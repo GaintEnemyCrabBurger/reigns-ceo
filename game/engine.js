@@ -279,6 +279,11 @@ function bindDrag(el){
       el.style.transform=`translateX(${yes?520:-520}px) rotate(${yes?26:-26}deg)`;
       el.style.opacity='0';
       L.style.opacity=R.style.opacity='0';
+      // 隐藏所有影响圆点
+      RES.forEach(r => {
+        const dot = $('#bars').querySelector(`[data-k="${r.k}"] .dot`);
+        if (dot) dot.classList.remove('show');
+      });
       choose(yes);
     } else {
       // 回弹到中间，标签淡出，内容重新显示

@@ -14,29 +14,30 @@ body{
   user-select:none;
 }
 #app{width:100%;max-width:420px;height:100%;max-height:820px;
-  display:flex;flex-direction:column;padding:14px;position:relative}
+  display:flex;flex-direction:column;padding:20px 16px;position:relative}
 
 /* 四条资源槽 */
-#bars{display:flex;gap:10px;margin-bottom:6px;padding-top:12px}
+#bars{display:flex;gap:14px;margin-bottom:20px;padding-top:14px}
 .bar{flex:1;text-align:center;position:relative}
-.bar .track{height:7px;background:#c9c3b6;border:1px solid #1a1a1a;position:relative;overflow:hidden}
+.bar .track{height:8px;background:#c9c3b6;border:1px solid #1a1a1a;position:relative;overflow:hidden;
+  border-radius:2px}
 .bar .fill{position:absolute;left:0;top:0;bottom:0;background:#1a1a1a;
   transition:width .45s cubic-bezier(.2,.8,.2,1)}
-.bar .lbl{font-size:11px;margin-top:4px;letter-spacing:1px}
-.bar .num{font-size:10px;color:#6b6459;font-variant-numeric:tabular-nums}
+.bar .lbl{font-size:12px;margin-top:6px;letter-spacing:1.2px;color:#6b6459}
+.bar .num{font-size:11px;color:#8a7f70;font-variant-numeric:tabular-nums;margin-top:2px}
 .bar.warn .fill{background:#a8321e}
 .bar.flash{animation:fl .5s}
 @keyframes fl{0%,100%{opacity:1}50%{opacity:.25}}
 
 /* 影响提示圆点 - 在资源槽上方 */
-.bar .dot{position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+.bar .dot{position:absolute;top:-10px;left:50%;transform:translateX(-50%);
   border-radius:50%;background:#d4af37;
   opacity:0;transition:opacity .2s,width .2s,height .2s;
-  box-shadow:0 2px 4px rgba(0,0,0,.3);pointer-events:none}
+  box-shadow:0 2px 5px rgba(0,0,0,.35);pointer-events:none}
 .bar .dot.show{opacity:1}
 
-#meta{display:flex;justify-content:space-between;font-size:11px;
-  color:#6b6459;letter-spacing:1px;margin:2px 0 8px}
+#meta{display:flex;justify-content:space-between;font-size:12px;
+  color:#6b6459;letter-spacing:1px;margin-bottom:16px}
 
 #stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center}
 
@@ -385,6 +386,11 @@ function bindDrag(el){
       el.style.transform=`translateX(${yes?520:-520}px) rotate(${yes?26:-26}deg)`;
       el.style.opacity='0';
       L.style.opacity=R.style.opacity='0';
+      // 隐藏所有影响圆点
+      RES.forEach(r => {
+        const dot = $('#bars').querySelector(`[data-k="${r.k}"] .dot`);
+        if (dot) dot.classList.remove('show');
+      });
       choose(yes);
     } else {
       // 回弹到中间，标签淡出，内容重新显示
