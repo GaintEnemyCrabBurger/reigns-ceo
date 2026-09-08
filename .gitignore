@@ -1,0 +1,7 @@
+*.apk
+_GoT/
+_Witcher/
+*.pyc
+__pycache__/
+.DS_Store
+server.log
