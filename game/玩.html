@@ -284,6 +284,21 @@ function drawBars(flashKeys){
 function show(idx){
   curIdx = idx;
   cur = CARDS[idx];
+
+  // 构建 yes 和 no 对象，包含资源变化
+  cur.yes = {
+    cash: parseInt(cur.yes_cash) || 0,
+    team: parseInt(cur.yes_team) || 0,
+    market: parseInt(cur.yes_market) || 0,
+    capital: parseInt(cur.yes_capital) || 0
+  };
+  cur.no = {
+    cash: parseInt(cur.no_cash) || 0,
+    team: parseInt(cur.no_team) || 0,
+    market: parseInt(cur.no_market) || 0,
+    capital: parseInt(cur.no_capital) || 0
+  };
+
   const el = document.createElement('div');
   el.className = 'card';
   el.innerHTML = `<div class="opt-label opt-left"></div>
