@@ -1,0 +1,311 @@
+id;en;tu;fr;es;jp;ko;sc;tc;de;ru;it;bp
+kings;KINGS;KRALLAR;ROIS;REYES;KINGS;왕;国王;國王;KÔNIGE;КОРОЛИ;RE;REIS
+queens;QUEENS;KRALİÇELER;REINES;REINAS;QUEENS;여왕;王后;王后;KÔNIGINNEN;КОРОЛЕВЫ;REGINE;RAINHAS
+yellow;YELLOW;SARI;JAUNE;AMARILLO;黄;노랑;黄色;黃色;GELB;ЖЕЛТЫЙ;GIALLO;AMARELO
+blue;BLUE;MAVİ;BLEU;AZUL;青;푸른;蓝色;藍色;藍色;СИНИЙ;BLU;AZUL
+action_confirm;CONFIRM;ONAYLA;CONFIRMER;CONFIRMAR;決定;결정;确认;確認;BESTÂTIGEN;ПОДТВЕРДИТЬ;CONFERMA;CONFIRMAR
+action_returnmenu;Return to main menu;Ana menüye dön;Retour au menu principal;Volver al menú principal;メインメニューへ戻る;메인 메뉴로 돌아간다;回到主菜单;回到主菜單;Zurück ins Hauptmenü;В главное меню;Torna al menu principale;Voltar ao menu principal
+action_controllers;Configure controllers;Kumandaları yapılandır;Configuration manettes;Configurar mandos;コントローラーの設定;컨트롤러 설정;设置手柄;設定手柄;Controller konfigurieren;Настройка управления;Configura controller;Configurar controles
+action_effects;EFFECTS;ETKİLER;EFFETS;EFECTOS;効果;이펙트;效果;效果;EFFEKTE;ЭФФЕКТЫ;EFFETTI;EFEITOS
+action_one;ONE PLAYER MODE;TEK OYUNCU MODU;MODE 1 JOUEUR;MODO 1 JUGADOR;1 PLAYER MODE;1인 모드;单人模式;單人模式;1 SPIELER;ОДИНОЧНЫЙ РЕЖИМ;MODALITÀ A UN GIOCATORE;UM JOGADOR
+action_two;TWO PLAYER MODE;İKİ OYUNCU MODU;MODE 2 JOUEURS;MODO 2 JUGADORES;2 PLAYER MODE;2인 모드;双人模式;雙人模式;2 SPIELER;ДВА ИГРОКА;MODALITÀ A DUE GIOCATORI;DOIS JOGADORES
+action_main;MAIN MENU;ANA MENÜ;MENU PRINCIPAL;;メインメニュー;메인 메뉴;主菜单;主菜單;HAUPTMENÛ;ГЛАВНОЕ МЕНЮ;MENU PRINCIPALE;MENU PRINCIPAL
+demo_text;This version of Reigns has been created specifically for demonstration purposes. The game will reset after 30 seconds without interaction.;Reigns'ın bu sürümü, özellikle gösteri amacıyla oluşturuldu. Oyun, etkileşim olmadan 30 saniye sonra sıfırlanır.;Cette version de Reigns a été créée spécifiquement à des fins de démonstration. Le jeu se réinitialise après 30 secondes sans interaction.;Esta versión de Reigns ha sido creada específicamente para propósitos de demostración. El juego se reiniciará después de 30 segundos sin interacción.;Reignsのこのバージョンは、デモンストレーション用に特別に作成されました。30秒後に対話なしにゲームがリセットされます。;Reigns의이 버전은 데모 용으로 특별히 제작되었습니다. 상호 작용없이 30 초 후에 게임이 재설정됩니다.;这个版本的版本是专门用于演示的。 游戏将在30秒后重置，无需互动。;這個版本的版本是專門用於演示的。遊戲將在30秒後重新啟動，無需互動。;Diese Version von Reigns wurde speziell für Demonstrationszwecke erstellt. Das Spiel wird nach 30 Sekunden ohne Interaktion zurückgesetzt.;Эта версия Reigns была создана специально для демонстрационных целей. Игра будет сброшена через 30 секунд без взаимодействия.;Questa versione di Reigns è stata creata appositamente per scopi dimostrativi. Il gioco si ripristina dopo 30 secondi senza interazione.;Esta versão do Reigns foi criada especificamente para fins de demonstração. O jogo será reiniciado após 30 segundos sem interação.
+subtitle;Swipe and be the King;Kaydır, Kral sen ol;Prenez des décisions royales;;;;;;;;;
+update;Sticker included!;;;;;;;;;;;
+num;st;.;er;er;第;대 국왕;第;第;.;-й;°;°
+;nd;.;e;°;代国王;대 국왕;代国王;代國王;.;-й;°;°
+;rd;.;e;er;;대 국왕;;;.;-й;°;°
+;th;.;e;°;;대 국왕;;;.;-й;°;°
+building;BUILDING THE CASTLE;KALE İNŞA EDİLİYOR;CONSTRUCTION DU CHÂTEAU;CONSTRUYENDO EL CASTILLO;城を建設中;성 건설 중;建造城堡中;建造城堡中;BURG ERRICHTEN;СТРОИМ ЗАМОК;COSTRUZIONE DEL CASTELLO;CONSTRUINDO O CASTELO
+antagonizing;ANTAGONIZING THE DEVIL;ŞEYTAN KIŞKIRTILIYOR;INVOCATION DU DIABLE;INVOCANDO AL DIABLO;悪魔と敵対中;악마와 적대 중;挑衅恶魔中;挑釁惡魔中;TEUFEL VERÄRGERN;БОРЕМСЯ С ДЬЯВОЛОМ;SCONTRO CON IL DEMONIO;COMBATENDO O DEMÔNIO
+updating;WRITING THE CARDS;KARTLAR YAZILIYOR;ÉCRITURE DES CARTES;ESCRIBIENDO CARTAS;カードを執筆中;카드 작성 중;撰写卡牌中;撰寫卡牌中;KARTEN BESCHREIBEN;ПИШЕМ КАРТЫ;SCRITTURA DELLE CARTE;ESCREVENDO AS CARTAS
+nomemory;Fading memory of another dimension;Bir başka diyarın sönmekte olan anıları;Souvenir perdu d'une autre dimension;Recuerdo perdido de otra vida;別の次元の遠い記憶;다른 차원의 불확실한 기억;正在遗忘+来自其他时空的记忆;正在遺忘+來自其他時空的記憶;Die verblassende Erinnerung an eine andere Dimension;Исчезающие воспоминания о другом измерении;Ricordo sbiadito di un'altra dimensione;Lembrança efêmera de outra dimensão
+slowly1;Take a breath!;Derin nefes al!;Respirez !;¡Respira!;落ち着いて！;진정하십시오!;深呼吸！;深呼吸！;Immer mit der Ruhe!;Вдохните!;Respira!;Respire!
+slowly2;Swipe sloooowly to see your answers and their consequences for the Kingdom.;Cevaplarını ve cevaplarının Krallığın için sonuçlarını görmek için yavaaaşça kaydır.;Balayez leeeeentement pour voir les réponses et leurs conséquences sur le royaume.;Desliza leeeentamente para ver las respuestas y sus consecuencias en el reino.;ゆ～～っくりスワイプして答えを確認し、+王国の行く末を定めよ。;천~~~천히 좌우로 움직여 대답을 확인하고 왕국의 운명을 결정하십시오.;慢悠悠悠地划动卡牌+来查看你的回答+会对王国造成什么样的影响。;慢悠悠悠地劃動卡牌+來查看你的回答+會對王國造成什麼樣的影響。;Wischt laaaangsam, um Eure Antworten und deren Folgen für das Königreich zu sehen.;Ме-е-е-едленно смахните, чтобы увидеть ответы и их влияние на королевство.;Fai scorrere leeentamente per vedere le tue risposte e le loro conseguenze per il Regno.;Deslize beeeem devagar para ver as respostas e suas respectivas consequências no reino.
+action_reset;NEW GAME;YENİ OYUN;RECOMMENCER;NUEVA PARTIDA;NEW GAME;새 게임;新游戏;新遊戲;NEUES SPIEL;НОВАЯ ИГРА;NUOVA PARTITA;NOVO JOGO
+action_next;NEXT;SIRADAKİ;CONTINUER;CONTINUAR;NEXT;다음;继续;繼續;FORTFAHREN;ДАЛЕЕ;AVANTI;AVANÇAR
+action_controller;PRESS;BAS;APPUYER;PULSAR;をプッシュ;누르기;长按;長按;DRÜCKEN;НАЖМИТЕ;PREMI;APERTE
+action_leap;CLAP!;ALKIŞLA!;APPLAUDIR !;¡APLAUDIR!;手をたたけ！;박수!;拍手！;拍手！;APPLAUS!;ХЛОПНИТЕ!;APPLAUDI!;APLAUDIR!
+action_mouse;NEXT;SIRADAKİ;CONTINUER;SIGUIENTE;NEXT;다음;继续;繼續;FORTFAHREN;ДАЛЕЕ;AVANTI;AVANÇAR
+action_select;SELECT;SEÇ;CHOISIR;ELEGIR;SELECT;선택;选择;選擇;WÄHLEN;ВЫБРАТЬ;SELEZIONA;SELEC.
+action_menu;MENU;MENÜ;MENU;MENÚ;MENU;메뉴;菜单;菜單;MENÜ;МЕНЮ;MENU;MENU
+the;The; ;Le;El;; ; ;;Der; ;Il;O
+king;King;Kral;Roi;Rey;;왕;国王;國王;König;Король;Re;Rei
+isdead;is dead;öldü;est mort;ha muerto;現王が逝去！;께서 승하하셨습니다!;已死;已死;ist tot;умер;è morto;está morto
+isgone;is gone;kayıp;est parti;se ha ido;現王が逝去！;께서 서거하셨습니다!;已死;已死;ist fort;скончался;se n'è andato;se foi
+longlive;Long live the;Çok yaşa yeni;Vive le;Viva el;新王が即位！;께서 즉위하셨습니다!;万岁;萬歲;Lang lebe der;Слава;Viva il;Vida longa ao
+yearsold;years old;yaşında;ans;años;歳;세;岁;歲;Jahre alt;год|года|лет;anni;anos de idade
+yourcourt;Your court;Sarayınız sizi;Votre cour;¡Vuestra corte;おかえり;왕좌에 오르소서,;您的臣下;您的臣下;Euer Hof erwartet;Ваш двор;La vostra corte;A corte está à
+awaits;awaits!;bekliyor!;attend !;espera!;なさいませ、陛下！;폐하!;谨遵御旨！;謹遵禦旨！;Euch!;ожидает!;attende!;espera!
+yes;Yes;Evet;Oui;Sí;<i>（はい）</i>;예;<i>（点头）</i>;<i>（點頭）</i>;Ja;Да;Sì;Sim
+no;No;Hayır;Non;No;<i>（いいえ）</i>;아니요;<i>（摇头）</i>;<i>（搖頭）</i>;Nein;Нет;No;Não
+games;King in the dynasty;Hanedan Kralı;Roi de la dynastie;Rey de la dinastía;王朝第|代国王;왕국 국왕;任国王;任國王;König der Dynastie;Король из династии;Re della dinastia;Rei da dinastia
+ends;ends found;son bulundu;fins trouvées;fin encontrado;:発見したエンディング;엔딩 수;不同的死法;不同的死法;Enden entdeckt;— найдено концовок;finali trovati;finais encontrados
+newcards;NEW CARDS!;YENİ KARTLAR!;NOUVELLES CARTES !;¡CARTAS NUEVAS!;新カード発見！;새 카드 발견!;新卡牌！;新卡牌！;NEUE KARTEN!;НОВЫЕ КАРТЫ!;NUOVE CARTE!;NOVAS CARTAS!
+options;OPTIONS;SEÇENEKLER;OPTIONS;OPCIONES;OPTION;옵션;选项;選項;OPTIONEN;НАСТРОЙКИ;OPZIONI;OPÇÕES
+action_back;BACK;GERİ;RETOUR;ATRÁS;BACK;뒤로;返回;返回;ZURÜCK;НАЗАД;INDIETRO;VOLTAR
+sfx_volume;SFX Volume;Ses Efektleri;Volume sons;Volumen sonido;SE音量;효과음;音效音量;音效音量;Lautstärke Effekte;Громкость звуков;Volume effetti;Volume de sons
+togglevo;Voice-over characters;Karakter seslendirmesi;Voix personnages;Voz personajes;キャラクターボイス;캐릭터 음성;角色语音;角色語音;Vertonte Charaktere;Голоса персонажей;Voce personaggi;Personagens dublados
+music_volume;Music Volume;Müzik;Volume musique;Volumen música;BGM音量;배경음;音乐音量;音樂音量;Lautstärke Musik;Громкость музыки;Volume musica;Volume de música
+language;Language;Dil;Langue;Idioma;言語;언어;语言;語言;Sprache;Язык;Lingua;Idioma
+resolution;Screen resolution;Ekran çözünürlüğü;Résolution écran;Resolución pantalla;画面解像度;화면 해상도;分辨率;解析度;Bildschirmauflösung;Разрешение экрана;Risoluzione schermo;Resolução de tela
+togglewin;Full screen;Tam ekran;Plein écran;Pantalla completa;フルスクリーン;전체화면;全屏;全屏;Vollbild;Полный экран;Schermo intero;Tela cheia
+apply;APPLY;UYGULA;APPLIQUER;APLICAR;適用;적용;应用;應用;ANWENDEN;ПРИНЯТЬ;APPLICA;APLICAR
+link1;MORE REIGNS! MORE LOVE!;DAHA FAZLA REIGNS! DAHA FAZLA SEVGİ!;PLUS DE REIGNS ! ET D'AMOUR !;¡MÁS REIGNS! ¡Y MÁS AMOR!;「REIGNS」WEBサイトへ;"REIGNS" 웹사이트 방문;REIGNS 官网信息;REIGNS 官網資訊;MEHR REIGNS! MEHR LIEBE!;БОЛЬШЕ ПРАВЛЕНИЯ!;PIÙ REGNI! PIÙ AMORE!;MAIS REIGNS! MAIS AMOR!
+start;START;BAŞLA;START;EMPEZAR;START;시작;开始;開始;START;НАЧАТЬ;INIZIA;INICIAR
+swipe;SWIPE;KAYDIR;BALAYEZ;APLAUDIR;スワイプ;스와이프;划动;劃動;WISCHEN;СМАХНИТЕ;FAI SCORRERE;DESLIZAR
+gameover;THE END;SON;;FIN;THE END;끝;剧终;劇終;ENDE;КОНЕЦ;FINE;O FIM
+resetall_label;Game data seems to be corrupted. Reset everything ?;Oyun verisi bozulmuş gibi duruyor. Her şey sıfırlansın mı?;Les données de jeu semblent corrompues. Réinitialiser ?;Los datos del juego parecen corrompidos. ¿Reiniciar?;ゲームのデータが破損しています。リセットしますか？;게임 데이터가 손상되었습니다. 리셋하시겠습니까?;疑似游戏数据损毁，+是否全部重置？;疑似遊戲數據損毀，+是否全部重置？;Spieldaten scheinen beschädigt zu sein. Alles zurücksetzen?;Похоже, игровые данные повреждены. Сбросить?;I dati di gioco sembrano essere danneggiati. Vuoi reimpostarli?;Os dados de jogo parecem estar corrompidos. Apagar tudo?
+reset_label;Do you want to reset the game?;Oyunu sıfırlamak istiyor musun?;Voulez-vous réinitialiser le jeu?;¿Quieres reiniciar el juego otra vez?;ゲームをリセットしますか？;게임을 리셋하시겠습니까?;您确定要重置游戏吗？;您確定要重置遊戲嗎？;Spiel zurücksetzen?;Вы хотите сбросить игру?;Vuoi reimpostare il gioco?;Deseja reiniciar o jogo?
+reset;RESET;SIFIRLA;RÉINITIALISER;REINICIAR;リセット;리셋;重置;重置;ZURÜCKSETZEN;СБРОСИТЬ;REIMPOSTA;REINICIAR
+quit_label;Do you want to quit the game?;Oyundan çıkmak istiyor musun?;Voulez-vous quitter le jeu ?;¿Quieres abandonar el juego?;ゲームを終了しますか？;게임을 종료하시겠습니까?;你确定要退出游戏吗？;你確定要退出遊戲嗎？;Spiel beenden?;Вы хотите выйти из игры?;Vuoi uscire dal gioco?;Deseja sair do jogo?
+quit;QUIT;ÇIK;QUITTER;SALIR;ゲームを終了;종료;退出;退出;BEENDEN;ВЫЙТИ;ESCI;SAIR
+cancel;CANCEL;İPTAL;ANNULER;CANCELAR;キャンセル;취소;取消;取消;ABBRECHEN;ОТМЕНИТЬ;ANNULLA;CANCELAR
+agameby;A game by;Oyun Yapımcıları;Un jeu de;Un juego de;MADE BY;제작자:;本游戏由;本遊戲由;Ein Spiel von;Игра;Un gioco di;Um jogo de
+devby;Game Dev;Yapımcı;;;開発;개발;开发者;開發者;Entwicklung;Разработка;Sviluppo;Desenv.
+artby;Art;Görseller;;Arte;アート;아트;美术;美術;Grafik;Арт;Grafica;Arte
+musicby;Audio direction;Ses yönetmeni;Direction audio;Dirección de sonido;オーディオ ディレクション;오디오 디렉션;音响指导;音響指導;Audio-Regie;Звукорежиссура;Direzione audio;Direção de áudio
+musicby2;Music;Müzik;Musique;Música;音楽;음악;音乐;音樂;Musik;Музыка;Musica;Música
+sfxby;Sound design;Ses tasarımı;Design sons;Diseño de sonido;サウンド デザイン;사운드 디자인;声音设计;聲音設計;Sound-Design;Звуковое оформление;Progettazione audio;Design de áudio
+thanks;Special thanks to...;Özel teşekkürler;Un grand merci à...;Agradecimientos especiales para...;SPECIAL THANKS:;고마운 분들:;特别鸣谢……;特別鳴謝……;Besonderen Dank an …;Особая благодарность…;Un ringraziamento speciale a…;Agradecimentos especiais a...
+thanks2;And thanks to...;Ve teşekkürler;Et aussi à...;Y también para...;AND THANKS:;다시 고마운 분들:;还要感谢……;還要感謝……;Danke auch an …;И спасибо…;Grazie anche a…;E agradecimentos a...
+devilcurse;A body was found later that year, horrifyingly torn and bloated.;O yılın ilerleyen günlerinde dehşet verici şekilde parçalanmış ve şişmiş bir ceset bulundu.;Un corps fut retrouvé plus tard cette année-là, horriblement déformé.;Un cuerpo fue encontrado más tarde aquel año, terriblemente deformado.;その後しばらくして、1体の死体が+発見された。それは醜く膨れあがり、+ズタズタに引き裂かれていたという。;얼마 뒤 시신 한 구가 발견되었다. 끔찍하게 부풀어 올라 갈기갈기 찢겨 있었다고 한다.;后来，有一具尸体在那一年被发现，+浑身浮肿、几乎被彻底扯碎，+样貌骇人。;後來，有一具屍體在那一年被發現，+渾身浮腫、幾乎被徹底扯碎，+樣貌駭人。;Später in diesem Jahr wird eine schrecklich zugerichtete Leiche aufgefunden.;В том же году нашли труп. Тело было явно растерзано и отвратительно раздулось.;Nel corso di quello stesso anno venne trovato un corpo orribilmente deformato.;Um corpo foi encontrado meses depois, terrivelmente dilacerado e inchado.
+kingdom_update;KINGDOM UPDATE;KRALLIĞA GÜNCELLEME;MISE À JOUR ROYAUME;ACTUALIZACIÓN DEL REINO;王国アップデート;왕국 업데이트;王国情报更新;王國情報更新;KÖNIGREICH-UPDATE;ОБНОВЛЕНИЕ КОРОЛЕВСТВА;AGGIORNAMENTO REGNO;ATUALIZAÇÃO DE REINO
+;NEW CARDS!;YENİ KARTLAR!;NOUVELLES CARTES !;¡CARTAS NUEVAS!;新カード発見！;새 카드 발견!;新卡牌！;新卡牌！;NEUE KARTEN!;НОВЫЕ КАРТЫ!;NUOVE CARTE!;NOVAS CARTAS!
+kingdom_stats;KINGDOM;KRALLIK;ROYAUME;REINO;王国;왕국;王国;王國;KÖNIGREICH;КОРОЛЕВСТВО;REGNO;REINO
+objective_stats;Royal deeds;Kraliyet başarıları;Faits du Roi;Hechos reales;功績;공적;王者荣耀;王者榮耀;Taten des Königs;Королевские дела;Azioni reali;Façanhas reais
+;objectives fulfilled;hedef başarıldı;objectifs remplis;objetivos conseguidos;: 達成した目標;:달성한 목표;个目标已被达成;個目標已被達成;erfüllte Ziele;выполнено целей;obiettivi raggiunti;objetivos concluídos
+objective_icloud;<number> / <total> objectives fulfilled;<number>/<total> hedef tamamladın;<number> / <total> objectifs atteints;<number> / <total> de objetivos conseguidos;<number> / <total>個の目標を達成;<number> / <total> 목표 달성;已完成<number> / <total>个目标;已完成<number> / <total>個目標;erfüllte Ziele: <number> / <total>;<number> / <total> целей выполнено;<number> / <total> obiettivi raggiunti;<number> / <total> objetivos cumpridos
+cloudsave;A game more recent than the local one is saved on iCloud. Which one do you want to load?;iCloud'da yerel kayıtlı oyundan daha yakın zamanda kaydedilmiş bir oyun bulunuyor. Hangisini yüklemek istersin?;Une partie plus récente que la partie locale est sauvegardée sur iCloud. Laquelle voulez-vous charger ?;Una partida más reciente que la local está guardada en iCloud. ¿Cuál quieres cargarla?;ローカルのデータより最新のセーブデータがiCloud上に存在します。どちらのデータをロードしますか？;iCloud에 저장된 게임이 로컬에 저장된 게임보다 최신 버전입니다. 어느 것을 불러오시겠습니까?;iCloud上发现比本地存档更新+的存档，请问要载入哪个？;iCloud上發現比本地存檔更新+的存檔，請問要載入哪個？;Auf iCloud ist ein aktuellerer Spielstand gespeichert als lokal. Welchen möchtest du laden?;Более ранняя версия игры сохранена в iCloud. Какую версию вы хотите загрузить?;Su iCloud è stata salvata una partita più recente di quella locale. Quale vuoi caricare?;Há um jogo salvo no iCloud que é mais recente do que o jogo salvo neste dispositivo. Qual deles você quer carregar?
+endcard_stats;Memento mori;Ölümden kaçınılmaz;;;歴代王の最期;역대 왕의 최후;凡人终死;凡人終死;Memento mori;;Memento mori;Memento mori
+;deaths suffered;ölüm yaşandı;morts éprouvées;muertes sufridas;: 体験した最期;:체험한 최후;种死法已体验;種死法已體驗;erlittene Tode;смертей;morti subite;mortes sofridas
+character_stats;Portrait gallery;Portre galerisi;Portraits;Retratos;ポートレートギャラリー;초상화 갤러리;肖像画廊;肖像畫廊;Porträt-Galerie;Галерея портретов;Galleria dei ritratti;Galeria de retratos
+;characters met;karakterle tanışıldı;personnages rencontrés;personajes encontrados;: 出会ったキャラクター;:만난 캐릭터;名角色已相遇;名角色已相遇;getroffene Charaktere;встречено персонажей;personaggi incontrati;personagens encontrados
+card_stats;null;;;;null;null;;;null;;null;null
+;cards discovered;kart keşfedildi;cartes découvertes;cartas descubiertas;: 発見したカード;:발견한 카드;张卡片已发现;張卡片已發現;entdeckte Karten;открыто карт;carte scoperte;cartas descobertas
+highscore_stats;HIGH SCORE;EN İYİLER;;;HIGH SCORE;최고 득점;高分榜;高分榜;BESTENLISTE;ЛУЧШИЙ СЧЕТ;;RECORDE
+year_in_power;year in power|years in power;yıl hüküm sürdü|yıl hüküm sürdü;an au pouvoir|ans au pouvoir;año al poder|años al poder;在位|年;년 재위|년 재위;在位|年;在位|年;Jahr|Jahre;год у власти|года у власти|лет у власти;anno al potere|anni al potere;ano no poder|anos no poder
+highscore_label;NEW HIGH SCORE!;YENİ EN İYİ SÜRE!;NOUVEAU HIGH SCORE !;¡NUEVO SCORE!;NEW HIGH SCORE！;신규 최고 득점!;新高分！;新高分！;NEUE BESTPUNKTZAHL!;НОВЫЙ РЕКОРД!;NUOVO PUNTEGGIO MIGLIORE!;NOVO RECORDE!
+;STILL ALIVE!;HÂLÂ HAYATTA!;ENCORE VIVANT !;¡AÚN CON VIDA!;存命！;아직 생존!;依然存活！;依然存活！;NOCH AM LEBEN!;ЕЩЕ ЖИВ!;ANCORA IN VITA!;AINDA VIVO!
+noeffect;You have neither curse, nor spell, nor magical item, nor special event.;Ne lanet, ne büyü, ne büyülü eşya, ne de özel etkinliğin var.;Vous n'avez ni malédiction, ni sort, ni objet magique, ni événement spécial.;No tienes ni maldición ni objeto mágico ni evento especial.;国政に影響を及ぼす呪い、魔法、特殊行事は発生していません。;국정에 영향을 미치는 저주, 마법 아이템, 특수 이벤트가 없습니다.;你既未遭受诅咒，+也无法术法器或遭遇特殊事件;你既未遭受詛咒，+也無法術法器或遭遇特殊事件;Kein Fluch oder Zauber, kein magischer Gegenstand, kein besonderes Ereignis.;У вас нет ни проклятья, ни заклятья, ни магического предмета, ни особого события.;Non hai maledizioni, incantesimi, oggetti magici o eventi speciali.;Você não tem maldição, feitiço, item mágico nem evento especial.
+nothing;Nothing;Hiçbir şey;Rien;Nada;なし;없음;无事件;無事件;Nichts;Ничего.;Niente;Nada
+king_names;Robert;;;Roberto;ロバート;로버트;罗伯特;羅伯特;Robert;Роберт;Roberto;Roberto
+;James;;Jean;Jaime;ジェームズ;제임스;詹姆斯;詹姆斯;Jakob;Джеймс;Giacomo;Jaime
+;Edward;;Édouard;Eduardo;エドワード;에드워드;爱德华;愛德華;Eduard;Эдвард;Edoardo;Eduardo
+;Baudouin;;;Benito;ボードゥアン;보두안;博杜安;博杜安;Balduin;Бодуэн;Baldovino;Baudouin
+;George;;Georges;Jorge;ジョージ;조지;乔治;喬治;Georg;Георг;Giorgio;Jorge
+;William;;Guillaume;Guillermo;ウィリアム;윌리엄;威廉;威廉;Wilhelm;Вильям;Giovanni;Guilherme
+;Gerald;;Gérald;Gerardo;ジェラルド;제럴드;杰洛德;傑洛德;Gerald;Геральд;Gerardo;Geraldo
+;Harry;;;José;ハリー;해리;哈利;哈利;Heinrich;Гарри;Enrico;Henrique
+dungeon_generic;The Dungeon;Zindan;Le Donjon;Las mazmorras;ダンジョン;지하감옥;地下城;地下城;Das Verlies;Подземелье;La prigione;A Masmorra
+dungeon;<...>;;;;<...>;<...>;<...>;<...>;;;<...>;
+;Caves of Doom;Yıkım Mağaraları;Caves du Destin;Las cuevas del Destino;破滅の洞窟;파멸의 동굴;毁灭洞窟;毀滅洞窟;Höhlen des Verderbens;Роковые пещеры;Grotte del destino;Cavernas da Perdição
+;Crypt of Despair;Çaresizlik Mahzeni;Crypte du Désespoir;Cripta de la Desesperación;絶望の墓所;절망의 묘소;绝望墓穴;絕望墓穴;Gruft der Verzweiflung;Крипта отчаяния;Cripta della disperazione;Cripta do Desespero
+;World of Fear;Korku Dünyası;Monde de la Peur;Mundo del Miedo;恐れの冥府;공포의 세계;恐怖世界;恐怖世界;Welt der Furcht;Мир страха;Mondo della paura;Mundo do Medo
+;Whispering Horror;Fısıldayan Dehşet;Horreur Insondable;Horror Inescrutable;魔の囁き;소름끼치는 속삭임;呢喃恐惧;呢喃恐懼;Flüsternder Schrecken;Шепчущий ужас;Orrore mormorante;Murmúrios de Horror
+queen_generic;The Queen;Kraliçe;La Reine;La Reina;王妃;여왕;皇后;皇后;Die Königin;Королева;La Regina;A Rainha
+queen;Queen <...>;Kraliçe <...>;Reine <...>;Reina <...>;<...>妃;<...>여왕;<...>皇后;<...>皇后;Königin <...>;Королева <...>;Regina <...>;Rainha <...>
+;Joan;;Jeanne;Juana;ヨハンナ;요한나;琼恩;瓊恩;Johanna;Иоанна;Giovanna;Joana
+;Vivian;;Viviane;Viviana;ビビアン;비비안;薇薇安;薇薇安;Anna;Вивьен;Viviana;Vivian
+;Filisia;;;Felicia;フィリシア;필리시아;菲莉西亚;菲莉西亞;Elisabeth;Фелисия;Felicita;Felícia
+;Laurentia;;;Laurencia;ローレンシア;로렌시아;劳伦希娅;勞倫希婭;Laurentia;Лаурентия;Lorenza;Laurência
+;Lucy;;Lucie;Lucía;ルーシー;루시;露西;露西;Lucia;Люсия;Lucia;Lúcia
+priest;Archbishop of <places>;<places> Başpiskoposu;Évêque de <places>;Arzobisto de <places>;<places>大司教;<places> 대사제;<places>大主教;<places>大主教;Erzbischof von <places>;Архиепископ из <places>;Arcivescovo di <places>;Arcebispo de <places>
+priest_generic;The Priest;Rahip;Le Prêtre;El Sacerdote;司祭;사제;牧师;牧師;Der Priester;Священник;Il Sacerdote;O padre
+viking;<exotic_male_names> <...>;<...><exotic_male_names>;;;<...><exotic_male_names>;<...> <exotic_male_names>;<...><exotic_male_names>;<...><exotic_male_names>;;;<exotic_male_names> <...>;
+;the World Bane;Dünyanın Kırbacı;la Fléau Humain;la Plaga Humana;地上の禍根;지상의 화근;世界祸端;世界禍端;der Weltenbann;Каратель;il Flagello del mondo;a Ruína do Mundo
+;the Lone Wolf;Yalnız Kurt;le Loup Solitaire;el Lobo Solitario;独狼の;외로운 늑대;孤傲之狼;孤傲之狼;der einsame Wolf;Одинокий волк;il Lupo solitario;o Lobo Solitário
+;the Silent Eagle;Sessiz Kartal;l'Aigle Silencieux;el Águila Silenciosa;静鷹の;조용한 독수리;静默之鹰;靜默之鷹;der stille Adler;Молчаливый орел;l'Aquila silente;a Águia Silenciosa
+;the Stormbearer;Fırtına Hamili;l'Âme des Tempêtes;el Alma de la Tormenta;嵐の申し子;폭풍을 불러오는 자;风暴之主;風暴之主;der Sturmbringer;Буреносец;il Messaggero della tempesta;a Tempestade
+viking_generic;The Barbarian;Barbar;Le Barbare;El Bárbaro;野人;야만인;蛮人王;蠻人王;Der Barbar;Варвар;Il Barbaro;O Bárbaro
+black_bird;Fate;Kader;Destin;Destino;厄運の鳥;운명;命运;命運;Schicksal;Судьба;Destino;Destino
+black_bird_generic;The Black Bird;Kara Kuş;L'Oiseau Noir;El Ave Negra;黒歌鳥;흑조;黑鸟;黑鳥;Der schwarze Vogel;Дрозд;l'Uccello nero;O Pássaro Preto
+bird;<...>;;;;<...>;<...>;<...>;<...>;;;<...>;
+;Sakuya;;;;サクヤ;사쿠야;咲夜;咲夜;Sakuya;Сакуя;Sakuya;Sakuya
+;Piaw;;Piau;Pío pío;ピアウ;피아우;皮尧;皮堯;Piaw;Пиав;Pio pio;Piau
+;Pipin;;;;ピピン;피핀;乒乒;乒乒;Pipin;Пипин;Pipin;Pipin
+bird_generic;The Bird;Kuş;L'Oiseau;El Pájaro;鳥;새;小鸟;小鳥;Der Vogel;Птица;L'Uccello;O Pássaro
+dragon;Dragon;Ejderha;;Dragón;ドラゴン;드래곤;巨龙;巨龍;Drache;Дракон;Drago;Dragão
+dragon_generic;The Dragon;Ejderha;Le Dragon;El Dragón;ドラゴン;드래곤;巨龙;巨龍;Der Drache;Дракон;Il Drago;O Dragão
+courtesan;Lady <...>;<...> Hanım;Dame <...>;Dama <...>;レディ・<...>;레이디 <...>;<...>夫人;<...>夫人;Madame <...>;Леди <...>;Lady <...>;Lady <...>
+;Grey;;;Gris;グレー;그레이;格雷;格雷;Grey;Грей;Grey;Grey
+;Selwige;;;;セルウィッジ;셀비지;塞尔维戈;塞爾維戈;Selwige;Селвидж;Selwige;Selwige
+;Belle;;;Bella;ベル;벨;贝尔;貝爾;Belle;Белль;Belle;Belle
+;Charlotte;;;;シャルロット;샬롯;夏洛特;夏洛特;Charlotte;Шарлотта;Charlotte;Charlotte
+courtesan_generic;The Courtesan;Hanımefendi;La Courtisane;La Cortesana;愛妾;애첩;花魁;花魁;Die Kurtisane;Куртизанка;La Cortigiana;A Cortesã
+diplomat;<male_names> <last_names>;;;;<male_names>・<last_names>;<male_names> <last_names>;<male_names>・<last_names>;<male_names>・<last_names>;;;<male_names> <last_names>;
+diplomat_generic;The Diplomat;Diplomat;Le Diplomate;El Diplomático;大使;대사;外务大臣;外務大臣;Der Diplomat;Дипломат;Il Diplomatico;O Diplomata
+doctor;Master <...>;<...> Efendi;Maître <...>;Maestro <...>;<...>医師;<...> 의사;<...>大师;<...>大師;Meister <...>;Мастер <...>;Maestro <...>;Mestre <...>
+;Ibn Zuhr;;;;イブン=ズフル;이븐 즈흐루;伊本・苏尔;伊本・蘇爾;Ibn Zuhr;ибн Зухр;Ibn Zuhr;Ibn Zuhr
+;Avenzoar;;;;アベンゾアル;아벤조아;艾本祖尔;艾本祖爾;Avenzoar;Абензоар;Avenzoar;Avenzoar
+;Abraham of Aragon;Aragonlu Abraham;Abraham d'Aragon;Abraham de Aragón;アラゴンのアブラハム;아라곤의 아브라함;阿拉贡的亚伯拉罕;阿拉貢的亞伯拉罕;Abraham von Aragon;Авраам Арагонский;Abraham di Aragona;Abraão de Aragon
+;Joannes Actuarius;;;Juan Actuarius;ハネス・アクトゥアリウス;요하네스 악트리아우스;乔安尼斯・阿丘列斯;喬安尼斯・阿丘列斯;Joannes Actuarius;Иоанн Актуарий;Joannes Actuarius;Joannes Actuarius
+;Arn de Villa Nova;;;Arno de Villa Nova;アルノー・ド・ビルヌーブ;아르노 드 빌라노바;维拉诺瓦的安纳尔;維拉諾瓦的安納爾;Arn de Villa Nova;Арн из Виллановы;Arn di Villa Nova;Arn de Villa Nova
+;Ferrarius;;;Ferrario;フェラリウス;페라리우스;费拉瑠斯;費拉瑠斯;Ferrarius;Феррарий;Ferrarius;Ferrário
+;Ben Maimon;;;;ベン=マイモーン;벤 마이몬;本・迈蒙;本・邁蒙;Ben Maimon;бен Маймон;Ben Maimon;Ben Maimon
+doctor_generic;The Doctor;Hekim;Le Docteur;El Doctor;医師;의사;医生;醫生;Der Doktor;Врачеватель;Il Dottore;O Médico
+ghost;Spirit of the Fallen;Ölmüşlerin Ruhu;Esprit des Déchus;Espíritu de los Caídos;亡者;망자;亡者之灵;亡者之靈;Geist der Gefallenen;Дух падшего;Spirito dei caduti;Espírito dos Caídos
+ghost_generic;The Ghost;Hayalet;Le Fantôme;El Fantasma;亡霊;망령;幽灵;幽靈;Der Geist;Призрак;Il Fantasma;O Fantasma
+duke;Lord <male_names>;;;;<male_names>公;<male_names> 공;<male_names>大人;<male_names>大人;Fürst <male_names>;Лорд <male_names>;Lord <male_names>;Lorde <male_names>
+duke_generic;The Duke;Dük;Le Duc;El Duque;公爵;공작;公爵;公爵;Der Herzog;Герцог;Il Duca;O Duque
+farmer;<...>;;;;<...>;<...>;<...>;<...>;;;<...>;
+;Puck;;;;パック;퍽;巴克;巴克;Puck;Пак;Puck;Puck
+;Boon;;;;ブーン;분;布恩;布恩;Boon;Бун;Boon;Boon
+;Mat;;;;マット;매트;马特;馬特;Mat;Мат;Mat;Mat
+farmer_generic;The Farmer;Çiftçi;Le Fermier;El Granjero;農民;농부;农民;農民;Der Bauer;Фермер;Il contadino;O Fazendeiro
+effects;<i>This will have effect every year.</i>;<i>Bu durum, her yıl etki edecektir.</i>;<i>Cela vous affectera chaque année.</i>;<i>Ésto os afectará cada año.</i>;<i>毎年、効果が発生！</i>;<i>매년 효과가 발생합니다.</i>;<i>这一效果将每年生效。</i>;<i>這一效果將每年生效。</i>;<i>Dies wirkt sich jedes Jahr aus.</i>;<i>Эффект проявляется каждый год.</i>;<i>Questo avrà effetto ogni anno.</i>;<i>Isto surtirá efeito a cada ano.</i>
+effects_move;<i>This will have effect every second.</i>;<i>Bu durum, her saniye etki edecektir.</i>;<i>Cela vous affectera chaque seconde.</i>;<i>Ésto os afectará cada segundo.</i>;<i>毎秒、効果が発生！</i>;<i>매초 효과가 발생합니다.</i>;<i>这一效果将时刻生效。</i>;<i>這一效果將時刻生效。</i>;<i>Dies wirkt sich jede Sekunde aus.</i>;<i>Эффект проявляется каждую секунду.</i>;<i>Questo avrà effetto ogni secondo.</i>;<i>Isto surtirá efeito a cada segundo.</i>
+foreign_princess;Princess <...>;Prenses <...>;Princesse <...>;Princesa <...>;プリンセス・<...>;<...> 공주;<...>公主;<...>公主;Prinzessin <...>;Принцесса <...>;Principessa <...>;Princesa <...>
+;Jumanah;;;;ジュマナー;쥬마나;尤马娜;尤馬娜;Jumanah;Джумана;Jumanah;Jumanah
+;Kamaria;;;;カマリア;카마리아;卡玛利亚;卡瑪利亞;Kamaria;Камария;Kamaria;Kamaria
+;Lale;;;;ララ;레일;蕾尔;蕾爾;Lale;Лейла;Lale;Lale
+;Maisha;;;;マイシャ;마이샤;麦伊莎;麥伊莎;Maisha;Маиша;Maisha;Maisha
+;Mushtaree;;;;ムシュタリー;무슈타리;穆莎塔里;穆莎塔裏;Mushtaree;Муштари;Mushtaree;Mushtari
+foreign_princess_generic;The Foreign Princess;Yabancı Prenses;La Princesse Étrangère;La Princesa Extranjera;異国の王女;다른 나라 공주;异国公主;異國公主;Die fremde Prinzessin;Иностранная принцесса;La Principessa straniera;A Princesa Estrangeira
+fortune_teller;<...> the Seer;Falcı <...>;<...> le Voyant;<...> el Vidente;占術師<...>;점술사 <...>;先知<...>;先知<...>;<...> der Seher;<...> Провидец;<...> il Veggente;<...>, o Vidente
+;Rohannes;;;;ロハネス;로하네스;洛汉内斯;洛漢內斯;Rohannes;Роханн;Rohannes;Rohannes
+;Loon;;;;ルーン;룬;卢恩;盧恩;Loon;Лун;Loon;Lum
+;Actarius;;;;アクタリウス;악타리우스;阿丘列斯;阿丘列斯;Actarius;Актарий;Actarius;Actário
+;Zen;;;;ゼン;젠;禅;禪;Zen;Дзен;Zen;Zen
+;Pastorius;;;;パストリアス;파스토리우스;帕斯托瑞斯;帕斯托瑞斯;Pastorius;Пасторий;Pastorius;Pastório
+fortune_teller_generic;The Fortune Teller;Falcı;Le Voyant;El Vidente;占い師;점쟁이;预言师;預言師;Der Wahrsager;Гадатель;Il Chiromante;O Vidente
+general;General <...>;;Général <...>;General <...>;<...>将軍;<...> 장군;<...>将军;<...>將軍;General <...>;Генерал <...>;Generale <...>;General <...>
+;Blomington;;;;ブロミントン;블루밍튼;波洛明顿;波洛明頓;Blomington;Бломингтон;Blomington;Blomington
+;Coventon;;;;コベントン;코벤튼;柯文顿;柯文頓;Coventon;Ковентон;Coventon;Coventon
+;Arnoulf of Dover;Doverli Arnoulf;Arnoulf de Douvres;Arnolfo de Douvres;アルヌルフ＝オブ＝ドーバー;도버의 아눌프;多佛尔的阿诺夫;多佛爾的阿諾夫;Arnulf von Dover;Арноульф Доверский;Arnolfo di Dover;Arnolfo de Dover
+;Pollon;;;;ポロン;폴롱;波伦;波倫;Pollon;Поллон;Pollon;Pólon
+general_generic;The General;General;Le Général;El General;将軍;장군;将军;將軍;Der General;Генерал;Il Generale;O General
+jester;<...> Loosetongue;Boşboğaz <...>;<...> Languependue;<...> Lenguaperdida;軽口の<...>;수다쟁이 <...>;长舌<...>;長舌<...>;<...> Schandmaul;<...> Болтун;<...> Lingualunga;<...> Gárrulo
+;Borhat;;;;ボルハット;보르햇;博尔赫特;博爾赫特;Borhat;Борхат;Borhat;Borhat
+;Graham;;;;グラハム;그레이엄;格雷姆;格雷姆;Graham;Грэхем;Graham;Graham
+;Junius;;;;ジュニアス;주니어스;尤涅斯;尤涅斯;Junius;Юний;Junius;Júnior
+;Guybrosh;;;;ガイブロシ;가이브로쉬;盖布洛什;蓋布洛什;Guybrosh;Гайброш;Guybrosh;Guybrosh
+jester_generic;The Jester;Soytarı;Le Fou;El Bufón;道化師;어릿광대;弄臣;弄臣;Der Narr;Шут;Il Giullare;O Bobo
+lady;Miss <...>;<...> Hanım;Mademoiselle <...>;Señorita <...>;ミス・<...>;<...> 양;<...>女士;<...>女士;Fräulein <...>;Мисс <...>;Signorina <...>;Senhorita <...>
+;Alice;;;Alicia;アリス;앨리스;爱丽丝;愛麗絲;Alice;Алиса;Alice;Alice
+;Agona;;;;アゴナ;에이고나;艾格娜;艾格娜;Agona;Агона;Agona;Agona
+;Tarascol;;;;タラスコル;타라스콜;塔拉斯科;塔拉斯科;Tarascol;Тарасколь;Tarascol;Tarascol
+;Birmin;;;;バーミン;버민;毕尔敏;畢爾敏;Birmin;Бирмин;Birmin;Birmin
+lady_generic;The Lady;Leydi;La Demoiselle;La Dama;貴婦人;귀부인;贵妇;貴婦;Die Dame;Госпожа;La Lady;A Dama
+merchant;Master <last_names>;<last_names> Efendi;Maître <last_names>;Maestro <last_names>;<last_names>親方;<last_names> 사장;<last_names>先生;<last_names>先生;Meister <last_names>;Мастер <last_names>;Maestro <last_names>;Mestre <last_names>
+merchant_generic;The Merchant;Tüccar;Le Marchand;El Mercader;商人;상인;商人;商人;Der Händler;Купец;Il Mercante;O Comerciante
+monk;Father <...>;Peder <...>;Père <...>;Padre <...>;<...>師;<...> 신부;<...>神父;<...>神父;Pater <...>;Отец <...>;Padre <...>;Pai <...>
+;Brown;;;;ブラウン;브라운;布朗;布朗;Brown;Браун;Brown;Brown
+;Felipe;;;;フェリペ;펠리페;费利佩;費利佩;Felipe;Фелипе;Felipe;Felipe
+;Patrick;;;Patricio;パトリック;패트릭;帕特里克;帕特裏克;Patrick;Патрик;Patrick;Patrício
+;Quill;;;;クイル;퀼;奎尔;奎爾;Quill;Квилл;Quill;Quill
+;Zenon;;;;ゼノン;제논;芝诺;芝諾;Zenon;Зенон;Zeno;Zenon
+monk_generic;The Monk;Keşiş;Le Capucin;El Monje;修道士;수도사;僧侣;僧侶;Der Mönch;Монах;Il Frate;O Monge
+nobleman;Sir <male_names>;<male_names> Bey;;Lord <male_names>;<male_names>公;<male_names> 공;<male_names>爵士;<male_names>爵士;Sir <male_names>;Сэр <male_names>;Sir <male_names>;Sor <male_names>
+nobleman_generic;The Nobleman;Soylu;Le Noble;El Noble;諸侯;제후;贵族;貴族;Der Adlige;Дворянин;Il Nobile;O Nobre
+pestifer_generic;The Pestifer;Hasta;Le Pestiféré;El Apestado;疫病患者;역병환자;瘟疫患者;瘟疫患者;Der Pestbringer;Вредный;L'Appestato;O Pestífero
+prince;Prince <male_names>;Prens <male_names>;;Príncipe <male_names>;<male_names>王子;<male_names> 왕자;<male_names>王子;<male_names>王子;Prinz <male_names>;Принц <male_names>;Prince <male_names>;Príncipe <male_names>
+prince_generic;The Prince;Prens;Le Prince;El Príncipe;王太子;왕자;王子;王子;Der Prinz;Принц;Il Principe;O Príncipe
+soldier;<male_names> the Bold;Yiğit <male_names>;<male_names> le Fier;<male_names> el Orgulloso;勇敢なる<male_names>;용기있는 <male_names>;无畏<male_names>;無畏<male_names>;<male_names> der Kühne;<male_names> Храбрый;<male_names> l'Ardito;<male_names>, o Valente
+soldier_generic;The Soldier;Asker;Le Soldat;El Soldado;兵士;병사;士兵;士兵;Der Soldat;Солдат;Il Soldato;O Soldado
+spy;Whisperer;Sır Paylaşan;Chuchoteur;Susurrador;密告者;밀고자;告密者;告密者;Flüsterer;Шептун;Sussurratore;Sussurrante
+spy_generic;The Spy;Casus;L'Espion;El Espía;密偵;밀정;密探;密探;Der Spion;Шпион;La Spia;O Espião
+witch;Lady <...>;<...> Hanım;;Doña <...>;レディ・<...>;레이디 <...>;<...>夫人;<...>夫人;Madame <...>;Леди <...>;Madame <...>;Lady <...>
+;Leana;;;;リアナ;리아나;琳娜;琳娜;Leana;Леана;Leana;Leana
+;Pausilia;;;;ポーシリア;푸실리아;保希莉亚;保希莉亞;Pausilia;Паузилия;Pausilia;Pausília
+;Karkovia;;;;カルコヴィア;카르코비아;卡科维亚;卡科維亞;Karkovia;Карковия;Karkovia;Karkóvia
+;Secos;;;;シーコス;시코스;赛可斯;賽可斯;Secos;Сэкос;Secos;Secos
+witch_generic;The Witch;Cadı;La Sorcière;La Bruja;魔女;마녀;女巫;女巫;Die Hexe;Ведьма;La Strega;A Bruxa
+nun;Sister <female_names>;Rahibe <female_names>;Sœur <female_names>;Sor <female_names>;シスター・<female_names>;<female_names> 수녀;<female_names>修女;<female_names>修女;Schwester <female_names>;Сестра <female_names>;Sorella <female_names>;Irmã <female_names>
+nun_generic;The Nun;Rahibe;La Nonne;La Monja;修道女;수녀;嬷嬷;嬤嬤;Die Nonne;Монахиня;La Suora;A Freira
+executioner;Justice <male_names>;Cellat <male_names>;;Justicia <male_names>;<male_names>執行官;<male_names> 집행관;<male_names>法官;<male_names>法官;<male_names> der Vollstrecker;Судья <male_names>;<male_names> la Giustizia;Justiceiro <male_names>
+executioner_generic;The Executioner;Cellat;L'Exécuteur;El Verdugo;処刑人;사형집행인;处刑人;處刑人;Der Henker;Палач;Il Boia;O Carrasco
+explorator;<male_names> <last_names>;;;;<male_names>・<last_names>;<male_names> <last_names>;<male_names>・<last_names>;<male_names>・<last_names>;<male_names> <last_names>;;<male_names> <last_names>;<male_names> <last_names>
+explorator_generic;The Explorator;Kaşif;L'Explorateur;El Explorador;探検家;탐험가;探险家;探險家;Der Entdecker;Открыватель;L'Esploratore;O Explorador
+dog_generic;The Royal Dog;Kraliyet Köpeği;Le Chien Royal;El Perro Real;宮廷犬;궁중견;御犬;禦犬;Der Hund des Königs;Королевский пес;Il Cane Reale;O Cão Real
+dog;Rex;;;;レックス;렉스;雷克斯;雷克斯;Rex;Рекс;Rex;Rex
+prophet_generic;The Prophet;Peygamber;Le Prophète;El Profeta;預言者;예언자;先知;先知;Der Prophet;Пророк;Il Profeta;O Profeta
+prophet;<...> of <places>;<places> Şehrinden <...>;<...> de <places>;<...> de <places>;<places>の<...>;<places>의 <...>;<places>的<...>;<places>的<...>;<...> von <places>;<...> из <places>;<...> di <places>;<...> de <places>
+;Acturus;;;;アクトゥルス;악투루스;阿丘鲁斯;阿丘魯斯;Acturus;Актурус;Acturus;Arcturo
+;Brodus;;;;ブローダス;브로더스;布鲁杜斯;布魯杜斯;Brodus;Бродус;Brodus;Brodus
+;Limitus;;;;リミタス;리미투스;李米特斯;李米特斯;Limitus;Лимитус;Limitus;Limito
+;Arnauld;;;;アルノー;아르노;阿尔诺;阿爾諾;Arnauld;Арнольд;Arnaldo;Arnoldo
+parker_generic;The Lord;Lord;Le Lord;El Señor;領主;영주;领主;領主;Der Lord;Владыка;Il Lord;O Senhor
+parker;Lord Parker;Lord Parker;;Señor;パーカー公;파커 공;帕克勋爵;帕克勳爵;Lord Parker;Лорд Паркер;Lord Parker;Lorde Parker
+werewolf_generic;The Werewolf;Kurtadam;Le Loup-Garou;El Hombre-lobo;人狼;늑대인간;狼人;狼人;Der Werwolf;Оборотень;Il Licantropo;O Lobisomem
+werewolf;Wulfa;Kurtkadın;;;ウルファ;울파;沃尔弗;沃爾弗;Wulfa;Вульфа;Wulfa;Wulfa
+homunculus_generic;The Homunculus;Homunkulüs;L'Homonculus;El Homúnculo;ホムンクルス;호문클루스;瓶中小人;瓶中小人;Der Homunkulus;Гомункул;L'Omuncolo;O Homúnculo
+homunculus;? ? ?;;;;？？？;? ? ?;谜之声;謎之聲;;;? ? ?;
+minstrel_generic;The Minstrel;Ozan;Le Ménestrel;El Juglar;吟遊詩人;음유시인;吟游诗人;吟遊詩人;Der Minnesänger;Менестрель;Il Menestrello;O Trovador
+minstrel;<male_names> <last_names>;;;;<male_names>・<last_names>;<male_names> <last_names>;<male_names>・<last_names>;<male_names>・<last_names>;;;<male_names> <last_names>;
+painter_generic;The Painter;Ressam;Le Peintre;El Pintor;画家;화가;画家;畫家;Der Maler;Живописец;Il Pittore;O Pintor
+painter;<...>;;;;<...>;<...>;<...>;<...>;;;<...>;
+;Gregorios;;;;グレゴリオス;그레고리우스;格雷戈瑞斯;格雷戈瑞斯;Gregorios;Грегориос;Gregorio;Gregório
+;Randall;;;;ランドール;랜달;兰德尔;蘭德爾;Randall;Рэндалл;Randall;Randall
+;Proteos;;;;プロテオース;프로테우스;普罗秋斯;普羅秋斯;Proteos;Протеос;Proteo;Proteo
+rival_generic;The Rival;Hasım;Le Rival;El Rival;宿敵;숙적;竞争者;競爭者;Der Rivale;Претендент;Il Rivale;O Rival
+rival;<king_names>;;;;<king_names>;<king_names>;<king_names>;<king_names>;;;<king_names>;
+skeleton_generic;The Skeleton;İskelet;Le Squelette;El Esqueleto;スケルトン;해골;骷髅;骷髏;Das Skelett;Скелет;Lo Scheletro;O Esqueleto
+skeleton;Kloc;;;;クロック;클록;克洛;克洛;Kloc;Клок;Kloc;Kloc
+places;Coterbury;;;Castalejo;コータベリー;코터베리;坎特伯雷;坎特伯雷;Coterbury;Котербери;Coterbury;Coterbury
+;Randon;;;Riandro;ランドン;랜든;兰登;蘭登;Randon;Рэндона;Randon;Randon
+;Angeli;;;San Angel;サンタンゲリオン;세인트 안젤리온;圣安吉利安;聖安吉利安;Saint Angeli;Сент-Ангелиона;Saint Angel;Santo Angélio
+;Portune;;;Portón;ポルトン;포르툰;波顿;波頓;Portune;Портуна;Portune;Portuna
+;Talman;;;Talmañoso;タルマニー;탈만;塔尔曼;塔爾曼;Talman;Талмана;Talman;Talmem
+;Rigsbourg;;;Burgo Rico;リグズバーグ;릭스부르크;里斯伯格;裏斯伯格;Rigsburg;Ригсбурга;Rigsburg;Rigsburgo
+;Alamain;;;Alhama;アラメーン;알라망;阿莱曼;阿萊曼;Alamain;Алемейна;Alamain;Alamã
+;Port Sead;;;Puertomar;ポート・シード;포트 시드;波特・希德;波特・希德;Port Sead;Порта Сида;Port Sead;Porto Sead
+;Falisby;;;Falisco;ファリスビー;팰리스비;法里斯比;法裏斯比;Falisby;Фалисби;Falisby;Falisby
+;Reeds;;;Risadegua;リーズ;리즈;里德;裏德;Reeds;Ридса;Reeds;Canavial
+;Valambun;;;;バラムバン;발람번;瓦拉布恩;瓦拉布恩;Valam;Валамбуна;Valambun;Valambum
+;Grevoh;;;Grevorrubi;グレヴォー;그레보;格雷科;格雷科;Grevoh;Грево;Grevoh;Grevô
+;Ostwald;;;Ajolibre;オストウォルド;오츠왈드;奥斯特沃德;奧斯特沃德;Ostwald;Оствальда;Ostwald;Ostwaldo
+exotic_male_names;Woldruff;;;;ヴォルドラフ;보르드러프;伍德拉夫;伍德拉夫;Woldruff;Волдруф;Woldruff;Woldrufo
+;Radogost;;;;ラドゴスト;라도고스트;拉德格斯特;拉德格斯特;Radogost;Радогост;Radogost;Radogosti
+;Brohnwist;;;;ブローンヴィスト;브론비스트;布若韦斯特;布若韋斯特;Brohnwist;Бронвист;Brohnwist;Bronwist
+;Deobulf;;;;デオバルフ;데오벌프;德尔布夫;德爾布夫;Deobulf;Деобульф;Deobulf;Deobulfe
+;Powpow;;;;パウパウ;파우파우;包宝;包寶;Powpow;Паупау;Powpow;Powpow
+;Sylbourgh;;;;シルボー;실버러;希尔波尔;希爾波爾;Sylbourgh;Сильборо;Sylbourgh;Silborow
+male_names;Cedric;;Cédric;;セドリック;세드릭;塞德里克;塞德裏克;Cedric;Седрик;Cedric;Cedric
+;Gotfried;;;Godofredo;ゴットフリート;고트프리드;哥弗里德;哥弗裏德;Gottfried;Готфрид;Goffredo;Godofredo
+;Adémar;;;Ademar;アデマール;아데마르;阿德马尔;阿德馬爾;Adémar;Адемар;Ademaro;Ádemar
+;Jest;;;Jesto;ジェスト;제스트;杰斯特;傑斯特;Jest;Джест;Giusto;Jest
+;Thomas;;;Tomás;トマス;토마스;托马斯;托馬斯;Thomas;Томас;Tommaso;Tomás
+;John;;Jean;Juan;ジョン;존;约翰;約翰;John;Джон;Giovanni;João
+;Henry;;Henri;Enrique;ヘンリー;헨리;亨利;亨利;Henry;Генри;Enrico;Henrico
+;William;;Guillaume;Guillermo;ウィリアム;윌리엄;威廉;威廉;William;Вильям;Guglielmo;Guilherme
+last_names;Vaujhan;;;;ボーン;보잔;沃伊安;沃伊安;Vaujhan;Воэн;Vaujhan;Vagner
+;Ware;;;;ウェア;웨어;威尔;威爾;Ware;Вейр;Ware;Weir
+;Writhe;;;;ライズ;라이즈;莱斯;萊斯;Writhe;Ритт;Writhe;Rito
+;de Rous;;;de Roz;デ・ルー;드 루;德罗斯;德羅斯;de Rous;де Ру;de Rous;de Rous
+;of Sherwood;Sherwoodlu;de Sherwood;de Sherwood;シャーウッド;오브 셔우드;舍伍德;舍伍德;von Sherwood;Шервудский;di Sherwood;de Shérvila
+;Farringon;;;;ファリンゴン;파링곤;法林顿;法林頓;Farringon;Фаррингтон;Farringon;Fárringo
+;Croomwell;;;;クルームウェル;크룸웰;克隆威尔;克隆威爾;Croomwell;Крумвель;Croomwell;Crunvel
+;Courtenay;;;;コートニー;코트니;科特内;科特內;Courtenay;Куртенэ;Courtenay;Cortenai
+;Brandon;;;;ブランドン;브랜든;布兰东;布蘭東;Brandon;Брендон;Brand;Breno
+female_names;Julie;;;Julia;ジュリー;줄리;朱莉;朱莉;Julia;Жули;Giulia;Julia
+;Sylvia;;;Silvia;シルビア;실비아;希尔薇娅;希爾薇婭;Sylvia;Сильвия;Silvia;Sílvia
+;Godiva;;;;ゴダイバ;고다이바;戈迪瓦;戈迪瓦;Godiva;Годива;Godiva;Godiva
+;Elena;;;;エレナ;엘레나;艾琳娜;艾琳娜;Elena;Елена;Elena;Elena
+;Delphine;;;;デルフィーヌ;델핀;德尔芬;德爾芬;Delphine;Дельфина;Delfina;Delfine
+;Brianne;;;;ブリアンヌ;브리안느;布兰恩;布蘭恩;Brianne;Брианна;Brianne;Briane
+;Pauline;;;Paulina;ポーリーン;폴린;保琳娜;保琳娜;Pauline;Паулина;Paolina;Pauline
+;Melusin;;Mélusine;Melusina;メリュジーヌ;멜르진;梅露辛;梅露辛;Melusine;Мелюзина;Melusina;Melusina
+duel_stats;NEW MOVE;YENİ HAMLE;NOUVEAU COUP;NUEVO GOLPE;新技を習得！;새로운 공격!;新招式;新招式;NEUE TECHNIK;НОВЫЙ ХОД;NUOVA MOSSA;NOVO MOVIMENTO
+knife;Treacherous hornet;Hain eşek arısı;Frelon traître;Abejorro Traidor;不実な蜂;악명높은 벌;狡诈飞蜂;狡詐飛蜂;Tückische Hornisse;Коварный шершень;Calabrone traditore;Vespão traiçoeiro
+taunt;Silly taunt;Sersem sataşma;Stupide provocation;Provocación estúpida;お道化の挑発;어리석은 도발;犯蠢挑衅;犯蠢挑釁;Alberne Stichelei;Глупая насмешка;Sciocca provocazione;Escárnio tolo
+longattack;Angry boar;Kızgın yaban domuzu;Sanglier furieux;Jabalí furioso;怒れる猪;성난 멧돼지;愤怒野猪;憤怒野豬;Wütender Eber;Разъяренный вепрь;Cinghiale furioso;Javali furioso
+botte1;Unstoppable bull;Önlenemeyen boğa;Taureau enragé;Toro furioso;荒ぶる雄牛;거친 황소;牛不可当;牛不可當;Unaufhaltsamer Stier;Неудержимый бык;Toro inarrestabile;Touro implacável
+botte2;Tricky weasel;Düzenbaz sansar;Fouine insaisissable;Comadreja escurridiza;騙しの鼬;간악한 족제비;狡黠鼬鼠;狡黠鼬鼠;Listiges Wiesel;Хитрый горностай;Donnola scaltra;Doninha astuta
+botte3;Cheating pig;Hilekar domuz;Porc tricheur;Cerdo tramposos;欺きの豚;사기꾼 돼지;耍赖猪猡;耍賴豬玀;Schummelndes Schwein;Лживая свинья;Maiale imbroglione;Porco traiçoeiro
+retreat;Prudent retreat;Dikkatle geri çekiliş;Retraite prudente;Retirada prudente;戦略的退却;전략적 후퇴;谨慎后退;謹慎後退;Besonnener Rückzug;Благоразумное отступление;Ritirata prudente;Retirada prudente
+flowers;Unexpected proposal;Beklenmeyen teklif;Proposition inattendue;Posición inesperada;不意打ちの求愛;깜짝 구애;意外求婚;意外求婚;Unerwarteter Vorschlag;Неожиданное предложение;Proposta inaspettata;Proposta inesperada
+pray;Fervent pray;Tutkulu dua;Fervente prière;Oración ferviente;熱き祈り;열정적 기도;热忱祈祷;熱忱祈禱;Inbrünstiges Gebet;Истовая молитва;Preghiera fervente;Oração fervorosa
+portrait;Portrait mode;Portre modu;Mode portrait;Modo retrato;ポートレートモード;세로 모드;竖屏模式;竖屏模式;Porträt-Modus;Портретный режим;Modalità ritratto;Modo retrato
+king_old;King;Kral;;;現王;왕;国王;國王;;;;
+king_young;King;Kral;;;新王;왕;国王;國王;;;;
+achieve;Achievements;Başarımlar;Succès;Logros;トロフィー;도전과제;成就;成就;Errungenschaften;Достижения;Obiettivi;Conquistas
+saving;Cloud Save;Bulut Kaydı;Sauvegardes;Juegos guardados;クラウドセーブ;클라우드 세이브;云存储;雲存儲;Spielstände;Guardar;Partite salvate;Jogos salvos
+highscore;Leaderboard;En İyiler;Scores;Puntuación;ランキング;순위표;排行榜;排行榜;Rangliste;Рекорд;Punteggio;Pontuação
+barbare_generic;The Warlord;Cenkbeyi;Le Seigneur de la Guerre;El Señor de la Guerra;プラーン;군사령관;军阀;軍閥;Der Kriegsherr;Вождь;Il signore della guerra;O Chefe de Guerra
+barbare;<...> the Fierce;Acımasız <...>;<...> le Redoutable;<...> el Temible;猛々しき<...>;험악한 <...>;威猛的<...>;威猛的<...>;<...> der Grimmige;<...> Свирепый;<…> l'Impetuoso;<...>, o Feroz
+;Krahn;;;;武将;크란;;;Krahn;Крахн;Krahn;Krahn
+;Drahn;;;;クラーン;드란;;;Drahn;Драхн;Drahn;Drahn
+;Prahn;;;;ドラーン;프란;;;Prahn;Прахн;Prahn;Prahn
+null;null;;null;null;null;null;null;null;null;null;null;null

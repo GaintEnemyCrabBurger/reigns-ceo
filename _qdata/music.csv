@@ -1,0 +1,36 @@
+name;conditions;dynastyID;length;overlap
+d1;isDeaf;;;4
+d1;plague;;;4
+d1;devil_curse_keep;;;4
+s1;spice_trade_keep;;3;3
+s1;fortification_keep;;3;3
+s1;centralbank_keep;;3;3
+s1;excalibur_keep;;1;3
+s1;strawberry_keep;;1;3
+s2;isSlaver;;3;5
+s2;crusade_keep;;3;5
+s3;theocracy;;1;1.5
+s3;cathedral_keep;;1;1.5
+s4;hospital_keep;;1;3
+s4;barn_keep;;1;3
+p1mono;age<4;1;;2.5
+p1duo;age>3 and age<9;1;;2.5
+p1trio;age>8 and age<16;1;;2.5
+p1quad;age>15 and age<29;1;;2.5
+p1mono;age>28 and age<33;1;;2.5
+p1quad;age>32 and age<51;1;;2.5
+p1duo;age>50;1;;2.5
+p2mono;age<4;2;;2.5
+p2duo;age>3 and age<9;2;;2.5
+p2trio;age>8 and age<16;2;;2.5
+p2quad;age>15 and age<29;2;;2.5
+p2mono;age>28 and age<33;2;;2.5
+p2quad;age>32 and age<51;2;;2.5
+p2duo;age>50;2;;2.5
+p3mono;age<4;3;;3
+p3duo;age>3 and age<9;3;;3
+p3trio;age>8 and age<16;3;;3
+p3quad;age>15 and age<29;3;;3
+p3mono;age>28 and age<33;3;;3
+p3quad;age>32 and age<51;3;;3
+p3duo;age>50;3;;3

@@ -1,0 +1,89 @@
+bearer;id;type;max;keyword;house;genre;eyes;firstname;generated;name;title
+coins;1;function;1;;;;;;;The Master of Coin;Master of Coin
+grand_maester;3;function;1;;;male;;;;The Grand Maester;Grand Maester
+hand;2;function;1;;;;;;;The Hand;Hand of the (King*Queen)
+high_septon;62;function;1;;;;;;;The High Septon;High Septon
+spider;4;function;1;;;;;;;The Spider;Master of Whisperers
+archer;97;individual;1;;;male;0;;<west_first_male> <west_last>;The Archer;Archer
+arryn_male;83;individual;1;noble;arryn;male;16;;Lord <west_first_male>;House Arryn;House Arryn
+arya;46;individual;1;;;female;0;Arya;Arya;Arya Stark;
+banker;82;individual;1;;;male;14;;<essos_first_male> <essos_last>;The Banker;Banker
+blacksmith;36;individual;1;;people;male;22;;<west_first_male> <west_last>;The Blacksmith;Blacksmith
+arryn;49;house;3;;;;;;;;House Arryn
+cat;98;special;1;;;male;;;Balerion;The Cat;King of the Castle
+greyjoy;25;house;5;;;;;;;;House Greyjoy
+cersei;55;individual;1;;lannister;female;0;Cersei;Queen Cersei;Cersei Lannister;
+lannister;11;house;5;;;;;;;;House Lannister
+clegane;56;individual;1;;;male;12;;Sandor Clegane;Sandor Clegane;
+martell;8;house;4;;;;;;;;House Martell
+commoner_female;85;individual;2;;people;female;-1;;<west_first_female> <west_last>;The Laundress;Smallfolk
+stark;12;house;5;;;;;;;;House Stark
+commoner_male;84;individual;2;;people;male;7;;<west_first_male> <west_last>;The Smallfolk;Smallfolk
+targaryen;13;house;5;;;;;;;;House Targaryen
+tully;30;house;3;;;;;;;;House Tully
+cook;38;individual;1;;people;male;-15;;<west_first_male> <west_last>;The Cook;Cook
+tyrell;10;house;4;;;;;;;;House Tyrell
+courtesan;94;generated;1;;people;female;11;;<essos_first_female>;The Courtesan;Courtesan
+crow;5;individual;4;;military;male;16;;<west_first_male> <west_last>;The Crow;Black brother
+crowd;71;special;1;;;;no;;A crowd;The Crowd;
+daenerys;47;individual;1;;targaryen;female;3;Daenerys;Queen Daenerys;Daenerys Targaryen;
+dothraki;50;individual;3;;;male;19;;<doth_first_male>;The Dothraki;Dothraki screamer
+drogon;27;special;1;;;;no;;Drogon;The Dragon;Dragon
+dungeon;68;special;1;;;;no;;A dungeon;The Dungeon;
+forest_child;105;individual;1;;;male;-25;;Moss;One of the Children;Children of the Forest
+freefolk;90;individual;1;;;female;9;;<west_first_female>;The Wildling;Wildling
+gendry;75;individual;1;;;male;18;Gendry;Gendry;Gendry Baratheon;
+goldcloak;89;individual;1;;;male;15;;<west_first_male> <west_last>;The Gold Cloak;Gold Cloak
+greyjoy_male;72;individual;1;;greyjoy;male;9;;Lord <west_first_male>;House Greyjoy;House Greyjoy
+handmaiden;32;individual;3;;people;female;11;;<west_first_female> <west_last>;The Handmaiden;Handmaiden
+jaime;74;individual;1;;lannister;male;11;Jaime;Ser Jaime;Jaime Lannister;
+jon;54;individual;1;;stark;male;9;Jon;Jon Snow;Jon Snow;
+kingsguard;87;individual;1;;military;male;12;;Ser <west_first_male>;The Kingsguard;(Kings*Queens)guard
+kirsten;101;individual;1;;;female;6;;Lady Calloway;The Ingenuous;House Lowrie
+knight;88;individual;1;;military;male;8;;Ser <west_first_male>;The Knight;Knight
+lannister_male;65;individual;1;noble;lannister;male;8;;Lord <west_first_male>;House Lannister;House Lannister
+lannister_soldier;103;individual;1;;military;male;0;;Ser <west_first_male>;The Captain;Captain of the Guard
+little_bird;95;generated;4;;;people;-28;;<little_bird>;The Little Bird;Little bird
+maester;17;generated;2;;;male;3;;Maester <west_first_male>;The Maester;Maester
+martell_female;102;individual;1;;martell;female;0;;Meria Sand;House Martell;House Martell
+melisandre;51;individual;1;;;female;6;;Lady Melisandre;The Red Priestess;Red priestess
+militant;78;individual;1;;pious;male;0;;<west_last>;The Militant;Faith Militant
+nobleman;48;individual;1;;noble;male;6;;Lord <west_first_male>;House Caron;House Caron
+pirate;91;individual;1;;;male;19;;<west_first_male> <west_last>;The Pirate;Pirate
+pyromancer;52;individual;1;;people;male;4;;<west_first_male> <west_last>;The Pyromancer;Pyromancer
+raven;79;special;1;;;;no;;A raven;The Raven;
+rhaegal;106;special;1;;;;no;;Rhaegal;The Brother;Dragon
+sam;73;individual;1;;;male;12;;Samwell Tarly;Samwell Tarly;
+sansa;14;individual;1;;stark;female;6;Sansa;Lady Sansa;Sansa Stark;
+scorpion;63;special;1;;;;no;;Dragon killer;The Scorpion;Scorpion
+sellsword;96;individual;1;;military;male;6;;<west_first_male> <doth_first_male>;The Sellsword;Golden Company
+septa;92;individual;1;;pious;female;3;;<west_first_female> <west_last>;The Septa;Septa
+septon;44;generated;2;;pious;male;3;;<west_first_male> <west_last>;The Septon;Septon
+soldier;16;generated;2;;military;male;0;;<west_first_male> <west_last>;The Soldier;Soldier
+stark_male;66;individual;1;noble;stark;male;5;;Lord <west_first_male>;House Umber;House Umber
+three_eyed_raven;45;special;1;;;;no;;Three-Eyed Raven;The Three-Eyed Raven;
+throne;26;special;1;;;;no;;Iron Throne;The Iron Throne;
+tully_male;100;individual;1;noble;tully;male;9;;Lord <west_first_male>;House Tully;House Tully
+tyrell_female;69;individual;1;noble;tyrell;female;0;;Lady <west_first_female>;House Tyrell;House Tyrell
+tyrion;61;individual;1;;lannister;male;-20;Tyrion;Lord Tyrion;Tyrion Lannister;
+unsullied;86;individual;1;;;male;18;;<unsullied>;The Unsullied;Unsullied
+varys;59;individual;1;;people;male;25;;Lord Varys;Lord Varys;
+walker;93;special;1;;;male;10;;? ? ?;The White Walker;White Walker
+weirwood;107;special;1;;;;no;;The Weirwood;Weirwood;
+white_raven;80;special;1;;;;no;;A white raven;The White Raven;
+wolf;60;special;1;;;;no;;Nymeria;The Direwolf;Direwolf
+antagonist;64;system;7;;;;;;;;
+anyone;19;system;100;;;;;;;;
+commander;104;system;1;;;male;;;Orgo Magnar;;Lord Commander
+end;18;system;;;;;;;;;
+female;29;system;;;;;;;;;
+male;28;system;;;;;;;;;
+military;99;system;;;;;;;;;
+noble;41;system;;;;;;;;;
+people;70;system;;;;;;;;;
+pious;81;system;;;;;;;;;
+reigning;37;system;;;;;;;;;
+cell;108;special;1;;;;no;;A cell;The Cell;
+jailor;110;individual;1;;;male;;;Jeor;The Jailor;Jailor
+wall;111;special;1;;;;no;;On the Wall;The Wall;
+wight;112;special;1;;;;no;;? ? ?;The Wight;

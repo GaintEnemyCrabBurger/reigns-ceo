@@ -1,0 +1,22 @@
+tag;title;description;length;spiritual;military;demography;treasure;custom
+crusade_keep;Crusader;The slaughter of infidels is a lucrative way to decrease your population each year.;;;;-.5*;.5*;special_crusade
+isSlaver;Slaver;The slave trade gives you access to an infinite amount of cash. But what about your soul?;15;;;;2*;
+plague;Black Death;The plague is decimating your population. It's a bleak time to be a citizen of the Kingdom.;;;;-3*;;
+isOblivious;Clarity;From now on, you will know more precisely how your decisions affect the Kingdom. Is it a gift or a malediction?;;;;;;special_clarity
+isDeaf;Old Age;You won't be able to hear or understand properly. Scared, you try very hard to hide your ailment from the court.;;;;;;special_deaf
+isLover;Lover;You won't be able to say "no" to your paramour. The Church disapproves, but it mesmerizes your people.;;-1*;;lock;;special_lover
+intheDungeon;Enter the Pungeon;There's no way back and in your absence, the Kingdom ineluctably falls into anarchy.;;-1*;-1*;-1*;-1*;special_dungeon
+fortification_keep;High Walls;The fortifications are an excellent way to repel invaders. Useful when your army is weak.;;;;;;
+strawberry_keep;The One;It's probably the last strawberry plant on earth. You keep it under heavy protection. ;;;;;;
+centralbank_keep;Money Money;The central bank protects you from bankruptcy. You just have to create more money when you need it. Genius!;;;;;;
+cathedral_keep;Gracias Deo;The cathedral is a monument for the generations. It prevents the Church from being too weak and the people too powerful.;;;;;;
+hospital_keep;Mount Care;The hospital will limit the consequence of epidemics and catastrophes.;;;;;;
+barn_keep;Providence;The barn was expensive but it's good protection to avoid famine and the people's unrest.;;;;;;
+excalibur_keep;Excalibur;The sword of Kings is yours. In duels you will be more steady and you will be able to trigger special moves without defending first.;;;;;;
+dice_keep;Loaded Dice;You will never lose again at the Red Dwarf.;;;;;;
+isStone;Blue Mushroom;You feel suddenly very happy. Then strange things start to happen...;8;;;;;special_stone
+devil_visit;Diabolus;Time is gone, space is insane. Here it comes, here again. You feel your mouth closing down as if you never had one.;;;;;;special_devilvisit
+devil_curse_keep;Death Wish;The next character you say 'Yes' to will die.;;;;;;special_devilcurse
+theocracy;Theocracy;You won't be able to say 'no' to the church anymore. That said, they're taking care of the money.;30;;;;lock;special_nochurch
+spice_trade_keep;Silk Road;The spice trade adds to the treasure every year. You have more chance of angering your neighbours though. ;30;;;;.5*;
+colonies_keep;Colonies;The New World is adding to the treasury and the army every year but will you be able to manage such an empire?;;;.5*;;.5*;special_colonies

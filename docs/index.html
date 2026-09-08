@@ -335,13 +335,20 @@ function bindDrag(el){
       const choice = dx > 0 ? cur.yes : cur.no;
       RES.forEach(r => {
         const dot = $('#bars').querySelector(`[data-k="${r.k}"] .dot`);
+        if (!dot) {
+          console.error('Dot not found for', r.k);
+          return;
+        }
         const delta = Math.abs(choice[r.k] || 0);
+        console.log('Delta for', r.k, ':', delta);
         if (delta > 0) {
           // 圆点大小：影响值 5 -> 6px, 10 -> 8px, 15 -> 10px, 20+ -> 12px
           const size = Math.min(12, 6 + delta * 0.3);
           dot.style.width = size + 'px';
           dot.style.height = size + 'px';
+          dot.style.backgroundColor = '#d4af37';
           dot.classList.add('show');
+          console.log('Showing dot for', r.k, 'size:', size);
         } else {
           dot.classList.remove('show');
         }
@@ -349,7 +356,8 @@ function bindDrag(el){
     } else {
       // 隐藏所有圆点
       RES.forEach(r => {
-        $('#bars').querySelector(`[data-k="${r.k}"] .dot`).classList.remove('show');
+        const dot = $('#bars').querySelector(`[data-k="${r.k}"] .dot`);
+        if (dot) dot.classList.remove('show');
       });
     }
   };

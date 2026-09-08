@@ -1,0 +1,51 @@
+name;parent;title;description;achievement;blocked_until_revealed;conditions
+young;;the Maiden;Rule at least five years;;;age>5
+wise;;the Heathen;Recruit the acolyte;Moon Magic;;has_priestess
+patron;;the Patron;Meet the explorer;Discovery Channel;x;has_explorer
+fateful;;the Fateful;Upgrade your clock;Mysteries of the Zodiac;x;advancedclock
+amicable;;the Amicable;Host a neighboring kingdom;Double Date;x;has_ravenna
+council;;the Advisor;Join the royal council;;;council
+witch;;the Sorceress;Recruit the witch;So Must It Be;;meetwitch
+extravagant;;the Extravagant;Own a royal riverboat;;x;riverboat
+hearty;;the Hearty;Duel a pirate;;;pirateduel
+widow;;the Widow;Rule without the King;Slay Queen;x;!has_king
+romantic;;the Romantic;Play matchmaker at court;;;romance_reign
+builder;;the Builder;Earn three architectural works;;;statue and wonderhall and philocentre
+indefatiguable;;the Indefatigable;Have four affairs at once;;;allaffairs
+throne;young;the Graceful;Perform the Coronation Rite;;x;ceremony
+mercantile;;the Mercantile;Recruit the merchant;No Provenance;x;has_merchant
+worldly;;the Worldly;Discover a new world;Northern Exposure;x;has_cossack
+maze;;the Lost;Enter the maze;Labyrinthine;x;has_maze
+duelist;;the Duelist;Find a pistol;;;pistol
+keen;;the Keen;Unmask a traitor;;;!has_comtesse and ceremony
+father;;the Merciful;Examine a church prisoner;Our Father;x;has_father
+enlighten;;the Enlightened;Become a patron of the arts;;x;patron
+mother;;the Mother;Produce an heir;;;prince_reign
+vengeful;;the Vengeful;Duel the assassin;;;>_duel_ravenna1
+old;;the Matron;Govern at least 20 years;;;age>20
+elder;;the Elder;Govern at least 40 years;;;age>40
+ancient;;the Ancient;Govern at least 60 years;;;age>60
+venerated;;the Venerated;Govern at least 80 years;;;age>80
+crone;;the Crone;Govern at least a century;;;age>100
+deathless;;the Deathless;Govern at least two centuries;;;age>200
+doctor;young;the Savant;Investigate the locked tower;Bizarre Enlightenment;x;has_doctor
+machinist;;the Machinist;Restore the mechanical owl;The Duel Room;x;has_owl
+saint;;the Saint;Pass the sainthood test;;;enameledbone
+magi;;the Magi;Talk to an animal;;;animals
+unholy;;the Unholy;Speak to the Lady of the Wood;;;foretold
+chosen;;the Pure;Defeat your inner darkness;;;>_duelself_won
+eclipse;;the Celestial;Summon an eclipse;Inner Shadow;;eclipse_reign
+innocent;;the Innocent;Stand trial;;;>_trialstart
+snake;;the Secret;Reveal the snake society;;;>_snakewin
+millenium;;the Millennial;Pass the second millenium;;;year>1999
+empowered;;the Empowered;YASSSS KWEEEEN! Learn to code!;;;normalend
+olddeath;;the Fulfilled;Die happy;;;>_end_old
+collector;;the Collector;Upgrade all your items;;;squirtgun and creditcard and dataresults and sacredtablet
+vampiremeet;;the Bloodless;Meet the vampire;Curse Drama;;has_vampire
+alchemy;;the Philosopher;Explore a new form of science;Extreme Transmutation;;has_alchemist
+vampirewin;;the Magus;Transform the vampire;;;vampirewin
+vampireking;;the Healer;Cure the King's curse;;;>_kingcure
+transform;;the Conjurer;Turn the frog into a princess;;;has_frprincess
+undo;;the Witch;Turn the princess into a frog;;;witchclue and !has_frprincess
+transmute;;the Forbidden;Complete the alchemist's work;;;itemtransform 
+runaways;;the Faithless;Escape with your lover;;;>_runaway

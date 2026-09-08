@@ -1,0 +1,50 @@
+name;parent;title;description;achievement;blocked_until_revealed;conditions
+young;;the Mother of Dragons;Wake up Drogon;;;wakeupdrogon
+magnanimous;;the Magnanimous;Hear a request from the North;;;northrequest
+dove;;the Fool;Witness an unexpected use of wildfire;The Lady of Winterfell;;seen_752
+hidden;;the Hidden;Enter the tavern;;;seen_387
+brawl;;the Dazed;Win a tavern brawl;;;seen_1346
+arya;;the Witty;Arrest the killer of Cersei's men;The Faceless Queen;;seen_288
+pentos;;the Drunk;Remember Pentos;;;seen_307
+replace;;the New Queen;Replace Cersei on the throne;;;newqueen
+cat;;the Swift;Catch a cat;;;seen_980
+dothpie;;the Cook;Make Dothraki pie;;;seen_1685
+hideout;;the Wanderer;Discover a hidden workshop;;;seen_1231
+reunite;;the Wild;Reunite two wild friends;;;seen_682
+pirate;young;the Pirate;Meet the pirate;;;>pirate
+jon;;the (Usurper*Aunt);Discover a hidden Targaryen;The Lost Heir;;jonheir_keep
+battle;;the Brave;Win a battle against Dorne;;;seen_1317
+light;;the Heretic;Look into Melisandre's fire;;x;dreamloop
+oath;;the Liege;Hear a Knight's oath;;x;seen_376
+brown;;the Bright;Find who is behind the Brown Walkers;;x;seen_146
+batnorth;;the Southerner;Win a battle against Winterfell;;;seen_1430
+tourney;;the Champion;Win a tourney;;;seen_1449
+dothrakibak;;the Prudent;Bring the Dothraki back;;;dothrakiback
+crowd;;the Orator;Give a speech;;;speech
+liar;;the Liar;Tell a convincing lie;;x;tyrionlie
+militant;;the Believer;Restore the Faith Militant;;;faithmilitant
+mad;;the Mad Queen;Betray both your brothers;;;seen_968
+superjaime;;the Wooer;Find a surprising husband;;;seen_466
+valyrian;;the Smith;Forge Valyrian steel;;;seen_1216
+summer;;the Legend;Survive winter;The Dawn;;summer
+lovers;;the Nephew;Marry Daenerys;;;seen_1527
+robust;;the Vigorous;Survive 20 moons;;;age>20
+barnacle;;the Barnacle;Survive 40 moons;;;age>40
+parasite;;the Great;Survive 60 moons;;;age>60
+ancient;;the Ancient;Survive 100 moons;;;age>100
+cersei;young;the Judge;Attend Cersei's trial;The Mad Queen;;seen_274
+pyro;;the Firefly;Reveal who's hiding in the dungeon;;x;seen_241
+courtesan;;the Tolerant;Meet the courtesan;;;>courtesan
+dearjaime;;the Keeper;Retain Jaime's loyalty;The Kingslayer;;jaimesacrifice
+brothel;;the Legacy;Discover Littlefinger's legacy;;x;seen_181
+sellsword;;the Patron;Meet the Sellsword;;;>sellsword
+gendry;;the Sharp;Unmask Gendry;The Bastard King;;>gendry
+sharp;;the Friend;Win her trust, win her game;;;seen_429
+lover;;the Romance;Discover who has stolen your crown;;x;seen_361
+peace;;the Dove;Achieve peace;;;seen_1751
+council;;the Studious;Attend 3 small councils in a single reign;;;nb_council>2
+repentant;;the Repentant;Construct Cersei's redemption;;;greatseptdone
+cook;;the Chef;Recruit a surprising Master of Whisperers;;;cook&spider
+clegane;;the Witness;End a brotherly feud;;;seen_256
+walkers;;the General;Defeat the army of the dead in battle;;;seen_1187
+stubborn;;the Stubborn;Be at war during summer;;;summer and war>0

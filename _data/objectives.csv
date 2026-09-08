@@ -1,0 +1,46 @@
+name;parent;title;description;achievement;conditions
+young;;the Young;Govern at least 5 years;;age>5
+sword;;the Duelist;Win a duel;;nb_duelwon_keep>0
+stone;;the Dazed;Try the blue one;;isStone
+spy;;the Wicked;Recruit the spy;Insane whispers;has_spy
+patron;;the Patron;Recruit the minstrel;Divine soundtrack;has_minstrel
+blessed;;the Blessed;Meet the clumsy prophet;Awkward miracles;has_prophet
+lover;;the Lover;Start a romance;;isLover
+conspiracy;;the Target;Hear about the conspiracy;Shrewd scheming;conspiracy_keep
+farmerwolf;;the Tender;Arrange a bestial honeymoon;;farmerwolf
+senator;;the Doomed;Unmask the Senator;;isSenator
+millenium;;the Pivot;Pass the first millenium;Millennial frenzy;year>999
+survivor;;the Survivor;Trick the devil;;>_devilfail
+wise;young;the Wise;Recruit the doctor;Dirty science;has_doctor
+sorcerer;;the Sorcerer;Meet the witch;White arcanum;has_witch
+dungeon;;the Creepy;Lose yourself in the dungeon;Dark traps;intheDungeon
+spin;;the Trump;Govern like a winner;Spin doctor;spin_keep
+frozen;;the Alchemist;Find the Frozen Blood;Enclosed philosophy;hopen_keep
+america;;the Settler;Discover a new world;;colonies_keep
+hatoful;;the Boyfriend;Date a pigeon;;hatoful
+cathedral;;the Pious;Build a Cathedral;;cathedral_keep
+hat;;the Hat;Identify the terrorist cell;;>_headgear
+printer;;the Writer;Discover printing;;printing_keep
+greedy;;the Greedy;Build a personal fortune;;isGreedy
+paganist;;the Bigot;Build 5 churches;;nb_church_keep=5
+shrewd;;the Devious;Invent modern politics;;isShrewd
+devil;young;the Devil;Meet the devil;Devious curse;devil_curse_keep
+father;;the Father;Have an heir;;has_prince
+homunculus;;the Mage;Talk to the vase;;has_homunculus
+crusader;;the Crusader;Start a crusade;Lamascian secrets;crusade_keep
+peacemaker;;the Peacemaker;End a crusade;;isPeaceful
+fortune;;the Seer;See the future;Crooked visions;>_ftregal
+musician;;the Musician;Write a war song;;>_hymn_military
+killer;;the Coward;Look somewhere else;;isCoward
+onehand;;the One-handed;Lose a limb;;isOnearm
+old;;the Old;Govern at least 20 years;;age>20
+ancient;;the Ancient;Govern at least 40 years;;age>40
+grizzled;;the Grizzled;Govern at least 60 years;;age>60
+senile;;the Senile;Govern at least 80 years;;age>80
+fossil;;the Fossil;Govern at least a century;;age>100
+eternal;;the Eternal;Govern at least two centuries;;age>200
+polyglot;;the Polyglot;Convince the barbarian to help;;>_barbawon
+elephant;;the Elephant;Unmask the Elephant;;>_unmaskelephant
+partygoer;;the Urban;Crash the party;;>_party
+schizm;;the Schizmatic;Start a schizm;;>_schizm
+birdy;;the Decisive;Take a black or white decision;;>_birdchoice
