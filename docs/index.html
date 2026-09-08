@@ -17,7 +17,7 @@ body{
   display:flex;flex-direction:column;padding:14px;position:relative}
 
 /* 四条资源槽 */
-#bars{display:flex;gap:10px;margin-bottom:6px}
+#bars{display:flex;gap:10px;margin-bottom:6px;padding-top:12px}
 .bar{flex:1;text-align:center;position:relative}
 .bar .track{height:7px;background:#c9c3b6;border:1px solid #1a1a1a;position:relative;overflow:hidden}
 .bar .fill{position:absolute;left:0;top:0;bottom:0;background:#1a1a1a;
@@ -28,12 +28,12 @@ body{
 .bar.flash{animation:fl .5s}
 @keyframes fl{0%,100%{opacity:1}50%{opacity:.25}}
 
-/* 影响提示圆点 - 在图标上方 */
-.bar .dot{position:absolute;top:-10px;left:50%;transform:translateX(-50%);
-  border-radius:50%;background:#c9a86a;
-  opacity:0;transition:opacity .18s,width .18s,height .18s;
-  box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.bar .dot.show{opacity:0.9}
+/* 影响提示圆点 - 在资源槽上方 */
+.bar .dot{position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  border-radius:50%;background:#d4af37;
+  opacity:0;transition:opacity .2s,width .2s,height .2s;
+  box-shadow:0 2px 4px rgba(0,0,0,.3);pointer-events:none}
+.bar .dot.show{opacity:1}
 
 #meta{display:flex;justify-content:space-between;font-size:11px;
   color:#6b6459;letter-spacing:1px;margin:2px 0 8px}
