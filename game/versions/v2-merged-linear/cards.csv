@@ -1,0 +1,197 @@
+thematic;card;id;bearer;conditions;lockturn;weight;question;override_yes;answer_yes;yes_cash;yes_team;yes_market;yes_capital;yes_custom;override_no;answer_no;no_cash;no_team;no_market;no_capital;no_custom
+endings;end_cash_zero;900;财务总监;cash=0;;1000000;账上还有八万六。今天要付的工资是三百一十万。;我知道了;那我去通知大家吧。;;;;;end_破产清算;还有别的办法吗;没有了。我从三个月前就开始说了。;;;;;end_破产清算
+endings;end_cash_max;901;董事长;money=100;;1000000;账上趴着十一个亿，两年没动过。你打算什么时候花？;明年吧;董事会等不到明年了。;;;;;end_守财奴;我在等时机;时机是等出来的，还是做出来的？;;;;;end_守财奴
+endings;end_team_zero;902;人事总监;team=0;;1000000;今天最后三个人办完离职。整层楼只剩你和我。;那你呢;我的信也在你桌上。;;;;;end_人去楼空;总会有人来;招聘启事挂了七个月，没人投。;;;;;end_人去楼空
+endings;end_team_max;903;财务总监;team=100;;1000000;两千一百人。上季度人力成本吃掉了全部毛利，还超了四千万。;养得起;养不起。这是数学，不是态度。;;;;;end_大锅饭;谁都不能动;那就一起等着发不出工资。;;;;;end_大锅饭
+endings;end_market_zero;904;市场总监;market=0;;1000000;官网昨天的访问量是十七。其中十四个是我们自己人。;还有三个;那三个是爬虫。;;;;;end_无人问津;做点活动;活动预算上个月就停了。;;;;;end_无人问津
+endings;end_market_max;905;交付负责人;market=100;;1000000;在手订单排到二十八个月后。客户开始集体索赔了。;继续接;签一单，赔两单。;;;;;end_爆单崩盘;先停一停;停不了。合同都签了。;;;;;end_爆单崩盘
+endings;end_capital_zero;906;董事长;capital=0;;1000000;刚才那个会你没参加。七个董事，七票通过。;通过什么;换人。今天下午交接。;;;;;end_一致行动;我要申辩;流程走完了。这是通知，不是商量。;;;;;end_一致行动
+endings;end_capital_max;907;董事长;capital=100;;1000000;下个月八号敲钟。你的股份解禁期，我们帮你谈到了最短。;这是让我走;这是让你体面地走。;;;;;end_功成身退;我不卖;那就等六个月后被动减持，一样的结果，难看一点。;;;;;end_功成身退
+pressure;risk_cash_low;920;财务总监;cash<18 and cash>0 and !risk_cash_run and turn>1;del;6000;周五发工资还差两百万。现在只剩借钱，或者停掉一个项目。;借钱;钱能到账，签字权要给出去。;22;;;-15;risk_cash_run and debt_keep and nb_capital_grip+;停项目;项目停了，客户和团队都会知道。;15;-10;-8;;risk_cash_run
+
+pressure;risk_cash_high;921;董事长;cash>82 and cash<100 and !risk_cash_run and turn>1;del;6000;账上的钱够撑三年，市场窗口却在关。今天必须投出去一笔。;投产品;至少是在买未来。;-20;5;10;;risk_cash_run;买家公司;买来的团队未必听你的。;-25;-5;;10;risk_cash_run
+pressure;risk_team_low;922;人事总监;team<18 and team>0 and !risk_team_run and turn>1;del;6000;再走五个人，核心系统就没人会修了。;全员加薪;这能留住人，也会掏空账。;-15;22;;;risk_team_run;只留骨干;其他人会知道自己不在名单上。;;15;-8;-5;risk_team_run
+pressure;risk_team_high;923;财务总监;team>82 and team<100 and !risk_team_run and turn>1;del;6000;工资已经吃掉全部毛利。再不减人，下个月就发不出来。;裁一批;名单今晚就会传开。;10;-22;;8;risk_team_run;停招聘;只能慢一点，不能不减。;5;-15;-5;;risk_team_run
+pressure;risk_market_low;924;市场总监;market<18 and market>0 and !risk_market_run and turn>1;del;6000;再丢两家客户，销售就可以回家了。;降价;先把人留下再说。;-10;;22;;risk_market_run;押新产品;这是最后一笔试错的钱。;-15;-5;18;;risk_market_run
+pressure;risk_market_high;925;交付负责人;market>82 and market<100 and !risk_market_run and turn>1;del;6000;订单已经排到明年。再接一单，就会一起违约。;暂停接单;销售会骂，交付能喘口气。;;;-20;-5;risk_market_run;外包交付;钱和口碑都交给别人赌。;-15;-8;-15;;risk_market_run
+pressure;risk_capital_low;926;董事长;capital<18 and capital>0 and !risk_capital_run and turn>1;del;6000;再少一票，董事会今天就能换掉你。;让出预算权;他们要的从来不只是一票。;;-5;;22;risk_capital_run and investor_veto_keep and nb_capital_grip+;拉拢联创;他会问，你以前为什么不找他。;;8;;15;risk_capital_run and nb_founder_trust+
+pressure;risk_capital_high;927;法务;capital>82 and capital<100 and !risk_capital_run and turn>1;del;6000;董事会已经能越过你决定所有事。今天不收回一项权力，你只剩头衔。;收回人事权;下面至少知道该听谁的。;;5;;-20;risk_capital_run;收回预算权;董事长会把这理解成宣战。;-5;;;-22;risk_capital_run
+rescue;rescue_open;100;财务总监;nb_story=0 and !rescue_started_keep;del;5000;账上的钱只够三个月。董事长和领投方已经在会议室等你。;去见;他们只带了一份文件。;;;;;rescue_started_keep and >_rescue_offer;先看账;每一页都写着同一个结论：等不到下一轮。;;;;;rescue_started_keep and >_rescue_offer
+
+rescue;rescue_offer;101;领投人;;;;钱今晚到账。以后五百万以上的支出，要我们签字。;签;钱是公司的，签字权也是。;25;-5;;12;investor_veto_keep and nb_capital_grip+ and >_rescue_observer;不签;那我祝你周五发得出工资。;;;;-12;investor_refused_keep and >_rescue_choice
+rescue;rescue_observer;102;董事长;;;;财务观察员明天入职，直接向投资人汇报。;让他来;你会习惯会议室里多一把椅子。;;;;5;finance_observer_keep;这不在条件里;现在在了。;;;;-8;finance_observer_keep and nb_capital_grip+
+rescue;rescue_choice;103;财务总监;;;;不拿这笔钱，只剩两条路：让大客户预付，或者今晚裁三十个人。;找客户;他一直想要独家。;;;;;>_rescue_customer;准备名单;研发会占一半。;;;;;>_rescue_layoff
+rescue;rescue_customer;104;大客户;;;;一年货款今天预付。同类产品以后只能卖给我。;成交;从今天起，你只有一个真正的客户。;22;;10;-5;dealer_keep and nb_customer_grip+;不独家;那就没有预付款。;;;;-5;>_rescue_layoff
+rescue;rescue_layoff;105;人事总监;;;;名单三十人，十八个在研发。今晚发，能多撑两个月。;我签;联创要是问，我会说是你定的。;15;-18;;5;layoff_keep and nb_founder_hurt+;先欠工资;所有人都会在周五发现。;8;-10;;-10;debt_keep
+rescue;rescue_resume_veto;106;财务总监;nb_story=0 and rescue_started_keep and investor_veto_keep and turn=1;del;5000;前任拿到了救命钱，也把预算权留给了投资人。第一笔付款正在等他们签。;催他们签;他们说先看你的经营计划。;;;;-5;;先见团队;至少先告诉他们，谁在决定。;;5;;-5;
+rescue;rescue_resume_dealer;107;大客户;nb_story=0 and rescue_started_keep and dealer_keep and turn=1;del;4900;前任收了我们的预付款。欢迎上任，独家协议还有四年。;照合同来;那就先改掉卖给别人的功能。;5;;8;;;重新谈;钱已经花了，合同不会自己消失。;-5;;-8;;
+rescue;rescue_resume_layoff;108;联合创始人;nb_story=0 and rescue_started_keep and layoff_keep and turn=1;del;4800;前任裁了十八个研发，然后走了。你坐的是他的椅子，空的是我的工位。;把人找回来;有几个已经去了竞对。;-10;8;;;;先把活接住;剩下的人已经连上了十二天班。;;-8;5;;nb_founder_hurt+
+rescue;rescue_resume_debt;109;财务总监;nb_story=0 and rescue_started_keep and debt_keep and turn=1;del;4700;前任借钱发了工资。你上任的第一件事，是在还款单上签字。;先还一部分;利息照整笔算。;-12;;;5;;再借一笔;下一任会收到同一张单。;12;;;-10;debt_roll_keep and nb_capital_grip+
+rescue;rescue_relief_veto;110;财务总监;nb_story=0 and investor_veto_keep and !rescue_relief_run and turn>=5;del;1200;桥接款到账了。工资、房租和供应商，今晚都能付。;发一笔奖金;投资人会在明早看到。;-8;10;;-5;rescue_relief_run;先别动;账上终于有了能睡觉的钱。;5;;;5;rescue_relief_run
+rescue;rescue_relief_dealer;111;市场总监;nb_story=0 and dealer_keep and !rescue_relief_run and turn>=5;del;1200;大客户的预付款到了。银行短信第一次没有催你。;庆祝一下;所有人都以为最难的时候过去了。;-5;8;5;;rescue_relief_run;先排交付;合同上的日期比大家想得早。;;-5;8;;rescue_relief_run
+rescue;rescue_relief_layoff;112;财务总监;nb_story=0 and layoff_keep and !rescue_relief_run and turn>=5;del;1200;裁员省下的钱够撑两个月。董事长说这次动作很果断。;告诉团队;留下的人没有鼓掌。;;-5;;8;rescue_relief_run;只报董事会;他们喜欢这个数字。;;;;10;rescue_relief_run
+rescue;rescue_relief_debt;113;财务总监;nb_story=0 and debt_keep and !rescue_relief_run and turn>=5;del;1200;借来的钱到了。工资发出去后，群里有人发了一个谢谢老板。;回一句;下一条消息在问下个月。;;8;;;rescue_relief_run;别回;至少今晚没人辞职。;;3;;;rescue_relief_run
+rescue;rescue_cost_veto;114;领投人;nb_story=0 and investor_veto_keep and !rescue_cost_run and turn>=9;del;1400;研发要买一批服务器。我没签。活下去比做新东西重要。;照买;你是在用我的钱反对我。;-15;8;5;-15;rescue_cost_run and rescue_cost_veto_run and nb_founder_trust+;停掉;联创会知道是谁点的头。;5;-12;;8;rescue_cost_run and rescue_cost_veto_run and nb_founder_hurt+
+rescue;rescue_cost_dealer;115;大客户;nb_story=0 and dealer_keep and !rescue_cost_run and turn>=9;del;1400;交付日期提前一个月。我们已经替你向总部保证了。;接下来;那就让研发把别的都停掉。;5;-12;8;;rescue_cost_run and rescue_cost_dealer_run and nb_founder_hurt+;按合同;合同也写着我们可以取消下一年。;;;-15;-5;rescue_cost_run and rescue_cost_dealer_run
+rescue;rescue_cost_layoff;116;联合创始人;nb_story=0 and layoff_keep and !rescue_cost_run and turn>=9;del;1400;被裁的人里有六个去了竞对。他们带走的，是我们还没发布的版本。;加钱请回来;有人愿意谈，但不会便宜。;-15;8;5;-5;rescue_cost_run and rescue_cost_layoff_run and nb_founder_trust+;让剩下的人顶;他们已经在替三十个人干活。;;-15;-5;5;rescue_cost_run and rescue_cost_layoff_run and nb_founder_hurt+
+rescue;rescue_cost_debt;117;财务总监;nb_story=0 and debt_keep and !rescue_cost_run and turn>=9;del;1400;还款日在下个月。借两百万，要还三百二十万。;再借一笔;先把今天推给下一任。;15;;;-12;rescue_cost_run and rescue_cost_debt_run and debt_roll_keep and nb_capital_grip+;停一个项目;联创会问，为什么先停他的。;8;-10;-8;;rescue_cost_run and rescue_cost_debt_run and nb_founder_hurt+
+rescue;rescue_review_warn;118;董事长;nb_story=0 and rescue_cost_run and !review_warn_run and turn>=15;del;1600;六个月后，董事会重审你的任命。到时候他们只看公司还欠谁。;把账摊开;有些承诺不适合放在一张表里。;;5;;-8;review_warn_run and truth_keep;先过这关;那就准备两套说法。;;;;8;review_warn_run and lie_keep
+endings;rescue_final_veto;119;领投人;nb_story=0 and rescue_cost_veto_run and turn>=18;del;2200;桥接款救了公司。现在请兑现另一半：把经营权交出来。;签交接;钱救活了公司。你不在救助范围里。;;;;;nb_story+ and end_融资换帅;要求投票;刚投完。五票同意，两票弃权。;;;;;nb_story+ and end_融资换帅
+endings;rescue_final_dealer;120;董事长;nb_story=0 and rescue_cost_dealer_run and turn>=18;del;2200;新投资人愿意填上缺口。独家协议一字不改，条件是换一位 CEO。;让他接;签完以后，所有人都松了口气。除了你。;;;;;nb_story+ and dealer_keep and end_融资换帅;我不签;工资账户明早冻结。;;;;;nb_story+ and debt_keep and end_破产清算
+endings;rescue_final_layoff;121;联合创始人;nb_story=0 and rescue_cost_layoff_run and turn>=18;del;2200;董事会让我提一位新 CEO。名单第一位不是你。;让他来;这是你签完裁员名单后，他们给我的权力。;;;;;nb_story+ and founder_control_keep and end_联创反杀;你也会被换;也许。但不是今天。;;;;;nb_story+ and founder_control_keep and end_联创反杀
+endings;rescue_final_debt;122;财务总监;nb_story=0 and rescue_cost_debt_run and turn>=18;del;2200;借款今天到期。投资人替公司还，条件写在最后一行：你辞职。;签字;债留在公司，责任写在你名下。;;;;;nb_story+ and debt_roll_keep and end_融资换帅;拒绝;银行不会因为你不签就晚一天扣款。;;;;;nb_story+ and debt_keep and end_破产清算
+control;control_open_founder;199;董事长;nb_story=1 and !control_started_keep and founder_control_keep;del;5200;联创替董事会选了你。他手里有代码、团队和三票，你手里只有 CEO 的头衔。;先合作;他会把这理解成你知道位置。;;5;;-5;control_started_keep and >_control_founder;先收权;前任也是从这句话开始输的。;;-5;;5;control_started_keep and >_control_founder
+control;control_open;200;董事长;nb_story=1 and !control_started_keep and !founder_control_keep;del;5000;你上任第一天，董事会只给了一个任务：从联创手里拿回代码和用人权。;照办;他们要的是结果，不是过程。;;;;8;control_started_keep and >_control_founder;先见他;前任就是没把这次谈话谈完。;;5;;-5;control_started_keep and >_control_founder
+control;control_founder;201;联合创始人;;;;前任拿钱、裁人、签独家。现在他们让你来收我的权。你站哪边？;跟你联手;那就先把董事会的手拿开。;;12;;-10;founder_allied_run and nb_founder_trust+;交出权限;权限可以给，愿意留下的人你拿不走。;;-10;;10;founder_ordered_run and nb_founder_hurt+
+control;control_resume;202;联合创始人;nb_story=1 and control_started_keep and turn=1;del;5000;前任没熬到投票。代码还在我手里，董事会还在等你的答案。;跟你联手;别再让我听第三遍同一句话。;;10;;-8;founder_allied_run and nb_founder_trust+;交出权限;我会给你一个空仓库。;;-10;;8;founder_ordered_run and nb_founder_hurt+
+control;control_relief_allied;203;技术总监;nb_story=1 and founder_allied_run and !control_relief_run and turn>=5;del;1200;新版本提前上线了。联创把庆功邮件抄送给了整个董事会。;回信感谢;至少所有人看见你们站在一起。;;8;5;-5;control_relief_run;别太高调;邮件已经发了，低调不了。;;;;3;control_relief_run
+control;control_relief_ordered;204;董事长;nb_story=1 and founder_ordered_run and !control_relief_run and turn>=5;del;1200;联创交出了权限。投资人说，你比前任更像一个 CEO。;谢谢;这句话不会传到研发。;;;;8;control_relief_run;先别高兴;至少今天，文件都在你手里。;;-3;;5;control_relief_run
+control;control_cost_veto;205;领投人;nb_story=1 and investor_veto_keep and !control_cost_run and turn>=9;del;1400;联创必须停职。桥接协议给了我们这个权力。;执行;他会带多少人走，不在协议里。;;-15;;10;control_cost_run and nb_founder_hurt+;挡回去;那你和前任有什么区别。;;8;;-15;control_cost_run and nb_founder_trust+
+control;control_cost_dealer;206;大客户;nb_story=1 and dealer_keep and !control_cost_run and turn>=9;del;1400;联创告诉我们，这个版本按期交不了。你们内部是谁说了算？;我说了算;那就在交付承诺上签名。;5;-8;8;;control_cost_run and nb_founder_hurt+;他说得算;以后我们直接找他。;;5;5;-5;control_cost_run and nb_founder_trust+
+control;control_cost_layoff;207;人事总监;nb_story=1 and layoff_keep and !control_cost_run and turn>=9;del;1400;又有六个人递了辞呈。他们说，联创的新公司给了正式报价。;加钱留;留下的人会问，为什么辞职才涨薪。;-12;10;;;control_cost_run;放他们走;这次走的是系统最后一批老人。;;-15;-5;;control_cost_run and nb_founder_hurt+ and nb_lost_tech+
+control;control_cost_debt;208;财务总监;nb_story=1 and debt_keep and !control_cost_run and turn>=9;del;1400;债主要求联创用个人股份担保。他说债不是他借的。;让他签;他会记住是谁递的笔。;8;-10;;5;control_cost_run and nb_founder_hurt+;公司自己扛;那董事会要你解释钱从哪来。;-10;5;;-10;control_cost_run and nb_founder_trust+
+control;control_turn_betray;209;联合创始人;nb_story=1 and founder_allied_run and nb_founder_hurt>1 and !control_turn_run and turn>=13;del;1650;竞对给了我一份报价。我昨天签了意向书，今天才来告诉你。;你早就想走;我只是比你早替自己留路。;;-10;-8;;control_turn_run and founder_rival_keep;开个条件;你拿什么跟他们比？;-10;5;;-5;control_turn_run and founder_rival_keep
+control;control_turn_loyal;210;联合创始人;nb_story=1 and founder_allied_run and nb_founder_hurt<=1 and nb_founder_trust>0 and !control_turn_run and turn>=13;del;1650;董事长请我取代你。这是他的邮件，我还没回复。;公开邮件;从今天起，你和资本只能留一个。;;8;5;-15;control_turn_run and founder_loyal_keep and board_exposed_keep;先留着;证据握在手里，也会烫手。;;;;-5;control_turn_run and founder_loyal_keep
+control;control_turn_ordered;211;联合创始人;nb_story=1 and founder_ordered_run and !control_turn_run and turn>=13;del;1650;权限给你了。人和下一版产品归我，竞对已经准备好办公室。;你不能带走;合同可以告我，团队不会替你出庭。;-10;-15;-5;;control_turn_run and founder_rival_keep;谈谈条件;现在终于轮到你求我了。;-8;5;;-8;control_turn_run and founder_rival_keep
+control;control_review_warn;212;董事长;nb_story=1 and control_turn_run and !review_warn_run and turn>=16;del;1800;六个月后投票。桌上只有两个名字：你，或者联创。;现在谈;所有人都在等更好的价。;;;;-5;review_warn_run;等投票;等的这六个月，谁都不会闲着。;;;;;review_warn_run
+endings;control_final_rival;213;联合创始人;nb_story=1 and founder_rival_keep and turn>=18;del;2200;我带走产品和团队。董事会要一个人解释为什么，你比我合适。;辞职;你终于替公司承担了一次。;;;;;nb_story+ and nb_lost_tech+ and end_联创反杀;告他;官司会打三年，公司活不过三个月。;-10;-15;-10;-10;nb_story+ and nb_lost_tech+ and end_联创反杀
+endings;control_final_loyal;214;董事长;nb_story=1 and founder_loyal_keep and turn>=18;del;2200;融资可以继续。条件是联创走，你六个月后交接。;牺牲他;这次他没有和你争，只是收拾了工位。;;-15;;10;nb_story+ and founder_rival_keep and split_won_keep and end_融资换帅;一起走;你们守住了彼此，没守住位置。;;8;;-15;nb_story+ and end_联创反杀
+endings;control_final_ordered;215;董事长;nb_story=1 and founder_ordered_run and turn>=18;del;2200;联创走了，核心团队也走了。投资人认为需要一位能稳定局面的新 CEO。;我明白;你完成了他们交给你的任务。也完成了自己。;;;;;nb_story+ and split_won_keep and nb_lost_tech+ and end_融资换帅;这不公平;合同里没有公平这一条。;;;;;nb_story+ and split_won_keep and nb_lost_tech+ and end_融资换帅
+leak;leak_open;400;技术总监;nb_story=2 and !leak_started_keep;del;5000;有人说他能下载全部用户资料。样本里有你的手机号。;看样本;姓名、地址、订单，一条不少。;;;;;leak_started_keep and >_leak_decide;查入口;入口还开着。;;;;;leak_started_keep and >_leak_decide
+leak;leak_decide;401;法务;;;;七十二小时从昨天开始算。今晚十二点前，要不要告诉用户？;马上上报;明天所有媒体都会知道。;;;-15;-8;leak_reported_run;先堵漏洞;堵完以后，也许没人知道。;;-5;;5;leak_hidden_run
+leak;leak_resume;402;法务;nb_story=2 and leak_started_keep and turn=1;del;5000;前任没等到调查结束。七十二小时已经过了，现在每一分钟都算瞒报。;立刻公开;至少这份通报是你签的。;;;-15;-5;leak_reported_run;继续查;记者也在查。;;-5;;5;leak_hidden_run
+leak;leak_source_security;403;安全负责人;nb_story=2 and security_keep and !leak_source_run and turn>=5;del;1500;日志找到了。是外部攻击，时间、入口和下载量都能证明。;交给监管;证据完整，处罚会轻一些。;-5;;5;5;leak_source_run and truth_keep;先留着;证据也可以变成谈判筹码。;;;;-5;leak_source_run and lie_keep
+leak;leak_source_founder;404;技术总监;nb_story=2 and founder_rival_keep and !security_keep and !leak_source_run and turn>=5;del;1450;下载账号属于联创。离职那天，没人关掉他的权限。;报警;他会说数据本来就是他做的。;-5;-5;;5;leak_source_run and founder_leak_keep;先问他;他只回了四个字：董事会见。;;;;-5;leak_source_run and founder_leak_keep
+leak;leak_source_layoff;405;人事总监;nb_story=2 and layoff_keep and !security_keep and !founder_rival_keep and !leak_source_run and turn>=5;del;1400;账号属于那批被裁的人。名单发了，权限没人关。;追究个人;一封律师函会让所有人看见这个漏洞。;-5;-8;;5;leak_source_run and employee_leak_keep;承认管理问题;至少没人需要替公司撒谎。;;5;;-5;leak_source_run and employee_leak_keep and truth_keep
+leak;leak_source_observer;406;财务观察员;nb_story=2 and finance_observer_keep and !security_keep and !founder_rival_keep and !layoff_keep and !leak_source_run and turn>=5;del;1380;投资人每周都收到系统日志。记者拿到的那份，和观察员的副本一模一样。;当面问他;他只说自己向董事会负责。;;;;-8;leak_source_run and observer_leak_keep;先留证据;这封邮件以后可能有用。;;5;;-5;leak_source_run and observer_leak_keep and truth_keep
+leak;leak_source_grudge;416;人事总监;nb_story=2 and employee_grudge_keep and !security_keep and !founder_rival_keep and !layoff_keep and !finance_observer_keep and !leak_source_run and turn>=5;del;1370;最早发帖说加班的员工离职了。研究员收到的内部截图，来自他的账号。;追究他;帖子、律师函和截图会一起被转发。;-5;-8;;5;leak_source_run and employee_leak_keep;承认没处理;当时省下的一次谈话，现在要公开补上。;;5;;-5;leak_source_run and employee_leak_keep and truth_keep
+leak;leak_source_tech;415;技术总监;nb_story=2 and !security_keep and !founder_rival_keep and !layoff_keep and !finance_observer_keep and !employee_grudge_keep and !leak_source_run and turn>=5;del;1350;入口是三年前留下的测试地址。大家都知道它该关，没人有空关。;把记录留下;以后会有人问，为什么拖了三年。;;5;;-5;leak_source_run and tech_debt_keep and truth_keep;删掉记录;地址能删，访问记录删不干净。;;;;5;leak_source_run and tech_debt_keep and lie_keep
+leak;leak_relief_reported;407;公关总监;nb_story=2 and leak_reported_run and !leak_relief_run and turn>=8;del;1350;通报发了。下载量没有继续掉，大客户却要求今晚开会。;去解释;至少你比记者先开口。;;5;-8;;leak_relief_run and truth_keep;让法务回;他们会得到一封没有人味的邮件。;;;-10;5;leak_relief_run
+leak;leak_relief_hidden;408;技术总监;nb_story=2 and leak_hidden_run and !leak_relief_run and turn>=8;del;1350;漏洞堵上了。研究员没再回信，办公室安静得像什么都没发生。;给他钱;这叫奖励，也可以叫封口费。;-8;;;5;leak_relief_run and lie_keep;别联系;沉默不是同意。;;;;;leak_relief_run
+leak;leak_bomb_hidden;409;记者;nb_story=2 and leak_hidden_run and !leak_bomb_run and turn>=11;del;1550;三个月前的漏洞，你们没上报。我们手上还有内部邮件。;承认;瞒报的处罚不会因为认错消失。;-15;-5;-18;-15;leak_bomb_run and leak_hidden_keep and truth_keep;否认;邮件里有你的批注。;-10;-8;-20;-20;leak_bomb_run and leak_hidden_keep and lie_keep
+leak;leak_bomb_reported;410;大客户;nb_story=2 and leak_reported_run and !leak_bomb_run and turn>=11;del;1550;你们按时说了，但我们的法务要加一条：以后出事，由你们全赔。;签;合同保住了，风险全留下了。;-5;;8;-8;leak_bomb_run and leak_reported_keep and unlimited_liability_keep;不签;他们会找一家没出过事的。;;;-15;5;leak_bomb_run and leak_reported_keep
+leak;leak_blame;411;领投人;nb_story=2 and leak_bomb_run and !leak_blame_run and turn>=14;del;1700;董事会要一个人负责。你，或者技术总监。;我负责;至少公告里只有一个人的名字。;;5;;-15;leak_blame_run and truth_keep;技术负责;他跟了公司六年。;;-15;;5;leak_blame_run and betray_keep
+leak;leak_review_warn;412;董事长;nb_story=2 and leak_blame_run and !review_warn_run and turn>=16;del;1800;六个月后，监管结论和董事会投票会在同一天出来。;准备说明;说明写给公众，投票看的是损失。;;;;-5;review_warn_run;找人担责;名单上的每个人都在准备自己的说法。;;-5;;5;review_warn_run
+endings;leak_final_hidden;413;董事长;nb_story=2 and leak_hidden_run and turn>=18;del;2200;处罚下来了。董事会说，瞒报是个人判断，不是公司决定。;我辞职;公告已经写好，只差你的签名。;;;;;nb_story+ and leak_hidden_keep and lie_keep and end_替罪离场;公布邮件;他们会先说邮件断章取义，再说你情绪失控。;;;;-15;nb_story+ and leak_hidden_keep and board_exposed_keep and end_替罪离场
+endings;leak_final_reported;414;董事长;nb_story=2 and leak_reported_run and turn>=18;del;2200;你守了七十二小时，没守住估值。董事会想换一张没上过新闻的脸。;接受交接;规则救了公司，没有救你。;;;;;nb_story+ and leak_reported_keep and truth_keep and end_止损离场;要求留任;四票反对。联创那一票没有来。;;;;-12;nb_story+ and leak_reported_keep and end_止损离场
+reckoning;reckoning_open_hidden;298;董事长;nb_story=3 and !reckoning_started_keep and leak_hidden_keep;del;5200;上一任因为瞒报离场，估值只剩一半。资本现在只接受两条路：上市，或者出售。;准备上市;他们想在下一封问询前退出。;;;5;12;reckoning_started_keep and ipo_path_run and >_reckoning_books;谈出售;买方知道你没有时间慢慢谈。;10;-5;;10;reckoning_started_keep and sale_path_run and >_reckoning_books
+reckoning;reckoning_open_reported;299;董事长;nb_story=3 and !reckoning_started_keep and !leak_hidden_keep and leak_reported_keep;del;5150;上一任按时公开，保住了公司，没保住估值。现在要上市，或者出售。;准备上市;资本要的是退出，不是表扬。;;;5;12;reckoning_started_keep and ipo_path_run and >_reckoning_books;谈出售;买方已经把事故算进价格。;10;-5;;10;reckoning_started_keep and sale_path_run and >_reckoning_books
+reckoning;reckoning_open;300;董事长;nb_story=3 and !reckoning_started_keep and !leak_hidden_keep and !leak_reported_keep;del;5000;公司只剩两条路：带着旧账上市，或者卖给竞对。;准备上市;资本要的是退出，不是纪念。;;;5;12;reckoning_started_keep and ipo_path_run and >_reckoning_books;谈出售;买方已经看过一部分材料。;10;-5;;10;reckoning_started_keep and sale_path_run and >_reckoning_books
+reckoning;reckoning_books;301;财务总监;;;;不管选哪条，前四任留下的合同和邮件都要交出去。;全部交;那就没有第二种说法。;;5;;-5;truth_keep;先整理;整理的意思，是拿掉不好看的部分。;;;;8;ipo_polish_keep and lie_keep
+reckoning;reckoning_resume;302;财务总监;nb_story=3 and reckoning_started_keep and turn=1;del;5000;前任没等到交易结束。上市和出售还在桌上，你得重新选。;继续上市;审计今天进场。;;;5;10;ipo_path_run;改谈出售;竞对的报价又低了一成。;8;-5;;8;sale_path_run
+reckoning;reckoning_claim_customer;303;大客户;nb_story=3 and dealer_keep and nb_customer_grip>0 and !reckoning_claim_run and turn>=5;del;1500;独家协议写着，公司出售要我们同意。想让我们签字，先给永久折扣。;给折扣;买方会把少收的钱从报价里扣掉。;5;;8;-5;reckoning_claim_run and customer_discount_keep;不给;那就让交易停在我们法务桌上。;;;-10;-8;reckoning_claim_run
+reckoning;reckoning_claim_founder;304;联合创始人;nb_story=3 and founder_rival_keep and !dealer_keep and !reckoning_claim_run and turn>=5;del;1450;竞对的买方是我。你当年不肯卖，现在这个价格只剩一半。;继续谈;至少这次条件写在桌面上。;8;-5;;8;reckoning_claim_run;不谈;那我去等你的董事会。;;;;-10;reckoning_claim_run
+reckoning;reckoning_claim_investor;305;领投人;nb_story=3 and investor_veto_keep and nb_capital_grip>0 and !dealer_keep and !founder_rival_keep and !reckoning_claim_run and turn>=5;del;1400;最早那份协议给了我们优先出售权。价格可以谈，顺序不能谈。;承认;他们会第一个拿钱。;;;;10;reckoning_claim_run and capital_first_keep;挑战条款;律师说胜算只有三成。;-8;;;-10;reckoning_claim_run
+reckoning;reckoning_claim_liability;319;大客户;nb_story=3 and unlimited_liability_keep and !dealer_keep and !founder_rival_keep and !investor_veto_keep and !reckoning_claim_run and turn>=5;del;1390;泄露后的合同写着，下一次损失由你们全赔。买方要求先给这笔风险定价。;接受扣价;还没出事，也要先赔。;5;;5;-8;reckoning_claim_run;拒绝;那份合同不会因为换 CEO 消失。;;;-8;-8;reckoning_claim_run
+reckoning;reckoning_claim_refused;320;领投人;nb_story=3 and investor_refused_keep and !unlimited_liability_keep and !dealer_keep and !founder_rival_keep and !investor_veto_keep and !reckoning_claim_run and turn>=5;del;1380;当年被拒绝的投资人回来了。现在他愿意买，价格是当时的一半。;继续谈;他等的就是公司没有别的选择。;8;;;5;reckoning_claim_run;请他出去;他会直接去找董事长。;;;;-8;reckoning_claim_run
+reckoning;reckoning_claim_rolled_debt;321;财务总监;nb_story=3 and debt_roll_keep and !investor_refused_keep and !unlimited_liability_keep and !dealer_keep and !founder_rival_keep and !investor_veto_keep and !reckoning_claim_run and turn>=5;del;1370;借新还旧已经滚了三任。交易一完成，第一笔钱先还银行。;照还;债主不会参加庆功宴。;-10;;;5;reckoning_claim_run;再谈期限;他们已经听过三任 CEO 这么说。;5;;;-8;reckoning_claim_run
+reckoning;reckoning_claim_debt;306;财务总监;nb_story=3 and !debt_roll_keep and !investor_refused_keep and !unlimited_liability_keep and !dealer_keep and !founder_rival_keep and !investor_veto_keep and !reckoning_claim_run and turn>=5;del;1350;旧债还在。交易一完成，第一笔钱先还银行，不会进公司。;照还;债主不会参加庆功宴。;-10;;;5;reckoning_claim_run;再谈期限;他们已经等过三任 CEO。;5;;;-8;reckoning_claim_run and debt_roll_keep
+reckoning;reckoning_relief_ipo;307;投行负责人;nb_story=3 and ipo_path_run and !reckoning_relief_run and turn>=8;del;1400;路演认购超了两倍。大家都说，这是今年最受欢迎的项目。;定高价;价格越高，旧账摔下来越响。;8;;5;8;reckoning_relief_run;留点空间;老股东会说你把钱送给了别人。;5;;5;-5;reckoning_relief_run
+reckoning;reckoning_relief_sale;308;董事长;nb_story=3 and sale_path_run and !reckoning_relief_run and turn>=8;del;1400;买方给了正式报价。够还债、付工资，也够投资人退出。;接受价格;还没算你能拿多少。;12;-5;;10;reckoning_relief_run;再抬一点;他们知道你没有第二个买家。;;;;-8;reckoning_relief_run
+reckoning;reckoning_witness_board;322;联合创始人;nb_story=3 and board_exposed_keep and !reckoning_witness_run and turn>=11;del;1700;当年董事长想换掉你们的邮件，我一直留着。现在投行问，公司到底谁说了算。;把邮件交出去;它会证明资本动过手，也会证明公司一直内斗。;;5;;-10;reckoning_witness_run and truth_keep;别再翻旧账;旧账已经在审计手里。;;;;5;reckoning_witness_run and lie_keep
+reckoning;reckoning_witness_founder;323;联合创始人;nb_story=3 and founder_leak_keep and !board_exposed_keep and !reckoning_witness_run and turn>=11;del;1690;那个下载账号是我的。董事会当年知道，现在却只想让前任背。;请他作证;他会说出全部，不只说对你有利的。;;5;;-8;reckoning_witness_run and truth_keep;让法务拦住;他就在竞对的会议室里等这封函。;-5;-5;;5;reckoning_witness_run and lie_keep
+reckoning;reckoning_witness_employee;324;前员工;nb_story=3 and employee_leak_keep and !board_exposed_keep and !founder_leak_keep and !reckoning_witness_run and turn>=11;del;1680;裁员那晚，我的账号还能登录。你们现在说是我偷数据，还是承认没人管？;承认管理问题;他会撤回对个人的指控。;;8;;-8;reckoning_witness_run and truth_keep;追究到底;他手上还有当年的裁员邮件。;-5;-8;-5;5;reckoning_witness_run and lie_keep
+reckoning;reckoning_witness_observer;325;财务观察员;nb_story=3 and observer_leak_keep and !board_exposed_keep and !founder_leak_keep and !employee_leak_keep and !reckoning_witness_run and turn>=11;del;1670;我把日志交给投资人，是职责。谁把副本给记者，不在我的职责里。;要求他说清;他只会在董事会上回答。;;;;-8;reckoning_witness_run and truth_keep;接受说法;投资人会替他记住。;;;;8;reckoning_witness_run
+reckoning;reckoning_witness_techdebt;326;技术总监;nb_story=3 and tech_debt_keep and !board_exposed_keep and !founder_leak_keep and !employee_leak_keep and !observer_leak_keep and !reckoning_witness_run and turn>=11;del;1660;三年前那次重构被停了。每一任都说先打补丁，现在审计要看原始决定。;把记录交出;签过字的人不止一个。;;5;;-8;reckoning_witness_run and truth_keep;只交结果;他们问的就是过程。;;;;5;reckoning_witness_run and lie_keep
+reckoning;reckoning_witness_polish;327;财务总监;nb_story=3 and ipo_polish_keep and !board_exposed_keep and !founder_leak_keep and !employee_leak_keep and !observer_leak_keep and !tech_debt_keep and !reckoning_witness_run and turn>=11;del;1655;那张晚开的发票还在。金额不大，但足够证明我们会为了好看挪日期。;主动说明;小问题会变成公开的问题。;-5;5;;-8;reckoning_witness_run and truth_keep;当作没看见;审计已经看见了。;;;;5;reckoning_witness_run and lie_keep
+reckoning;reckoning_witness_betray;309;技术总监;nb_story=3 and betray_keep and !board_exposed_keep and !founder_leak_keep and !employee_leak_keep and !observer_leak_keep and !tech_debt_keep and !ipo_polish_keep and !reckoning_witness_run and turn>=11;del;1650;当年让我背锅的公告还在。原始邮件我也留着，记者想看。;向他道歉;六年晚了一点，但不是没用。;;8;;-5;reckoning_witness_run and truth_keep;让法务处理;律师函会和邮件一起上新闻。;-5;-10;-8;5;reckoning_witness_run and lie_keep
+reckoning;reckoning_witness_lie;310;财务总监;nb_story=3 and lie_keep and !betray_keep and !reckoning_witness_run and turn>=11;del;1600;审计发现两套说法。数字都是真的，放在一起就是假的。;全部更正;估值会掉，签字的人能留下。;-10;5;;-10;reckoning_witness_run and truth_keep;只改一处;审计问的就是另一处。;;;;5;reckoning_witness_run and ipo_polish_keep
+reckoning;reckoning_witness_truth;311;记者;nb_story=3 and truth_keep and !lie_keep and !betray_keep and !reckoning_witness_run and turn>=11;del;1550;泄露时你第一个公开。报道会写这件事，也会写前几任瞒过什么。;都写;真话不会只挑好看的部分。;;5;8;-5;reckoning_witness_run;只写这次;那就不是完整的故事。;;;;-5;reckoning_witness_run
+reckoning;reckoning_witness_clean;312;法务;nb_story=3 and !truth_keep and !lie_keep and !betray_keep and !reckoning_witness_run and turn>=11;del;1500;材料没有致命问题。买方还是要求所有前任承诺由公司承担。;接受;没人记得是谁答应的，只记得公司要还。;-8;;;5;reckoning_witness_run;逐条排除;交易会因此再拖一个月。;-5;;;-5;reckoning_witness_run
+reckoning;reckoning_preference;313;领投人;nb_story=3 and reckoning_witness_run and !reckoning_terms_run and turn>=14;del;1750;交易的钱，前五个亿先归投资人。剩下的，才轮到公司和你。;接受顺序;至少每个人都知道自己排第几。;10;;;15;reckoning_terms_run and capital_first_keep;不同意;那就没有交易，也没有下一轮。;-10;;;-18;reckoning_terms_run
+reckoning;reckoning_review_warn;314;董事长;nb_story=3 and reckoning_terms_run and !review_warn_run and turn>=16;del;1850;六个月后敲钟，或者签出售协议。无论哪一个，你都不会再坐这张椅子。;把事做完;这是资本最喜欢的职业精神。;;5;;8;review_warn_run;现在离开;他们会把它写成临阵脱逃。;;;;-8;review_warn_run
+endings;reckoning_final_sale_founder;315;联合创始人;nb_story=3 and sale_path_run and founder_rival_keep and turn>=18;del;2300;收购协议在这里。签完，公司归我，钱先归投资人，你得到一场告别会。;签;当年我们说要一起做到最后。只是没说谁买谁。;;;;;nb_story+ and split_bought_keep and end_低价卖身;不卖;董事会已经接受报价。你拒绝的只剩自己的签名。;;;;-15;nb_story+ and split_rival_keep and end_一致行动
+endings;reckoning_final_sale;316;董事长;nb_story=3 and sale_path_run and !founder_rival_keep and turn>=18;del;2250;买方接受所有旧账，条件是管理层全部离开。;签;投资人拿回了钱，员工等新的名单。;;;;;nb_story+ and sale_done_keep and end_低价卖身;拒绝;六票同意出售。你只有一票。;;;;-15;nb_story+ and end_一致行动
+endings;reckoning_final_ipo_dirty;317;财务总监;nb_story=3 and ipo_path_run and lie_keep and turn>=18;del;2300;敲钟前夜，我不会在这份报表上签字。原始凭证已经交给监管。;让我承担;公告会说，这是你个人要求。;;;;-20;nb_story+ and fraud_keep and end_替罪离场;让他承担;这一次，他先把邮件发了出去。;;-15;;-15;nb_story+ and betray_keep and fraud_keep and end_替罪离场
+endings;reckoning_final_ipo_clean;318;董事长;nb_story=3 and ipo_path_run and !lie_keep and turn>=18;del;2250;明天敲钟。照片里站谁，是你最后一个还能决定的事。;所有人都上;照片里看不清谁是英雄，也看得见没人被藏起来。;;8;8;10;nb_story+ and public_keep and end_功成身退;只站自己;这家公司会被写成你的故事，也会由别人继续经营。;;;;15;nb_story+ and public_keep and end_功成身退
+aftermath;aftermath_open;600;财务总监;nb_story>=4 and !aftermath_seen_keep and turn=1;del;5000;档案室里摆着四位前任的交接箱。你的名字已经贴在第五个上。;先拆旧箱;里面每一份合同都还有效。;;;;;aftermath_seen_keep;先做自己的;所有前任都这么说。;;;;;aftermath_seen_keep
+aftermath;aftermath_again;601;董事长;nb_story>=4 and aftermath_seen_keep and turn=1;del;5000;又一任开始了。公司记得合同、官司和欠款，不记得谁当时说了算。;先看旧账;至少这次没人能说你不知道。;;;;;;先定新目标;旧账会自己来找你。;;;;;
+aftermath;legacy_fraud;604;法务;nb_story>=4 and fraud_keep and !legacy_fraud_seen_keep and !legacy_seen_run;del;1500;上一任留下的监管调查今天开庭。公司请了律师，也准备好了和他切割。;承认公司责任;董事会会问，为什么替前任认账。;-12;5;;-10;legacy_seen_run and legacy_fraud_seen_keep;继续切割;法庭上还有公司的邮件。;5;-8;;5;legacy_seen_run and legacy_fraud_seen_keep
+aftermath;legacy_bought;605;联合创始人;nb_story>=4 and split_bought_keep and !legacy_bought_seen_keep and !legacy_seen_run;del;1490;现在我是收购方，也是你的老板。你可以保留 CEO 头衔，预算由我签。;留下;当年他失去的权力，现在轮到你交。;8;-5;;10;legacy_seen_run and legacy_bought_seen_keep;辞职;职位空出来，他会再找一个人。;-5;5;;-5;legacy_seen_run and legacy_bought_seen_keep
+aftermath;legacy_sale;606;新集团负责人;nb_story>=4 and sale_done_keep and !legacy_sale_seen_keep and !legacy_seen_run;del;1480;收购后的第一份协同名单出来了。两个部门只能留一个。;留我们的人;另一边会说你不懂集团。;5;8;;-8;legacy_seen_run and legacy_sale_seen_keep;留对方的人;你自己的团队会先明白谁多余。;8;-12;;5;legacy_seen_run and legacy_sale_seen_keep
+aftermath;legacy_capital_first;607;财务总监;nb_story>=4 and capital_first_keep and !legacy_capital_seen_keep and !legacy_seen_run;del;1470;交易款到账了。前五个亿已经按协议划给投资人，公司账户只剩零头。;照协议办;资本退出了，账单还在。;-12;;;8;legacy_seen_run and legacy_capital_seen_keep;暂缓付款;他们的律师比工资到账得早。;5;;;-12;legacy_seen_run and legacy_capital_seen_keep
+aftermath;legacy_discount;608;大客户;nb_story>=4 and customer_discount_keep and !legacy_discount_seen_keep and !legacy_seen_run;del;1460;永久折扣今年开始执行。原材料涨了，我们的价格不能涨。;继续供货;每卖一单都少赚一点。;-10;;8;;legacy_seen_run and legacy_discount_seen_keep;要求重谈;他们手里还有独家协议。;5;;-10;-5;legacy_seen_run and legacy_discount_seen_keep
+aftermath;legacy_split_won;609;人事总监;nb_story>=4 and split_won_keep and !legacy_split_won_seen_keep and !legacy_seen_run;del;1450;当年被赶走的联创又来挖人。名单上的一半，是他亲自招进公司的。;全面加薪;你是在和公司的记忆竞价。;-15;15;;;legacy_seen_run and legacy_split_won_seen_keep;让他们选;有人已经选完了。;;-12;-5;;legacy_seen_run and legacy_split_won_seen_keep
+aftermath;legacy_split_rival;610;联合创始人;nb_story>=4 and split_rival_keep and !legacy_split_rival_seen_keep and !legacy_seen_run;del;1440;董事会卖了公司，你拒绝签字。现在他们让我来问，你愿不愿意留下。;留下;名片上的职位没变，汇报对象变了。;5;-5;;8;legacy_seen_run and legacy_split_rival_seen_keep;不留;这次至少是你自己走出去。;-5;5;;-5;legacy_seen_run and legacy_split_rival_seen_keep
+aftermath;aftermath_warn;602;董事长;nb_story>=4 and !review_warn_run and turn>=15;del;1800;六个月后任期复盘。董事会已经开始和下一位候选人喝咖啡。;约他们谈;他们会说只是正常接触。;;;;-5;review_warn_run;把业绩做好;业绩是票，不是投票的人。;;5;;5;review_warn_run
+endings;aftermath_final;603;董事长;nb_story>=4 and turn>=18;del;2200;任期到了。董事会愿意续聘，条件是你放弃最后一票否决权。;签续约;合同签完，新组织架构里的 CEO 不是你。;;;;;end_融资换帅;到此为止;这是少数由你决定的离开。;;;;;end_任满交棒
+daily;d_supplier_01;500;供应商;;40;10;老王家的货，这个月能不能先结一半。;结;那我下个月还按老价格给你。;-10;;5;;;下个月;行，我等。;8;;-5;;
+daily;d_supplier_02;501;采购经理;;60;10;新来的供应商报价低两成。但没做过我们这个行业。;换;省下来的钱一年是四百万。;12;;-5;;;不换;老王合作七年了，一次没出过问题。;;;5;;
+daily;d_supplier_03;502;采购经理;;80;8;有个供应商想请我吃饭。他明说了，是想谈谈明年的量。;去;吃饭而已。;5;;;-5;;不去;那他会觉得我们不给面子。;;;;;
+daily;d_finance_01;503;财务总监;;50;12;这个月的发票能不能晚点开。开了就要交这个季度的税。;晚开;客户那边催了三次了。;8;;-5;;ipo_polish_keep and lie_keep;按时开;那这个季度的税是六百万。;-10;;;5;truth_keep
+daily;d_finance_02;504;财务总监;;70;10;年会预算，去年是八十万。今年要不要照旧。;照旧;下面盼一年就盼这个。;-10;12;;;;砍掉;砍了能省八十万。也能省掉不少笑脸。;10;-12;;;
+daily;d_finance_03;505;财务总监;;90;8;有人拿了一张两万三的餐费票来报销。上面是七个人的名字。;报;那以后都这么报。;;5;;-5;;不报;那这事今天就会传遍公司。;;-5;;5;
+daily;d_hr_01;506;人事总监;;40;12;技术那边有个人要涨薪。他说外面给的是我们的一倍半。;涨;那其他人也会来问。;-10;12;;;;不涨;他大概两周内就会走。;5;-10;;;
+daily;d_hr_02;507;人事总监;;50;12;绩效考核要不要按比例强制分布。总得有人拿 C。;强制;那团队里就要有人当垫背的。;;-10;;8;;不强制;那考核就没意义了，大家都是 B。;;8;;-5;
+daily;d_hr_03;508;人事总监;;60;10;有个员工怀孕了。她是这个项目的核心。;正常休;那项目要延期两个月。;;12;-5;;;调整下;调整的意思是，换人？;;-15;;;
+daily;d_hr_04;509;技术总监;;70;10;下面想搞技术分享会，每周五下午两个小时。;搞;一年下来是一百个工时乘以全组人数。;-5;8;;;;算了;那他们就自己在群里发链接。;;;;;
+daily;d_hr_05;510;人事总监;;80;10;有人在匿名论坛发帖说我们加班严重。内容基本是真的。;不管;那帖子会一直挂在那儿。;;;;;employee_grudge_keep;查是谁;查出来了怎么办。;;-12;;;security_keep
+daily;d_hr_06;511;人事总监;;90;8;招聘要不要放宽学历要求。现在这个门槛，简历量少一半。;放宽;那筛选成本会上去。;-5;8;;;;不放;那就慢慢等。;;;;;
+daily;d_hr_07;512;技术总监;;100;8;有个实习生写的东西比正式员工好。他明年毕业。;提前签;给多少。;-5;10;;;;等毕业;等到明年，他手上会有五个offer。;;;;;
+daily;d_market_01;513;市场总监;;40;12;竞对昨天降价三成。我们跟不跟。;跟;那这个季度的利润就没了。;-12;;15;;;不跟;那客户会一个一个问我们为什么贵。;5;;-8;;
+daily;d_market_02;514;市场总监;;50;12;有个头部博主要收费推我们。三十万一条，他有八百万粉。;投;转化率没人保证。;-12;;15;;;不投;那这三十万就还在账上。;;;;;
+daily;d_market_03;515;大客户;;60;10;我们想要独家。作为交换，明年的量翻倍。;给;那你就是我们唯一的出口了。;12;;-10;;dealer_keep and nb_customer_grip+;不给;那量还是老样子。;;;;;
+daily;d_market_04;516;客户;;70;10;你们的产品我们用了两年，有个功能一直没做。;做;那要占掉一个季度的排期。;;-5;12;;;不做;那我们就自己找人做个外挂。;;;;;
+daily;d_market_05;517;市场总监;;80;10;要不要把价格提上去。我们现在是行业最低。;提;提价会掉一批客户。;12;;-10;;;不提;那我们永远是那个便宜的。;-5;;5;;
+daily;d_capital_01;518;董事长;;40;12;有家基金想投下一轮。但他们要一个董事席位和一票否决权。;要钱;那以后大事你说了不算。;20;;;-12;investor_veto_keep and nb_capital_grip+;不要;那我们就自己撑。;;;;8;investor_refused_keep
+daily;d_capital_02;519;投资人;;50;10;你们这个季度的数据，跟当初 BP 上写的差得有点远。;解释;市场变了。;;;;5;;认;那我下次投委会不好讲。;;;;-10;
+daily;d_capital_03;520;董事长;;60;10;要不要做股权激励池。留出百分之十五给团队。;做;那所有老股东都要按比例稀释。;;15;;-10;;不做;那核心的人拿什么留。;;-8;;5;
+daily;d_capital_04;521;投资人;;70;10;我们想退出一部分。你能不能帮我们找个接盘的。;帮;那新进来的人是什么条件我们不知道。;;;;8;;不帮;那我们的关系就到这儿了。;;;;-10;
+daily;d_capital_05;522;董事长;;80;8;有人想收购我们。价格是上一轮估值的一点二倍。;谈谈;谈了就会传出去。;;-5;;8;;不谈;那这个价明年可能就没有了。;;;;;
+daily;d_rival_01;523;市场总监;;50;12;竞对在挖我们的人。他们开的价我们跟不了。;涨薪留人;全组涨一遍是每年八百万。;-12;15;;;;不跟;那走几个算几个。;;-10;;;
+daily;d_rival_02;524;技术总监;;60;10;对面新出的功能，跟我们内部的方案一模一样。可能有人泄露。;查;查内鬼会让所有人都不舒服。;;-10;5;;security_keep;不查;那下次还会有。;;;;;tech_debt_keep
+daily;d_rival_03;525;市场总监;;70;10;有个竞对的销售总监想过来。他手上有客户名单。;要;那名单是他前公司的资产。;;;15;-5;-5;不要;那他会去别家。;;;;;
+daily;d_rival_04;526;公关总监;;80;8;有人在写行业分析，把我们排在第四。要不要沟通一下。;沟通;沟通是要花钱的。;-5;;8;;;不沟通;那第四就第四。;;;;;
+daily;d_legal_01;527;法务;;60;10;税务来查上两年的账。有几笔我们自己也说不太清。;主动补;补了大概两百万，加滞纳金。;-12;;;8;truth_keep;等他们查;查出来是补缴加罚款，一倍到三倍。;;;;-12;lie_keep
+daily;d_legal_02;528;法务;;70;10;有个前员工起诉我们，说加班费没给。他有考勤记录。;和解;和解金大概十五万。;-5;5;;;;打;打赢了也是这个数，还多花律师费。;-8;-8;;;
+daily;d_legal_03;529;法务;;80;8;我们的商标被人抢注了。对方要八十万转让。;买;八十万买回自己的名字。;-12;;5;;;不买;那我们要换个名字，或者打三年官司。;;;-10;;
+daily;d_legal_04;530;法务;;90;8;监管出了新规，我们有两条不合规。整改要停业三周。;整改;三周没有收入。;-12;;;8;;拖;拖到被查，是停业加罚款。;;;;-12;
+daily;d_ops_01;531;交付负责人;;50;12;这个月的交期又要延了。要不要跟客户说实话。;说;说了他们会扣款。;-5;;8;;truth_keep;先不说;不说的话，到期那天更难看。;;;-10;;lie_keep
+daily;d_ops_02;532;技术总监;;60;10;系统有个老问题，重构要三个月。不重构就一直打补丁。;重构;三个月不出新东西。;;8;-8;;security_keep;打补丁;那三年后这个系统没人敢碰。;;-5;5;;tech_debt_keep
+daily;d_ops_03;533;交付负责人;;70;10;仓库租约到期了。续租涨三成，搬要停半个月。;续;涨的这部分一年是两百万。;-10;;5;;;搬;半个月发不出货。;5;;-10;;
+daily;d_ops_04;534;技术总监;;80;8;服务器要不要上云。上云每年多花，但不用自己养人。;上;运维那两个人怎么办。;-8;-5;8;;;不上;那机房还得自己管。;;;;;
+daily;d_office_01;535;人事总监;;60;10;要不要装工位监控。说是防泄密。;装;那大家都会知道自己被看着。;;-12;;8;;不装;那泄密的时候查不到。;;5;;;
+daily;d_office_02;536;人事总监;;70;10;有人提议把周报改成双周报。说写周报的时间比干活多。;改;那我下周就少看一半东西。;;10;;-5;;不改;那他们就继续写。;;;;;
+daily;d_office_03;537;人事总监;;80;10;办公室的咖啡机坏了。修要三千，换要一万二。;换;一万二能买不少人心。;-5;8;;;;修;修好了还能用两年。;;;;;
+daily;d_pub_01;538;公关总监;;60;10;有个行业峰会请你做主题演讲。同台的是三个上市公司老板。;去;讲什么呢。;;;8;5;;不去;那位置会给竞对。;;;-5;;
+daily;d_pub_02;539;记者;;70;10;我们想做一篇创业故事。会问到早期的一些事。;接受;哪些事。;;;8;;;不接受;那我们就写公开资料。;;;;;
+daily;d_pub_03;540;公关总监;;80;8;你上次那条微博有句话被截出来了。现在有两万转发。;删;删了会被说心虚。;;;-5;;;不删;那就让它挂着。;;-5;5;;
+daily;d_pub_04;541;公关总监;;90;8;有个奖项可以买，二十万。放在官网上挺好看。;买;买了没人会知道是买的。;-5;;8;;;不买;那官网上就没有奖。;;;;;
+daily;d_ind_01;542;市场总监;;80;10;同行有家公司倒了。他们的客户现在到处在问。;去接;那些客户是他们没伺候好的。;;-5;12;;;不接;那就让别人接。;;;;;
+daily;d_ind_02;543;人事总监;;90;10;那家倒掉的公司，有二十几个人在投我们。;招;里面有几个不错的。;-8;12;;;;不招;那我们就错过一批便宜的人。;;;;;
+daily;d_ind_03;544;技术总监;;100;8;行业里在传一个新技术。跟不跟，现在看不清。;投人进去;投了可能是白投。;-10;;10;;;观望;观望到看清的时候，就晚了。;;;-5;;
+daily;d_person_01;545;;;60;10;今天是我女儿的家长会。同时是季度董事会。;去家长会;董事会推到下周。;;5;;-5;;去董事会;她说没关系。;;;;;
+daily;d_person_02;546;;;70;10;体检报告出来了，几项指标不太好。医生建议休一个月。;休;公司一个月没人管。;;5;;-5;;不休;那就先这样。;;;;;
+daily;d_person_03;547;;;80;10;老朋友借钱，二十万。他说三个月还。;借;这是我自己的钱。;;;;;;不借;那这个朋友大概就没了。;;;;;
+daily;d_person_04;548;;;90;8;有人问我，做这个到底是为了什么。我一时没答上来。;为了钱;至少是实话。;;;;;;为了做成一件事;那件事是什么，我也说不清了。;;;;;
+daily;d_dyn_01;549;人事总监;dynasty>2;100;20;老员工在议论，说这几年换了好几个 CEO。;开个会;说什么。;;8;;;;不理;那他们就自己猜。;;-5;;;
+daily;d_dyn_02;550;董事长;dynasty>4;120;20;你是第几任了？我都记不清了。;第五任;前面四个都是被换掉的。;;;;;;记不清;那说明这个位置本来就是流水的。;;;;;
+daily;d_dyn_03;551;;dynasty>9;150;25;仓库最里面有个箱子，是创始团队的东西。要不要清掉。;留着;放着占地方。;;5;;;;清掉;那就没人记得了。;;-5;;;
+daily;d_legacy_01;552;财务总监;debt_keep;60;25;上一任借的那笔钱，这个月要还了。;还;账上会空一半。;-20;;;8;;再借;那就是借新还旧。;10;;;-12;
+daily;d_legacy_02;553;人事总监;nb_lost_tech>0;80;25;上次走掉那批技术，现在在竞对那边做我们的对标产品。;认了;那是我们自己没留住。;;;-5;;;招回来;开双倍的价，有两个愿意回。;-12;12;;;
+daily;d_legacy_03;554;公关总监;lie_keep;100;25;上一任在董事会上说过的数字，现在对不上了。;说清;那要承认之前有问题。;;5;;-8;;继续圆;圆一次要圆一辈子。;;;;-5;
+daily;d_legacy_04;555;董事长;betray_keep;120;25;那个替你背锅的人，他家里人上周来公司了。;见;她说不是来闹的，是想问个明白。;;8;;;;不见;那她就在楼下等。;;-12;;;
+daily;d_legacy_05;556;法务;public_keep;80;20;上市公司信息披露，这条要不要报。报了股价会动。;报;规则就是规则。;;;-5;8;;不报;不报是违规。;;;;-15;
+daily;d_good_01;557;技术总监;;100;10;那个项目做完了。团队想申请三天假。;批;三天没人干活。;;12;-5;;;不批;后面还有排期。;;-8;;;
+daily;d_good_02;558;大客户;;110;10;这单我们提前付款，你给个折扣就行。;给;现金提前到账。;12;;-5;;;不给;那我们按合同走。;;;;;
+daily;d_good_03;559;市场总监;;120;10;有个小客户，量很小，但一直在续。今年他们要涨量了。;重视;小客户变大客户就是这么来的。;;;12;;;按老样子;那也没什么损失。;;;;;
+daily;d_win_01;560;财务总监;;90;12;这个季度超了预算目标百分之十八。要不要报给董事会。;报;数字好看的时候就该让他们看见。;;;;10;;先压着;压着干什么，等下个季度差了一起报？;5;;;-5;
+daily;d_win_02;561;市场总监;;100;12;那个大单签了。三年期，年付。;庆祝一下;应该的。;-5;10;;5;;继续干;下一个单子已经在谈了。;;;5;5;
+daily;d_win_03;562;投资人;;110;12;你们上季度的数据我看了。下一轮我们想加注。;要;估值可以谈得比上次好。;15;;;12;;暂时不要;不要钱的公司，投资人反而更想投。;;;;8;
+daily;d_win_04;563;技术总监;;100;12;那个功能上线了。用户自发在社区里写了长评。;转出去;那是最好的广告，还不要钱。;;5;12;;;不声张;做产品的人自己知道就够了。;;8;;;
+daily;d_win_05;564;董事长;;120;12;有家上市公司想跟我们战略合作。他们出钱出渠道。;合作;那我们要让出一部分决策权。;12;;12;-8;;自己做;那就慢一点，但都是自己的。;;5;;5;
+daily;d_win_06;565;人事总监;;110;12;今年一个核心的都没走。这在我们这行不常见。;发奖金;那是应该的。;-8;15;;;;写进汇报;董事会喜欢看这个。;;5;;8;
+daily;d_win_07;566;财务总监;;130;10;应收账款收回来了，比预计的快两个月。;补研发;那笔钱正好够。;-5;5;8;;;放着;放着心里踏实。;10;;;5;
+daily;d_win_08;567;市场总监;;120;10;有个客户主动帮我们介绍了三家同行。;谢谢他;要不要给点返点。;-5;;12;;;记着;这种客户以后要重点伺候。;;;8;;
+daily;d_win_09;568;董事长;;140;10;董事会一致通过了你的年度方案。这是第一次。;不容易;是你这一年做出来的。;;5;;12;;应该的;别太得意。下一年更难。;;;;8;
+daily;d_win_10;569;技术总监;;130;10;那个老系统重构完了。比预计早了三周。;放假;三周的假，团队值得。;;12;-5;;;接下一个;那他们大概会有点意见。;;-5;8;5;
+daily;d_grow_01;570;市场总监;;80;14;渠道那边说，再投一笔就能进两百家门店。;投;那是今年的市场预算全部。;-12;;18;;;不投;那就守着现在这些。;;;;;
+daily;d_grow_02;571;市场总监;;90;14;有个新平台在招首批商家，免佣半年。;上;要抽两个人过去做。;;-5;15;;;不上;等它做起来了，位置就没了。;;;-5;;
+daily;d_grow_03;572;技术总监;;100;14;把产品拆一个免费版出去，能拉一批新用户。;拆;免费的会吃掉一部分付费的。;-5;;18;;;不拆;那增长就还是靠销售一家一家跑。;;;;;
+daily;d_grow_04;573;市场总监;;110;14;老客户里有六成没用过我们的新功能。;做个推广;成本不高，见效快。;-5;;12;;;算了;那他们续约的时候可能就走了。;;;-8;;
+daily;d_grow_05;574;客户;;90;14;我们想把你们介绍给集团其他三家子公司。;当然好;那要专门配一个团队。;-8;-5;20;;;先不了;那这条线就断了。;;;-5;;
+daily;d_cap_01;575;董事长;capital>60;100;14;董事会想让你去做行业协会的理事。露脸的事。;去;那要占掉不少时间。;;-5;5;12;;不去;那位置会给别人。;;;;-5;
+daily;d_cap_02;576;投资人;capital>65;110;14;我们想把你介绍给几个 LP。他们管的钱比我们多。;见;见了就是要讲故事。;;;;15;;不见;那这层关系就搭不起来。;;;;;
+daily;d_cap_03;577;董事长;capital>70;120;14;有几家投行开始主动联系我们了。要不要接触一下。;接触;接触了就是往上市走。;;;;15;ipo_ready_keep;还早;那就等你觉得不早的时候。;;;;;
+daily;d_cap_04;578;董事长;capital>75 and ipo_ready_keep;130;16;董事会想正式启动上市。你怎么看。;启动;那从今天起一切都要按公开公司的标准。;;-5;;18;;再等等;窗口期不等人。;;;;-8;
+daily;d_cap_05;579;投资人;capital>80;140;16;所有股东都签了。就等你了。;签;签完就没有回头路。;;;;15;;不签;那你要跟每个股东单独解释一遍。;;;;-12;

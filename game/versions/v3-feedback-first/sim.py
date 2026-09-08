@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""复刻浏览器抽卡逻辑，检查开放任期牌组的生存长度和结局分布。"""
+"""复刻浏览器抽卡逻辑，检查反馈优先牌组的任期长度、短篇覆盖和结局分布。"""
 import csv, io, os, random, re, collections
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -20,7 +20,7 @@ class G:
         self.v = dict(seed)
         self.dyn = dyn
         self.turn = 0
-        self.f = dict(keep)  # 只模拟当前一局；重新开局时传入空字典
+        self.f = dict(keep)
         self.lock = {}
 
     def val(self, n):
@@ -70,10 +70,6 @@ def pick(g, forced):
         best = max(best, w)
         pool.append((i, w))
     if not pool:
-        # 与浏览器一致：牌堆耗尽后重置抽卡锁，不清空本局后果状态。
-        if g.lock:
-            g.lock.clear()
-            return pick(g, forced)
         return None
     use = [p for p in pool if p[1] == best] if best >= 1000 else [p for p in pool if p[1] >= best * 0.5]
     tot = sum(w for _, w in use)
@@ -116,10 +112,28 @@ def apply_flags(g, s, idx):
     return forced
 
 
+ENDNEXT = {
+    '破产清算': dict(cash=15, team=40, market=40, capital=35),
+    '守财奴': dict(cash=85, team=50, market=25, capital=50),
+    '人去楼空': dict(cash=45, team=15, market=35, capital=40),
+    '大锅饭': dict(cash=25, team=85, market=45, capital=45),
+    '无人问津': dict(cash=40, team=45, market=15, capital=35),
+    '爆单崩盘': dict(cash=45, team=20, market=80, capital=40),
+    '一致行动': dict(cash=50, team=45, market=45, capital=20),
+    '功成身退': dict(cash=60, team=50, market=55, capital=85),
+    '融资换帅': dict(cash=65, team=40, market=50, capital=70),
+    '联创反杀': dict(cash=42, team=35, market=40, capital=38),
+    '替罪离场': dict(cash=35, team=35, market=25, capital=58),
+    '止损离场': dict(cash=42, team=45, market=35, capital=55),
+    '低价卖身': dict(cash=70, team=30, market=60, capital=85),
+    '任满交棒': dict(cash=50, team=50, market=50, capital=50),
+}
+
 RESOURCE_ENDINGS = {
     '破产清算', '守财奴', '人去楼空', '大锅饭',
     '无人问津', '爆单崩盘', '一致行动', '功成身退',
 }
+SCHEDULED_ENDINGS = set(ENDNEXT) - RESOURCE_ENDINGS
 
 EPISODE_VARIANTS = {
     '市场': ('price_fight_run', 'price_hold_run', 'buy_rival_run', 'wait_rival_run',
@@ -154,7 +168,7 @@ def run_one(g, smart=False):
     """跑一任，返回 (活了几张卡, 结局名)"""
     forced = None
     n = 0
-    while n < 2000:
+    while n < 400:
         # 浏览器在每次抽牌前增加 turn，首张牌的 turn 是 1。
         g.turn += 1
         idx = pick(g, forced)
@@ -176,11 +190,11 @@ def run_one(g, smart=False):
         forced = apply_flags(g, c['%s_custom' % side], idx)
         if c['thematic'] == 'endings':
             cu = c['%s_custom' % side] or ''
-            for name in RESOURCE_ENDINGS:
+            for name in ENDNEXT:
                 if name in cu:
                     return n, name
             return n, '未知结局'
-    return n, '超时（模拟保护上限）'
+    return n, '超时'
 
 
 def percentile(values, ratio):
@@ -189,49 +203,61 @@ def percentile(values, ratio):
     return values[min(len(values) - 1, int(len(values) * ratio))]
 
 
-def main(runs=500, smart=False, tenures=1):
+def main(runs=500, smart=False, tenures=8):
     lens, ends, seen = [], collections.Counter(), collections.Counter()
     episode_triggers = collections.Counter()
     episode_variants = collections.defaultdict(collections.Counter)
-    games = 0
+    scheduled = early = 0
+    tenure_count = 0
     for _ in range(runs):
-        games += 1
         g = G(dict(cash=50, team=55, market=45, capital=50), 1, {})
-        n, e = run_one(g, smart)
-        lens.append(n)
-        ends[e] += 1
-        for k in g.f:
-            if k.endswith('_keep'):
-                seen[k] += 1
-        if g.f.get('slot_market_run'):
-            episode_triggers['市场'] += 1
-        if g.f.get('slot_people_run'):
-            episode_triggers['团队'] += 1
-        for theme, flags in EPISODE_VARIANTS.items():
-            for flag in flags:
-                if g.f.get(flag):
-                    episode_variants[theme][flag] += 1
+        for _t in range(tenures):
+            tenure_count += 1
+            n, e = run_one(g, smart)
+            lens.append(n)
+            ends[e] += 1
+            if e in SCHEDULED_ENDINGS:
+                scheduled += 1
+            elif e in RESOURCE_ENDINGS:
+                early += 1
+            for k in g.f:
+                if k.endswith('_keep'):
+                    seen[k] += 1
+            if g.f.get('slot_market_run'):
+                episode_triggers['市场'] += 1
+            if g.f.get('slot_people_run'):
+                episode_triggers['团队'] += 1
+            for theme, flags in EPISODE_VARIANTS.items():
+                for flag in flags:
+                    if g.f.get(flag):
+                        episode_variants[theme][flag] += 1
+            nxt = ENDNEXT.get(e)
+            if not nxt:
+                break
+            keep = {k: v for k, v in g.f.items() if k.endswith('_keep') or k.startswith('nb_')}
+            g = G(nxt, g.dyn + 1, keep)
 
     lens.sort()
     tag = '会玩的人' if smart else '随机乱划'
-    print('=== %s：每局任期能活多少张卡 (%d 局) ===' % (tag, len(lens)))
+    print('=== %s：一任能活多少张卡 (%d 任) ===' % (tag, len(lens)))
     print('  中位数 %d   平均 %.1f' % (lens[len(lens) // 2], sum(lens) / len(lens)))
     print('  10分位 %d   90分位 %d   最长 %d' %
           (percentile(lens, .1), percentile(lens, .9), lens[-1]))
-    print('  10 张前结束 %.1f%%   30 张后仍在任 %.1f%%' %
-          (100 * sum(n < 10 for n in lens) / len(lens),
-           100 * sum(n > 30 for n in lens) / len(lens)))
-    print('  资源结局 %.1f%%   模拟保护上限 %.1f%%' %
-          (100 * sum(ends[name] for name in RESOURCE_ENDINGS) / len(lens),
-           100 * ends.get('超时（模拟保护上限）', 0) / len(lens)))
+    in_target = sum(18 <= n <= 22 for n in lens)
+    print('  18-22 张占比 %.1f%%   18 张前结束 %.1f%%   22 张后结束 %.1f%%' %
+          (100 * in_target / len(lens),
+           100 * sum(n < 18 for n in lens) / len(lens),
+           100 * sum(n > 22 for n in lens) / len(lens)))
+    print('  计划终局 %.1f%%   资源提前下台 %.1f%%' %
+          (100 * scheduled / len(lens), 100 * early / len(lens)))
     print()
     print('=== 短篇触发率 ===')
-    total_games = games or 1
+    total_tenures = tenure_count or 1
     for theme in ('市场', '团队'):
         count = episode_triggers[theme]
         variants = episode_variants[theme]
-        print('  %-2s短篇：%4.1f%% 本局触发，%d 种后续选择出现' %
-              (theme, 100 * count / total_games, len(variants)))
+        print('  %-2s短篇：%4.1f%% 任期触发，%d 种后续选择出现' %
+              (theme, 100 * count / total_tenures, len(variants)))
     print()
     print('=== 结局分布 ===')
     total = sum(ends.values())
@@ -239,7 +265,7 @@ def main(runs=500, smart=False, tenures=1):
         print('  %-10s %5d  %4.1f%%  %s' %
               (name, count, 100 * count / total, '#' * int(50 * count / total)))
     print()
-    print('=== 本局后果状态出现次数（前十）===')
+    print('=== 永久状态出现次数（前十）===')
     for name, count in seen.most_common(10):
         print('  %-26s %5d' % (name, count))
     print()
@@ -249,8 +275,7 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--runs', type=int, default=500)
-    parser.add_argument('--tenures', type=int, default=1,
-                        help='兼容旧命令；开放任期模式下每局独立，不跨任继承')
+    parser.add_argument('--tenures', type=int, default=8)
     parser.add_argument('--smart', action='store_true')
     parser.add_argument('--seed', type=int, default=7)
     args = parser.parse_args()

@@ -41,24 +41,38 @@ const RES = [
   {k:'capital',n:'资本',   icon:SVG.capital},
 ];
 
-// 八种资源结局。结局后重新开始时，所有资源和本局状态都会归零重置。
+const BOARD_REVIEW_TURN = 18;
+
+// 八种下台方式：留给下一任什么
 const ENDINGS = {
   '破产清算': {kicker:'现金流 归零', body:'供应商堵在门口，账上一分钱没有。清算组进场那天，工牌是保安帮你摘的。',
-    carry:'本局结束：公司进入清算。'},
+    next:{cash:15,team:40,market:40,capital:35}, carry:'下一任接手：一身债，前十个回合催款不断。', flag:'debt_keep'},
   '守财奴':   {kicker:'现金流 爆表', body:'账上趴着十一个亿，两年没动过。董事会说，我们需要一个敢花钱的人。',
-    carry:'本局结束：钱没有花出去，机会已经错过。'},
+    next:{cash:85,team:50,market:25,capital:50}, carry:'下一任接手：钱很多，但整个窗口期已经错过了。'},
   '人去楼空': {kicker:'团队 归零', body:'最后三个人办完离职。整层楼的灯你自己关的。',
-    carry:'本局结束：团队散了。'},
+    next:{cash:45,team:15,market:35,capital:40}, carry:'下一任接手：行业里都知道这儿留不住人，招聘难度翻倍。', flag:'badrep_keep'},
   '大锅饭':   {kicker:'团队 爆表', body:'两千一百人，人力成本吃掉全部毛利。没人愿意做那个签裁员名单的人。',
-    carry:'本局结束：人力成本吞掉了利润。'},
+    next:{cash:25,team:85,market:45,capital:45}, carry:'下一任接手：第一件事就是裁员。'},
   '无人问津': {kicker:'市场 归零', body:'官网昨天的访问量是十七，其中十四个是爬虫。产品还在，只是没有人需要它了。',
-    carry:'本局结束：产品还在，但没人需要。'},
+    next:{cash:40,team:45,market:15,capital:35}, carry:'下一任接手：得从头找一遍，客户到底要什么。'},
   '爆单崩盘': {kicker:'市场 爆表', body:'在手订单排到二十八个月后，客户开始集体索赔。签得越多，赔得越多。',
-    carry:'本局结束：订单越多，赔得越多。'},
+    next:{cash:45,team:20,market:80,capital:40}, carry:'下一任接手：单子满手，人全累垮了。'},
   '一致行动': {kicker:'资本 归零', body:'那个会你没参加。七个董事，七票通过。下午三点交接，你的门禁十五分钟后失效。',
-    carry:'本局结束：董事会完成换人。'},
+    next:{cash:50,team:45,market:45,capital:20}, carry:'下一任接手：董事会盯得极紧，重大决策都要走流程。'},
   '功成身退': {kicker:'资本 爆表', body:'八号敲钟，解禁期谈到了最短。所有人都恭喜你，包括那个接你位子的人。\n\n这是唯一算赢的结局。你还是走了。',
-    carry:'本局结束：公司进入新的阶段。', win:true},
+    next:{cash:60,team:50,market:55,capital:85}, carry:'下一任接手：一家上市公司，处处受限。', flag:'public_keep', win:true},
+  '融资换帅': {kicker:'救命钱 到账', body:'钱在最后一天到账。董事会感谢你撑到现在，然后请下一位 CEO 进了会议室。',
+    next:{cash:65,team:40,market:50,capital:70}, carry:'下一任接手：现金暂时安全，预算权和否决权留在投资人手里。'},
+  '联创反杀': {kicker:'伙伴 倒戈', body:'联创带走了产品、团队或者董事会的票。你最后一次走出公司时，他没有来送。',
+    next:{cash:42,team:35,market:40,capital:38}, carry:'下一任接手：核心团队分裂，竞对知道公司所有底牌。'},
+  '替罪离场': {kicker:'旧账 追责', body:'公告把系统性问题写成了个人判断。公司继续营业，你的名字留在监管问询里。',
+    next:{cash:35,team:35,market:25,capital:58}, carry:'下一任接手：调查仍在继续，每个人都保存着自己的证据。'},
+  '止损离场': {kicker:'董事会 止损', body:'你按时公开，也控制住了事故。董事会仍然决定换一张没有上过新闻的脸。',
+    next:{cash:42,team:45,market:35,capital:55}, carry:'下一任接手：处罚可控，但客户和媒体不会立刻忘记。'},
+  '低价卖身': {kicker:'公司 被收购', body:'交易完成，投资人先拿回了钱。你的部门名称还在，工牌上的公司名已经换了。',
+    next:{cash:70,team:30,market:60,capital:85}, carry:'下一任接手：公司成了别人的业务线，第一件事是做人员整合。'},
+  '任满交棒': {kicker:'任期 届满', body:'没有保安，没有公告，也没有突然失效的门禁。你把交接箱放在桌上，自己关了灯。',
+    next:{cash:50,team:50,market:50,capital:50}, carry:'下一任接手：旧账仍在，但这一次交接是完整的。'},
 };
 
 let S;   // state
@@ -70,7 +84,7 @@ function initState(seed, dyn, keep){
   S = {
     cash:seed.cash, team:seed.team, market:seed.market, capital:seed.capital,
     dynasty:dyn, turn:0, month:0, year:2015 + (dyn-1)*2,
-    flags:Object.assign({}, keep||{}),   // 后果只在当前一局内保留
+    flags:Object.assign({}, keep||{}),   // _keep 跨任保留
     lock:{},                            // card -> 解锁回合
     seen:{},
   };
@@ -131,15 +145,7 @@ function pick(){
     if (w > best) best = w;
     pool.push([i,w]);
   }
-  if (!pool.length){
-    // 开放任期没有牌堆上限：一次性卡用完后只重置抽卡锁，
-    // 本局旗标和资源后果仍然保留，真正的结束只由结局卡触发。
-    if (Object.keys(S.lock).length){
-      S.lock = {};
-      return pick();
-    }
-    return -1;
-  }
+  if (!pool.length) return -1;
   // 高权重压倒：只在最高一档里随机（死亡卡就是靠这个必出的）
   const top = pool.filter(p => p[1] >= best*0.5);
   const use = best >= 1000 ? pool.filter(p=>p[1]===best) : top;
@@ -243,12 +249,8 @@ function drawBars(previousValues){
     el.classList.toggle('warn', v<=20 || v>=80);
   });
   $('#mLeft').textContent  = `第 ${S.dynasty} 任`;
-  const totalMonths = S.turn * 2;
-  const years = Math.floor(totalMonths / 12);
-  const months = totalMonths % 12;
-  $('#mRight').textContent = years
-    ? `在任 ${years}年${months ? months + '个月' : ''}`
-    : `在任 ${totalMonths}个月`;
+  const remaining = Math.max(0, BOARD_REVIEW_TURN - S.turn);
+  $('#mRight').textContent = remaining > 0 ? `还剩 ${remaining} 次` : '本任结束';
 }
 
 const DECK_LAYERS = [
@@ -597,30 +599,29 @@ let pendingEnd = null;
 function showEnding(key){
   const e = ENDINGS[key];
   pendingEnd = key;
-  const totalMonths = S.turn * 2;
-  const years = Math.floor(totalMonths / 12);
-  const months = totalMonths % 12;
-  const tenure = years
-    ? `${years} 年${months ? ` ${months} 个月` : ''}`
-    : `${totalMonths} 个月`;
+  const years = Math.floor(S.turn/6), months = S.turn%6*2;
   veil.innerHTML =
     `<div class="kicker">${e.kicker}</div>
      <h1>${key}</h1>
      <div class="body">${e.body.replace(/\n/g,'<br>')}</div>
-     <div class="carry">本局在任 ${tenure}<br><br>${e.carry}</div>
-     <button id="go">再来一局</button>`;
+     <div class="carry">在位 ${years} 年 ${months} 个月 · 第 ${S.dynasty} 任<br><br>${e.carry}</div>
+     <button id="go">${e.win?'再来一次':'下一任'}</button>`;
   veil.classList.add('on');
   $('#go').onclick = succeed;
   if (restoreCardFocus) $('#go').focus();
 }
 
 function succeed(){
-  // 每局都是独立挑战；资源、短篇后果和计数器全部从初始状态开始。
-  forced = null;
-  cur = null;
-  curIdx = -1;
-  busy = false;
-  initState({cash:50,team:55,market:45,capital:50}, 1, {});
+  const e = ENDINGS[pendingEnd];
+  // 只保留 _keep 标记，_run 和其他一律清空
+  const keep = {};
+  for (const k in S.flags){
+    if (S.flags[k] && /_keep$/.test(k)) keep[k] = S.flags[k];
+    if (S.flags[k] && /^nb_/.test(k))   keep[k] = S.flags[k];   // 计数器也留
+  }
+  if (e.flag) keep[e.flag] = 1;
+  const dyn = S.dynasty + 1;
+  initState(e.next, dyn, keep);
   veil.classList.remove('on');
   step(null);
 }
@@ -635,9 +636,9 @@ function succeed(){
      <div class="body">你是这家公司的 CEO。<br><br>
        四条槽 —— 现金流、团队、市场、资本。<br>
        任意一条见底或者爆表，你就会被换掉。<br><br>
-       没有固定任期。<br>你能撑多久，就看每一次决定。</div>
+       换掉之后，公司还在。<br>烂摊子留给下一任。</div>
      <div class="carry">左右明显拖动卡片做决定，轻轻碰一下会回到中间。<br>
-       没有正确答案，只有代价。<br>结束后从头再来，比较谁在任更久。</div>
+       没有正确答案，只有代价。</div>
      <button id="go">开始</button>`;
   veil.classList.add('on');
   $('#go').onclick = ()=>{ veil.classList.remove('on'); step(null); };

@@ -28,25 +28,13 @@ body{
 .bar .track{width:100%;max-width:64px;height:5px;background:#c9c3b6;
   border:1px solid #1a1a1a;position:relative;overflow:hidden;border-radius:1px}
 .bar .fill{position:absolute;left:0;top:0;bottom:0;background:#1a1a1a;
-  transition:width .82s cubic-bezier(.18,.82,.22,1)}
+  transition:width .45s cubic-bezier(.2,.8,.2,1)}
 .bar .icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#1a1a1a}
 .bar .icon svg{width:26px;height:26px;display:block}
 .bar .lbl{font-size:11px;line-height:14px;letter-spacing:0;color:#6b6459;white-space:nowrap}
 .bar.warn .fill{background:#a8321e}
-/* 结果反馈落在资源槽本身：减益红闪、增益浅绿闪，随后回到常态。 */
-.bar.impact-down .icon,.bar.impact-down .lbl{color:#a8321e}
-.bar.impact-down .track{border-color:#a8321e;box-shadow:0 0 0 2px rgba(168,50,30,.12)}
-.bar.impact-down .fill{background:#a8321e}
-.bar.impact-up .icon,.bar.impact-up .lbl{color:#687b3d}
-.bar.impact-up .track{border-color:#687b3d;box-shadow:0 0 0 2px rgba(104,123,61,.12)}
-.bar.impact-up .fill{background:#687b3d}
-.bar.flash{animation:resourceHit .78s ease-out}
-@keyframes resourceHit{
-  0%,100%{transform:translateY(0);filter:none}
-  18%{transform:translateY(-2px);filter:brightness(1.2)}
-  42%{transform:translateY(1px);filter:brightness(.78)}
-  68%{transform:translateY(-1px);filter:brightness(1.08)}
-}
+.bar.flash{animation:fl .5s}
+@keyframes fl{0%,100%{opacity:1}50%{opacity:.25}}
 
 /* 影响提示独占一行，避免和图标、名称、状态条互相挤压 */
 .bar .dot{display:block;border-radius:50%;background:#b59034;opacity:0;transform:scale(.45);
@@ -94,7 +82,7 @@ body{
 .card.touch-dragging .opt-label{transition-duration:.08s,.12s}
 .card.waiting{cursor:default}
 .card:focus-visible{outline:2px solid #1a1a1a;outline-offset:4px}
-.card.anim{transition:transform .38s cubic-bezier(.22,1.25,.36,1),opacity .32s ease-out}
+.card.anim{transition:transform .32s ease-out,opacity .32s ease-out}
 .card.deal-in{animation:cardDealIn .46s cubic-bezier(.2,.8,.2,1) both}
 @keyframes cardDealIn{
   0%{opacity:0;transform:translate3d(0,26px,0) scale(.95) rotate(-1.2deg)}
@@ -119,11 +107,12 @@ body{
 .opt-yes{left:18px;text-align:left;border-left:3px solid #a9bd79}
 .opt-no{right:18px;text-align:right;border-right:3px solid #c17d68}
 
-/* 选择结果只保留一句黑字说明；资源变化由上方四条槽反馈。 */
+/* 选择结果独立于卡面，避免遮挡下一张牌。具体上下位置由可用空间决定。 */
 #answer{position:absolute;left:50%;top:0;transform:translate(-50%,8px);
-  width:min(92%,300px);max-width:300px;background:transparent;color:#1a1a1a;
-  border:0;padding:7px 4px 0;font-size:13px;line-height:1.65;text-align:center;
-  opacity:0;transition:opacity .22s;overflow-wrap:anywhere;white-space:pre-line;
+  width:82%;max-width:300px;background:#171914;color:#f5efdf;
+  border:1px solid rgba(208,190,133,.58);border-left:3px solid #b8a05c;border-radius:3px;
+  padding:12px 16px;font-size:14px;line-height:1.65;opacity:0;
+  box-shadow:0 9px 22px rgba(26,26,26,.2);transition:opacity .22s;
   pointer-events:none;z-index:5}
 #answer.on{opacity:1}
 #answer.on{animation:answerRise .26s cubic-bezier(.2,.8,.2,1) both}
@@ -159,7 +148,7 @@ body{
   .card .q{font-size:17px;line-height:1.65;padding:16px 2px}
   .card .hint{padding-top:7px}
   .opt-label{top:14px;max-width:calc(100% - 28px);padding:8px 10px;font-size:12px;min-height:34px}
-  #answer{width:92%;padding:6px 4px 0;font-size:12px;line-height:1.5}
+  #answer{width:88%;padding:10px 13px;font-size:12px;line-height:1.55}
   .deck-card.back-far{transform:translate3d(0,-14px,0) scale(.93) rotate(-2.4deg)}
   .deck-card.back-mid{transform:translate3d(0,-9px,0) scale(.965) rotate(1.5deg)}
   .deck-card.back-near{transform:translate3d(0,-5px,0) scale(.985) rotate(-.8deg)}

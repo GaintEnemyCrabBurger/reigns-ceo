@@ -45,17 +45,23 @@ episode_people;ep_star_left;1132;市场总监;star_left_run and turn>=13;del;180
 episode_people;ep_overtime_open;1140;人事总监;turn>=4 and !slot_people_run;del;150;员工把加班表发上网，已经上了热搜。;公开道歉;公众会听见，投资人也会。;;5;8;-8;slot_people_run and overtime_apology_run;说他造假;热搜可能降，也可能等来证据。;;-5;5;5;slot_people_run and overtime_deny_run
 episode_people;ep_overtime_apology;1141;投资人;overtime_apology_run and turn>=13;del;180;你承认加班违法。谁批准发的道歉？;我批准的;团队记住你，董事会也记住你。;;10;;-12;;人事批准;公告保住你，人事总监开始留证据。;;-12;;8;betray_keep
 episode_people;ep_overtime_denied;1142;前员工;overtime_deny_run and turn>=13;del;180;你说我造假。我这里有打卡记录，还有你的语音。;马上认错;事情更难看，但还能停在今天。;-5;5;-8;-8;;起诉他;律师函发出，他把语音也发了。;-8;-10;-10;5;lie_keep
-legacy;legacy_low_price;1200;大客户;low_price_keep and !legacy_low_price_seen_keep and !legacy_seen_run;del;28;你几个月前打过价格战。现在续约，还是那个低价。;继续低价;客户续了，利润继续薄。;-10;;10;;legacy_seen_run and legacy_low_price_seen_keep;涨回去;利润回来，客户少了一批。;8;;-10;;legacy_seen_run and legacy_low_price_seen_keep
-legacy;legacy_acquired_team;1201;人事总监;acquired_team_keep and !legacy_acquired_seen_keep and !legacy_seen_run;del;28;你前面买来的团队集体要加薪，不加就一起走。;统一加薪;人留下，现金少一块。;-12;15;;;legacy_seen_run and legacy_acquired_seen_keep;让他们走;钱省下，买来的技术也走了。;5;-12;-5;;legacy_seen_run and legacy_acquired_seen_keep
-legacy;legacy_delivery_debt;1202;供应商;delivery_debt_keep and !legacy_delivery_seen_keep and !legacy_seen_run;del;28;你前面直播爆单时借了我的货。今天该付款了。;现在付;旧账结清，现金见底一截。;-15;;5;;legacy_seen_run and legacy_delivery_seen_keep;再拖一个月;钱留下，下一批货不会来。;8;;-8;-5;legacy_seen_run and legacy_delivery_seen_keep
-legacy;legacy_exclusive;1203;第二大客户;exclusive_keep and !legacy_exclusive_seen_keep and !legacy_seen_run;del;28;你之前签了独家。你继续只卖给一家吗？;照旧执行;大客户满意，其他市场关上。;8;;-12;5;legacy_seen_run and legacy_exclusive_seen_keep;付钱解约;市场重新打开，先赔一笔。;-15;;10;-5;legacy_seen_run and legacy_exclusive_seen_keep
-legacy;legacy_old_product;1204;老客户;old_product_keep and !legacy_product_seen_keep and !legacy_seen_run;del;28;你之前答应维护老产品。工程师今天来要人。;继续维护;老客户稳住，新项目少两个人。;-5;-8;10;;legacy_seen_run and legacy_product_seen_keep;停止维护;团队轻松，客户开始离开。;5;8;-12;;legacy_seen_run and legacy_product_seen_keep
-legacy;legacy_founder_split;1205;联合创始人;founder_split_keep and !legacy_founder_seen_keep and !legacy_seen_run;del;28;你之前让全公司站过队。现在我带走的人想回来。;让他们回来;技术回来，旧矛盾也回来。;-8;12;5;;legacy_seen_run and legacy_founder_seen_keep;不让回来;团队更稳，技术缺口还在。;5;5;-8;;legacy_seen_run and legacy_founder_seen_keep
-legacy;legacy_founder_grudge;1206;联合创始人;founder_grudge_keep and !legacy_founder_seen_keep and !legacy_seen_run;del;28;之前你没解决我和董事会的冲突。今天轮到你选边。;站在他这边;团队支持你，董事会反对。;;10;;-12;legacy_seen_run and legacy_founder_seen_keep;站董事会;权力稳了，联创开始收拾工位。;;-10;;10;legacy_seen_run and legacy_founder_seen_keep
-legacy;legacy_nephew;1207;董事长侄子;chairman_nephew_keep and !legacy_nephew_seen_keep and !legacy_seen_run;del;28;你之前让我当了副总。现在我要直接管产品。;让他管;董事长满意，产品团队不服。;;-10;-5;12;legacy_seen_run and legacy_nephew_seen_keep;收回职位;团队支持你，董事长会算账。;;10;;-12;legacy_seen_run and legacy_nephew_seen_keep
-legacy;legacy_layoff;1208;人事总监;layoff_keep and !legacy_layoff_seen_keep and !legacy_seen_run;del;28;你之前裁了三十人。今天留下的人要求承诺不再裁。;公开承诺;团队安心，董事会少一张牌。;;12;;-8;legacy_seen_run and legacy_layoff_seen_keep;不给承诺;权力留着，简历开始外投。;;-10;;8;legacy_seen_run and legacy_layoff_seen_keep
-legacy;legacy_star_sales;1209;销售冠军;star_sales_keep and !legacy_star_seen_keep and !legacy_seen_run;del;28;你之前升过我，也可能告过我。现在三家客户只认我。;给他分红;客户稳住，他更难控制。;-8;-5;12;;legacy_seen_run and legacy_star_seen_keep;换掉他;权力回来，客户跟着走。;5;5;-12;5;legacy_seen_run and legacy_star_seen_keep
-legacy;legacy_daily_exclusive;1210;大客户;dealer_keep and !legacy_dealer_seen_keep and !legacy_seen_run;del;28;你之前答应只卖给我。今天有人出双倍价格抢货。;守旧合同;信用保住，钱少赚。;-8;;8;5;legacy_seen_run and legacy_dealer_seen_keep;卖给新人;现金多了，老客户当场解约。;12;;-12;-5;legacy_seen_run and legacy_dealer_seen_keep
+legacy;legacy_low_price;1200;大客户;low_price_keep and !legacy_low_price_seen_keep and !legacy_seen_run;del;28;前任打过价格战。现在续约，还是那个低价。;继续低价;客户续了，利润继续薄。;-10;;10;;legacy_seen_run and legacy_low_price_seen_keep;涨回去;利润回来，客户少了一批。;8;;-10;;legacy_seen_run and legacy_low_price_seen_keep
+legacy;legacy_acquired_team;1201;人事总监;acquired_team_keep and !legacy_acquired_seen_keep and !legacy_seen_run;del;28;前任买来的团队集体要加薪，不加就一起走。;统一加薪;人留下，现金少一块。;-12;15;;;legacy_seen_run and legacy_acquired_seen_keep;让他们走;钱省下，买来的技术也走了。;5;-12;-5;;legacy_seen_run and legacy_acquired_seen_keep
+legacy;legacy_delivery_debt;1202;供应商;delivery_debt_keep and !legacy_delivery_seen_keep and !legacy_seen_run;del;28;前任直播爆单时借了我的货。今天该付款了。;现在付;旧账结清，现金见底一截。;-15;;5;;legacy_seen_run and legacy_delivery_seen_keep;再拖一个月;钱留下，下一批货不会来。;8;;-8;-5;legacy_seen_run and legacy_delivery_seen_keep
+legacy;legacy_exclusive;1203;第二大客户;exclusive_keep and !legacy_exclusive_seen_keep and !legacy_seen_run;del;28;前任签了独家。你继续只卖给一家吗？;照旧执行;大客户满意，其他市场关上。;8;;-12;5;legacy_seen_run and legacy_exclusive_seen_keep;付钱解约;市场重新打开，先赔一笔。;-15;;10;-5;legacy_seen_run and legacy_exclusive_seen_keep
+legacy;legacy_old_product;1204;老客户;old_product_keep and !legacy_product_seen_keep and !legacy_seen_run;del;28;前任答应维护老产品。工程师今天来要人。;继续维护;老客户稳住，新项目少两个人。;-5;-8;10;;legacy_seen_run and legacy_product_seen_keep;停止维护;团队轻松，客户开始离开。;5;8;-12;;legacy_seen_run and legacy_product_seen_keep
+legacy;legacy_founder_split;1205;联合创始人;founder_split_keep and !legacy_founder_seen_keep and !legacy_seen_run;del;28;前任让全公司站过队。现在我带走的人想回来。;让他们回来;技术回来，旧矛盾也回来。;-8;12;5;;legacy_seen_run and legacy_founder_seen_keep;不让回来;团队更稳，技术缺口还在。;5;5;-8;;legacy_seen_run and legacy_founder_seen_keep
+legacy;legacy_founder_grudge;1206;联合创始人;founder_grudge_keep and !legacy_founder_seen_keep and !legacy_seen_run;del;28;前任没有解决我和董事会的冲突。今天轮到你选边。;站在他这边;团队支持你，董事会反对。;;10;;-12;legacy_seen_run and legacy_founder_seen_keep;站董事会;权力稳了，联创开始收拾工位。;;-10;;10;legacy_seen_run and legacy_founder_seen_keep
+legacy;legacy_nephew;1207;董事长侄子;chairman_nephew_keep and !legacy_nephew_seen_keep and !legacy_seen_run;del;28;前任让我当了副总。现在我要直接管产品。;让他管;董事长满意，产品团队不服。;;-10;-5;12;legacy_seen_run and legacy_nephew_seen_keep;收回职位;团队支持你，董事长会算账。;;10;;-12;legacy_seen_run and legacy_nephew_seen_keep
+legacy;legacy_layoff;1208;人事总监;layoff_keep and !legacy_layoff_seen_keep and !legacy_seen_run;del;28;前任裁了三十人。今天留下的人要求承诺不再裁。;公开承诺;团队安心，董事会少一张牌。;;12;;-8;legacy_seen_run and legacy_layoff_seen_keep;不给承诺;权力留着，简历开始外投。;;-10;;8;legacy_seen_run and legacy_layoff_seen_keep
+legacy;legacy_star_sales;1209;销售冠军;star_sales_keep and !legacy_star_seen_keep and !legacy_seen_run;del;28;前任升过我，也可能告过我。现在三家客户只认我。;给他分红;客户稳住，他更难控制。;-8;-5;12;;legacy_seen_run and legacy_star_seen_keep;换掉他;权力回来，客户跟着走。;5;5;-12;5;legacy_seen_run and legacy_star_seen_keep
+legacy;legacy_daily_exclusive;1210;大客户;dealer_keep and !legacy_dealer_seen_keep and !legacy_seen_run;del;28;前任答应只卖给我。今天有人出双倍价格抢货。;守旧合同;信用保住，钱少赚。;-8;;8;5;legacy_seen_run and legacy_dealer_seen_keep;卖给新人;现金多了，老客户当场解约。;12;;-12;-5;legacy_seen_run and legacy_dealer_seen_keep
+endings;review_cash_low;1900;投资人;turn>=18 and cash<30;del;2400;公司还活着，但钱又只够两个月。打款条件是换掉你。;拿钱离开;钱到账，你的门禁同时失效。;;;;;end_融资换帅;拒绝交权;投资人起身走了，工资账户明天冻结。;;;;;end_破产清算
+endings;review_team_low;1901;人事总监;turn>=18 and cash>=30 and team<30;del;2400;六名主管联名：你留下，他们就走。;我离开;他们撤回离职信，开始等下一任。;;;;;end_联创反杀;换掉他们;名单发完，公司只剩空工位。;;;;;end_人去楼空
+endings;review_market_low;1902;董事长;turn>=18 and cash>=30 and team>=30 and market<30;del;2400;董事会找到一个买家。价格很低，但够发工资。;卖掉公司;投资人先拿钱，你最后离场。;;;;;end_低价卖身;继续撑着;买家走了，客户也没有回来。;;;;;end_无人问津
+endings;review_capital_low;1903;董事长;turn>=18 and cash>=30 and team>=30 and market>=30 and capital<30;del;2400;复盘结束。七名董事已经投完票。;接受结果;七票同意换人。;;;;;end_一致行动;要求重投;第二次还是七票。;;;;;end_一致行动
+endings;review_high;1904;董事长;turn>=18 and cash>=30 and team>=30 and market>=30 and capital>70;del;2300;公司没倒，董事会也赚到了钱。接任人正在门外。;体面交接;奖金到账，你把位置交给下一任。;;;;;end_功成身退;拒绝交接;奖金取消，接任人照样进门。;;;;;end_融资换帅
+endings;review_normal;1905;董事长;turn>=18 and cash>=30 and team>=30 and market>=30 and capital>=30 and capital<=70;del;2300;十八个月到了。公司还在，董事会问你怎么离开。;办完交接;这一次，没有人需要保安送你。;;;;;end_任满交棒;现在就走;门在身后关上，交接箱还是空的。;;;;;end_融资换帅
 daily;d_supplier_01;500;供应商;;40;10;老王家的货，这个月能不能先结一半。;结;那我下个月还按老价格给你。;-10;;5;;;下个月;行，我等。;8;;-5;;
 daily;d_supplier_02;501;采购经理;;60;10;新来的供应商报价低两成。但没做过我们这个行业。;换;省下来的钱一年是四百万。;12;;-5;;;不换;老王合作七年了，一次没出过问题。;;;5;;
 daily;d_supplier_03;502;采购经理;;80;8;有个供应商想请我吃饭。他明说了，是想谈谈明年的量。;去;吃饭而已。;5;;;-5;;不去;那他会觉得我们不给面子。;;;;;
@@ -105,13 +111,14 @@ daily;d_person_01;545;;;60;10;今天是我女儿的家长会。同时是季度�
 daily;d_person_02;546;;;70;10;体检报告出来了，几项指标不太好。医生建议休一个月。;休;公司一个月没人管。;;5;;-5;;不休;那就先这样。;;;;;
 daily;d_person_03;547;;;80;10;老朋友借钱，二十万。他说三个月还。;借;这是我自己的钱。;;;;;;不借;那这个朋友大概就没了。;;;;;
 daily;d_person_04;548;;;90;8;有人问我，做这个到底是为了什么。我一时没答上来。;为了钱;至少是实话。;;;;;;为了做成一件事;那件事是什么，我也说不清了。;;;;;
-daily;d_dyn_01;549;人事总监;turn>12;100;20;老员工在议论，说这家公司已经换过好几个 CEO。;开个会;说什么。;;8;;;;不理;那他们就自己猜。;;-5;;;
-daily;d_dyn_02;550;董事长;turn>24;120;20;你在这个位置多久了？我都快记不清了。;继续做;那就把结果做出来。;;;;;;歇一歇;董事会会把你的空档记下来。;;;;;
-daily;d_dyn_03;551;;turn>54;150;25;仓库最里面有个箱子，是创始团队的东西。要不要清掉。;留着;放着占地方。;;5;;;;清掉;那就没人记得了。;;-5;;;
-daily;d_legacy_01;552;财务总监;debt_keep;60;25;你前面借的那笔钱，这个月要还了。;还;账上会空一半。;-20;;;8;;再借;那就是借新还旧。;10;;;-12;
+daily;d_dyn_01;549;人事总监;dynasty>2;100;20;老员工在议论，说这几年换了好几个 CEO。;开个会;说什么。;;8;;;;不理;那他们就自己猜。;;-5;;;
+daily;d_dyn_02;550;董事长;dynasty>4;120;20;你是第几任了？我都记不清了。;第五任;前面四个都是被换掉的。;;;;;;记不清;那说明这个位置本来就是流水的。;;;;;
+daily;d_dyn_03;551;;dynasty>9;150;25;仓库最里面有个箱子，是创始团队的东西。要不要清掉。;留着;放着占地方。;;5;;;;清掉;那就没人记得了。;;-5;;;
+daily;d_legacy_01;552;财务总监;debt_keep;60;25;上一任借的那笔钱，这个月要还了。;还;账上会空一半。;-20;;;8;;再借;那就是借新还旧。;10;;;-12;
 daily;d_legacy_02;553;人事总监;nb_lost_tech>0;80;25;上次走掉那批技术，现在在对手公司做一模一样的产品。;认了;那是我们自己没留住。;;;-5;;;招回来;开双倍的价，有两个愿意回。;-12;12;;;
-daily;d_legacy_03;554;公关总监;lie_keep;100;25;你之前在董事会上说过的数字，现在对不上了。;说清;那要承认之前有问题。;;5;;-8;;继续圆;圆一次要圆一辈子。;;;;-5;
+daily;d_legacy_03;554;公关总监;lie_keep;100;25;上一任在董事会上说过的数字，现在对不上了。;说清;那要承认之前有问题。;;5;;-8;;继续圆;圆一次要圆一辈子。;;;;-5;
 daily;d_legacy_04;555;董事长;betray_keep;120;25;那个替你背锅的人，他家里人上周来公司了。;见;她说不是来闹的，是想问个明白。;;8;;;;不见;那她就在楼下等。;;-12;;;
+daily;d_legacy_05;556;法务;public_keep;80;20;上市公司有一条信息必须公开。现在要不要报？报了股价会动。;报;规则就是规则。;;;-5;8;;不报;不报就是违规。;;;;-15;
 daily;d_good_01;557;技术总监;;100;10;那个项目做完了。团队想申请三天假。;批;三天没人干活。;;12;-5;;;不批;后面还有排期。;;-8;;;
 daily;d_good_02;558;大客户;;110;10;这单我们提前付款，你给个折扣就行。;给;现金提前到账。;12;;-5;;;不给;那我们按合同走。;;;;;
 daily;d_good_03;559;市场总监;;120;10;有个小客户，量很小，但一直在续。今年他们要涨量了。;重视;小客户变大客户就是这么来的。;;;12;;;按老样子;那也没什么损失。;;;;;
