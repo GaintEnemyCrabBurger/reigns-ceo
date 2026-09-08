@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>任职 · 故事控制室</title>
+<link rel="stylesheet" href="story-control.css">
+</head>
+<body>
+<div id="storyControl" class="sc-shell">
+  <header class="sc-header">
+    <div class="sc-brand">
+      <span class="sc-brand-mark" aria-hidden="true">任</span>
+      <div>
+        <div class="sc-eyebrow">NARRATIVE CONTROL / LOCAL</div>
+        <h1>故事控制室</h1>
+      </div>
+    </div>
+    <div class="sc-header-actions">
+      <span id="scSource" class="sc-source">正在读取 cards.csv</span>
+      <button id="scReload" type="button">重新载入</button>
+      <button id="scUndoAll" type="button" disabled>放弃未保存</button>
+      <button id="scSave" class="primary" type="button" disabled>写回 cards.csv</button>
+      <button id="scMore" class="icon-button" type="button" aria-label="更多导出操作" title="更多导出操作">•••</button>
+      <div id="scMoreMenu" class="sc-menu" hidden>
+        <button id="scExportCsv" type="button">导出当前 CSV</button>
+        <button id="scExportReview" type="button">导出审阅记录</button>
+        <button id="scImportBaseline" type="button">导入对比基线</button>
+        <button id="scResetBaseline" type="button">恢复项目基线</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="sc-overview" aria-label="故事状态概览">
+    <div><strong id="scCardCount">—</strong><span>卡片</span></div>
+    <div><strong id="scThemeCount">—</strong><span>故事线</span></div>
+    <div><strong id="scChangeCount">—</strong><span>相对旧版改动</span></div>
+    <div><strong id="scDirtyCount">—</strong><span>尚未写回</span></div>
+    <div><strong id="scErrorCount">—</strong><span>阻断问题</span></div>
+    <div><strong id="scReviewCount">—</strong><span>待重写</span></div>
+  </section>
+
+  <div class="sc-commandbar">
+    <nav class="sc-tabs" aria-label="后台视图">
+      <button data-view="graph" class="active" aria-pressed="true">故事图谱</button>
+      <button data-view="changes" aria-pressed="false">版本改动</button>
+      <button data-view="audit" aria-pressed="false">叙事体检</button>
+    </nav>
+    <div class="sc-baseline">
+      <span id="scBaseline">对比基线：—</span>
+      <button id="scSetBaseline" type="button">以当前版为基线</button>
+    </div>
+  </div>
+
+  <div class="sc-workspace">
+    <aside class="sc-sidebar" aria-label="卡片索引">
+      <label class="sc-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="scSearch" type="search" placeholder="搜索 ID、人物、正文、状态" aria-label="搜索卡片">
+      </label>
+      <div class="sc-filters">
+        <select id="scTheme" aria-label="筛选故事线"><option value="all">全部故事线</option></select>
+        <select id="scKind" aria-label="筛选卡片作用">
+          <option value="all">全部作用</option>
+          <option value="story">剧情连接</option>
+          <option value="state">状态 / 伏笔</option>
+          <option value="resource">资源调节</option>
+          <option value="flavor">氛围 / 对话</option>
+          <option value="ending">结局</option>
+          <option value="unreviewed">未判断价值</option>
+          <option value="key">人工标记：关键</option>
+          <option value="pace">人工标记：节奏</option>
+          <option value="rewrite">待重写</option>
+          <option value="remove">无效 / 待删除</option>
+        </select>
+      </div>
+      <div class="sc-list-head"><span id="scListTitle">卡片索引</span><span id="scListCount">0</span></div>
+      <div id="scCardList" class="sc-card-list"></div>
+      <button id="scAddCard" class="sc-add-card" type="button">＋ 新建卡片</button>
+    </aside>
+
+    <main class="sc-main">
+      <div class="sc-main-head">
+        <div>
+          <div id="scBreadcrumb" class="sc-eyebrow">ALL THREADS</div>
+          <h2 id="scMainTitle">故事全局</h2>
+          <p id="scMainSubtitle">直接跳转与状态牵动</p>
+        </div>
+        <div id="scGraphActions" class="sc-graph-actions">
+          <button id="scClearFocus" type="button">总览</button>
+          <button id="scFocus" type="button" disabled>聚焦关联</button>
+          <label><input id="scShowFlags" type="checkbox" checked> 选中卡的状态关联</label>
+        </div>
+      </div>
+      <div id="scViewport" class="sc-viewport" tabindex="0" aria-label="故事关系图，可拖动空白处平移">
+        <div id="scGraph"></div>
+      </div>
+      <div id="scReport" class="sc-report" hidden></div>
+      <footer class="sc-main-foot">
+        <div class="sc-legend">
+          <span><i class="line yes"></i>右划</span>
+          <span><i class="line no"></i>左划</span>
+          <span><i class="line flag"></i>状态牵动</span>
+          <span><i class="node-key"></i>关键 / 分支</span>
+          <span><i class="node-flavor"></i>氛围 / 待判断</span>
+          <span><i class="node-dirty"></i>本次已修改</span>
+        </div>
+        <div class="sc-zoom">
+          <button id="scZoomOut" class="icon-button" type="button" aria-label="缩小" title="缩小">−</button>
+          <output id="scZoomLabel">80%</output>
+          <button id="scZoomIn" class="icon-button" type="button" aria-label="放大" title="放大">＋</button>
+          <button id="scFit" type="button">适应画布</button>
+        </div>
+      </footer>
+    </main>
+
+    <aside id="scInspector" class="sc-inspector" aria-label="卡片详情"></aside>
+  </div>
+</div>
+
+<div id="scToast" class="sc-toast" role="status" aria-live="polite"></div>
+<input id="scBaselineFile" type="file" accept=".csv,.json" hidden>
+
+<dialog id="scBaselineDialog">
+  <form method="dialog">
+    <h2>设为对比基线</h2>
+    <p>只保存在这个浏览器，不会改动项目文件。</p>
+    <label>基线名称<input id="scBaselineName" maxlength="80" value="本次故事版本"></label>
+    <div class="dialog-actions"><button value="cancel">取消</button><button id="scBaselineConfirm" class="primary" value="default">确认</button></div>
+  </form>
+</dialog>
+
+<dialog id="scConfirmDialog">
+  <form method="dialog">
+    <h2 id="scConfirmTitle">确认操作</h2>
+    <p id="scConfirmText"></p>
+    <div class="dialog-actions"><button value="cancel">取消</button><button id="scConfirmAction" class="danger" value="default">确认</button></div>
+  </form>
+</dialog>
+
+<script src="story-model.js"></script>
+<script src="story-control.js"></script>
+</body>
+</html>

@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>任职</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{
+  background:#e8e4dc;
+  font-family:"Songti SC","SimSun","Noto Serif CJK SC",serif;
+  color:#1a1a1a;display:flex;align-items:center;justify-content:center;
+  user-select:none;
+}
+#app{--card-width:min(78vw,300px,calc(100% - 32px));--card-height:clamp(300px,55vh,380px);
+  width:100%;max-width:420px;height:100vh;height:100dvh;max-height:820px;
+  display:flex;flex-direction:column;
+  padding:max(16px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));
+  position:relative}
+
+/* 四条资源槽 */
+#bars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;
+  flex:none;margin-bottom:14px;padding:2px 4px 0}
+.bar{display:grid;grid-template-rows:14px 28px 14px 5px;row-gap:5px;
+  min-width:0;text-align:center;place-items:center;position:relative}
+.bar .impact{width:16px;height:14px;display:grid;place-items:center}
+.bar .track{width:100%;max-width:64px;height:5px;background:#c9c3b6;
+  border:1px solid #1a1a1a;position:relative;overflow:hidden;border-radius:1px}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;background:#1a1a1a;
+  transition:width .82s cubic-bezier(.18,.82,.22,1)}
+.bar .icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#1a1a1a}
+.bar .icon svg{width:26px;height:26px;display:block}
+.bar .lbl{font-size:11px;line-height:14px;letter-spacing:0;color:#6b6459;white-space:nowrap}
+.bar.warn .fill{background:#a8321e}
+/* 结果反馈落在资源槽本身：减益红闪、增益浅绿闪，随后回到常态。 */
+.bar.impact-down .icon,.bar.impact-down .lbl{color:#a8321e}
+.bar.impact-down .track{border-color:#a8321e;box-shadow:0 0 0 2px rgba(168,50,30,.12)}
+.bar.impact-down .fill{background:#a8321e}
+.bar.impact-up .icon,.bar.impact-up .lbl{color:#687b3d}
+.bar.impact-up .track{border-color:#687b3d;box-shadow:0 0 0 2px rgba(104,123,61,.12)}
+.bar.impact-up .fill{background:#687b3d}
+.bar.flash{animation:resourceHit .78s ease-out}
+@keyframes resourceHit{
+  0%,100%{transform:translateY(0);filter:none}
+  18%{transform:translateY(-2px);filter:brightness(1.2)}
+  42%{transform:translateY(1px);filter:brightness(.78)}
+  68%{transform:translateY(-1px);filter:brightness(1.08)}
+}
+
+/* 影响提示独占一行，避免和图标、名称、状态条互相挤压 */
+.bar .dot{display:block;border-radius:50%;background:#b59034;opacity:0;transform:scale(.45);
+  transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1),width .18s,height .18s;
+  box-shadow:0 0 0 3px rgba(181,144,52,.13);pointer-events:none}
+.bar .dot.show{opacity:1;transform:scale(1);animation:impactPulse 1s ease-in-out infinite alternate}
+@keyframes impactPulse{to{box-shadow:0 0 0 5px rgba(181,144,52,.06)}}
+
+#meta{display:flex;justify-content:space-between;font-size:12px;
+  color:#6b6459;letter-spacing:0;margin-bottom:12px;flex:none}
+
+#stage{flex:1;min-height:0;position:relative;display:flex;align-items:center;justify-content:center;
+  perspective:900px;isolation:isolate;overflow:visible}
+
+/* The back of the deck stays purely decorative. Keeping it separate from the
+   active card lets the story engine choose the next card only after a decision. */
+.deck{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  pointer-events:none;z-index:0;overflow:visible}
+.deck-card{position:absolute;width:var(--card-width);height:var(--card-height);max-height:calc(100% - 8px);
+  border:1.5px solid #171914;border-radius:9px;background:#27291f;
+  box-shadow:4px 5px 0 rgba(26,26,26,.14);overflow:hidden;will-change:transform}
+.deck-card::before{content:"";position:absolute;inset:12px;border:1px solid rgba(208,190,133,.35);
+  background-image:linear-gradient(45deg,transparent 46%,rgba(208,190,133,.18) 47%,rgba(208,190,133,.18) 53%,transparent 54%),
+    linear-gradient(-45deg,transparent 46%,rgba(208,190,133,.18) 47%,rgba(208,190,133,.18) 53%,transparent 54%);
+  background-size:26px 26px;opacity:.82}
+.deck-card.back-far{z-index:0;opacity:.56;transform:translate3d(0,-18px,0) scale(.93) rotate(-2.4deg);
+  transition:transform .42s cubic-bezier(.2,.8,.2,1),opacity .35s ease}
+.deck-card.back-mid{z-index:1;opacity:.78;transform:translate3d(0,-12px,0) scale(.965) rotate(1.5deg);
+  transition:transform .38s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+.deck-card.back-near{z-index:2;opacity:.94;transform:translate3d(0,-6px,0) scale(.985) rotate(-.8deg);
+  transition:transform .34s cubic-bezier(.2,.8,.2,1),opacity .28s ease}
+#stage.is-committing .back-far{opacity:.7}
+#stage.is-committing .back-mid{opacity:.9}
+#stage.is-committing .back-near{opacity:1}
+
+.card{
+  position:absolute;width:var(--card-width);height:var(--card-height);max-height:calc(100% - 8px);
+  background:#faf7f0;border:1.5px solid #1a1a1a;border-radius:9px;
+  box-shadow:5px 6px 0 rgba(26,26,26,.16);
+  padding:20px 18px 16px;display:flex;flex-direction:column;
+  cursor:grab;touch-action:none;z-index:3;will-change:transform,opacity;transform-origin:50% 86%;
+  -webkit-user-select:none;user-select:none;-webkit-touch-callout:none;overflow:visible;
+}
+.card.dragging{cursor:grabbing}
+.card.touch-dragging .opt-label{transition-duration:.08s,.12s}
+.card.waiting{cursor:default}
+.card:focus-visible{outline:2px solid #1a1a1a;outline-offset:4px}
+.card.anim{transition:transform .38s cubic-bezier(.22,1.25,.36,1),opacity .32s ease-out}
+.card.deal-in{animation:cardDealIn .46s cubic-bezier(.2,.8,.2,1) both}
+@keyframes cardDealIn{
+  0%{opacity:0;transform:translate3d(0,26px,0) scale(.95) rotate(-1.2deg)}
+  65%{opacity:1;transform:translate3d(0,-3px,0) scale(1.008) rotate(.15deg)}
+  100%{opacity:1;transform:translate3d(0,0,0) scale(1) rotate(0)}
+}
+.card .who{font-size:12px;letter-spacing:0;color:#6b6459;
+  border-bottom:1px solid #d5cfc2;padding-bottom:8px;margin-bottom:auto;min-height:14px;
+  transition:opacity .18s}
+.card .q{font-size:18px;line-height:1.72;padding:22px 2px;letter-spacing:0;
+  transition:opacity .18s}
+.card .hint{font-size:11px;color:#9a9284;letter-spacing:0;text-align:center;
+  margin-top:auto;padding-top:10px;transition:opacity .18s}
+
+.opt-label{position:absolute;top:18px;display:flex;align-items:center;min-height:38px;
+  max-width:calc(100% - 36px);font-size:13px;line-height:1.4;letter-spacing:0;
+  opacity:0;transform:translateY(-7px) scale(.96);transition:opacity .2s ease,transform .28s cubic-bezier(.2,.8,.2,1);
+  padding:9px 13px;background:#171914;color:#f5efdf;border:1px solid rgba(208,190,133,.62);
+  border-radius:3px;pointer-events:none;white-space:normal;overflow-wrap:anywhere;word-break:break-word;
+  box-shadow:0 8px 18px rgba(26,26,26,.22);z-index:4}
+.opt-label.revealed{opacity:1;transform:translateY(0) scale(1)}
+.opt-yes{left:18px;text-align:left;border-left:3px solid #a9bd79}
+.opt-no{right:18px;text-align:right;border-right:3px solid #c17d68}
+
+/* 选择结果只保留一句黑字说明；资源变化由上方四条槽反馈。 */
+#answer{position:absolute;left:50%;top:0;transform:translate(-50%,8px);
+  width:min(92%,300px);max-width:300px;background:transparent;color:#1a1a1a;
+  border:0;padding:7px 4px 0;font-size:13px;line-height:1.65;text-align:center;
+  opacity:0;transition:opacity .22s;overflow-wrap:anywhere;white-space:pre-line;
+  pointer-events:none;z-index:5}
+#answer.on{opacity:1}
+#answer.on{animation:answerRise .26s cubic-bezier(.2,.8,.2,1) both}
+@keyframes answerRise{from{transform:translate(-50%,10px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+
+/* 结局 / 继任 */
+#veil{position:absolute;inset:0;background:#e8e4dc;display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:34px;z-index:20}
+#veil.on{display:flex}
+#veil .kicker{font-size:11px;letter-spacing:0;color:#6b6459;margin-bottom:18px}
+#veil h1{font-size:30px;margin:0 0 22px;letter-spacing:0;font-weight:normal}
+#veil .body{font-size:14px;line-height:2;color:#3a3630;max-width:290px;margin-bottom:14px}
+#veil .carry{font-size:12px;line-height:2;color:#6b6459;border-top:1px solid #d5cfc2;
+  padding-top:16px;margin-top:6px;max-width:290px;text-align:left;width:100%}
+#veil button{margin-top:26px;background:none;border:1.5px solid #1a1a1a;
+  color:#1a1a1a;font-family:inherit;font-size:14px;letter-spacing:0;
+  padding:11px 30px;cursor:pointer}
+#veil button:active{background:#1a1a1a;color:#faf7f0}
+#dbg{display:none}
+
+
+@media (max-height:620px){
+  #app{padding-top:12px;padding-bottom:10px}
+  #bars{gap:12px;margin-bottom:8px;padding-top:0}
+  .bar{grid-template-rows:14px 24px 13px 4px;row-gap:4px}
+  .bar .impact{height:14px}
+  .bar .icon,.bar .icon svg{width:22px;height:22px}
+  .bar .lbl{font-size:10px;line-height:13px}
+  .bar .track{height:4px}
+  #meta{font-size:11px;margin-bottom:6px}
+  .card{padding:17px 16px 14px}
+  .card .q{font-size:17px;line-height:1.65;padding:16px 2px}
+  .card .hint{padding-top:7px}
+  .opt-label{top:14px;max-width:calc(100% - 28px);padding:8px 10px;font-size:12px;min-height:34px}
+  #answer{width:92%;padding:6px 4px 0;font-size:12px;line-height:1.5}
+  .deck-card.back-far{transform:translate3d(0,-14px,0) scale(.93) rotate(-2.4deg)}
+  .deck-card.back-mid{transform:translate3d(0,-9px,0) scale(.965) rotate(1.5deg)}
+  .deck-card.back-near{transform:translate3d(0,-5px,0) scale(.985) rotate(-.8deg)}
+}
+
+/* 触摸屏上把选择徽标做得更醒目，但仍留在当前卡片的面内。 */
+@media (pointer:coarse), (max-width:600px){
+  .opt-label{top:16px;min-height:44px;max-width:calc(100% - 28px);
+    padding:10px 14px;font-size:15px;line-height:1.35;color:#fff;
+    background:rgba(23,25,20,.97);border:1.5px solid rgba(208,190,133,.9);
+    box-shadow:0 8px 20px rgba(26,26,26,.3)}
+  .opt-yes{left:14px;border-left-width:3px}
+  .opt-no{right:14px;border-right-width:3px}
+}
+
+@media (max-width:340px){
+  #app{padding-left:12px;padding-right:12px}
+  #bars{gap:10px;padding-left:2px;padding-right:2px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important}
+}
+
+/* 周期切换横幅 —— 风来了和风停了必须能感觉到 */
+#phaseBanner{position:absolute;left:50%;top:32%;transform:translate(-50%,-6px);
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  padding:17px 32px;border:1.5px solid #1a1a1a;background:#faf7f0;
+  opacity:0;pointer-events:none;z-index:15;
+  transition:opacity .34s,transform .34s;
+  box-shadow:5px 6px 0 rgba(26,26,26,.16)}
+#phaseBanner.on{opacity:1;transform:translate(-50%,0)}
+#phaseBanner .pn{font-size:26px;letter-spacing:8px;line-height:1;text-indent:8px}
+#phaseBanner .pt{font-size:12px;letter-spacing:2px;color:#6b6459}
+#phaseBanner.phase-2{background:#f7ecd0;border-color:#a8801e}
+#phaseBanner.phase-2 .pn{color:#8a6410}
+#phaseBanner.phase-4{background:#e3e6ea;border-color:#4a5560}
+#phaseBanner.phase-4 .pn{color:#33404d}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="bars"></div>
+  <div id="meta"><span id="mLeft"></span><span id="mRight"></span></div>
+  <div id="stage">
+    <div id="answer" role="status" aria-live="polite"></div>
+  </div>
+  <div id="veil"></div>
+  <div id="dbg"></div>
+</div>
+<script>
+const CARDS = [{"thematic": "open", "card": "op_start", "id": "1", "bearer": "", "conditions": "turn<=1", "lockturn": "del", "weight": "max", "question": "三个人，一间三十平的房子，账上十七万。你想先做什么？", "override_yes": "先做出来", "answer_yes": "那三个月你们没见过白天。", "yes_money": "", "yes_team": "8", "yes_market": "", "yes_mind": "8", "yes_custom": "builder_keep", "override_no": "先去卖", "answer_no": "第一个客户是你大学同学，他给了八千。", "no_money": "8", "no_team": "", "no_market": "10", "no_mind": "", "no_custom": "seller_keep"}, {"thematic": "start", "card": "st_name", "id": "10", "bearer": "联合创始人", "conditions": "phase=1", "lockturn": "del", "weight": "60", "question": "公司叫什么？我想了三个，都挺土的。", "override_yes": "我早想好了", "answer_yes": "你写在白板上，没人敢说不好。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "6", "yes_custom": "", "override_no": "你们定", "answer_no": "他们投票选了最土的那个。", "no_money": "", "no_team": "6", "no_market": "", "no_mind": "-6", "no_custom": ""}, {"thematic": "start", "card": "st_firsthire", "id": "11", "bearer": "联合创始人", "conditions": "phase=1", "lockturn": "del", "weight": "70", "question": "有个人愿意来，但只肯拿一半工资，要双倍股份。", "override_yes": "给股份", "answer_yes": "三年后这个人成了你们的技术负责人。", "yes_money": "4", "yes_team": "10", "yes_market": "", "yes_mind": "", "yes_custom": "bet_person_keep", "override_no": "给工资", "answer_no": "他去了大厂，现在偶尔还聊。", "no_money": "-10", "no_team": "", "no_market": "", "no_mind": "-5", "no_custom": ""}, {"thematic": "start", "card": "st_office", "id": "12", "bearer": "", "conditions": "phase=1", "lockturn": "del", "weight": "60", "question": "可以搬进孵化器，免租一年。但要挂他们的牌子。", "override_yes": "搬", "answer_yes": "免的那一年房租，是你们当年全部的钱。", "yes_money": "10", "yes_team": "", "yes_market": "", "yes_mind": "-8", "yes_custom": "", "override_no": "不搬", "answer_no": "房东说押一付三，你刷了三张卡。", "no_money": "-14", "no_team": "", "no_market": "", "no_mind": "6", "no_custom": ""}, {"thematic": "start", "card": "st_firstclient", "id": "13", "bearer": "客户", "conditions": "phase=1", "lockturn": "del", "weight": "75", "question": "这个功能我们要，但价格得砍一半。", "override_yes": "砍", "answer_yes": "签的时候你手在抖。", "yes_money": "", "yes_team": "", "yes_market": "10", "yes_mind": "-6", "yes_custom": "cheap_keep", "override_no": "不砍", "answer_no": "他两周后又回来了，按原价。", "no_money": "", "no_team": "", "no_market": "6", "no_mind": "6", "no_custom": ""}, {"thematic": "start", "card": "st_copy", "id": "14", "bearer": "联合创始人", "conditions": "phase=1", "lockturn": "del", "weight": "65", "question": "有个现成的开源方案，改改就能用。要自己写吗？", "override_yes": "自己写", "answer_yes": "多花了七周，但后来那部分谁也没动过。", "yes_money": "-8", "yes_team": "", "yes_market": "", "yes_mind": "8", "yes_custom": "builder_keep", "override_no": "改现成的", "answer_no": "上线快了七周。半年后为了它重写了两次。", "no_money": "", "no_team": "", "no_market": "7", "no_mind": "-8", "no_custom": ""}, {"thematic": "start", "card": "st_investor_no", "id": "15", "bearer": "投资人", "conditions": "phase=1", "lockturn": "del", "weight": "65", "question": "你们这个东西，市场太小了。我不投。", "override_yes": "记下来", "answer_yes": "三年后他发来一条消息，说当年看错了。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "7", "yes_custom": "proved_keep", "override_no": "问为什么", "answer_no": "他讲了四十分钟，其中两点你后来发现他说对了。", "no_money": "", "no_team": "", "no_market": "4", "no_mind": "-6", "no_custom": ""}, {"thematic": "start", "card": "st_parents", "id": "16", "bearer": "", "conditions": "phase=1", "lockturn": "del", "weight": "55", "question": "你爸问你什么时候找个正经工作。", "override_yes": "这就是正经工作", "answer_yes": "他没再问，但每个月给你转两千。", "yes_money": "4", "yes_team": "", "yes_market": "", "yes_mind": "4", "yes_custom": "", "override_no": "先不说", "answer_no": "你说项目挺顺利的。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "-6", "no_custom": ""}, {"thematic": "start", "card": "st_nosalary", "id": "17", "bearer": "联合创始人", "conditions": "phase=1 and money<45", "lockturn": "del", "weight": "70", "question": "这个月工资我不拿了，你也别拿。", "override_yes": "都不拿", "answer_yes": "那两个月你们靠他妈寄的腊肉过来的。", "yes_money": "8", "yes_team": "7", "yes_market": "", "yes_mind": "", "yes_custom": "together_keep", "override_no": "我拿一半", "answer_no": "他什么也没说，照常上班。", "no_money": "-6", "no_team": "-6", "no_market": "", "no_mind": "", "no_custom": ""}, {"thematic": "start", "card": "st_bug", "id": "18", "bearer": "客户", "conditions": "phase=1", "lockturn": "del", "weight": "60", "question": "凌晨了，你们那个东西又崩了。", "override_yes": "自己去修", "answer_yes": "你四点修好，五点给他发了消息。", "yes_money": "", "yes_team": "", "yes_market": "7", "yes_mind": "6", "yes_custom": "", "override_no": "明天处理", "answer_no": "他第二天没回，第三天退了款。", "no_money": "-6", "no_team": "", "no_market": "-10", "no_mind": "", "no_custom": ""}, {"thematic": "start", "card": "st_pitch", "id": "19", "bearer": "投资人", "conditions": "phase=1 and turn>=3", "lockturn": "del", "weight": "70", "question": "你讲得太细了。一句话说清你们做什么。", "override_yes": "一句话", "answer_yes": "你说了十一个字。他说，再讲讲。", "yes_money": "", "yes_team": "", "yes_market": "6", "yes_mind": "3", "yes_custom": "", "override_no": "讲全套", "answer_no": "你讲了五十页。他中途接了两个电话。", "no_money": "", "no_team": "", "no_market": "-6", "no_mind": "-8", "no_custom": ""}, {"thematic": "wind", "card": "wd_signal", "id": "30", "bearer": "联合创始人", "conditions": "phase=2", "lockturn": "del", "weight": "150", "question": "昨天注册涨了四十倍。服务器扛不住了。", "override_yes": "加机器", "answer_yes": "当天加了二十台，还是不够。", "yes_money": "-12", "yes_team": "", "yes_market": "12", "yes_mind": "", "yes_custom": "wind_ride_run", "override_no": "先限流", "answer_no": "放进来的人少了，但都留下了。", "no_money": "", "no_team": "6", "no_market": "10", "no_mind": "", "no_custom": ""}, {"thematic": "wind", "card": "wd_bigmoney", "id": "31", "bearer": "投资人", "conditions": "phase=2 and turn>=6", "lockturn": "del", "weight": "140", "question": "两千万，两周内打款。条件是你不能再跟别人谈。", "override_yes": "签", "answer_yes": "打款那天你在群里发了一个字：到。", "yes_money": "15", "yes_team": "12", "yes_market": "", "yes_mind": "", "yes_custom": "big_money_keep", "override_no": "再等等", "answer_no": "两天后有三家一起找你，价格翻倍。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "8", "no_custom": "hot_keep"}, {"thematic": "wind", "card": "wd_hire50", "id": "32", "bearer": "人事", "conditions": "phase=2", "lockturn": "del", "weight": "130", "question": "要在一个月内招五十个人。标准还按原来的吗？", "override_yes": "按原来的", "answer_yes": "三个月只招到十九个，但一个没走。", "yes_money": "", "yes_team": "9", "yes_market": "", "yes_mind": "6", "yes_custom": "quality_keep", "override_no": "放宽", "answer_no": "五十个人一个月到位，其中十一个半年内走了。", "no_money": "", "no_team": "13", "no_market": "14", "no_mind": "", "no_custom": "fastgrow_keep"}, {"thematic": "wind", "card": "wd_competitor", "id": "33", "bearer": "市场", "conditions": "phase=2", "lockturn": "del", "weight": "130", "question": "对手融了三亿，正在挖我们的人。", "override_yes": "涨薪留人", "answer_yes": "全组涨了四成，账上少了一大块。", "yes_money": "-11", "yes_team": "12", "yes_market": "", "yes_mind": "", "yes_custom": "", "override_no": "不跟", "answer_no": "走了六个，其中两个是核心。", "no_money": "", "no_team": "-9", "no_market": "-6", "no_mind": "", "no_custom": ""}, {"thematic": "wind", "card": "wd_press", "id": "34", "bearer": "记者", "conditions": "phase=2 and market>55", "lockturn": "del", "weight": "120", "question": "想给你做封面。标题是\"最年轻的独角兽\"。", "override_yes": "做", "answer_yes": "那期杂志你妈买了二十本。", "yes_money": "", "yes_team": "", "yes_market": "11", "yes_mind": "8", "yes_custom": "myth_keep", "override_no": "不做", "answer_no": "三个月后封面上是你的对手。", "no_money": "", "no_team": "", "no_market": "-8", "no_mind": "-6", "no_custom": ""}, {"thematic": "wind", "card": "wd_windfall", "id": "35", "bearer": "财务", "conditions": "phase=2 and money>60", "lockturn": "del", "weight": "135", "question": "这个月的钱，比过去三年加起来都多。", "override_yes": "发奖金", "answer_yes": "有人当场哭了，有人当天下午去看车。", "yes_money": "-14", "yes_team": "14", "yes_market": "", "yes_mind": "", "yes_custom": "rich_keep", "override_no": "留着", "answer_no": "账上很好看。团队在群里没说话。", "no_money": "10", "no_team": "-10", "no_market": "", "no_mind": "", "no_custom": ""}, {"thematic": "wind", "card": "wd_expand", "id": "36", "bearer": "联合创始人", "conditions": "phase=2 and turn>=7", "lockturn": "del", "weight": "125", "question": "要不要一次开八个城市？现在钱够。", "override_yes": "八个", "answer_yes": "三个月后你在飞机上过了十七个夜。", "yes_money": "-12", "yes_team": "", "yes_market": "17", "yes_mind": "", "yes_custom": "expand_keep", "override_no": "开两个", "answer_no": "那两个做得很扎实。半年后对手占了另外六个。", "no_money": "", "no_team": "", "no_market": "12", "no_mind": "-6", "no_custom": ""}, {"thematic": "wind", "card": "wd_offer", "id": "37", "bearer": "投资人", "conditions": "phase=2 and market>60", "lockturn": "del", "weight": "120", "question": "有人想整体收购。价格是你们上一轮的六倍。", "override_yes": "卖", "answer_yes": "所有人分到了钱。你在庆功宴上很早就走了。", "yes_money": "18", "yes_team": "", "yes_market": "", "yes_mind": "-12", "yes_custom": "sold_keep", "override_no": "不卖", "answer_no": "有四个人那一周递了辞呈。", "no_money": "", "no_team": "-14", "no_market": "", "no_mind": "7", "no_custom": "refuse_keep"}, {"thematic": "wind", "card": "wd_allin", "id": "38", "bearer": "", "conditions": "phase=2 and mind>62", "lockturn": "del", "weight": "120", "question": "所有钱押一个方向。做成了是行业第一，做不成什么都没有。", "override_yes": "押", "answer_yes": "那天晚上你一个人在办公室待到很晚。", "yes_money": "-14", "yes_team": "-8", "yes_market": "", "yes_mind": "", "yes_custom": "allin_run", "override_no": "分散点", "answer_no": "三个方向都做了六成，没有一个做透。", "no_money": "-10", "no_team": "", "no_market": "", "no_mind": "-14", "no_custom": ""}, {"thematic": "ebb", "card": "eb_quiet", "id": "50", "bearer": "市场", "conditions": "phase=3", "lockturn": "del", "weight": "140", "question": "上周注册掉了七成。不是我们的问题，整个行业都这样。", "override_yes": "停投放", "answer_yes": "省下的钱够撑四个月。", "yes_money": "10", "yes_team": "", "yes_market": "-10", "yes_mind": "", "yes_custom": "", "override_no": "继续投", "answer_no": "花掉一大笔，曲线没有动。", "no_money": "-11", "no_team": "", "no_market": "", "no_mind": "-6", "no_custom": ""}, {"thematic": "ebb", "card": "eb_expand_bill", "id": "51", "bearer": "财务", "conditions": "phase=3 and expand_keep", "lockturn": "del", "weight": "150", "question": "风口时开的那些城市，六个在亏钱。", "override_yes": "关掉", "answer_yes": "关的那天，有三个城市的负责人自己提了离职。", "yes_money": "", "yes_team": "-14", "yes_market": "-10", "yes_mind": "", "yes_custom": "", "override_no": "都留着", "answer_no": "每个月多烧一笔，你说再给三个月。", "no_money": "-12", "no_team": "", "no_market": "", "no_mind": "4", "no_custom": ""}, {"thematic": "ebb", "card": "eb_fastgrow_bill", "id": "52", "bearer": "人事", "conditions": "phase=3 and fastgrow_keep", "lockturn": "del", "weight": "150", "question": "那批快速招的人，一半还不知道自己该干什么。", "override_yes": "裁", "answer_yes": "名单上有两个是你自己面的。", "yes_money": "", "yes_team": "-11", "yes_market": "", "yes_mind": "-10", "yes_custom": "layoff_keep", "override_no": "不裁", "answer_no": "工资照发，效率上不去。", "no_money": "-9", "no_team": "", "no_market": "-6", "no_mind": "", "no_custom": ""}, {"thematic": "ebb", "card": "eb_rich_bill", "id": "53", "bearer": "", "conditions": "phase=3 and rich_keep", "lockturn": "del", "weight": "135", "question": "发奖金那阵买车的几个人，现在在还贷。", "override_yes": "当没看见", "answer_yes": "有人开始接私活。", "yes_money": "", "yes_team": "-10", "yes_market": "", "yes_mind": "-5", "yes_custom": "", "override_no": "帮一把", "answer_no": "你私下垫了钱。这事后来传开了。", "no_money": "-10", "no_team": "8", "no_market": "", "no_mind": "", "no_custom": ""}, {"thematic": "ebb", "card": "eb_investor_cold", "id": "54", "bearer": "投资人", "conditions": "phase=3", "lockturn": "del", "weight": "140", "question": "下一轮我们观察一下。你们的数据不像上季度了。", "override_yes": "理解", "answer_yes": "他半年后投了你的对手。", "yes_money": "", "yes_team": "", "yes_market": "-6", "yes_mind": "-8", "yes_custom": "", "override_no": "追问", "answer_no": "他说了实话，比不投更难听。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "-12", "no_custom": "proved_keep"}, {"thematic": "ebb", "card": "eb_cofounder_doubt", "id": "55", "bearer": "联合创始人", "conditions": "phase=3 and turn>=11", "lockturn": "del", "weight": "135", "question": "我们是不是走错了？我最近有点不确定。", "override_yes": "还是这条路", "answer_yes": "他点点头，但那次之后话变少了。", "yes_money": "", "yes_team": "-6", "yes_market": "", "yes_mind": "7", "yes_custom": "", "override_no": "听你说", "answer_no": "你们聊到凌晨三点，最后改了方向。", "no_money": "", "no_team": "7", "no_market": "-8", "no_mind": "", "no_custom": "pivot_keep"}, {"thematic": "cold", "card": "cd_payroll", "id": "60", "bearer": "财务", "conditions": "phase=4 and money<40", "lockturn": "del", "weight": "170", "question": "这个月工资差一大截。", "override_yes": "借", "answer_yes": "借到了，年息很高。", "yes_money": "12", "yes_team": "", "yes_market": "", "yes_mind": "-8", "yes_custom": "debt_keep", "override_no": "停项目", "answer_no": "停了两个，走了四个人。", "no_money": "", "no_team": "-14", "no_market": "-8", "no_mind": "", "no_custom": ""}, {"thematic": "cold", "card": "cd_lawsuit", "id": "61", "bearer": "律师", "conditions": "phase=4", "lockturn": "del", "weight": "155", "question": "有人起诉我们抄了他们的东西。风口那阵你说过快点上。", "override_yes": "和解", "answer_yes": "赔了一笔，签了保密。", "yes_money": "-16", "yes_team": "", "yes_market": "", "yes_mind": "-8", "yes_custom": "", "override_no": "打", "answer_no": "打了十四个月，赢了，但律师费更贵。", "no_money": "-22", "no_team": "", "no_market": "", "no_mind": "6", "no_custom": ""}, {"thematic": "cold", "card": "cd_poach", "id": "62", "bearer": "人事", "conditions": "phase=4", "lockturn": "del", "weight": "155", "question": "对手来挖人，开的是我们的两倍。", "override_yes": "放走", "answer_yes": "走了五个，其中一个说对不起。", "yes_money": "", "yes_team": "-16", "yes_market": "", "yes_mind": "-6", "yes_custom": "", "override_no": "留", "answer_no": "涨薪加期权，账上又薄了一层。", "no_money": "-18", "no_team": "9", "no_market": "", "no_mind": "", "no_custom": ""}, {"thematic": "cold", "card": "cd_client_squeeze", "id": "63", "bearer": "大客户", "conditions": "phase=4 and market>40", "lockturn": "del", "weight": "150", "question": "续约可以，价格再降三成。你们现在也没别的选择。", "override_yes": "降", "answer_yes": "签完你在会议室坐了一会儿。", "yes_money": "-12", "yes_team": "", "yes_market": "", "yes_mind": "-12", "yes_custom": "cheap_keep", "override_no": "不降", "answer_no": "他走了，带走了你们四成营收。", "no_money": "", "no_team": "", "no_market": "-20", "no_mind": "8", "no_custom": ""}, {"thematic": "cold", "card": "cd_shutdown_line", "id": "64", "bearer": "联合创始人", "conditions": "phase=4", "lockturn": "del", "weight": "145", "question": "那个我们最喜欢的产品线，一直在亏。", "override_yes": "砍", "answer_yes": "砍的时候团队里没有人说话。", "yes_money": "", "yes_team": "-10", "yes_market": "", "yes_mind": "-14", "yes_custom": "", "override_no": "留着", "answer_no": "每个月烧一笔，你说它总有一天会对。", "no_money": "-16", "no_team": "", "no_market": "", "no_mind": "7", "no_custom": "obsess_keep"}, {"thematic": "cold", "card": "cd_sell_cheap", "id": "65", "bearer": "", "conditions": "phase=4 and money<30", "lockturn": "del", "weight": "160", "question": "有人来收，价格是你们最高估值的两成。", "override_yes": "卖", "answer_yes": "签字那天你没有拍照。", "yes_money": "14", "yes_team": "", "yes_market": "", "yes_mind": "-18", "yes_custom": "sold_cheap_keep", "override_no": "不卖", "answer_no": "你抵了房子，账上多了三个月。", "no_money": "-8", "no_team": "", "no_market": "", "no_mind": "9", "no_custom": ""}, {"thematic": "mind", "card": "md_floor", "id": "70", "bearer": "工程师", "conditions": "turn>=4", "lockturn": "del", "weight": "80", "question": "我要的零件八万没批。但我看到车间在换地板，两百万。", "override_yes": "地板先换", "answer_yes": "新地板铺完那天，你在车间站了很久。", "yes_money": "-14", "yes_team": "-10", "yes_market": "", "yes_mind": "", "yes_custom": "obsess_keep", "override_no": "批零件", "answer_no": "地板的事没人再提。", "no_money": "-6", "no_team": "", "no_market": "", "no_mind": "-8", "no_custom": ""}, {"thematic": "mind", "card": "md_cs", "id": "71", "bearer": "技术负责人", "conditions": "turn>=6", "lockturn": "del", "weight": "75", "question": "团建打游戏。系统把你和两个下属分到了敌对阵营。", "override_yes": "照打", "answer_yes": "你先把他们俩炸了，然后赢了全场。", "yes_money": "", "yes_team": "-8", "yes_market": "", "yes_mind": "8", "yes_custom": "obsess_keep", "override_no": "放放水", "answer_no": "他们赢得很客气，散场很早。", "no_money": "", "no_team": "2", "no_market": "", "no_mind": "-7", "no_custom": ""}, {"thematic": "mind", "card": "md_bet3y", "id": "72", "bearer": "财务", "conditions": "turn>=7", "lockturn": "del", "weight": "80", "question": "那个项目做了三年，还是零收入。今年还投吗？", "override_yes": "再投", "answer_yes": "会上没有人说话。", "yes_money": "-18", "yes_team": "", "yes_market": "", "yes_mind": "10", "yes_custom": "longbet_keep", "override_no": "停了", "answer_no": "负责人当天下午交了辞呈。", "no_money": "", "no_team": "-10", "no_market": "", "no_mind": "-12", "no_custom": ""}, {"thematic": "mind", "card": "md_firecustomer", "id": "73", "bearer": "销售", "conditions": "market>50 and turn>=8", "lockturn": "del", "weight": "75", "question": "那个客户又骂了我们的工程师。他占四成营收。", "override_yes": "不做他了", "answer_yes": "工程师那天下班时跟你说了声谢谢。", "yes_money": "", "yes_team": "", "yes_market": "-22", "yes_mind": "11", "yes_custom": "obsess_keep", "override_no": "忍一下", "answer_no": "工程师第二天请了病假。", "no_money": "", "no_team": "-12", "no_market": "", "no_mind": "-10", "no_custom": ""}, {"thematic": "mind", "card": "md_ugly", "id": "74", "bearer": "市场", "conditions": "market>45", "lockturn": "del", "weight": "70", "question": "客户最想要的那个功能，做出来一定卖。但你说它丑。", "override_yes": "不做", "answer_yes": "对手三个月后做了，卖得很好。", "yes_money": "", "yes_team": "", "yes_market": "-16", "yes_mind": "9", "yes_custom": "obsess_keep", "override_no": "做", "answer_no": "上线数据很好。你没有打开看。", "no_money": "", "no_team": "", "no_market": "10", "no_mind": "-12", "no_custom": ""}, {"thematic": "mind", "card": "md_3am", "id": "75", "bearer": "助理", "conditions": "turn>=7", "lockturn": "del", "weight": "65", "question": "你凌晨三点发的那封邮件，八个人回了，四个没回。", "override_yes": "问没回的", "answer_yes": "其中一个说他在陪产。", "yes_money": "", "yes_team": "-12", "yes_market": "", "yes_mind": "7", "yes_custom": "obsess_keep", "override_no": "算了", "answer_no": "第二天凌晨三点，回复的人变成了十一个。", "no_money": "", "no_team": "-6", "no_market": "", "no_mind": "-4", "no_custom": ""}, {"thematic": "mind", "card": "md_flower", "id": "76", "bearer": "行政", "conditions": "turn>=5", "lockturn": "del", "weight": "60", "question": "你发现前台那盆花是塑料的。全换真的，每月八千。", "override_yes": "全换", "answer_yes": "后来有人专门为了拍那盆花来面试。", "yes_money": "", "yes_team": "5", "yes_market": "", "yes_mind": "6", "yes_custom": "obsess_keep", "override_no": "算了", "answer_no": "那盆花还在那儿。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "-5", "no_custom": ""}, {"thematic": "mind", "card": "md_font", "id": "77", "bearer": "设计", "conditions": "turn>=6", "lockturn": "del", "weight": "60", "question": "你坚持全公司只用一种字体。新来的设计说这不专业。", "override_yes": "不改", "answer_yes": "他改了三版，最后一版用的还是那个字体。", "yes_money": "", "yes_team": "-6", "yes_market": "", "yes_mind": "7", "yes_custom": "obsess_keep", "override_no": "让他改", "answer_no": "新的确实好看。你每次看到都觉得不对。", "no_money": "", "no_team": "", "no_market": "3", "no_mind": "-8", "no_custom": ""}, {"thematic": "mind", "card": "md_selffix", "id": "78", "bearer": "客户", "conditions": "turn>=8", "lockturn": "del", "weight": "70", "question": "客户那边半夜出故障。工程师在路上，你也在路上。", "override_yes": "自己先到", "answer_yes": "你到得比工程师早四十分钟，什么也没修好。", "yes_money": "", "yes_team": "", "yes_market": "7", "yes_mind": "8", "yes_custom": "obsess_keep", "override_no": "等工程师", "answer_no": "他两点二十到，四点修好，没人知道你也起来了。", "no_money": "", "no_team": "", "no_market": "4", "no_mind": "-6", "no_custom": ""}, {"thematic": "mind", "card": "md_daughter", "id": "79", "bearer": "", "conditions": "turn>=11", "lockturn": "del", "weight": "60", "question": "女儿画了张全家福。画里有妈妈、有奶奶、有猫。", "override_yes": "问问她", "answer_yes": "她说因为你总是不在，画了也不像。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "-12", "yes_custom": "family_keep", "override_no": "收起来", "answer_no": "你把那张画放进抽屉最下面。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "-6", "no_custom": ""}, {"thematic": "mind", "card": "md_oldfriend", "id": "80", "bearer": "大学同学", "conditions": "turn>=12", "lockturn": "del", "weight": "55", "question": "十年没见。他说你变了，但没说是变好还是变坏。", "override_yes": "问清楚", "answer_yes": "他想了很久，说你现在讲话都像在开会。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "-10", "yes_custom": "", "override_no": "换个话题", "answer_no": "后来你们聊了两个小时的房价。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "-4", "no_custom": ""}, {"thematic": "mind", "card": "md_longbet_win", "id": "81", "bearer": "技术负责人", "conditions": "longbet_keep and turn>=14", "lockturn": "del", "weight": "200", "question": "三年前那个项目，昨天有家客户一次性订了两年的量。", "override_yes": "我知道", "answer_yes": "你说这句话的时候声音很平。", "yes_money": "15", "yes_team": "", "yes_market": "12", "yes_mind": "", "yes_custom": "proved_keep", "override_no": "运气好", "answer_no": "负责人说不是运气。", "no_money": "11", "no_team": "", "no_market": "10", "no_mind": "", "no_custom": ""}, {"thematic": "mind", "card": "md_longbet_dead", "id": "82", "bearer": "财务", "conditions": "longbet_keep and turn>=16", "lockturn": "del", "weight": "190", "question": "那个项目还是零收入。第四年了。", "override_yes": "继续", "answer_yes": "这次有三个投资人投了反对。", "yes_money": "-20", "yes_team": "", "yes_market": "", "yes_mind": "9", "yes_custom": "deaf_keep", "override_no": "认了", "answer_no": "设备当废铁卖了六十万。", "no_money": "", "no_team": "-12", "no_market": "", "no_mind": "-18", "no_custom": ""}, {"thematic": "mind", "card": "md_deaf", "id": "83", "bearer": "", "conditions": "mind>84", "lockturn": "del", "weight": "180", "question": "有个下属说，你最近谁的话都听不进去。", "override_yes": "他不懂", "answer_yes": "三个月后他去了对手那里，带走两个人。", "yes_money": "", "yes_team": "-14", "yes_market": "", "yes_mind": "4", "yes_custom": "deaf_keep", "override_no": "想一想", "answer_no": "你把上周三个决定重看了一遍，其中一个确实错了。", "no_money": "", "no_team": "5", "no_market": "", "no_mind": "-14", "no_custom": ""}, {"thematic": "mind", "card": "md_hollow", "id": "84", "bearer": "", "conditions": "mind<28", "lockturn": "del", "weight": "180", "question": "你今天批了十一份文件，没有一份是你想做的事。", "override_yes": "照批", "answer_yes": "第十二份你签得比前十一份都快。", "yes_money": "", "yes_team": "", "yes_market": "3", "yes_mind": "-10", "yes_custom": "hollow_run", "override_no": "停一下", "answer_no": "你在那份文件上坐了四十分钟，最后什么也没写。", "no_money": "", "no_team": "", "no_market": "-6", "no_mind": "7", "no_custom": ""}, {"thematic": "daily", "card": "dy_price", "id": "100", "bearer": "销售", "conditions": "", "lockturn": "40", "weight": "16", "question": "要不要涨价。我们现在是同行里最便宜的。", "override_yes": "涨", "answer_yes": "走了两成客户，赚的比以前多。", "yes_money": "9", "yes_team": "", "yes_market": "-10", "yes_mind": "", "yes_custom": "", "override_no": "不涨", "answer_no": "你们永远是那个便宜的。", "no_money": "", "no_team": "", "no_market": "4", "no_mind": "-6", "no_custom": ""}, {"thematic": "daily", "card": "dy_bonus", "id": "101", "bearer": "人事", "conditions": "", "lockturn": "50", "weight": "16", "question": "这个季度做得好。发奖金还是发假？", "override_yes": "发假", "answer_yes": "那一周办公室是空的，回来之后人是满的。", "yes_money": "", "yes_team": "10", "yes_market": "-6", "yes_mind": "", "yes_custom": "", "override_no": "发钱", "answer_no": "有人当天下午去看了车。", "no_money": "-12", "no_team": "6", "no_market": "", "no_mind": "", "no_custom": ""}, {"thematic": "daily", "card": "dy_bigclient", "id": "102", "bearer": "客户", "conditions": "", "lockturn": "45", "weight": "16", "question": "我们可以下大单，但要独家。", "override_yes": "给独家", "answer_yes": "单子很大。你们从此只有一个出口。", "yes_money": "10", "yes_team": "", "yes_market": "-10", "yes_mind": "", "yes_custom": "exclusive_keep", "override_no": "不给", "answer_no": "他签了小单，也没走。", "no_money": "", "no_team": "", "no_market": "4", "no_mind": "3", "no_custom": ""}, {"thematic": "daily", "card": "dy_reject", "id": "103", "bearer": "", "conditions": "", "lockturn": "55", "weight": "15", "question": "有个人很想来，能力很强，但你不喜欢他。", "override_yes": "还是招", "answer_yes": "半年后他做出了成绩，你还是不喜欢他。", "yes_money": "", "yes_team": "7", "yes_market": "", "yes_mind": "-8", "yes_custom": "", "override_no": "不招", "answer_no": "他去了对手那里。", "no_money": "", "no_team": "-5", "no_market": "-6", "no_mind": "", "no_custom": ""}, {"thematic": "daily", "card": "dy_feature", "id": "104", "bearer": "技术负责人", "conditions": "", "lockturn": "50", "weight": "15", "question": "有个功能只有三个客户要，做起来要一个月。", "override_yes": "做", "answer_yes": "那三个客户后来带来了十一个。", "yes_money": "-8", "yes_team": "", "yes_market": "7", "yes_mind": "", "yes_custom": "", "override_no": "不做", "answer_no": "他们其中一个走了。", "no_money": "", "no_team": "", "no_market": "-6", "no_mind": "", "no_custom": ""}, {"thematic": "daily", "card": "dy_overtime", "id": "105", "bearer": "人事", "conditions": "", "lockturn": "45", "weight": "15", "question": "项目要赶，这周末加班吗？", "override_yes": "加", "answer_yes": "赶上了。周一有两个人请了病假。", "yes_money": "", "yes_team": "-12", "yes_market": "7", "yes_mind": "", "yes_custom": "crunch_keep", "override_no": "不加", "answer_no": "延期三天，客户没说什么。", "no_money": "", "no_team": "6", "no_market": "-6", "no_mind": "", "no_custom": ""}, {"thematic": "daily", "card": "dy_partner", "id": "106", "bearer": "", "conditions": "", "lockturn": "60", "weight": "14", "question": "有家大公司想合作，出钱出渠道。但要冠名。", "override_yes": "合作", "answer_yes": "渠道很好用。你们的名字变小了。", "yes_money": "", "yes_team": "", "yes_market": "9", "yes_mind": "-10", "yes_custom": "", "override_no": "自己做", "answer_no": "慢一点，但都是自己的。", "no_money": "-6", "no_team": "", "no_market": "", "no_mind": "4", "no_custom": ""}, {"thematic": "daily", "card": "dy_pr", "id": "107", "bearer": "市场", "conditions": "", "lockturn": "55", "weight": "14", "question": "要不要请公关公司。一年一百二十万。", "override_yes": "请", "answer_yes": "稿子发得很密。你看不出效果。", "yes_money": "-12", "yes_team": "", "yes_market": "", "yes_mind": "-5", "yes_custom": "", "override_no": "不请", "answer_no": "你自己写了三篇，其中一篇很多人转。", "no_money": "", "no_team": "", "no_market": "4", "no_mind": "4", "no_custom": ""}, {"thematic": "daily", "card": "dy_office_move", "id": "108", "bearer": "行政", "conditions": "", "lockturn": "65", "weight": "13", "question": "要不要搬去更好的办公楼。房租翻一倍。", "override_yes": "搬", "answer_yes": "新地方有落地窗，招人容易了。", "yes_money": "-14", "yes_team": "7", "yes_market": "", "yes_mind": "", "yes_custom": "", "override_no": "不搬", "answer_no": "省下的钱够多招三个人。", "no_money": "5", "no_team": "", "no_market": "", "no_mind": "-5", "no_custom": ""}, {"thematic": "daily", "card": "dy_share", "id": "109", "bearer": "联合创始人", "conditions": "", "lockturn": "70", "weight": "13", "question": "股份要不要重新分？现在的比例是当年随手定的。", "override_yes": "重新分", "answer_yes": "谈了三周，最后每个人都少了一点。", "yes_money": "", "yes_team": "-8", "yes_market": "", "yes_mind": "3", "yes_custom": "", "override_no": "不动", "answer_no": "有人心里记着这件事。", "no_money": "", "no_team": "-6", "no_market": "", "no_mind": "", "no_custom": "grudge_keep"}, {"thematic": "daily", "card": "dy_award", "id": "110", "bearer": "", "conditions": "", "lockturn": "60", "weight": "13", "question": "有个行业奖可以买，二十万。放在官网上挺好看。", "override_yes": "买", "answer_yes": "没有人知道是买的。", "yes_money": "-8", "yes_team": "", "yes_market": "", "yes_mind": "-8", "yes_custom": "", "override_no": "不买", "answer_no": "官网上那一栏是空的。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "3", "no_custom": ""}, {"thematic": "daily", "card": "dy_intern", "id": "111", "bearer": "技术负责人", "conditions": "", "lockturn": "55", "weight": "13", "question": "有个实习生写的东西比正式员工好。", "override_yes": "提前签", "answer_yes": "给的钱不多，他后来成了骨干。", "yes_money": "-5", "yes_team": "9", "yes_market": "", "yes_mind": "", "yes_custom": "", "override_no": "等毕业", "answer_no": "他毕业时手上有五个offer。", "no_money": "", "no_team": "-6", "no_market": "", "no_mind": "", "no_custom": ""}, {"thematic": "daily", "card": "dy_refund", "id": "112", "bearer": "客户", "conditions": "", "lockturn": "50", "weight": "13", "question": "你们的东西没达到我的预期。我要退款。", "override_yes": "退", "answer_yes": "他后来又回来了一次。", "yes_money": "-10", "yes_team": "", "yes_market": "5", "yes_mind": "", "yes_custom": "", "override_no": "不退", "answer_no": "他在网上写了很长一篇。", "no_money": "", "no_team": "", "no_market": "-12", "no_mind": "-5", "no_custom": ""}, {"thematic": "daily", "card": "dy_media_bad", "id": "113", "bearer": "记者", "conditions": "", "lockturn": "65", "weight": "12", "question": "有前员工说你们加班严重。内容基本是真的。", "override_yes": "认", "answer_yes": "你写了一条回应，说以后会改。", "yes_money": "", "yes_team": "6", "yes_market": "-8", "yes_mind": "", "yes_custom": "", "override_no": "不理", "answer_no": "那篇文章挂了很久。", "no_money": "", "no_team": "-8", "no_market": "-10", "no_mind": "", "no_custom": ""}, {"thematic": "daily", "card": "dy_supplier", "id": "114", "bearer": "供应商", "conditions": "", "lockturn": "45", "weight": "13", "question": "这个月的货款能不能先结一半。", "override_yes": "先结", "answer_yes": "他下个月给了你老价格。", "yes_money": "-10", "yes_team": "", "yes_market": "4", "yes_mind": "", "yes_custom": "", "override_no": "下个月", "answer_no": "他说行，但语气不太好。", "no_money": "", "no_team": "", "no_market": "-5", "no_mind": "", "no_custom": ""}, {"thematic": "daily", "card": "dy_health", "id": "115", "bearer": "", "conditions": "", "lockturn": "70", "weight": "12", "question": "体检报告出来了，几项指标不太好。", "override_yes": "停两周", "answer_yes": "第九天你在群里发了消息。", "yes_money": "", "yes_team": "", "yes_market": "-5", "yes_mind": "6", "yes_custom": "", "override_no": "不停", "answer_no": "你把报告收进了抽屉。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "-8", "no_custom": ""}, {"thematic": "endings", "card": "ed_money_zero", "id": "900", "bearer": "财务", "conditions": "money=0", "lockturn": "", "weight": "1000000", "question": "账上还剩两万三。这个月工资是六十八万。", "override_yes": "我知道了", "answer_yes": "那我去跟大家说。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_关门", "override_no": "还有办法吗", "answer_no": "没有了。我一个月前就说过。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_关门"}, {"thematic": "endings", "card": "ed_money_max", "id": "901", "bearer": "投资人", "conditions": "money=100", "lockturn": "", "weight": "1000000", "question": "账上趴着很多钱，两年没动。风口那阵你没押。", "override_yes": "明年吧", "answer_yes": "明年这个数字不值现在这么多。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_躺在钱上", "override_no": "我在等时机", "answer_no": "时机是等出来的，还是做出来的？", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_躺在钱上"}, {"thematic": "endings", "card": "ed_team_zero", "id": "902", "bearer": "人事", "conditions": "team=0", "lockturn": "", "weight": "1000000", "question": "最后两个人今天办完离职。", "override_yes": "那你呢", "answer_yes": "我的信也在你桌上。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_人走空", "override_no": "总会有人来", "answer_no": "招聘挂了七个月，没人投。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_人走空"}, {"thematic": "endings", "card": "ed_team_max", "id": "903", "bearer": "财务", "conditions": "team=100", "lockturn": "", "weight": "1000000", "question": "两百个人，上季度人力成本吃掉了全部毛利。", "override_yes": "养得起", "answer_yes": "养不起。这是数学。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_全在开会", "override_no": "谁都不能动", "answer_no": "那就一起等着发不出工资。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_全在开会"}, {"thematic": "endings", "card": "ed_market_zero", "id": "904", "bearer": "市场", "conditions": "market=0", "lockturn": "", "weight": "1000000", "question": "后台昨天的活跃是十一个。", "override_yes": "还有十一个", "answer_yes": "其中八个是我们自己人。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_没人要", "override_no": "做点活动", "answer_no": "预算上个月就停了。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_没人要"}, {"thematic": "endings", "card": "ed_market_max", "id": "905", "bearer": "技术负责人", "conditions": "market=100", "lockturn": "", "weight": "1000000", "question": "订单排到两年后。退款单堆到门口了。", "override_yes": "继续接", "answer_yes": "签一单，赔两单。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_接不过来", "override_no": "先停", "answer_no": "停不了，合同都签了。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_接不过来"}, {"thematic": "endings", "card": "ed_mind_zero", "id": "906", "bearer": "投资人", "conditions": "mind=0", "lockturn": "", "weight": "1000000", "question": "你最近的决定都很稳。稳到我们觉得换个人也能做。", "override_yes": "那就换", "answer_yes": "下周一交接。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_交给专业的人", "override_no": "我会调整", "answer_no": "这话你去年也说过。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_交给专业的人"}, {"thematic": "endings", "card": "ed_mind_max", "id": "907", "bearer": "联合创始人", "conditions": "mind=100", "lockturn": "", "weight": "1000000", "question": "所有人都劝过你了。你真的一个字都没听。", "override_yes": "我知道我对", "answer_yes": "那我陪你梭。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_一把梭", "override_no": "再想想", "answer_no": "你嘴上说再想想，手已经签了。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_一把梭"}, {"thematic": "endings", "card": "ed_ipo", "id": "910", "bearer": "投资人", "conditions": "turn>=18 and money>=50 and team>=34 and market>=44", "lockturn": "", "weight": "2410", "question": "敲钟的日子定了。下个月八号。", "override_yes": "那就敲", "answer_yes": "台上你站在中间，照片里所有人都在笑。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_敲钟", "override_no": "我再想想", "answer_no": "时间不等人，窗口就这几个月。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_敲钟"}, {"thematic": "endings", "card": "ed_acquired", "id": "911", "bearer": "", "conditions": "turn>=18 and money>=27 and team>=34 and market>=38 and money<50", "lockturn": "", "weight": "2400", "question": "有家大公司要收，价格是你们最高估值的三倍。", "override_yes": "卖", "answer_yes": "所有人都分到了钱。你在庆功宴上很早就走了。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_卖掉了", "override_no": "不卖", "answer_no": "董事会当天下午重新算了一次票数。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_卖掉了"}, {"thematic": "endings", "card": "ed_replaced", "id": "912", "bearer": "投资人", "conditions": "turn>=18 and money<27 and !debt_keep", "lockturn": "", "weight": "2400", "question": "下一轮我们可以投，但要换个 CEO。", "override_yes": "接受", "answer_yes": "新来的那个人很专业，第一件事是砍掉你最喜欢的产品线。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_融资换帅", "override_no": "不接受", "answer_no": "那这笔钱就不投了。你有三个月。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_融资换帅"}, {"thematic": "endings", "card": "ed_cofounder_out", "id": "913", "bearer": "联合创始人", "conditions": "turn>=18 and money>=27 and team<34", "lockturn": "", "weight": "2400", "question": "我带一部分人出去做。你别拦我。", "override_yes": "不拦", "answer_yes": "走的那天他们把工牌留在了桌上，摆得很整齐。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_联创出走", "override_no": "拦", "answer_no": "拦下来了。但那之后你们没再一起吃过饭。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_联创出走"}, {"thematic": "endings", "card": "ed_debt_sell", "id": "914", "bearer": "", "conditions": "turn>=18 and money<27 and debt_keep", "lockturn": "", "weight": "2400", "question": "债主同意展期，条件是把公司抵给他们。", "override_yes": "签", "answer_yes": "签完那天你在楼下抽了很久的烟。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_卖身还债", "override_no": "不签", "answer_no": "第二天他们把资产冻结了。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_卖身还债"}, {"thematic": "endings", "card": "ed_survive", "id": "915", "bearer": "联合创始人", "conditions": "turn>=18 and money>=27 and team>=34", "lockturn": "", "weight": "2300", "question": "三年了。我们还开着。", "override_yes": "还开着", "answer_yes": "那天晚上你们在楼下吃了顿很便宜的饭。", "yes_money": "", "yes_team": "", "yes_market": "", "yes_mind": "", "yes_custom": "end_还开着", "override_no": "有点累", "answer_no": "他说他也是。", "no_money": "", "no_team": "", "no_market": "", "no_mind": "", "no_custom": "end_还开着"}];
+</script>
+<script>
+/* 《任职》引擎 —— 照王权那套跑：读表、算条件、按权重抽、按 > 跳 */
+'use strict';
+
+// 四条资源。icon 是手画的线条 SVG，黑白，跟细边框那套统一
+const SVG = {
+  // 叠起来的硬币
+  cash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"
+    stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="12" cy="6.5" rx="7.5" ry="3"/>
+    <path d="M4.5 6.5v4c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-4"/>
+    <path d="M4.5 12.5v4c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-4"/>
+  </svg>`,
+  // 两个人
+  team: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"
+    stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9" cy="7.5" r="3.2"/>
+    <path d="M2.8 20v-1.4C2.8 16 5.6 14 9 14s6.2 2 6.2 4.6V20"/>
+    <path d="M16.4 5.2a3.2 3.2 0 010 5.9"/>
+    <path d="M18.4 14.4c1.7.7 2.8 2.1 2.8 3.9V20"/>
+  </svg>`,
+  // 店面招牌
+  market: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.4 8.6h17.2L18.8 4H5.2z"/>
+    <path d="M4.6 8.6V20h14.8V8.6"/>
+    <path d="M9.4 20v-6.2h5.2V20"/>
+  </svg>`,
+  // 银行立柱
+  capital: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.2L21 8H3z"/>
+    <path d="M5.6 8v9M10.5 8v9M13.5 8v9M18.4 8v9"/>
+    <path d="M3 20.4h18"/>
+  </svg>`,
+  // 心气：一簇火。既能表达"还烧着"，也能表达"烧过头"
+  mind: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13.4 2.8c.6 3-1.2 4.2-2.6 5.8-1.6 1.8-2.9 3.5-2.9 6a6.1 6.1 0 0012.2 0c0-3.4-2.3-5.4-4-7.6"/>
+    <path d="M12 20.8a2.9 2.9 0 01-1.5-5.2c1-.7 1.7-1.5 1.7-2.9 1.4 1.2 2.4 2.6 2.4 4.2A2.9 2.9 0 0112 20.8z"/>
+  </svg>`,
+};
+
+const RES = [
+  {k:'money',  n:'钱', icon:SVG.cash},
+  {k:'team',   n:'人', icon:SVG.team},
+  {k:'market', n:'客', icon:SVG.market},
+  {k:'mind',   n:'心', icon:SVG.mind},
+];
+
+const BOARD_REVIEW_TURN = 18;
+
+/* ---------- 市场周期 ----------
+   一局自带情绪曲线：起步 → 风口 → 退潮 → 寒冬。
+   改的是数值乘数，不是卡池 —— 同一张卡在风口和寒冬里的后果不一样。
+   风口自己来自己走，跟玩家做得好不好无关。 */
+const PHASES = {
+  1:{name:'起步', gain:1.0, loss:0.85, tip:'刚开始，错了也还有机会'},
+  2:{name:'风口', gain:1.35, loss:0.8, tip:'风来了'},
+  3:{name:'退潮', gain:1.0, loss:1.0, tip:'风停了'},
+  4:{name:'寒冬', gain:0.75, loss:1.35, tip:'活下去'},
+};
+
+// 风口在第 4-7 回合之间开始，持续 4-7 回合。每局不同，所以不会按部就班。
+function rollWindow(){
+  return {start: 4 + Math.floor(Math.random()*4), len: 4 + Math.floor(Math.random()*4)};
+}
+
+function phaseOf(turn, win){
+  if (turn < win.start) return 1;
+  if (turn < win.start + win.len) return 2;
+  if (turn < win.start + win.len + 4) return 3;
+  return 4;
+}
+
+// 八种下台方式：留给下一任什么
+const ENDINGS = {
+  '关门':     {kicker:'钱 归零', body:'工资发不出来了。你把办公室钥匙交给房东，最后一个走。\n\n三年，一场空。',
+    next:{money:30,team:35,market:20,mind:55}, carry:'下一次：行业里有人记得你亏过钱。', flag:'failed_keep'},
+  '躺在钱上': {kicker:'钱 爆表', body:'账上很多钱，两年没动过。风口那阵你没敢押，现在风停了，钱也不值那么多了。',
+    next:{money:70,team:40,market:25,mind:40}, carry:'下一次：你有本钱，但错过了一整个周期。'},
+  '人走空':   {kicker:'人 归零', body:'最后两个人办完离职。工位上还留着没带走的杯子。',
+    next:{money:40,team:20,market:35,mind:45}, carry:'下一次：行业里都知道你留不住人。', flag:'badrep_keep'},
+  '全在开会': {kicker:'人 爆表', body:'两百个人，每天开十四个会。没有人记得上一次发版是什么时候。',
+    next:{money:25,team:70,market:40,mind:40}, carry:'下一次：第一件事是裁员。'},
+  '没人要':   {kicker:'客 归零', body:'后台昨天的活跃是十一个，其中八个是你们自己人。',
+    next:{money:35,team:40,market:20,mind:50}, carry:'下一次：得重新想清楚谁要这东西。'},
+  '接不过来': {kicker:'客 爆表', body:'订单排到两年后，退款单堆到了门口。所有人都在道歉。',
+    next:{money:40,team:20,market:70,mind:45}, carry:'下一次：单子满手，人全累垮了。'},
+  '交给专业的人': {kicker:'心 归零', body:'你最近的决定都很稳。稳到投资人觉得，换个职业经理人也能做，而且更便宜。\n\n你留在董事会里，但公司不再是你的了。',
+    next:{money:55,team:50,market:50,mind:45}, carry:'下一次：你还在行业里，但不再是主角。', flag:'hollow_keep'},
+  '一把梭':   {kicker:'心 爆表', body:'你把所有筹码推上去了。所有人都劝过你，你一个字也没听。\n\n赢了，你会是那个传奇。输了，没人会记得你为什么那么确定。',
+    next:{money:20,team:35,market:60,mind:75}, carry:'下一次：你赌上了一切，行业还在议论。', flag:'allin_keep', win:true},
+  '敲钟':     {kicker:'第 18 个月', body:'钟敲完了。账上进来的钱，比你爸这辈子见过的总数还多。\n\n所有人都恭喜你。你想起三年前那间三十平的房子。',
+    next:{money:75,team:55,market:65,mind:48}, carry:'下一次：你已经证明过一次了。', flag:'ipo_keep', win:true},
+  '卖掉了':   {kicker:'第 18 个月', body:'签字那天来了很多律师。团队每个人都分到了钱，有人当场哭了。\n\n三个月后，买方把你们的产品并进了他们的主线。名字没了。',
+    next:{money:70,team:45,market:40,mind:40}, carry:'下一次：你有钱，但那个东西已经不在了。', flag:'sold_keep'},
+  '融资换帅': {kicker:'第 18 个月', body:'钱到了，位置没了。新 CEO 很专业，你留在董事会里。\n\n第一次开会你举手了，后来就不举了。',
+    next:{money:60,team:45,market:50,mind:35}, carry:'下一次：你知道被换掉是什么感觉了。', flag:'hollow_keep'},
+  '联创出走': {kicker:'第 18 个月', body:'他带走了七个人，其中三个是你亲自招的。\n\n半年后他们的产品上线，跟你们做的很像，但更快。',
+    next:{money:45,team:28,market:40,mind:58}, carry:'下一次：他现在是你的竞争对手。', flag:'rival_keep'},
+  '卖身还债': {kicker:'第 18 个月', body:'公司还在，但已经不是你的了。你留任一年，负责交接。\n\n那一年你每天照常上班。',
+    next:{money:35,team:35,market:35,mind:42}, carry:'下一次：你还欠着人情。', flag:'failed_keep'},
+  '还开着':   {kicker:'第 18 个月', body:'没有敲钟，没有被收，也没有关门。三年过去了，你们还开着。\n\n这在这个行业里已经不容易了。',
+    next:{money:50,team:50,market:45,mind:50}, carry:'下一次：你活下来了，这就是本钱。', flag:'survivor_keep'},
+};
+
+let S;   // state
+let byName = {};
+let cur = null, curIdx = -1, forced = null, busy = false;
+let restoreCardFocus = false;
+
+function initState(seed, dyn, keep){
+  S = {
+    money:seed.money, team:seed.team, market:seed.market, mind:seed.mind,
+    dynasty:dyn, turn:0, month:0, year:2015 + (dyn-1)*2,
+    flags:Object.assign({}, keep||{}),   // _keep 跨局保留
+    lock:{},                            // card -> 解锁回合
+    seen:{},
+    win:rollWindow(),                   // 本局的风口窗口
+    phase:1,
+    lastPhase:1,
+  };
+}
+
+/* ---------- 条件 ---------- */
+function val(name){
+  if (name==='money'||name==='cash')   return S.money;
+  if (name==='team')                   return S.team;
+  if (name==='market')                 return S.market;
+  if (name==='mind')                   return S.mind;
+  if (name==='dynasty')                return S.dynasty;
+  if (name==='turn')                   return S.turn;
+  if (name==='year')                   return S.year;
+  if (name==='phase')                  return S.phase;
+  if (name==='overall')                return Math.round((S.money+S.team+S.market+S.mind)/4);
+  if (/^nb_/.test(name))               return S.flags[name]|0;
+  return S.flags[name] ? 1 : 0;
+}
+
+function testOne(t){
+  t = t.trim();
+  if (!t) return true;
+  let m = t.match(/^([a-zA-Z_][\w]*)\s*(>=|<=|>|<|=)\s*(-?\d+)$/);
+  if (m){
+    const a = val(m[1]), b = parseInt(m[3],10);
+    switch(m[2]){
+      case '>':  return a >  b;
+      case '<':  return a <  b;
+      case '=':  return a === b;
+      case '>=': return a >= b;
+      case '<=': return a <= b;
+    }
+  }
+  if (t[0]==='!') return !val(t.slice(1));
+  return !!val(t);
+}
+
+function testCond(str){
+  if (!str || !str.trim()) return true;
+  return str.split(/\s+and\s+/).every(testOne);
+}
+
+/* ---------- 抽卡 ---------- */
+function pick(){
+  if (forced){
+    const f = forced; forced = null;
+    return f;
+  }
+  const pool = [];
+  let best = 0;
+  for (let i=0;i<CARDS.length;i++){
+    const c = CARDS[i];
+    if (!c.weight) continue;                       // 续写卡：永不随机抽中
+    if (S.lock[c.card] && S.turn < S.lock[c.card]) continue;
+    if (!testCond(c.conditions)) continue;
+    const w = c.weight === 'max' ? 1e9 : parseInt(c.weight,10);
+    if (!w || isNaN(w)) continue;
+    if (w > best) best = w;
+    pool.push([i,w]);
+  }
+  if (!pool.length) return -1;
+  // 高权重压倒：只在最高一档里随机（死亡卡就是靠这个必出的）
+  const top = pool.filter(p => p[1] >= best*0.5);
+  const use = best >= 1000 ? pool.filter(p=>p[1]===best) : top;
+  let sum = 0; use.forEach(p=>sum+=p[1]);
+  let r = Math.random()*sum;
+  for (const p of use){ r -= p[1]; if (r<=0) return p[0]; }
+  return use[use.length-1][0];
+}
+
+/* ---------- 应用结果 ---------- */
+function applyFlags(str, idx){
+  if (!str) return;
+  str.split(/\s+and\s+/).forEach(tok=>{
+    let t = tok.trim();
+    if (!t) return;
+    if (t[0]==='>'){                                  // 跳转
+      const arrows = t.match(/^>+/)[0].length;
+      const rest = t.slice(arrows);
+      if (rest && rest[0]==='_'){
+        const tgt = byName[rest.slice(1)];
+        if (tgt!==undefined) forced = tgt;
+      } else if (rest && byName[rest]!==undefined){
+        forced = byName[rest];
+      } else if (rest && /^\d+$/.test(rest)){
+        forced = idx + parseInt(rest,10);
+      } else {
+        forced = idx + arrows;
+      }
+      return;
+    }
+    if (t.slice(-1)==='+'){                            // 计数器
+      const base = t.replace(/\++$/,'');
+      S.flags[base] = (S.flags[base]|0) + (t.length - base.length);
+      return;
+    }
+    if (t[0]==='!'){ delete S.flags[t.slice(1)]; return; }
+    if (/^(del|add)_/.test(t)){ S.flags[t] = 1; return; }
+    if (/^mus_/.test(t)) return;                       // 音乐指令，原型里忽略
+    S.flags[t] = 1;
+  });
+}
+
+function num(v){
+  if (!v) return 0;
+  v = String(v).replace(/[?*]/g,'').trim();
+  if (!v) return 0;
+  const m = v.match(/^-?\d+/);
+  return m ? parseInt(m[0],10) : 0;
+}
+
+function feedbackMarkup(reply){
+  // 结果区只承担一句解释；具体的得失由上方资源槽的动画表达。
+  return String(reply || '');
+}
+
+/* ---------- 渲染 ---------- */
+const $ = s => document.querySelector(s);
+const stage = $('#stage'), veil = $('#veil'), ansEl = $('#answer');
+
+
+function drawBars(previousValues){
+  const box = $('#bars');
+  if (!box.children.length){
+    box.innerHTML = RES.map(r=>
+      `<div class="bar" data-k="${r.k}" aria-label="${r.n}">
+         <div class="impact"><span class="dot"></span></div>
+         <div class="icon">${r.icon}</div>
+         <div class="lbl">${r.n}</div>
+         <div class="track" role="progressbar" aria-label="${r.n}" aria-valuemin="0" aria-valuemax="100"><div class="fill"></div></div>
+       </div>`).join('');
+  }
+  RES.forEach(r=>{
+    const el = box.querySelector(`[data-k="${r.k}"]`);
+    const v = Math.max(0, Math.min(100, S[r.k]));
+    const fill = el.querySelector('.fill');
+    const track = el.querySelector('.track');
+    const before = previousValues && Number.isFinite(previousValues[r.k])
+      ? Math.max(0, Math.min(100, previousValues[r.k])) : null;
+    const changed = before !== null && before !== v;
+    if (changed){
+      const direction = v < before ? 'impact-down' : 'impact-up';
+      el.classList.remove('impact-down','impact-up','flash');
+      void el.offsetWidth;
+      el.classList.add(direction,'flash');
+      // 先停在旧位置，再在下一帧明显退进，避免瞬间跳变。
+      fill.style.transition = 'none';
+      fill.style.width = before + '%';
+      void fill.offsetWidth;
+      fill.style.transition = '';
+      requestAnimationFrame(()=>{
+        if (fill.isConnected) fill.style.width = v + '%';
+      });
+      window.setTimeout(()=>{
+        if (el.isConnected) el.classList.remove('impact-down','impact-up','flash');
+      }, 980);
+    } else {
+      fill.style.width = v + '%';
+      if (!previousValues) el.classList.remove('impact-down','impact-up','flash');
+    }
+    track.setAttribute('aria-valuenow', v);
+    el.classList.toggle('warn', v<=20 || v>=80);
+  });
+  $('#mLeft').textContent  = `第 ${S.dynasty} 任`;
+  const remaining = Math.max(0, BOARD_REVIEW_TURN - S.turn);
+  $('#mRight').textContent = remaining > 0 ? `还剩 ${remaining} 次` : '本任结束';
+}
+
+const DECK_LAYERS = [
+  {className:'back-far', y:-18, compactY:-14, scale:.93, angle:-2.4, settle:6},
+  {className:'back-mid', y:-12, compactY:-9,  scale:.965, angle:1.5, settle:7},
+  {className:'back-near',y:-6,  compactY:-5,  scale:.985, angle:-.8, settle:6},
+];
+
+function ensureDeck(){
+  let deck = stage.querySelector('.deck');
+  if (deck) return deck;
+  deck = document.createElement('div');
+  deck.className = 'deck';
+  deck.setAttribute('aria-hidden','true');
+  deck.innerHTML = DECK_LAYERS.map(layer =>
+    `<div class="deck-card ${layer.className}"></div>`
+  ).join('');
+  stage.prepend(deck);
+  setDeckProgress(0);
+  return deck;
+}
+
+function setDeckProgress(progress){
+  const deck = stage.querySelector('.deck');
+  if (!deck) return;
+  const p = Math.max(0, Math.min(1, progress));
+  const compact = window.innerHeight <= 620;
+  DECK_LAYERS.forEach(layer=>{
+    const el = deck.querySelector('.' + layer.className);
+    if (!el) return;
+    const startY = compact ? layer.compactY : layer.y;
+    const y = startY + p * Math.min(Math.abs(startY), layer.settle);
+    const scale = layer.scale + p * (1 - layer.scale) * .45;
+    const angle = layer.angle * (1 - p * .18);
+    el.style.transform = `translate3d(0,${y}px,0) scale(${scale}) rotate(${angle}deg)`;
+  });
+}
+
+function positionAnswer(){
+  const activeCard = stage.querySelector('.card');
+  if (!activeCard) return;
+  const compact = window.innerHeight <= 620;
+  const gap = compact ? 18 : 24;
+  const cardTop = activeCard.offsetTop;
+  const cardBottom = cardTop + activeCard.offsetHeight;
+  const answerHeight = ansEl.offsetHeight;
+  const below = cardBottom + gap;
+  const above = cardTop - gap - answerHeight;
+  const top = below + answerHeight <= stage.clientHeight ? below : Math.max(0,above);
+  ansEl.style.top = `${top}px`;
+}
+
+function show(idx, unlockDelay=0){
+  curIdx = idx;
+  cur = CARDS[idx];
+
+  ansEl.classList.remove('on');
+  ansEl.innerHTML = '';
+
+  // 构建 yes 和 no 对象，包含资源变化
+  cur.yes = {
+    cash: parseInt(cur.yes_cash) || 0,
+    team: parseInt(cur.yes_team) || 0,
+    market: parseInt(cur.yes_market) || 0,
+    capital: parseInt(cur.yes_capital) || 0
+  };
+  cur.no = {
+    cash: parseInt(cur.no_cash) || 0,
+    team: parseInt(cur.no_team) || 0,
+    market: parseInt(cur.no_market) || 0,
+    capital: parseInt(cur.no_capital) || 0
+  };
+
+  ensureDeck();
+  const el = document.createElement('div');
+  el.className = 'card deal-in';
+  el.innerHTML = `<div class="opt-label opt-no" aria-hidden="true"></div>
+    <div class="opt-label opt-yes" aria-hidden="true"></div>
+    <div class="who">${cur.bearer||''}</div>
+    <div class="q">${(cur.question||'').replace(/\n/g,'<br>')}</div>
+    <div class="hint">← 左划 · 右划 →</div>`;
+  const clearDealIn = ()=>el.classList.remove('deal-in');
+  el.addEventListener('animationend',clearDealIn,{once:true});
+  stage.querySelectorAll('.card').forEach(n=>n.remove());
+  stage.appendChild(el);
+  stage.classList.remove('is-committing','is-dragging');
+  setDeckProgress(0);
+  setTimeout(clearDealIn,520);
+  el.querySelector('.opt-no').textContent = cur.override_no  || '否';
+  el.querySelector('.opt-yes').textContent = cur.override_yes || '是';
+  el.tabIndex = 0;
+  el.setAttribute('role', 'group');
+  el.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight');
+  el.setAttribute('aria-label', `${cur.bearer||'决策'}：${cur.question||''}。左选项：${cur.override_no||'否'}；右选项：${cur.override_yes||'是'}`);
+  bindDrag(el);
+  const unlock = ()=>{
+    if (!el.isConnected) return;
+    busy = false;
+    el.classList.remove('waiting');
+    el.removeAttribute('aria-disabled');
+    if (restoreCardFocus) el.focus();
+  };
+  if (unlockDelay > 0){
+    busy = true;
+    el.classList.add('waiting');
+    el.setAttribute('aria-disabled','true');
+    setTimeout(unlock,unlockDelay);
+  } else {
+    unlock();
+  }
+  drawBars();
+  dbg();
+}
+
+function dbg(){
+  const ks = Object.keys(S.flags).filter(k=>S.flags[k]).slice(-6);
+  $('#dbg').textContent = `${cur? cur.thematic+'/'+(cur.card||cur.id) : ''}\n${ks.join(' ')}`;
+}
+
+/* ---------- 交互 ---------- */
+function hideImpactDots(){
+  RES.forEach(r=>{
+    const dot = $('#bars').querySelector(`[data-k="${r.k}"] .dot`);
+    if (dot) dot.classList.remove('show');
+  });
+}
+
+function showImpactDots(choice){
+  RES.forEach(r=>{
+    const dot = $('#bars').querySelector(`[data-k="${r.k}"] .dot`);
+    if (!dot) return;
+    const delta = Math.abs(choice[r.k] || 0);
+    if (!delta){
+      dot.classList.remove('show');
+      return;
+    }
+    const size = delta >= 20 ? 12 : delta >= 15 ? 10 : delta >= 10 ? 8 : 6;
+    dot.style.width = size + 'px';
+    dot.style.height = size + 'px';
+    dot.classList.add('show');
+  });
+}
+
+function bindDrag(el){
+  let sx=0, dx=0, drag=false, pointerId=null, pointerType='', inputSource='';
+  const choiceNo = el.querySelector('.opt-no');
+  const choiceYes = el.querySelector('.opt-yes');
+  const who = el.querySelector('.who');
+  const question = el.querySelector('.q');
+  const hint = el.querySelector('.hint');
+
+  const isTouchEvent = e => e.type.indexOf('touch') === 0;
+  const pointFrom = e => {
+    const point = isTouchEvent(e)
+      ? ((e.touches && e.touches[0]) || (e.changedTouches && e.changedTouches[0]))
+      : e;
+    return point && Number.isFinite(point.clientX) ? point : null;
+  };
+  const clientX = e => {
+    const point = pointFrom(e);
+    return point ? point.clientX : null;
+  };
+
+  const reset = ()=>{
+    el.style.transform='';
+    choiceNo.style.opacity = choiceYes.style.opacity = '0';
+    choiceNo.classList.remove('revealed');
+    choiceYes.classList.remove('revealed');
+    who.style.opacity = question.style.opacity = hint.style.opacity = '1';
+    stage.classList.remove('is-dragging','is-committing');
+    el.classList.remove('touch-dragging');
+    setDeckProgress(0);
+    hideImpactDots();
+  };
+
+  const down = e => {
+    const touch = isTouchEvent(e) || e.pointerType === 'touch' || e.pointerType === 'pen';
+    // Touch pointer events commonly use button=-1; only reject non-primary mice.
+    if (busy || drag || (!touch && e.button !== 0)) return;
+    const x = clientX(e);
+    if (x === null) return;
+    restoreCardFocus = false;
+    // 区分事件来源（pointer/touch）与指针类型（mouse/touch/pen）。
+    // 有些浏览器会同时派发两套事件，来源锁定可避免重复提交。
+    drag=true; inputSource=isTouchEvent(e) ? 'touch' : 'pointer';
+    pointerId=e.pointerId == null ? null : e.pointerId;
+    pointerType=touch ? 'touch' : (e.pointerType || 'mouse');
+    sx=x; dx=0;
+    el.classList.remove('anim','deal-in');
+    el.classList.add('dragging');
+    if (touch) el.classList.add('touch-dragging');
+    stage.classList.add('is-dragging');
+    if (e.pointerId != null && el.setPointerCapture){
+      try { el.setPointerCapture(e.pointerId); } catch (_) { /* older WebKit */ }
+    }
+    if (touch && e.cancelable) e.preventDefault();
+  };
+  const move = e => {
+    if(!drag) return;
+    const eventSource = isTouchEvent(e) ? 'touch' : 'pointer';
+    // 触摸指针在部分 WebView 中会交替派发 pointermove/touchmove，两者都可用。
+    if (pointerType !== 'touch' && eventSource !== inputSource) return;
+    if (!isTouchEvent(e) && pointerId !== null && e.pointerId !== pointerId) return;
+    const x = clientX(e);
+    if (x === null) return;
+    dx=x - sx;
+    if (isTouchEvent(e) && e.cancelable) e.preventDefault();
+    const visualDx = Math.max(-112, Math.min(112, dx));
+    el.style.transform=`translateX(${visualDx}px) rotate(${visualDx/26}deg)`;
+    setDeckProgress(Math.min(1, Math.abs(dx) / 120));
+    // 中立区先保留回弹空间；只有明显偏向一侧时才让选项变得醒目。
+    const absD = Math.abs(dx);
+    const revealStart = pointerType === 'touch' ? 24 : 30;
+    const revealFull = pointerType === 'touch' ? 86 : 96;
+    const optOpacity = absD>revealStart
+      ? Math.min(1,(absD-revealStart)/(revealFull-revealStart))
+      : 0;
+    const visibleOpacity = pointerType === 'touch' && absD > 48
+      ? Math.max(.88,optOpacity) : optOpacity;
+    // 卡片内容渐隐，但不影响上方的选择徽标。
+    const contentStart = pointerType === 'touch' ? 24 : 30;
+    const contentFull = pointerType === 'touch' ? 76 : 80;
+    const contentOpacity = absD>contentStart
+      ? Math.max(0, 1-(absD-contentStart)/(contentFull-contentStart))
+      : 1;
+
+    choiceYes.style.opacity = dx>revealStart ? visibleOpacity : 0;
+    choiceNo.style.opacity = dx<-revealStart ? visibleOpacity : 0;
+    choiceYes.classList.toggle('revealed',dx>revealStart);
+    choiceNo.classList.toggle('revealed',dx<-revealStart);
+    who.style.opacity = question.style.opacity = hint.style.opacity = contentOpacity;
+
+    // 显示影响圆点
+    if (absD > revealStart) {
+      showImpactDots(dx > 0 ? cur.yes : cur.no);
+    } else {
+      hideImpactDots();
+    }
+  };
+  const commit = yes=>{
+    const fly = window.innerWidth + el.offsetWidth;
+    const direction = yes ? 1 : -1;
+    el.style.transform=`translate3d(${direction*fly}px,-${Math.min(76,Math.max(34,Math.abs(dx)*.22))}px,0) rotate(${direction*22}deg) scale(.96)`;
+    el.style.opacity='0';
+    choiceNo.style.opacity = choiceYes.style.opacity = '0';
+    choiceNo.classList.remove('revealed');
+    choiceYes.classList.remove('revealed');
+    stage.classList.remove('is-dragging');
+    el.classList.remove('touch-dragging');
+    stage.classList.add('is-committing');
+    setDeckProgress(1);
+    hideImpactDots();
+    choose(yes);
+  };
+
+  const finish = (e, cancelled=false) => {
+    if(!drag) return;
+    drag=false;
+    inputSource='';
+    el.classList.remove('dragging');
+    el.classList.add('anim');
+    stage.classList.remove('is-dragging');
+    // 提交阈值约为卡片宽度的一半。阈值以内始终回到中立位。
+    const commitThreshold = Math.max(136, Math.min(164, el.offsetWidth * .48));
+    if (!cancelled && Math.abs(dx) >= commitThreshold){
+      commit(dx>0);
+    } else {
+      reset();
+    }
+    dx=0;
+  };
+  el.addEventListener('pointerdown',down);
+  el.addEventListener('pointermove',move);
+  el.addEventListener('pointerup',e=>finish(e,false));
+  el.addEventListener('pointercancel',e=>finish(e,true));
+  // Older iOS/WebView builds may expose touch events without reliable PointerEvents.
+  el.addEventListener('touchstart',down,{passive:false});
+  el.addEventListener('touchmove',move,{passive:false});
+  el.addEventListener('touchend',e=>finish(e,false),{passive:false});
+  el.addEventListener('touchcancel',e=>finish(e,true),{passive:false});
+  el.addEventListener('keydown',e=>{
+    if (busy || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight')) return;
+    e.preventDefault();
+    restoreCardFocus = true;
+    el.classList.add('anim');
+    commit(e.key === 'ArrowRight');
+  });
+}
+
+function choose(yes){
+  if (busy) return;
+  busy = true;
+  const p = yes ? 'yes' : 'no';
+  const previousValues = {money:S.money, team:S.team, market:S.market, mind:S.mind};
+  const ph = PHASES[S.phase] || PHASES[1];
+  RES.forEach(r=>{
+    let d = num(cur[p+'_'+r.k]);
+    if (!d) return;
+    // 心气不受周期影响 —— 你的偏执跟大盘没关系
+    if (r.k !== 'mind') d = d > 0 ? Math.round(d*ph.gain) : Math.round(d*ph.loss);
+    if (d) S[r.k] = Math.max(0, Math.min(100, S[r.k]+d));
+  });
+  if (cur.lockturn === 'del')      S.lock[cur.card] = 1e9;
+  else if (cur.lockturn)           S.lock[cur.card] = S.turn + parseInt(cur.lockturn,10);
+  S.seen[cur.card] = 1;
+  applyFlags(cur[p+'_custom'], curIdx);
+
+  const ending = cur.thematic === 'endings' ? endingOf(cur[p+'_custom']) : null;
+  const reply  = cur['answer_'+p];
+  const feedbackDuration = 1280;
+
+  drawBars(previousValues);
+  ansEl.textContent = feedbackMarkup(reply);
+  if (reply){
+    positionAnswer();
+    ansEl.classList.add('on');
+  } else {
+    ansEl.classList.remove('on');
+  }
+  setTimeout(()=>{
+    if (ending){
+      ansEl.classList.remove('on');
+      step(ending);
+      return;
+    }
+    ansEl.classList.remove('on');
+    step(null);
+  },feedbackDuration);
+}
+
+function endingOf(str){
+  if (!str) return null;
+  const m = str.match(/end_(.+?)(?:\s|$)/);
+  if (m && ENDINGS[m[1]]) return m[1];
+  for (const k in ENDINGS) if (str.indexOf(k)>=0) return k;
+  return null;
+}
+
+function step(ending, unlockDelay=0){
+  if (ending){ showEnding(ending); return; }
+  S.turn++;
+  S.lastPhase = S.phase;
+  S.phase = phaseOf(S.turn, S.win);
+  const idx = pick();
+  if (idx < 0){ showEnding('没人要'); return; }
+  show(idx,unlockDelay);
+  // 周期切换要让玩家明确感觉到，否则风口白给
+  if (S.phase !== S.lastPhase) announcePhase(S.phase);
+}
+
+// 周期切换横幅。风来了、风停了，是这局最重要的两个时刻。
+function announcePhase(phase){
+  const ph = PHASES[phase];
+  if (!ph) return;
+  let el = document.getElementById('phaseBanner');
+  if (!el){
+    el = document.createElement('div');
+    el.id = 'phaseBanner';
+    document.getElementById('app').appendChild(el);
+  }
+  el.className = 'phase-' + phase;
+  el.innerHTML = `<span class="pn">${ph.name}</span><span class="pt">${ph.tip}</span>`;
+  el.classList.remove('on');
+  void el.offsetWidth;
+  el.classList.add('on');
+  window.setTimeout(()=>{ el.classList.remove('on'); }, 2100);
+}
+
+/* ---------- 结局与继任 ---------- */
+let pendingEnd = null;
+
+function showEnding(key){
+  const e = ENDINGS[key];
+  pendingEnd = key;
+  const years = Math.floor(S.turn/6), months = S.turn%6*2;
+  veil.innerHTML =
+    `<div class="kicker">${e.kicker}</div>
+     <h1>${key}</h1>
+     <div class="body">${e.body.replace(/\n/g,'<br>')}</div>
+     <div class="carry">在位 ${years} 年 ${months} 个月 · 第 ${S.dynasty} 任<br><br>${e.carry}</div>
+     <button id="go">${e.win?'再来一次':'下一任'}</button>`;
+  veil.classList.add('on');
+  $('#go').onclick = succeed;
+  if (restoreCardFocus) $('#go').focus();
+}
+
+function succeed(){
+  const e = ENDINGS[pendingEnd];
+  // 只保留 _keep 标记，_run 和其他一律清空
+  const keep = {};
+  for (const k in S.flags){
+    if (S.flags[k] && /_keep$/.test(k)) keep[k] = S.flags[k];
+    if (S.flags[k] && /^nb_/.test(k))   keep[k] = S.flags[k];   // 计数器也留
+  }
+  if (e.flag) keep[e.flag] = 1;
+  const dyn = S.dynasty + 1;
+  initState(e.next, dyn, keep);
+  veil.classList.remove('on');
+  step(null);
+}
+
+/* ---------- 启动 ---------- */
+(function boot(){
+  CARDS.forEach((c,i)=>{ if (c.card) byName[c.card] = i; });
+  initState({money:45,team:55,market:38,mind:52}, 1, {});
+  veil.innerHTML =
+    `<div class="kicker">创业 · 卡牌</div>
+     <h1>创 业</h1>
+     <div class="body">三个人，一间三十平的房子，账上十七万。<br><br>
+       四条槽 —— <b>钱</b>还剩几个月，<b>人</b>还剩几个，<br>
+       <b>客</b>要不要，还有<b>心</b>：你还剩多少自己的偏执。<br><br>
+       任意一条见底或者爆表，你就出局。<br>
+       但风口会来，也会走，跟你做得好不好没关系。</div>
+     <div class="carry">左右明显拖动卡片做决定，轻轻碰一下会回到中间。<br>
+       风来的时候敢不敢押，是这局最重要的一次决定。</div>
+     <button id="go">开始</button>`;
+  veil.classList.add('on');
+  $('#go').onclick = ()=>{ veil.classList.remove('on'); step(null); };
+})();
+
+</script>
+</body>
+</html>

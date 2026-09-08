@@ -1,0 +1,144 @@
+thematic;card;id;bearer;conditions;lockturn;weight;question;override_yes;answer_yes;yes_cash;yes_team;yes_market;yes_capital;yes_custom;override_no;answer_no;no_cash;no_team;no_market;no_capital;no_custom
+endings;end_cash_zero;900;财务总监;cash=0;;1000000;账上还有八万六。今天要付的工资是三百一十万。;我知道了;那我去通知大家吧。;;;;;end_破产清算;还有别的办法吗;没有了。我从三个月前就开始说了。;;;;;end_破产清算
+endings;end_cash_max;901;董事长;money=100;;1000000;账上趴着十一个亿，两年没动过。你打算什么时候花？;明年吧;董事会等不到明年了。;;;;;end_守财奴;我在等时机;时机是等出来的，还是做出来的？;;;;;end_守财奴
+endings;end_team_zero;902;人事总监;team=0;;1000000;今天最后三个人办完离职。整层楼只剩你和我。;那你呢;我的信也在你桌上。;;;;;end_人去楼空;总会有人来;招聘启事挂了七个月，没人投。;;;;;end_人去楼空
+endings;end_team_max;903;财务总监;team=100;;1000000;两千一百人。上季度人力成本吃掉了全部毛利，还超了四千万。;养得起;养不起。这是数学，不是态度。;;;;;end_大锅饭;谁都不能动;那就一起等着发不出工资。;;;;;end_大锅饭
+endings;end_market_zero;904;市场总监;market=0;;1000000;官网昨天的访问量是十七。其中十四个是我们自己人。;还有三个;那三个是爬虫。;;;;;end_无人问津;做点活动;活动预算上个月就停了。;;;;;end_无人问津
+endings;end_market_max;905;交付负责人;market=100;;1000000;在手订单排到二十八个月后。客户开始集体索赔了。;继续接;签一单，赔两单。;;;;;end_爆单崩盘;先停一停;停不了。合同都签了。;;;;;end_爆单崩盘
+endings;end_capital_zero;906;董事长;capital=0;;1000000;刚才那个会你没参加。七个董事，七票通过。;通过什么;换人。今天下午交接。;;;;;end_一致行动;我要申辩;流程走完了。这是通知，不是商量。;;;;;end_一致行动
+endings;end_capital_max;907;董事长;capital=100;;1000000;下个月八号敲钟。你的股份解禁期，我们帮你谈到了最短。;这是让我走;这是让你体面地走。;;;;;end_功成身退;我不卖;那就等六个月后被动减持，一样的结果，难看一点。;;;;;end_功成身退
+pressure;risk_cash_low;920;财务总监;cash<18 and cash>0 and !risk_cash_run and turn>1;del;6000;周五发工资还差两百万。只能借钱，或者停项目。;去借;工资能发了，董事会拿走了一部分签字权。;22;;;-12;risk_cash_run and debt_keep;停项目;钱省下了，项目组今天就散。;15;-10;-8;;risk_cash_run
+pressure;risk_cash_high;921;董事长;cash>82 and cash<100 and !risk_cash_run and turn>1;del;6000;账上钱很多，但市场窗口只剩一个月。投哪边？;押新产品;钱花出去了，新产品有人期待。;-20;5;10;;risk_cash_run;买下竞对;对手少了一个，新团队未必服你。;-25;-5;;10;risk_cash_run
+pressure;risk_team_low;922;人事总监;team<18 and team>0 and !risk_team_run and turn>1;del;6000;再走五个人，系统就没人会修了。怎么留？;全员加薪;人暂时留下，现金少了一截。;-15;22;;;risk_team_run;只留骨干;骨干留下，其他人知道自己被放弃。;;15;-8;-5;risk_team_run
+pressure;risk_team_high;923;财务总监;team>82 and team<100 and !risk_team_run and turn>1;del;6000;工资已经吃掉全部利润。今天必须减人。;裁一批;现金缓过来，名单今晚就会传开。;10;-22;;8;risk_team_run;停招聘;人少得慢一些，问题没有消失。;5;-15;-5;;risk_team_run
+pressure;risk_market_low;924;市场总监;market<18 and market>0 and !risk_market_run and turn>1;del;6000;再丢两家客户，销售就没活了。怎么办？;直接降价;客户回来了，利润更薄。;-10;;22;;risk_market_run;赌新产品;花掉最后一笔钱，换一次翻盘。;-15;-5;18;;risk_market_run
+pressure;risk_market_high;925;交付负责人;market>82 and market<100 and !risk_market_run and turn>1;del;6000;订单已经接不过来。再签一单，全部都要延期。;暂停接单;销售会骂，交付终于能喘气。;;;-20;-5;risk_market_run;找人外包;单子能做，钱和口碑交给别人。;-15;-8;-15;;risk_market_run
+pressure;risk_capital_low;926;董事长;capital<18 and capital>0 and !risk_capital_run and turn>1;del;6000;董事会差一票就能换掉你。拿什么换支持？;交预算权;你保住位置，也交出一部分权力。;;-5;;22;risk_capital_run;找联创;他愿意帮你，但会记住这次人情。;;8;;15;risk_capital_run
+pressure;risk_capital_high;927;法务;capital>82 and capital<100 and !risk_capital_run and turn>1;del;6000;董事会已经能绕过你做决定。今天收回哪项权力？;收人事权;团队重新听你，董事会很不高兴。;;5;;-20;risk_capital_run;收预算权;钱归你管，董事长把这当成宣战。;-5;;;-22;risk_capital_run
+episode_market;ep_price_open;1000;市场总监;turn<=10 and !slot_market_run;del;120;竞对把价格砍了一半。我们跟不跟？;跟到底;订单能保住，利润会先没。;-12;;15;;slot_market_run and price_fight_run;不跟价;钱保住了，客户可能会走。;5;;-8;;slot_market_run and price_hold_run
+episode_market;ep_price_fight;1001;大客户;price_fight_run and turn>=6;del;180;价格战打赢了。以后也按这个低价续约，行吗？;认低价;客户留下，我们以后少赚钱。;-10;;10;;low_price_keep;涨回去;利润回来了，一批客户走了。;8;;-10;;
+episode_market;ep_price_hold;1002;市场总监;price_hold_run and turn>=6;del;180;你没降价。最大的客户今天投了竞对。;花钱抢回;客户回来了，代价是一笔补贴。;-10;;12;;;让他走;钱省下了，市场少了一块。;5;;-10;;
+episode_market;ep_buy_open;1010;董事长;turn<=10 and !slot_market_run;del;120;一家小竞对撑不住了，开价两千万。买不买？;买下来;客户和团队一起买进来，现金先出去。;-15;5;10;5;slot_market_run and buy_rival_run;等他倒;一分钱不花，但别人也在等。;5;;-5;;slot_market_run and wait_rival_run
+episode_market;ep_buy_done;1011;竞对创始人;buy_rival_run and turn>=6;del;180;公司卖给你可以。工程师要跟我走。;加钱留人;人留下了，收购价又高一截。;-12;15;;;acquired_team_keep;只要客户;客户归你，做产品的人走了。;5;-12;12;;
+episode_market;ep_buy_wait;1012;市场总监;wait_rival_run and turn>=6;del;180;那家公司没倒，被大集团买走了。新老板开始挖我们的客户。;正面开战;市场声量回来了，现金烧得更快。;-12;;12;;;守老客户;老客户稳住，新市场让给了他们。;5;;-8;;
+episode_market;ep_live_open;1020;市场总监;turn<=10 and !slot_market_run;del;120;头部主播愿意今晚卖我们的货，抽成四成。上不上？;今晚就上;曝光会暴涨，利润会很薄。;-8;-5;15;;slot_market_run and live_go_run;不做直播;现金不动，这波流量归竞对。;5;;-8;;slot_market_run and live_skip_run
+episode_market;ep_live_boom;1021;仓库主管;live_go_run and turn>=6;del;180;直播爆单了。仓库里的货只够发一半。;借货发完;订单保住了，欠供应商一大笔。;-12;-8;15;;delivery_debt_keep;马上停售;少赔一点，也当众浇灭热度。;5;5;-12;;
+episode_market;ep_live_skip;1022;市场总监;live_skip_run and turn>=6;del;180;竞对上了那场直播，一夜卖空。;买广告追;声量追回一点，钱先花出去。;-10;;10;;;随他去;钱还在，热度不在。;5;;-8;;
+episode_market;ep_exclusive_open;1030;大客户;turn<=10 and !slot_market_run;del;120;我预付一年货款。条件是，你只能卖给我。;签独家;钱今天到账，其他客户会被挡在门外。;15;;8;-5;slot_market_run and exclusive_run;不签;自由保住了，钱不会到账。;-5;;-5;5;slot_market_run and exclusive_refuse_run
+episode_market;ep_exclusive_signed;1031;第二大客户;exclusive_run and turn>=6;del;180;我看见独家公告了。今天解约，还是给我同价？;也给低价;客户留下，两份合同一起压利润。;-10;;12;;exclusive_keep;让他解约;独家客户高兴，市场更单一。;5;;-12;5;exclusive_keep
+episode_market;ep_exclusive_refused;1032;市场总监;exclusive_refuse_run and turn>=6;del;180;你拒绝了独家。那位大客户转头投了竞对。;降价反击;客户开始比较价格，现金先受伤。;-10;;10;;;守住价格;利润没动，市场被拿走一块。;8;;-10;;
+episode_market;ep_product_open;1040;技术总监;turn<=10 and !slot_market_run;del;120;停掉老产品，全押新产品。敢不敢？;全押新的;团队有了目标，老客户会着急。;-10;8;8;;slot_market_run and product_bet_run;两个都做;客户都照顾，团队要做两份活。;-8;-10;5;;slot_market_run and product_both_run
+episode_market;ep_product_bet;1041;老客户;product_bet_run and turn>=6;del;180;听说老产品要停。我们下个月就要续约。;延长维护;老客户稳住，新产品慢下来。;-8;-5;12;;old_product_keep;按时停掉;新产品更快，老客户开始找下家。;5;5;-12;;old_product_keep
+episode_market;ep_product_both;1042;技术总监;product_both_run and turn>=6;del;180;两条产品线一起赶，团队已经连熬九天。;砍掉老线;人能喘气，老客户要走。;5;8;-10;;;推迟新品;团队能休息，市场窗口会关。;5;8;-8;;
+episode_people;ep_founder_open;1100;联合创始人;turn>=4 and !slot_people_run;del;150;我在全员群里说，公司现在不懂产品。你要我删吗？;现在删;消息会消失，截图不会。;;-8;;5;slot_people_run and founder_delete_run;当面开会;所有人都会看见我们站哪边。;;5;;-8;slot_people_run and founder_meeting_run
+episode_people;ep_founder_deleted;1101;人事总监;founder_delete_run and turn>=13;del;180;消息删了，截图却传遍公司。联创今天没来。;停他的职;你拿回权力，也会失去一批人。;;-12;;10;founder_split_keep and nb_lost_tech+;当没发生;他会把沉默当成胜利。;;5;;-8;founder_grudge_keep
+episode_people;ep_founder_meeting;1102;联合创始人;founder_meeting_run and turn>=13;del;180;会上我只问一句：大家信产品，还是信老板？;让大家投;你赢了票，团队也正式分成两边。;;-10;;10;founder_split_keep;结束会议;争吵停了，问题还在。;;5;;-5;founder_grudge_keep
+episode_people;ep_nephew_open;1110;董事长;turn>=4 and !slot_people_run;del;150;我侄子下周来当副总。你把他放哪个部门？;让他入职;董事长满意，团队会盯着你。;;-8;;12;slot_people_run and nephew_hired_run;当场拒绝;团队松口气，董事长记住了。;;8;;-12;slot_people_run and nephew_refused_run
+episode_people;ep_nephew_hired;1111;人事总监;nephew_hired_run and turn>=13;del;180;他入职第三天，就把你的周报直接发给董事长。;收回权限;团队知道谁是老板，董事长很不高兴。;;8;;-12;chairman_nephew_keep;先忍着;董事长满意，你的命令开始绕道。;;-8;;10;chairman_nephew_keep
+episode_people;ep_nephew_refused;1112;财务总监;nephew_refused_run and turn>=13;del;180;董事长没再提侄子。今天也没签你的预算。;去道歉;预算过了，你欠他一次。;8;;;8;;找别的票;钱还卡着，董事会开始站队。;-8;;;-8;
+episode_people;ep_layoff_open;1120;投资人;turn>=4 and !slot_people_run;del;150;本周裁三十人，下一笔钱就到账。签不签？;签名单;钱会来，名单也会传开。;15;-15;;8;slot_people_run and layoff_signed_run;不要这笔钱;人保住了，工资只够一个月。;-12;10;;-8;slot_people_run and layoff_refused_run
+episode_people;ep_layoff_signed;1121;人事总监;layoff_signed_run and turn>=13;del;180;名单提前泄露。没被裁的人也开始投简历。;全员说明;至少大家从你嘴里听见。;;5;;-8;layoff_keep;封锁消息;消息没封住，信任先没了。;;-12;;5;layoff_keep
+episode_people;ep_layoff_refused;1122;财务总监;layoff_refused_run and turn>=13;del;180;你保住了三十人。下月工资还差两百万。;自己去借;工资能发，公司又多一笔债。;12;5;;-10;debt_keep;停掉奖金;现金省下，所有人都知道公司缺钱。;10;-8;;5;
+episode_people;ep_star_open;1130;销售冠军;turn>=4 and !slot_people_run;del;150;不给我升副总，我明天就走。;现在升他;业绩留下，老主管会不服。;;-8;12;5;slot_people_run and star_promoted_run;让他走;职位守住，客户可能跟他走。;;5;-12;-5;slot_people_run and star_left_run
+episode_people;ep_star_promoted;1131;人事总监;star_promoted_run and turn>=13;del;180;他当上副总，第一件事是把老主管调走。;准他调走;新副总服你，老团队寒心。;;-12;8;5;star_sales_keep;把人留下;老团队稳住，新副总当众翻脸。;;8;-5;-8;star_sales_keep
+episode_people;ep_star_left;1132;市场总监;star_left_run and turn>=13;del;180;他带着三家客户去了竞对。;起诉他;官司能打，客户不会等。;-8;-5;-5;5;star_sales_keep;重签客户;花钱把客户抢回来。;-10;;12;;star_sales_keep
+episode_people;ep_overtime_open;1140;人事总监;turn>=4 and !slot_people_run;del;150;员工把加班表发上网，已经上了热搜。;公开道歉;公众会听见，投资人也会。;;5;8;-8;slot_people_run and overtime_apology_run;说他造假;热搜可能降，也可能等来证据。;;-5;5;5;slot_people_run and overtime_deny_run
+episode_people;ep_overtime_apology;1141;投资人;overtime_apology_run and turn>=13;del;180;你承认加班违法。谁批准发的道歉？;我批准的;团队记住你，董事会也记住你。;;10;;-12;;人事批准;公告保住你，人事总监开始留证据。;;-12;;8;betray_keep
+episode_people;ep_overtime_denied;1142;前员工;overtime_deny_run and turn>=13;del;180;你说我造假。我这里有打卡记录，还有你的语音。;马上认错;事情更难看，但还能停在今天。;-5;5;-8;-8;;起诉他;律师函发出，他把语音也发了。;-8;-10;-10;5;lie_keep
+legacy;legacy_low_price;1200;大客户;low_price_keep and !legacy_low_price_seen_keep and !legacy_seen_run;del;28;前任打过价格战。现在续约，还是那个低价。;继续低价;客户续了，利润继续薄。;-10;;10;;legacy_seen_run and legacy_low_price_seen_keep;涨回去;利润回来，客户少了一批。;8;;-10;;legacy_seen_run and legacy_low_price_seen_keep
+legacy;legacy_acquired_team;1201;人事总监;acquired_team_keep and !legacy_acquired_seen_keep and !legacy_seen_run;del;28;前任买来的团队集体要加薪，不加就一起走。;统一加薪;人留下，现金少一块。;-12;15;;;legacy_seen_run and legacy_acquired_seen_keep;让他们走;钱省下，买来的技术也走了。;5;-12;-5;;legacy_seen_run and legacy_acquired_seen_keep
+legacy;legacy_delivery_debt;1202;供应商;delivery_debt_keep and !legacy_delivery_seen_keep and !legacy_seen_run;del;28;前任直播爆单时借了我的货。今天该付款了。;现在付;旧账结清，现金见底一截。;-15;;5;;legacy_seen_run and legacy_delivery_seen_keep;再拖一个月;钱留下，下一批货不会来。;8;;-8;-5;legacy_seen_run and legacy_delivery_seen_keep
+legacy;legacy_exclusive;1203;第二大客户;exclusive_keep and !legacy_exclusive_seen_keep and !legacy_seen_run;del;28;前任签了独家。你继续只卖给一家吗？;照旧执行;大客户满意，其他市场关上。;8;;-12;5;legacy_seen_run and legacy_exclusive_seen_keep;付钱解约;市场重新打开，先赔一笔。;-15;;10;-5;legacy_seen_run and legacy_exclusive_seen_keep
+legacy;legacy_old_product;1204;老客户;old_product_keep and !legacy_product_seen_keep and !legacy_seen_run;del;28;前任答应维护老产品。工程师今天来要人。;继续维护;老客户稳住，新项目少两个人。;-5;-8;10;;legacy_seen_run and legacy_product_seen_keep;停止维护;团队轻松，客户开始离开。;5;8;-12;;legacy_seen_run and legacy_product_seen_keep
+legacy;legacy_founder_split;1205;联合创始人;founder_split_keep and !legacy_founder_seen_keep and !legacy_seen_run;del;28;前任让全公司站过队。现在我带走的人想回来。;让他们回来;技术回来，旧矛盾也回来。;-8;12;5;;legacy_seen_run and legacy_founder_seen_keep;不让回来;团队更稳，技术缺口还在。;5;5;-8;;legacy_seen_run and legacy_founder_seen_keep
+legacy;legacy_founder_grudge;1206;联合创始人;founder_grudge_keep and !legacy_founder_seen_keep and !legacy_seen_run;del;28;前任没有解决我和董事会的冲突。今天轮到你选边。;站在他这边;团队支持你，董事会反对。;;10;;-12;legacy_seen_run and legacy_founder_seen_keep;站董事会;权力稳了，联创开始收拾工位。;;-10;;10;legacy_seen_run and legacy_founder_seen_keep
+legacy;legacy_nephew;1207;董事长侄子;chairman_nephew_keep and !legacy_nephew_seen_keep and !legacy_seen_run;del;28;前任让我当了副总。现在我要直接管产品。;让他管;董事长满意，产品团队不服。;;-10;-5;12;legacy_seen_run and legacy_nephew_seen_keep;收回职位;团队支持你，董事长会算账。;;10;;-12;legacy_seen_run and legacy_nephew_seen_keep
+legacy;legacy_layoff;1208;人事总监;layoff_keep and !legacy_layoff_seen_keep and !legacy_seen_run;del;28;前任裁了三十人。今天留下的人要求承诺不再裁。;公开承诺;团队安心，董事会少一张牌。;;12;;-8;legacy_seen_run and legacy_layoff_seen_keep;不给承诺;权力留着，简历开始外投。;;-10;;8;legacy_seen_run and legacy_layoff_seen_keep
+legacy;legacy_star_sales;1209;销售冠军;star_sales_keep and !legacy_star_seen_keep and !legacy_seen_run;del;28;前任升过我，也可能告过我。现在三家客户只认我。;给他分红;客户稳住，他更难控制。;-8;-5;12;;legacy_seen_run and legacy_star_seen_keep;换掉他;权力回来，客户跟着走。;5;5;-12;5;legacy_seen_run and legacy_star_seen_keep
+legacy;legacy_daily_exclusive;1210;大客户;dealer_keep and !legacy_dealer_seen_keep and !legacy_seen_run;del;28;前任答应只卖给我。今天有人出双倍价格抢货。;守旧合同;信用保住，钱少赚。;-8;;8;5;legacy_seen_run and legacy_dealer_seen_keep;卖给新人;现金多了，老客户当场解约。;12;;-12;-5;legacy_seen_run and legacy_dealer_seen_keep
+endings;review_cash_low;1900;投资人;turn>=18 and cash<30;del;2400;公司还活着，但钱又只够两个月。打款条件是换掉你。;拿钱离开;钱到账，你的门禁同时失效。;;;;;end_融资换帅;拒绝交权;投资人起身走了，工资账户明天冻结。;;;;;end_破产清算
+endings;review_team_low;1901;人事总监;turn>=18 and cash>=30 and team<30;del;2400;六名主管联名：你留下，他们就走。;我离开;他们撤回离职信，开始等下一任。;;;;;end_联创反杀;换掉他们;名单发完，公司只剩空工位。;;;;;end_人去楼空
+endings;review_market_low;1902;董事长;turn>=18 and cash>=30 and team>=30 and market<30;del;2400;董事会找到一个买家。价格很低，但够发工资。;卖掉公司;投资人先拿钱，你最后离场。;;;;;end_低价卖身;继续撑着;买家走了，客户也没有回来。;;;;;end_无人问津
+endings;review_capital_low;1903;董事长;turn>=18 and cash>=30 and team>=30 and market>=30 and capital<30;del;2400;复盘结束。七名董事已经投完票。;接受结果;七票同意换人。;;;;;end_一致行动;要求重投;第二次还是七票。;;;;;end_一致行动
+endings;review_high;1904;董事长;turn>=18 and cash>=30 and team>=30 and market>=30 and capital>70;del;2300;公司没倒，董事会也赚到了钱。接任人正在门外。;体面交接;奖金到账，你把位置交给下一任。;;;;;end_功成身退;拒绝交接;奖金取消，接任人照样进门。;;;;;end_融资换帅
+endings;review_normal;1905;董事长;turn>=18 and cash>=30 and team>=30 and market>=30 and capital>=30 and capital<=70;del;2300;十八个月到了。公司还在，董事会问你怎么离开。;办完交接;这一次，没有人需要保安送你。;;;;;end_任满交棒;现在就走;门在身后关上，交接箱还是空的。;;;;;end_融资换帅
+daily;d_supplier_01;500;供应商;;40;10;老王家的货，这个月能不能先结一半。;结;那我下个月还按老价格给你。;-10;;5;;;下个月;行，我等。;8;;-5;;
+daily;d_supplier_02;501;采购经理;;60;10;新来的供应商报价低两成。但没做过我们这个行业。;换;省下来的钱一年是四百万。;12;;-5;;;不换;老王合作七年了，一次没出过问题。;;;5;;
+daily;d_supplier_03;502;采购经理;;80;8;有个供应商想请我吃饭。他明说了，是想谈谈明年的量。;去;吃饭而已。;5;;;-5;;不去;那他会觉得我们不给面子。;;;;;
+daily;d_finance_01;503;财务总监;;50;12;这个月的发票能不能晚点开。开了就要交这个季度的税。;晚开;客户那边催了三次了。;8;;-5;;;按时开;那这个季度的税是六百万。;-10;;;5;
+daily;d_finance_02;504;财务总监;;70;10;年会预算，去年是八十万。今年要不要照旧。;照旧;下面盼一年就盼这个。;-10;12;;;;砍掉;砍了能省八十万。也能省掉不少笑脸。;10;-12;;;
+daily;d_finance_03;505;财务总监;;90;8;有人拿了一张两万三的餐费票来报销。上面是七个人的名字。;报;那以后都这么报。;;5;;-5;;不报;那这事今天就会传遍公司。;;-5;;5;
+daily;d_hr_01;506;人事总监;;40;12;技术那边有个人要涨薪。他说外面给的是我们的一倍半。;涨;那其他人也会来问。;-10;12;;;;不涨;他大概两周内就会走。;5;-10;;;
+daily;d_hr_02;507;人事总监;;50;12;绩效考核要不要按比例强制分布。总得有人拿 C。;强制;那团队里就要有人当垫背的。;;-10;;8;;不强制;那考核就没意义了，大家都是 B。;;8;;-5;
+daily;d_hr_03;508;人事总监;;60;10;有个员工怀孕了。她是这个项目的核心。;正常休;那项目要延期两个月。;;12;-5;;;调整下;调整的意思是，换人？;;-15;;;
+daily;d_hr_04;509;技术总监;;70;10;下面想搞技术分享会，每周五下午两个小时。;搞;一年下来是一百个工时乘以全组人数。;-5;8;;;;算了;那他们就自己在群里发链接。;;;;;
+daily;d_hr_05;510;人事总监;;80;10;有人在匿名论坛发帖说我们加班严重。内容基本是真的。;不管;那帖子会一直挂在那儿。;;;;;;查是谁;查出来了怎么办。;;-12;;;
+daily;d_hr_06;511;人事总监;;90;8;招聘要不要放宽学历要求。现在这个门槛，简历量少一半。;放宽;那筛选成本会上去。;-5;8;;;;不放;那就慢慢等。;;;;;
+daily;d_hr_07;512;技术总监;;100;8;有个实习生写的东西比正式员工好。他明年毕业。;提前签;给多少。;-5;10;;;;等毕业;等到明年，他手上会有五个offer。;;;;;
+daily;d_market_01;513;市场总监;;40;12;竞对昨天降价三成。我们跟不跟。;跟;那这个季度的利润就没了。;-12;;15;;;不跟;那客户会一个一个问我们为什么贵。;5;;-8;;
+daily;d_market_02;514;市场总监;;50;12;有个头部博主要收费推我们。三十万一条，他有八百万粉。;投;转化率没人保证。;-12;;15;;;不投;那这三十万就还在账上。;;;;;
+daily;d_market_03;515;大客户;;60;10;我们想要独家。作为交换，明年的量翻倍。;给;那你就是我们唯一的出口了。;12;;-10;;dealer_keep;不给;那量还是老样子。;;;;;
+daily;d_market_04;516;客户;;70;10;你们的产品我们用了两年，有个功能一直没做。;做;那要占掉一个季度的排期。;;-5;12;;;不做;那我们就自己找人做个外挂。;;;;;
+daily;d_market_05;517;市场总监;;80;10;要不要把价格提上去。我们现在是行业最低。;提;提价会掉一批客户。;12;;-10;;;不提;那我们永远是那个便宜的。;-5;;5;;
+daily;d_capital_01;518;董事长;;40;12;有家基金想投钱。但以后大事，他们可以说“不”。;要钱;那以后大事你说了不算。;20;;;-12;;不要;那我们就自己撑。;;;;8;
+daily;d_capital_02;519;投资人;;50;10;你们这个季度的数据，跟当初给我的计划差得有点远。;解释;市场变了。;;;;5;;认;那我下次投钱不好讲。;;;;-10;
+daily;d_capital_03;520;董事长;;60;10;要不要给团队留一部分股份？老股东手里的份额会变少。;做;那所有老股东都要少一点。;;15;;-10;;不做;那核心的人拿什么留。;;-8;;5;
+daily;d_capital_04;521;投资人;;70;10;我们想先卖掉手里的股份。你能帮我们找买家吗？;帮;那新进来的人是什么条件我们不知道。;;;;8;;不帮;那我们的关系就到这儿了。;;;;-10;
+daily;d_capital_05;522;董事长;;80;8;有人想收购我们。出价是上次大家给公司算的价格的 1.2 倍。;谈谈;谈了就会传出去。;;-5;;8;;不谈;那这个价明年可能就没有了。;;;;;
+daily;d_rival_01;523;市场总监;;50;12;竞对在挖我们的人。他们开的价我们跟不了。;涨薪留人;全组涨一遍是每年八百万。;-12;15;;;;不跟;那走几个算几个。;;-10;;;
+daily;d_rival_02;524;技术总监;;60;10;对面新出的功能，跟我们内部的方案一模一样。可能有人泄露。;查;查内鬼会让所有人都不舒服。;;-10;5;;;不查;那下次还会有。;;;;;
+daily;d_rival_03;525;市场总监;;70;10;有个竞对的销售总监想过来。他手上有客户名单。;要;那名单是他前公司的资产。;;;15;-5;-5;不要;那他会去别家。;;;;;
+daily;d_rival_04;526;公关总监;;80;8;有人在写行业分析，把我们排在第四。要不要沟通一下。;沟通;沟通是要花钱的。;-5;;8;;;不沟通;那第四就第四。;;;;;
+daily;d_legal_01;527;法务;;60;10;税务来查上两年的账。有几笔我们自己也说不太清。;主动补;补了大概两百万，加滞纳金。;-12;;;8;;等他们查;查出来是补缴加罚款，一倍到三倍。;;;;-12;
+daily;d_legal_02;528;法务;;70;10;有个前员工起诉我们，说加班费没给。他有考勤记录。;和解;和解金大概十五万。;-5;5;;;;打;打赢了也是这个数，还多花律师费。;-8;-8;;;
+daily;d_legal_03;529;法务;;80;8;有人先把我们的名字注册了。对方要八十万才肯转手。;买;八十万买回自己的名字。;-12;;5;;;不买;那我们要换个名字，或者打三年官司。;;;-10;;
+daily;d_legal_04;530;法务;;90;8;新规来了，我们有两处不符合。改好要停业三周。;整改;三周没有收入。;-12;;;8;;拖;拖到被查，是停业加罚款。;;;;-12;
+daily;d_ops_01;531;交付负责人;;50;12;这个月的交期又要延了。要不要跟客户说实话。;说;说了他们会扣款。;-5;;8;;;先不说;不说的话，到期那天更难看。;;;-10;;
+daily;d_ops_02;532;技术总监;;60;10;系统有个老问题，彻底重做要三个月。不重做就继续修补。;重构;三个月不出新东西。;;8;-8;;;继续修补;那三年后这个系统没人敢碰。;;-5;5;;
+daily;d_ops_03;533;交付负责人;;70;10;仓库租约到期了。续租涨三成，搬要停半个月。;续;涨的这部分一年是两百万。;-10;;5;;;搬;半个月发不出货。;5;;-10;;
+daily;d_ops_04;534;技术总监;;80;8;要不要把服务器交给云服务商？每年多花钱，但不用自己养机房。;上;运维那两个人怎么办。;-8;-5;8;;;不上;那机房还得自己管。;;;;;
+daily;d_office_01;535;人事总监;;60;10;要不要装工位监控。说是防泄密。;装;那大家都会知道自己被看着。;;-12;;8;;不装;那泄密的时候查不到。;;5;;;
+daily;d_office_02;536;人事总监;;70;10;有人提议把周报改成双周报。说写周报的时间比干活多。;改;那我下周就少看一半东西。;;10;;-5;;不改;那他们就继续写。;;;;;
+daily;d_office_03;537;人事总监;;80;10;办公室的咖啡机坏了。修要三千，换要一万二。;换;一万二能买不少人心。;-5;8;;;;修;修好了还能用两年。;;;;;
+daily;d_pub_01;538;公关总监;;60;10;有个行业峰会请你做主题演讲。同台的是三个上市公司老板。;去;讲什么呢。;;;8;5;;不去;那位置会给竞对。;;;-5;;
+daily;d_pub_02;539;记者;;70;10;我们想做一篇创业故事。会问到早期的一些事。;接受;哪些事。;;;8;;;不接受;那我们就写公开资料。;;;;;
+daily;d_pub_03;540;公关总监;;80;8;你上次那条微博有句话被截出来了。现在有两万转发。;删;删了会被说心虚。;;;-5;;;不删;那就让它挂着。;;-5;5;;
+daily;d_pub_04;541;公关总监;;90;8;有个奖项可以买，二十万。放在官网上挺好看。;买;买了没人会知道是买的。;-5;;8;;;不买;那官网上就没有奖。;;;;;
+daily;d_ind_01;542;市场总监;;80;10;同行有家公司倒了。他们的客户现在到处在问。;去接;那些客户是他们没伺候好的。;;-5;12;;;不接;那就让别人接。;;;;;
+daily;d_ind_02;543;人事总监;;90;10;那家倒掉的公司，有二十几个人在投我们。;招;里面有几个不错的。;-8;12;;;;不招;那我们就错过一批便宜的人。;;;;;
+daily;d_ind_03;544;技术总监;;100;8;行业里在传一个新技术。跟不跟，现在看不清。;投人进去;投了可能是白投。;-10;;10;;;观望;观望到看清的时候，就晚了。;;;-5;;
+daily;d_person_01;545;;;60;10;今天是我女儿的家长会。同时是季度董事会。;去家长会;董事会推到下周。;;5;;-5;;去董事会;她说没关系。;;;;;
+daily;d_person_02;546;;;70;10;体检报告出来了，几项指标不太好。医生建议休一个月。;休;公司一个月没人管。;;5;;-5;;不休;那就先这样。;;;;;
+daily;d_person_03;547;;;80;10;老朋友借钱，二十万。他说三个月还。;借;这是我自己的钱。;;;;;;不借;那这个朋友大概就没了。;;;;;
+daily;d_person_04;548;;;90;8;有人问我，做这个到底是为了什么。我一时没答上来。;为了钱;至少是实话。;;;;;;为了做成一件事;那件事是什么，我也说不清了。;;;;;
+daily;d_dyn_01;549;人事总监;dynasty>2;100;20;老员工在议论，说这几年换了好几个 CEO。;开个会;说什么。;;8;;;;不理;那他们就自己猜。;;-5;;;
+daily;d_dyn_02;550;董事长;dynasty>4;120;20;你是第几任了？我都记不清了。;第五任;前面四个都是被换掉的。;;;;;;记不清;那说明这个位置本来就是流水的。;;;;;
+daily;d_dyn_03;551;;dynasty>9;150;25;仓库最里面有个箱子，是创始团队的东西。要不要清掉。;留着;放着占地方。;;5;;;;清掉;那就没人记得了。;;-5;;;
+daily;d_legacy_01;552;财务总监;debt_keep;60;25;上一任借的那笔钱，这个月要还了。;还;账上会空一半。;-20;;;8;;再借;那就是借新还旧。;10;;;-12;
+daily;d_legacy_02;553;人事总监;nb_lost_tech>0;80;25;上次走掉那批技术，现在在对手公司做一模一样的产品。;认了;那是我们自己没留住。;;;-5;;;招回来;开双倍的价，有两个愿意回。;-12;12;;;
+daily;d_legacy_03;554;公关总监;lie_keep;100;25;上一任在董事会上说过的数字，现在对不上了。;说清;那要承认之前有问题。;;5;;-8;;继续圆;圆一次要圆一辈子。;;;;-5;
+daily;d_legacy_04;555;董事长;betray_keep;120;25;那个替你背锅的人，他家里人上周来公司了。;见;她说不是来闹的，是想问个明白。;;8;;;;不见;那她就在楼下等。;;-12;;;
+daily;d_legacy_05;556;法务;public_keep;80;20;上市公司有一条信息必须公开。现在要不要报？报了股价会动。;报;规则就是规则。;;;-5;8;;不报;不报就是违规。;;;;-15;
+daily;d_good_01;557;技术总监;;100;10;那个项目做完了。团队想申请三天假。;批;三天没人干活。;;12;-5;;;不批;后面还有排期。;;-8;;;
+daily;d_good_02;558;大客户;;110;10;这单我们提前付款，你给个折扣就行。;给;现金提前到账。;12;;-5;;;不给;那我们按合同走。;;;;;
+daily;d_good_03;559;市场总监;;120;10;有个小客户，量很小，但一直在续。今年他们要涨量了。;重视;小客户变大客户就是这么来的。;;;12;;;按老样子;那也没什么损失。;;;;;
+daily;d_win_01;560;财务总监;;90;12;这个季度超了预算目标百分之十八。要不要报给董事会。;报;数字好看的时候就该让他们看见。;;;;10;;先压着;压着干什么，等下个季度差了一起报？;5;;;-5;
+daily;d_win_02;561;市场总监;;100;12;那个大单签了。三年期，年付。;庆祝一下;应该的。;-5;10;;5;;继续干;下一个单子已经在谈了。;;;5;5;
+daily;d_win_03;562;投资人;;110;12;你们上季度的数据我看了。下一轮我们想加注。;要;估值可以谈得比上次好。;15;;;12;;暂时不要;不要钱的公司，投资人反而更想投。;;;;8;
+daily;d_win_04;563;技术总监;;100;12;那个功能上线了。用户自发在社区里写了长评。;转出去;那是最好的广告，还不要钱。;;5;12;;;不声张;做产品的人自己知道就够了。;;8;;;
+daily;d_win_05;564;董事长;;120;12;有家上市公司想跟我们战略合作。他们出钱出渠道。;合作;那我们要让出一部分决策权。;12;;12;-8;;自己做;那就慢一点，但都是自己的。;;5;;5;
+daily;d_win_06;565;人事总监;;110;12;今年一个核心的都没走。这在我们这行不常见。;发奖金;那是应该的。;-8;15;;;;写进汇报;董事会喜欢看这个。;;5;;8;
+daily;d_win_07;566;财务总监;;130;10;应收账款收回来了，比预计的快两个月。;补研发;那笔钱正好够。;-5;5;8;;;放着;放着心里踏实。;10;;;5;
+daily;d_win_08;567;市场总监;;120;10;有个客户主动帮我们介绍了三家同行。;谢谢他;要不要给点返点。;-5;;12;;;记着;这种客户以后要重点伺候。;;;8;;
+daily;d_win_09;568;董事长;;140;10;董事会一致通过了你的年度方案。这是第一次。;不容易;是你这一年做出来的。;;5;;12;;应该的;别太得意。下一年更难。;;;;8;
+daily;d_win_10;569;技术总监;;130;10;那个老系统重构完了。比预计早了三周。;放假;三周的假，团队值得。;;12;-5;;;接下一个;那他们大概会有点意见。;;-5;8;5;
+daily;d_grow_01;570;市场总监;;80;14;渠道那边说，再投一笔就能进两百家门店。;投;那是今年的市场预算全部。;-12;;18;;;不投;那就守着现在这些。;;;;;
+daily;d_grow_02;571;市场总监;;90;14;有个新平台在招首批商家，免佣半年。;上;要抽两个人过去做。;;-5;15;;;不上;等它做起来了，位置就没了。;;;-5;;
+daily;d_grow_03;572;技术总监;;100;14;把产品拆一个免费版出去，能拉一批新用户。;拆;免费的会吃掉一部分付费的。;-5;;18;;;不拆;那增长就还是靠销售一家一家跑。;;;;;
+daily;d_grow_04;573;市场总监;;110;14;老客户里有六成没用过我们的新功能。;做个推广;成本不高，见效快。;-5;;12;;;算了;那他们续约的时候可能就走了。;;;-8;;
+daily;d_grow_05;574;客户;;90;14;我们想把你们介绍给集团其他三家子公司。;当然好;那要专门配一个团队。;-8;-5;20;;;先不了;那这条线就断了。;;;-5;;
+daily;d_cap_01;575;董事长;capital>60;100;14;董事会想让你去做行业协会的理事。露脸的事。;去;那要占掉不少时间。;;-5;5;12;;不去;那位置会给别人。;;;;-5;
+daily;d_cap_02;576;投资人;capital>65;110;14;我们想把你介绍给几个 LP。他们管的钱比我们多。;见;见了就是要讲故事。;;;;15;;不见;那这层关系就搭不起来。;;;;;
+daily;d_cap_03;577;董事长;capital>70;120;14;有几家投行开始主动联系我们了。要不要接触一下。;接触;接触了就是往上市走。;;;;15;ipo_ready_keep;还早;那就等你觉得不早的时候。;;;;;
+daily;d_cap_04;578;董事长;capital>75 and ipo_ready_keep;130;16;董事会想正式启动上市。你怎么看。;启动;那从今天起一切都要按公开公司的标准。;;-5;;18;;再等等;窗口期不等人。;;;;-8;
+daily;d_cap_05;579;投资人;capital>80;140;16;所有股东都签了。就等你了。;签;签完就没有回头路。;;;;15;;不签;那你要跟每个股东单独解释一遍。;;;;-12;

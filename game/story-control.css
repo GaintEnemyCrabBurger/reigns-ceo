@@ -1,0 +1,236 @@
+:root{
+  --bg:#0f120e;
+  --panel:#151a13;
+  --panel-2:#1b2118;
+  --panel-3:#222a1f;
+  --ink:#f2eddf;
+  --muted:#8e9489;
+  --faint:#5e655c;
+  --line:#343b31;
+  --gold:#c0a35d;
+  --green:#9bbc83;
+  --coral:#ca7c65;
+  --blue:#87aebb;
+  --danger:#d46f5c;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);font-family:"Songti SC","SimSun","Noto Serif CJK SC",serif}
+button,input,select,textarea{font:inherit}
+button,select{border:1px solid var(--line);border-radius:3px;background:var(--panel-2);color:var(--ink);font-size:11px;line-height:1.2;padding:7px 10px}
+button{cursor:pointer}
+button:hover,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{border-color:var(--gold);outline:none}
+button:disabled{opacity:.34;cursor:not-allowed}
+button.primary{background:var(--gold);border-color:var(--gold);color:#151811}
+button.danger{background:var(--danger);border-color:var(--danger);color:#160c09}
+button.icon-button{width:32px;height:30px;padding:0;display:grid;place-items:center;font-family:"Cascadia Mono","Consolas",monospace}
+
+.sc-shell{height:100%;display:flex;flex-direction:column;min-width:760px}
+.sc-header{height:64px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 20px;border-bottom:1px solid var(--line);background:#11150f;flex:none}
+.sc-brand{display:flex;align-items:center;gap:11px;min-width:0}
+.sc-brand-mark{width:35px;height:35px;display:grid;place-items:center;border:1px solid var(--gold);color:var(--gold);font-size:20px;flex:none}
+.sc-eyebrow{font:9px/1.3 "Cascadia Mono","Consolas",monospace;letter-spacing:.13em;color:var(--gold);text-transform:uppercase}
+.sc-brand h1{margin:3px 0 0;font-size:19px;font-weight:normal;letter-spacing:.04em}
+.sc-header-actions{display:flex;align-items:center;gap:6px;position:relative;flex:none}
+.sc-source{max-width:210px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font:9px/1.4 "Cascadia Mono","Consolas",monospace;margin-right:5px}
+.sc-menu{position:absolute;right:0;top:38px;z-index:30;width:172px;padding:5px;background:var(--panel-3);border:1px solid var(--line);box-shadow:0 16px 34px rgba(0,0,0,.42)}
+.sc-menu[hidden]{display:none}
+.sc-menu button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:8px}
+.sc-menu button:hover{background:#2b3427;color:var(--gold)}
+
+.sc-overview{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));height:62px;border-bottom:1px solid var(--line);background:var(--panel);flex:none}
+.sc-overview>div{padding:10px 14px;border-right:1px solid var(--line);min-width:0}
+.sc-overview>div:last-child{border-right:0}
+.sc-overview strong{display:block;font:18px/1 "Cascadia Mono","Consolas",monospace;font-weight:normal;color:var(--ink)}
+.sc-overview span{display:block;margin-top:6px;font-size:9px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.sc-commandbar{height:42px;display:flex;align-items:end;justify-content:space-between;gap:15px;padding:0 18px;border-bottom:1px solid var(--line);background:#11150f;flex:none}
+.sc-tabs{display:flex;align-items:end;gap:4px;height:100%}
+.sc-tabs button{height:100%;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--muted);padding:0 12px}
+.sc-tabs button.active{border-bottom-color:var(--gold);color:var(--ink)}
+.sc-baseline{display:flex;align-items:center;gap:9px;height:100%;color:var(--muted);font-size:9px}
+.sc-baseline button{padding:4px 7px;background:transparent;font-size:9px}
+
+.sc-workspace{display:grid;grid-template-columns:240px minmax(0,1fr) 350px;flex:1;min-height:0}
+.sc-sidebar,.sc-inspector{min-width:0;min-height:0;background:var(--panel)}
+.sc-sidebar{display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.sc-search{display:flex;align-items:center;gap:7px;margin:13px 12px 7px;padding:8px 9px;border:1px solid var(--line);background:var(--bg);color:var(--gold)}
+.sc-search:focus-within{border-color:var(--gold)}
+.sc-search span{font:18px/1 "Segoe UI Symbol","Microsoft YaHei",sans-serif}
+.sc-search input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font-size:11px}
+.sc-search input::placeholder{color:var(--faint)}
+.sc-filters{display:grid;grid-template-columns:1fr 1fr;gap:5px;padding:0 12px 11px}
+.sc-filters select{width:100%;min-width:0;padding:6px 5px;font-size:9px}
+.sc-list-head{display:flex;justify-content:space-between;padding:0 12px 7px;border-bottom:1px solid var(--line);color:var(--muted);font-size:9px}
+.sc-list-head span:last-child{font-family:"Cascadia Mono","Consolas",monospace;color:var(--gold)}
+.sc-card-list{flex:1;min-height:0;overflow:auto;padding:4px 6px}
+.sc-card-item{width:100%;display:grid;grid-template-columns:8px minmax(0,1fr) auto;gap:8px;align-items:start;border:0;border-left:2px solid transparent;border-radius:0;background:transparent;padding:8px 7px;text-align:left}
+.sc-card-item:hover,.sc-card-item.selected{background:var(--panel-3);border-left-color:var(--gold)}
+.sc-card-item.changed{box-shadow:inset -2px 0 var(--blue)}
+.sc-card-dot{width:7px;height:7px;border:1px solid var(--faint);border-radius:50%;margin-top:4px}
+.sc-card-dot.story{background:var(--gold);border-color:var(--gold)}
+.sc-card-dot.state{background:#7f9768;border-color:#7f9768}
+.sc-card-dot.resource{background:var(--green);border-color:var(--green)}
+.sc-card-dot.ending{background:var(--coral);border-color:var(--coral)}
+.sc-card-dot.flavor{background:transparent;border-color:#737a71}
+.sc-card-name{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);font-size:11px;font-weight:normal}
+.sc-card-meta{display:block;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--faint);font:9px/1.25 "Cascadia Mono","Consolas",monospace}
+.sc-card-badge{font:9px/1.2 "Cascadia Mono","Consolas",monospace;color:var(--gold);font-style:normal}
+.sc-add-card{margin:8px 12px 12px;background:transparent;flex:none}
+.sc-empty{padding:22px 12px;color:var(--muted);font-size:11px;line-height:1.7}
+
+.sc-main{display:flex;flex-direction:column;min-width:0;min-height:0;background:var(--bg)}
+.sc-main-head{min-height:64px;display:flex;align-items:end;justify-content:space-between;gap:18px;padding:11px 16px 9px;flex:none}
+.sc-main-head h2{margin:3px 0 2px;font-size:18px;font-weight:normal}
+.sc-main-head p{margin:0;color:var(--muted);font-size:10px}
+.sc-graph-actions{display:flex;align-items:center;gap:5px;flex:none}
+.sc-graph-actions label{display:flex;align-items:center;gap:5px;color:var(--muted);font-size:9px;padding-left:4px}
+.sc-graph-actions input{accent-color:var(--gold)}
+.sc-viewport{position:relative;flex:1;min-height:150px;overflow:auto;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background-color:#0c0f0b;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:24px 24px;outline:0;cursor:grab}
+.sc-viewport.dragging{cursor:grabbing}
+.sc-viewport:focus-visible{box-shadow:inset 0 0 0 2px var(--gold)}
+.sc-graph-world{position:relative;transform-origin:top left}
+.sc-graph-svg{display:block}
+.sc-graph-svg .lane{fill:#11160f;stroke:#242c21;stroke-width:1}
+.sc-graph-svg .lane.alt{fill:#0f140e}
+.sc-graph-svg .lane-title{fill:var(--gold);font:12px "Songti SC","SimSun",serif}
+.sc-graph-svg .lane-meta{fill:#60675e;font:9px "Cascadia Mono","Consolas",monospace}
+.sc-graph-svg .edge{fill:none;stroke-width:1.4;opacity:.5;pointer-events:stroke}
+.sc-graph-svg .edge.yes{stroke:var(--green)}
+.sc-graph-svg .edge.no{stroke:var(--coral)}
+.sc-graph-svg .edge.flag{stroke:var(--gold);stroke-dasharray:5 4;opacity:.3}
+.sc-graph-svg .edge.dim{opacity:.04}
+.sc-graph-svg .edge.hot{stroke-width:2.6;opacity:1}
+.sc-graph-svg .node{cursor:pointer;outline:0}
+.sc-graph-svg .node rect{fill:#20271d;stroke:#465143;stroke-width:1;rx:3}
+.sc-graph-svg .node:hover rect,.sc-graph-svg .node:focus rect{stroke:var(--ink);stroke-width:2}
+.sc-graph-svg .node.selected rect{stroke:var(--gold);stroke-width:2.5}
+.sc-graph-svg .node.story rect{stroke:var(--gold)}
+.sc-graph-svg .node.state rect{stroke:#7f9768}
+.sc-graph-svg .node.resource rect{stroke:var(--green)}
+.sc-graph-svg .node.ending rect{stroke:var(--coral)}
+.sc-graph-svg .node.flavor{opacity:.62}
+.sc-graph-svg .node.dim{opacity:.11}
+.sc-graph-svg .node.dirty rect{stroke:var(--blue);stroke-width:2}
+.sc-graph-svg .node.changed:not(.dirty) rect{stroke-dasharray:4 2}
+.sc-graph-svg .node.issue::after{content:""}
+.sc-graph-svg .node-id{fill:#828980;font:9px "Cascadia Mono","Consolas",monospace}
+.sc-graph-svg .node-name{fill:var(--ink);font:10px "Songti SC","SimSun",serif}
+.sc-graph-svg .node-mark{fill:var(--gold)}
+.sc-graph-svg .node.resource .node-mark{fill:var(--green)}
+.sc-graph-svg .node.ending .node-mark{fill:var(--coral)}
+.sc-graph-svg .node.flavor .node-mark{fill:#6b7368}
+.sc-graph-svg .node-dirty-mark{fill:var(--blue)}
+.sc-report{flex:1;min-height:150px;overflow:auto;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:0 18px 30px}
+.sc-report[hidden]{display:none}
+.sc-report-intro{display:flex;justify-content:space-between;gap:20px;padding:16px 0 12px;border-bottom:1px solid var(--line);color:var(--muted);font-size:10px;line-height:1.6}
+.sc-report-intro strong{display:block;color:var(--ink);font-size:16px;font-weight:normal}
+.sc-report-row{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:12px;align-items:start;padding:12px 2px;border-bottom:1px solid #252c22;cursor:pointer}
+.sc-report-row:hover{background:#141912}
+.sc-report-state{font:9px/1.4 "Cascadia Mono","Consolas",monospace;color:var(--gold);text-transform:uppercase}
+.sc-report-state.added{color:var(--green)}
+.sc-report-state.removed,.sc-report-state.error{color:var(--coral)}
+.sc-report-state.warning{color:var(--gold)}
+.sc-report-state.info{color:var(--blue)}
+.sc-report-name{font-size:12px}
+.sc-report-meta{margin-top:4px;color:var(--muted);font-size:10px;line-height:1.55}
+.sc-report-fields{text-align:right;color:var(--faint);font:9px/1.45 "Cascadia Mono","Consolas",monospace;white-space:nowrap}
+.sc-main-foot{min-height:42px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:7px 16px;flex:none;color:var(--muted);font-size:9px}
+.sc-legend,.sc-zoom{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sc-legend span{display:inline-flex;align-items:center;gap:5px}
+.sc-legend i{display:inline-block}
+.sc-legend .line{width:18px;border-top:2px solid var(--green)}
+.sc-legend .line.no{border-color:var(--coral)}
+.sc-legend .line.flag{border-top:2px dashed var(--gold)}
+.sc-legend .node-key,.sc-legend .node-flavor,.sc-legend .node-dirty{width:9px;height:9px;border:1px solid var(--gold)}
+.sc-legend .node-flavor{border-color:#737a71;opacity:.65}
+.sc-legend .node-dirty{border:2px solid var(--blue)}
+.sc-zoom output{min-width:38px;text-align:center;font:9px "Cascadia Mono","Consolas",monospace}
+.sc-zoom button{padding:4px 7px}
+
+.sc-inspector{border-left:1px solid var(--line);overflow:auto}
+.sc-inspector-empty{padding:25px 18px;color:var(--muted);font-size:11px;line-height:1.8}
+.sc-inspector-inner{padding:16px}
+.sc-inspector-top{display:flex;align-items:start;justify-content:space-between;gap:10px}
+.sc-inspector-kicker{color:var(--gold);font:9px/1.4 "Cascadia Mono","Consolas",monospace;letter-spacing:.08em}
+.sc-inspector h3{margin:5px 0 6px;font-size:19px;font-weight:normal;overflow-wrap:anywhere}
+.sc-inspector-sub{color:var(--muted);font-size:10px;line-height:1.65;overflow-wrap:anywhere}
+.sc-inspector-actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:11px}
+.sc-status{display:inline-block;margin-top:9px;padding:3px 6px;border:1px solid var(--line);color:var(--gold);font-size:9px}
+.sc-section{padding-top:14px;margin-top:14px;border-top:1px solid var(--line)}
+.sc-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px;color:var(--muted);font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.sc-copy{color:#ece6d6;font-size:12px;line-height:1.75;white-space:pre-wrap}
+.sc-choice{padding:9px 10px;margin-top:7px;background:var(--panel-2);border-top:2px solid var(--green)}
+.sc-choice.no{border-top-color:var(--coral)}
+.sc-choice strong{display:block;margin-bottom:5px;font-size:11px;font-weight:normal}
+.sc-choice p{margin:0;color:var(--muted);font-size:10px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.sc-choice .delta{color:var(--gold)}
+.sc-relations{display:grid;grid-template-columns:80px minmax(0,1fr);gap:7px;margin-top:7px}
+.sc-relations strong{color:var(--gold);font:9px/1.5 "Cascadia Mono","Consolas",monospace;font-weight:normal}
+.sc-relations button{display:block;width:100%;border:0;background:transparent;text-align:left;padding:3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sc-relations button:hover{color:var(--gold)}
+.sc-tag{display:inline-block;margin:2px 3px 2px 0;padding:3px 5px;border:1px solid var(--line);background:var(--panel-2);color:#b9bdb5;font:9px "Cascadia Mono","Consolas",monospace}
+.sc-issue{padding:7px 8px;margin-top:5px;border-left:2px solid var(--gold);background:var(--panel-2);color:#c4c7c0;font-size:10px;line-height:1.55}
+.sc-issue.error{border-left-color:var(--coral)}
+.sc-issue.info{border-left-color:var(--blue)}
+.sc-diff{padding:7px 8px;margin-top:5px;border-left:2px solid var(--blue);background:var(--panel-2);font-size:10px;line-height:1.55}
+.sc-diff code{color:var(--blue);font:9px "Cascadia Mono","Consolas",monospace}
+.sc-diff del{display:block;color:#d28a77;text-decoration-color:#d28a77}
+.sc-diff ins{display:block;color:#a8c794;text-decoration:none}
+.sc-review-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.sc-review-buttons button{padding:6px 3px;font-size:9px}
+.sc-review-buttons button.active{border-color:var(--gold);background:var(--gold);color:#151811}
+.sc-review-note{width:100%;min-height:64px;margin-top:7px;padding:8px;border:1px solid var(--line);border-radius:3px;resize:vertical;background:var(--bg);color:var(--ink);font-size:10px;line-height:1.55}
+
+.sc-edit-form{padding:16px}
+.sc-edit-head{display:flex;align-items:start;justify-content:space-between;gap:10px;margin-bottom:13px}
+.sc-edit-head h3{margin:4px 0 0}
+.sc-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sc-field{display:block;min-width:0;color:var(--muted);font-size:9px}
+.sc-field.wide{grid-column:1/-1}
+.sc-field input,.sc-field textarea,.sc-field select{display:block;width:100%;margin-top:5px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--ink);padding:7px;font-size:10px;line-height:1.45}
+.sc-field textarea{min-height:58px;resize:vertical}
+.sc-form-group{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+.sc-form-group h4{margin:0 0 8px;color:var(--gold);font-size:10px;font-weight:normal;letter-spacing:.06em}
+.sc-form-actions{position:sticky;bottom:0;display:flex;justify-content:flex-end;gap:6px;margin:15px -16px -16px;padding:11px 16px;border-top:1px solid var(--line);background:var(--panel)}
+.sc-inline-error{margin-top:8px;color:var(--coral);font-size:10px;line-height:1.5}
+
+.sc-toast{position:fixed;left:50%;bottom:20px;z-index:80;max-width:min(520px,calc(100% - 32px));transform:translate(-50%,10px);padding:9px 13px;border:1px solid var(--gold);background:var(--gold);color:#151811;font-size:11px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}
+.sc-toast.on{opacity:1;transform:translate(-50%,0)}
+dialog{width:min(440px,calc(100% - 32px));padding:20px;border:1px solid var(--line);border-radius:4px;background:var(--panel-2);color:var(--ink);box-shadow:0 18px 60px rgba(0,0,0,.55)}
+dialog::backdrop{background:rgba(5,7,5,.76)}
+dialog h2{margin:0 0 8px;font-size:18px;font-weight:normal}
+dialog p{margin:0 0 14px;color:var(--muted);font-size:11px;line-height:1.65}
+dialog label{display:block;color:var(--muted);font-size:10px}
+dialog input{display:block;width:100%;margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:3px;background:var(--bg);color:var(--ink)}
+.dialog-actions{display:flex;justify-content:flex-end;gap:6px;margin-top:17px}
+
+@media (max-width:1120px){
+  .sc-workspace{grid-template-columns:220px minmax(0,1fr) 310px}
+  .sc-source{display:none}
+  .sc-header{padding:0 14px}
+  .sc-header-actions button{padding-left:7px;padding-right:7px}
+}
+@media (max-width:900px){
+  .sc-workspace{grid-template-columns:210px minmax(0,1fr)}
+  .sc-inspector{position:fixed;right:0;top:168px;bottom:0;z-index:40;width:min(360px,88vw);transform:translateX(100%);transition:transform .2s ease;box-shadow:-18px 0 40px rgba(0,0,0,.38)}
+  body.inspector-open .sc-inspector{transform:translateX(0)}
+  .sc-overview{grid-template-columns:repeat(3,1fr);height:96px}
+  .sc-overview>div{padding:7px 11px}
+  .sc-overview strong{font-size:15px}.sc-overview span{margin-top:3px}
+  .sc-header-actions #scReload,.sc-header-actions #scUndoAll{display:none}
+}
+@media (max-width:640px){
+  html,body{overflow:auto}.sc-shell{min-width:0;min-height:100vh;height:auto}
+  .sc-header{height:auto;min-height:58px;padding:9px 10px}.sc-brand-mark{width:29px;height:29px;font-size:16px}.sc-brand h1{font-size:16px}.sc-eyebrow{font-size:8px}
+  .sc-header-actions #scMore{display:none}.sc-header-actions #scSave{font-size:9px;padding:6px}
+  .sc-commandbar{padding:0 8px}.sc-tabs button{padding:0 7px;font-size:10px}.sc-baseline{display:none}
+  .sc-workspace{display:block;height:calc(100vh - 196px)}
+  .sc-sidebar{display:none}.sc-main{height:100%}
+  .sc-main-head{padding:9px 10px 7px}.sc-main-head h2{font-size:15px}.sc-main-head p{font-size:9px}
+  .sc-graph-actions label{display:none}.sc-main-foot{padding:6px 9px}.sc-legend{display:none}
+  .sc-report{padding-left:10px;padding-right:10px}.sc-report-row{grid-template-columns:58px minmax(0,1fr);gap:7px}.sc-report-fields{display:none}
+  .sc-inspector{top:0;width:100vw}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition-duration:.01ms!important}}
