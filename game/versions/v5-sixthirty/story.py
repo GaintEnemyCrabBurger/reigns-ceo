@@ -136,7 +136,13 @@ add('star_demand', 'payoff', '销售冠军',
     '我带来的大客户，要我单独算账。',
     option('给他分成', '分成写进合同，客户没走。', (-9, 10, 12, -2), 'commission_run'),
     option('统一归公司', '他留下，客户开始慢慢流失。', (8, -7, -8, 5), 'star_control_run'),
-    'star_run and age_star>=3', 2500, 'payoff', 'star_done_run')
+    'star_hire_run and age_star>=3', 2500, 'payoff', 'star_done_run')
+
+add('star_promote_result', 'payoff', '销售总监',
+    '你提拔的人，先要一笔签字费。',
+    option('给他分成', '老客户留下，团队也学会卖。', (-6, 8, 11, 2), 'commission_run'),
+    option('只给奖金', '人留下，客户归公司。', (8, -5, -3, 4), 'star_control_run'),
+    'star_promote_run and age_star>=3', 2500, 'payoff', 'star_done_run')
 
 add('partner_power', 'venture', '合伙人 · {maker}',
     '第二款爆品是他做的，股份怎么分？',
@@ -286,13 +292,13 @@ add('launch_follow', 'payoff', '大客户',
     '预告卖爆了，但验货日提前了。',
     option('退订金', '钱退了，客户还给你留门。', (-16, 7, -8, -2), 'launch_clean_run'),
     option('按期交货', '工程师睡在工厂，货终于出门。', (-11, -8, 13, -6), 'launch_debt_run'),
-    'hype_debt_keep and age_launch>=3', 2500, 'payoff', 'launch_done_run')
+    'hype_debt_keep and launch_run and age_launch>=3', 2500, 'payoff', 'launch_done_run')
 
 add('launch_honest', 'payoff', '老客户',
     '你延期了，客户愿意帮你内测。',
     option('给他优先权', '他拿到首批，也带来同行。', (-7, 6, 16, 4), 'launch_done_run'),
     option('先卖旧款', '现金先回来，发布会再等等。', (15, 2, 4, -2), 'launch_done_run'),
-    'honest_launch_run and age_launch>=3', 2500, 'payoff')
+    'honest_launch_run and launch_run and age_launch>=3', 2500, 'payoff')
 
 add('founder_social', 'power', '公关总监',
     '你拒绝收购的截图，已经传遍行业。',
@@ -371,6 +377,18 @@ add('bridge_credit', 'pressure', '供应商老板',
     option('赊一个月', '他先发货，财务终于松气。', (28, 5, 5, 2), 'credit_rescue_run'),
     option('签长期单', '他让了价，产线重新开。', (23, 2, 8, 1), 'credit_rescue_run'),
     'money=0 and credit_good_run and !credit_rescue_run', 100000, 'crisis')
+
+add('credit_control', 'payoff', '供应商老板',
+    '账期救了你，他要进董事会。',
+    option('给观察席', '货不断，表决权少一票。', (-3, 6, 7, -3), 'supplier_seat_run'),
+    option('换供应商', '控制权还在，产线先停。', (-8, -2, -10, 5), 'supplier_exit_run'),
+    'credit_rescue_run and age_credit_rescue>=2', 3000, 'payoff', 'credit_control_run and credit_control_done_run')
+
+add('supplier_vote', 'payoff', '供应商代表',
+    '他不懂产品，却有一张董事票。',
+    option('给他看账', '他看懂现金流，投了你的票。', (-4, 5, 5, 4), 'supplier_vote_run'),
+    option('拉客户进来', '董事会多一张票，账期少一周。', (7, 2, 8, -2), 'customer_vote_run'),
+    'supplier_seat_run and credit_control_run and age_credit_control>=3', 2600, 'payoff')
 
 add('risk_team', 'pressure', '人事总监',
     '核心员工要走，离职信已经打印好了。',
@@ -506,7 +524,7 @@ def export():
         writer.writerows(CARDS)
     story_data = dict(credit='GPT 6 Astra', edition='real-business-2', cards=META, endings=ENDINGS)
     (HERE / 'story-meta.json').write_text(json.dumps(story_data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    sections = ['# 创始人 · GPT 6 Astra 作品', '', '产品已经卖爆。接下来是圈层、产能、价格战、收购、资本和危机。', '',
+    sections = ['# 创始人 · GPT 6 Astra 作品', '', '产品已经卖爆。接下来是收购、产能、价格战、现金流、控制权和危机。', '',
                 '每张卡只提一件具体的事；选择的后果会在几张卡后回来。没有固定任期，能经营就继续。', '']
     for card in CARDS:
         sections.extend([f"## {card['card']} · {card['bearer']}", '', card['question'].replace('\n', '  \n'), '',

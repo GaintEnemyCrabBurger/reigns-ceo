@@ -389,7 +389,7 @@
       "card": "star_demand",
       "id": "17",
       "bearer": "销售冠军",
-      "conditions": "star_run and age_star>=3",
+      "conditions": "star_hire_run and age_star>=3",
       "lockturn": "del",
       "weight": "2500",
       "question": "我带来的大客户，要我单独算账。",
@@ -409,9 +409,33 @@
       "no_custom": "commission_run and star_done_run"
     },
     {
+      "thematic": "payoff",
+      "card": "star_promote_result",
+      "id": "18",
+      "bearer": "销售总监",
+      "conditions": "star_promote_run and age_star>=3",
+      "lockturn": "del",
+      "weight": "2500",
+      "question": "你提拔的人，先要一笔签字费。",
+      "override_yes": "只给奖金",
+      "answer_yes": "人留下，客户归公司。",
+      "yes_money": "8",
+      "yes_team": "-5",
+      "yes_market": "-3",
+      "yes_mind": "4",
+      "yes_custom": "star_control_run and star_done_run",
+      "override_no": "给他分成",
+      "answer_no": "老客户留下，团队也学会卖。",
+      "no_money": "-6",
+      "no_team": "8",
+      "no_market": "11",
+      "no_mind": "2",
+      "no_custom": "commission_run and star_done_run"
+    },
+    {
       "thematic": "venture",
       "card": "partner_power",
-      "id": "18",
+      "id": "19",
       "bearer": "合伙人 · {maker}",
       "conditions": "founder_run and turn>=10 and !partner_run and !partner_left_run",
       "lockturn": "del",
@@ -435,7 +459,7 @@
     {
       "thematic": "payoff",
       "card": "partner_free_result",
-      "id": "19",
+      "id": "20",
       "bearer": "合伙人 · {maker}",
       "conditions": "partner_equal_run and age_partner>=3 and !partner_left_run",
       "lockturn": "del",
@@ -459,7 +483,7 @@
     {
       "thematic": "payoff",
       "card": "partner_control_result",
-      "id": "20",
+      "id": "21",
       "bearer": "合伙人 · {maker}",
       "conditions": "partner_control_run and age_partner>=3 and !partner_left_run",
       "lockturn": "del",
@@ -483,7 +507,7 @@
     {
       "thematic": "venture",
       "card": "buy_company",
-      "id": "21",
+      "id": "22",
       "bearer": "收购顾问",
       "conditions": "founder_run and turn>=11 and !buy_run",
       "lockturn": "del",
@@ -507,7 +531,7 @@
     {
       "thematic": "payoff",
       "card": "buy_whole_result",
-      "id": "22",
+      "id": "23",
       "bearer": "法务总监",
       "conditions": "buy_whole_run and age_buy>=3",
       "lockturn": "del",
@@ -531,7 +555,7 @@
     {
       "thematic": "payoff",
       "card": "buy_team_result",
-      "id": "23",
+      "id": "24",
       "bearer": "新团队负责人",
       "conditions": "buy_team_run and age_buy>=3",
       "lockturn": "del",
@@ -555,7 +579,7 @@
     {
       "thematic": "payoff",
       "card": "legal_claim",
-      "id": "24",
+      "id": "25",
       "bearer": "法务总监",
       "conditions": "legal_run and age_buy>=5",
       "lockturn": "del",
@@ -579,7 +603,7 @@
     {
       "thematic": "venture",
       "card": "investor_offer",
-      "id": "25",
+      "id": "26",
       "bearer": "大股东",
       "conditions": "founder_run and turn>=13 and !investor_run",
       "lockturn": "del",
@@ -603,7 +627,7 @@
     {
       "thematic": "payoff",
       "card": "board_vote",
-      "id": "26",
+      "id": "27",
       "bearer": "投资人代表",
       "conditions": "investor_seat_run and age_investor>=3",
       "lockturn": "del",
@@ -627,7 +651,7 @@
     {
       "thematic": "power",
       "card": "valuation_window",
-      "id": "27",
+      "id": "28",
       "bearer": "投行顾问",
       "conditions": "turn>=15 and !valuation_run",
       "lockturn": "14",
@@ -651,7 +675,7 @@
     {
       "thematic": "power",
       "card": "media_profile",
-      "id": "28",
+      "id": "29",
       "bearer": "财经记者",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -675,7 +699,7 @@
     {
       "thematic": "payoff",
       "card": "audit_follow",
-      "id": "29",
+      "id": "30",
       "bearer": "审计师",
       "conditions": "audit_run and age_audit>=2",
       "lockturn": "del",
@@ -699,7 +723,7 @@
     {
       "thematic": "power",
       "card": "founder_dinner",
-      "id": "30",
+      "id": "31",
       "bearer": "同行老板",
       "conditions": "deal_channel_run and turn>=6",
       "lockturn": "12",
@@ -723,7 +747,7 @@
     {
       "thematic": "power",
       "card": "supplier_game",
-      "id": "31",
+      "id": "32",
       "bearer": "供应商老板",
       "conditions": "turn>=2",
       "lockturn": "7",
@@ -747,7 +771,7 @@
     {
       "thematic": "power",
       "card": "old_stock",
-      "id": "32",
+      "id": "33",
       "bearer": "仓库主管",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -771,7 +795,7 @@
     {
       "thematic": "power",
       "card": "price_raise",
-      "id": "33",
+      "id": "34",
       "bearer": "财务总监",
       "conditions": "turn>=2",
       "lockturn": "7",
@@ -795,7 +819,7 @@
     {
       "thematic": "power",
       "card": "quality_return",
-      "id": "34",
+      "id": "35",
       "bearer": "售后主管",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -819,7 +843,7 @@
     {
       "thematic": "power",
       "card": "channel_conflict",
-      "id": "35",
+      "id": "36",
       "bearer": "渠道总监",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -843,7 +867,7 @@
     {
       "thematic": "power",
       "card": "regional_deal",
-      "id": "36",
+      "id": "37",
       "bearer": "区域经理",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -867,7 +891,7 @@
     {
       "thematic": "venture",
       "card": "product_bet",
-      "id": "37",
+      "id": "38",
       "bearer": "产品总监",
       "conditions": "founder_run and turn>=8 and !bet_run",
       "lockturn": "del",
@@ -891,7 +915,7 @@
     {
       "thematic": "payoff",
       "card": "bet_cheap_hit",
-      "id": "38",
+      "id": "39",
       "bearer": "产品总监",
       "conditions": "bet_cheap_run and lucky_bet_run and age_bet>=4",
       "lockturn": "del",
@@ -915,7 +939,7 @@
     {
       "thematic": "payoff",
       "card": "bet_premium_hit",
-      "id": "39",
+      "id": "40",
       "bearer": "产品总监",
       "conditions": "bet_premium_run and lucky_bet_run and age_bet>=4",
       "lockturn": "del",
@@ -939,7 +963,7 @@
     {
       "thematic": "payoff",
       "card": "bet_miss",
-      "id": "40",
+      "id": "41",
       "bearer": "财务总监",
       "conditions": "bet_run and !lucky_bet_run and age_bet>=4",
       "lockturn": "del",
@@ -963,7 +987,7 @@
     {
       "thematic": "initiative",
       "card": "launch_claim",
-      "id": "41",
+      "id": "42",
       "bearer": "公关总监",
       "conditions": "founder_run and turn>=16 and !launch_run",
       "lockturn": "del",
@@ -987,9 +1011,9 @@
     {
       "thematic": "payoff",
       "card": "launch_follow",
-      "id": "42",
+      "id": "43",
       "bearer": "大客户",
-      "conditions": "hype_debt_keep and age_launch>=3",
+      "conditions": "hype_debt_keep and launch_run and age_launch>=3",
       "lockturn": "del",
       "weight": "2500",
       "question": "预告卖爆了，但验货日提前了。",
@@ -1011,9 +1035,9 @@
     {
       "thematic": "payoff",
       "card": "launch_honest",
-      "id": "43",
+      "id": "44",
       "bearer": "老客户",
-      "conditions": "honest_launch_run and age_launch>=3",
+      "conditions": "honest_launch_run and launch_run and age_launch>=3",
       "lockturn": "del",
       "weight": "2500",
       "question": "你延期了，客户愿意帮你内测。",
@@ -1035,7 +1059,7 @@
     {
       "thematic": "power",
       "card": "founder_social",
-      "id": "44",
+      "id": "45",
       "bearer": "公关总监",
       "conditions": "independent_run and turn>=7",
       "lockturn": "12",
@@ -1059,7 +1083,7 @@
     {
       "thematic": "power",
       "card": "employee_options",
-      "id": "45",
+      "id": "46",
       "bearer": "人事总监",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -1083,7 +1107,7 @@
     {
       "thematic": "power",
       "card": "safety_line",
-      "id": "46",
+      "id": "47",
       "bearer": "厂长",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -1107,7 +1131,7 @@
     {
       "thematic": "power",
       "card": "customer_data",
-      "id": "47",
+      "id": "48",
       "bearer": "法务总监",
       "conditions": "turn>=2",
       "lockturn": "10",
@@ -1131,7 +1155,7 @@
     {
       "thematic": "power",
       "card": "regional_store",
-      "id": "48",
+      "id": "49",
       "bearer": "区域经理",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -1155,7 +1179,7 @@
     {
       "thematic": "power",
       "card": "board_packet",
-      "id": "49",
+      "id": "50",
       "bearer": "董事会秘书",
       "conditions": "turn>=2",
       "lockturn": "8",
@@ -1179,7 +1203,7 @@
     {
       "thematic": "power",
       "card": "founder_visit",
-      "id": "50",
+      "id": "51",
       "bearer": "销售总监",
       "conditions": "turn>=2",
       "lockturn": "7",
@@ -1203,7 +1227,7 @@
     {
       "thematic": "power",
       "card": "public_contract",
-      "id": "51",
+      "id": "52",
       "bearer": "法务总监",
       "conditions": "turn>=2",
       "lockturn": "10",
@@ -1227,7 +1251,7 @@
     {
       "thematic": "breather",
       "card": "founder_speech",
-      "id": "52",
+      "id": "53",
       "bearer": "财经记者",
       "conditions": "turn>=3",
       "lockturn": "del",
@@ -1251,7 +1275,7 @@
     {
       "thematic": "breather",
       "card": "office_move",
-      "id": "53",
+      "id": "54",
       "bearer": "行政总监",
       "conditions": "turn>=3",
       "lockturn": "del",
@@ -1275,7 +1299,7 @@
     {
       "thematic": "breather",
       "card": "award_dinner",
-      "id": "54",
+      "id": "55",
       "bearer": "行业协会",
       "conditions": "turn>=3",
       "lockturn": "del",
@@ -1299,7 +1323,7 @@
     {
       "thematic": "pressure",
       "card": "risk_money",
-      "id": "55",
+      "id": "56",
       "bearer": "财务总监",
       "conditions": "money<=18 and !risk_money_run",
       "lockturn": "del",
@@ -1323,7 +1347,7 @@
     {
       "thematic": "pressure",
       "card": "bridge_credit",
-      "id": "56",
+      "id": "57",
       "bearer": "供应商老板",
       "conditions": "money=0 and credit_good_run and !credit_rescue_run",
       "lockturn": "del",
@@ -1345,9 +1369,57 @@
       "no_custom": "credit_rescue_run"
     },
     {
+      "thematic": "payoff",
+      "card": "credit_control",
+      "id": "58",
+      "bearer": "供应商老板",
+      "conditions": "credit_rescue_run and age_credit_rescue>=2",
+      "lockturn": "del",
+      "weight": "3000",
+      "question": "账期救了你，他要进董事会。",
+      "override_yes": "换供应商",
+      "answer_yes": "控制权还在，产线先停。",
+      "yes_money": "-8",
+      "yes_team": "-2",
+      "yes_market": "-10",
+      "yes_mind": "5",
+      "yes_custom": "supplier_exit_run and credit_control_run and credit_control_done_run",
+      "override_no": "给观察席",
+      "answer_no": "货不断，表决权少一票。",
+      "no_money": "-3",
+      "no_team": "6",
+      "no_market": "7",
+      "no_mind": "-3",
+      "no_custom": "supplier_seat_run and credit_control_run and credit_control_done_run"
+    },
+    {
+      "thematic": "payoff",
+      "card": "supplier_vote",
+      "id": "59",
+      "bearer": "供应商代表",
+      "conditions": "supplier_seat_run and credit_control_run and age_credit_control>=3",
+      "lockturn": "del",
+      "weight": "2600",
+      "question": "他不懂产品，却有一张董事票。",
+      "override_yes": "拉客户进来",
+      "answer_yes": "董事会多一张票，账期少一周。",
+      "yes_money": "7",
+      "yes_team": "2",
+      "yes_market": "8",
+      "yes_mind": "-2",
+      "yes_custom": "customer_vote_run",
+      "override_no": "给他看账",
+      "answer_no": "他看懂现金流，投了你的票。",
+      "no_money": "-4",
+      "no_team": "5",
+      "no_market": "5",
+      "no_mind": "4",
+      "no_custom": "supplier_vote_run"
+    },
+    {
       "thematic": "pressure",
       "card": "risk_team",
-      "id": "57",
+      "id": "60",
       "bearer": "人事总监",
       "conditions": "team<=20 and !risk_team_run",
       "lockturn": "del",
@@ -1371,7 +1443,7 @@
     {
       "thematic": "pressure",
       "card": "bridge_team",
-      "id": "58",
+      "id": "61",
       "bearer": "老员工代表",
       "conditions": "team=0 and fair_pay_keep and !team_rescue_run",
       "lockturn": "del",
@@ -1395,7 +1467,7 @@
     {
       "thematic": "pressure",
       "card": "risk_market_low",
-      "id": "59",
+      "id": "62",
       "bearer": "销售总监",
       "conditions": "market<=15 and !risk_market_low_run",
       "lockturn": "del",
@@ -1419,7 +1491,7 @@
     {
       "thematic": "pressure",
       "card": "bridge_market",
-      "id": "60",
+      "id": "63",
       "bearer": "老客户",
       "conditions": "market=0 and customer_oath_run and !market_rescue_run",
       "lockturn": "del",
@@ -1443,7 +1515,7 @@
     {
       "thematic": "pressure",
       "card": "risk_market_high",
-      "id": "61",
+      "id": "64",
       "bearer": "厂长",
       "conditions": "market>=85 and !risk_market_high_run",
       "lockturn": "del",
@@ -1467,7 +1539,7 @@
     {
       "thematic": "pressure",
       "card": "market_overflow",
-      "id": "62",
+      "id": "65",
       "bearer": "厂长",
       "conditions": "market=100 and !market_overflow_run",
       "lockturn": "del",
@@ -1491,7 +1563,7 @@
     {
       "thematic": "pressure",
       "card": "risk_mind_low",
-      "id": "63",
+      "id": "66",
       "bearer": "产品总监",
       "conditions": "mind<=18 and !risk_mind_low_run",
       "lockturn": "del",
@@ -1515,7 +1587,7 @@
     {
       "thematic": "pressure",
       "card": "bridge_mind",
-      "id": "64",
+      "id": "67",
       "bearer": "产品总监",
       "conditions": "mind=0 and product_touch_run and !mind_rescue_run",
       "lockturn": "del",
@@ -1539,7 +1611,7 @@
     {
       "thematic": "pressure",
       "card": "risk_mind_high",
-      "id": "65",
+      "id": "68",
       "bearer": "董事会秘书",
       "conditions": "mind>=85 and !risk_mind_high_run",
       "lockturn": "del",
@@ -1563,7 +1635,7 @@
     {
       "thematic": "pressure",
       "card": "mind_overflow",
-      "id": "66",
+      "id": "69",
       "bearer": "董事会秘书",
       "conditions": "mind=100 and !mind_overflow_run",
       "lockturn": "del",
@@ -1587,7 +1659,7 @@
     {
       "thematic": "exit",
       "card": "cash_out",
-      "id": "67",
+      "id": "70",
       "bearer": "收购方",
       "conditions": "money>=65 and turn>=16",
       "lockturn": "18",
@@ -1611,7 +1683,7 @@
     {
       "thematic": "exit",
       "card": "hand_over",
-      "id": "68",
+      "id": "71",
       "bearer": "合伙人 · {maker}",
       "conditions": "partner_done_run and team>=65 and turn>=17 and !partner_left_run",
       "lockturn": "20",
@@ -1635,7 +1707,7 @@
     {
       "thematic": "exit",
       "card": "take_break",
-      "id": "69",
+      "id": "72",
       "bearer": "助理",
       "conditions": "mind<=27 and turn>=16",
       "lockturn": "14",
@@ -1659,7 +1731,7 @@
     {
       "thematic": "legacy",
       "card": "legacy_rival",
-      "id": "70",
+      "id": "73",
       "bearer": "对手 · {rival}",
       "conditions": "dynasty>1 and rival_keep and turn>=3 and !legacy_seen_run",
       "lockturn": "del",
@@ -1683,7 +1755,7 @@
     {
       "thematic": "legacy",
       "card": "legacy_paid",
-      "id": "71",
+      "id": "74",
       "bearer": "猎头",
       "conditions": "dynasty>1 and fair_pay_keep and turn>=3 and !legacy_seen_run",
       "lockturn": "del",
@@ -1707,7 +1779,7 @@
     {
       "thematic": "legacy",
       "card": "legacy_credit",
-      "id": "72",
+      "id": "75",
       "bearer": "供应商老板",
       "conditions": "dynasty>1 and credit_good_keep and turn>=3 and !legacy_seen_run",
       "lockturn": "del",
@@ -1731,7 +1803,7 @@
     {
       "thematic": "legacy",
       "card": "legacy_bet",
-      "id": "73",
+      "id": "76",
       "bearer": "技术买家",
       "conditions": "dynasty>1 and bet_wait_keep and turn>=3 and !legacy_seen_run",
       "lockturn": "del",
@@ -1755,7 +1827,7 @@
     {
       "thematic": "legacy",
       "card": "legacy_sold",
-      "id": "74",
+      "id": "77",
       "bearer": "投资人",
       "conditions": "dynasty>1 and last_sold_keep and turn>=3 and !legacy_seen_run",
       "lockturn": "del",
@@ -1779,7 +1851,7 @@
     {
       "thematic": "legacy",
       "card": "legacy_failed",
-      "id": "75",
+      "id": "78",
       "bearer": "财务总监",
       "conditions": "dynasty>1 and last_failed_keep and turn>=3 and !legacy_seen_run",
       "lockturn": "del",
@@ -1888,6 +1960,11 @@
       "star_demand": {
         "kind": "payoff",
         "title": "销售冠军",
+        "keepsakes": {}
+      },
+      "star_promote_result": {
+        "kind": "payoff",
+        "title": "销售总监",
         "keepsakes": {}
       },
       "partner_power": {
@@ -2083,6 +2160,16 @@
       "bridge_credit": {
         "kind": "crisis",
         "title": "供应商老板",
+        "keepsakes": {}
+      },
+      "credit_control": {
+        "kind": "payoff",
+        "title": "供应商老板",
+        "keepsakes": {}
+      },
+      "supplier_vote": {
+        "kind": "payoff",
+        "title": "供应商代表",
         "keepsakes": {}
       },
       "risk_team": {

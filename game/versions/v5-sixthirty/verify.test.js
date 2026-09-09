@@ -81,6 +81,28 @@ test('opening choices unlock separate commercial follow-ups', () => {
   }
 });
 
+test('follow-up cards only return for the branch that created them', () => {
+  const state = game.create(31);
+  state.turn = 12;
+  state.flags.founder_run = 1;
+  state.flags.star_run = 1;
+  state.marked.star_run = 1;
+  state.flags.star_promote_run = 1;
+  state.marked.star_promote_run = 1;
+  assert.equal(game.condition(state, byName.star_demand.conditions), false);
+  assert.equal(game.condition(state, byName.star_promote_result.conditions), true);
+
+  const launch = game.create(32);
+  launch.turn = 20;
+  launch.flags.founder_run = 1;
+  launch.flags.honest_launch_run = 1;
+  launch.marked.honest_launch_run = 16;
+  assert.equal(game.condition(launch, byName.launch_honest.conditions), false);
+  launch.flags.launch_run = 1;
+  launch.marked.launch_run = 16;
+  assert.equal(game.condition(launch, byName.launch_honest.conditions), true);
+});
+
 test('the price war changes the next card and leaves the premium path closed', () => {
   const state = game.create(4);
   state.turn = 6;
@@ -118,6 +140,22 @@ test('a past promise enables a real zero-cash revival', () => {
   dead.flags.credit_good_run = 1;
   dead.flags.credit_rescue_run = 1;
   assert.equal(game.resourceEnding(dead), 'closed');
+});
+
+test('cash revival can turn into a control fight instead of a free reset', () => {
+  const state = game.create(33);
+  state.money = 0;
+  state.turn = 20;
+  state.flags.credit_good_run = 1;
+  state.flags.credit_rescue_run = 1;
+  state.marked.credit_rescue_run = 17;
+  assert.equal(game.condition(state, byName.credit_control.conditions), true);
+  state.current = 'credit_control';
+  state.status = 'card';
+  game.choose(state, byName.credit_control, 'no', data.meta.cards);
+  assert.ok(state.flags.credit_control_run);
+  state.turn = 23;
+  assert.equal(game.condition(state, byName.supplier_vote.conditions), true);
 });
 
 test('team, market and mind can each return once from zero with a prior promise', () => {

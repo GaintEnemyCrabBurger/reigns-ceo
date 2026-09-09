@@ -87,6 +87,11 @@
       "title": "销售冠军",
       "keepsakes": {}
     },
+    "star_promote_result": {
+      "kind": "payoff",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
     "partner_power": {
       "kind": "venture",
       "title": "合伙人",
@@ -280,6 +285,16 @@
     "bridge_credit": {
       "kind": "crisis",
       "title": "供应商老板",
+      "keepsakes": {}
+    },
+    "credit_control": {
+      "kind": "payoff",
+      "title": "供应商老板",
+      "keepsakes": {}
+    },
+    "supplier_vote": {
+      "kind": "payoff",
+      "title": "供应商代表",
       "keepsakes": {}
     },
     "risk_team": {
