@@ -42,7 +42,7 @@ const RES = [
 
 const $ = selector => document.querySelector(selector);
 const stage = $('#stage'), veil = $('#veil'), ansEl = $('#answer');
-const STORAGE_KEY = 'founder-astra-v7-save';
+const STORAGE_KEY = 'founder-astra-v8-save';
 let state, cur = null, busy = false;
 let restoreCardFocus = false;
 let animationEpoch = 0;
@@ -438,7 +438,7 @@ window.addEventListener('resize', positionAnswer);
     veil.innerHTML = `<div class="kicker">${escape(STORY.meta.credit)} 作品</div>
       <h1>创始人</h1>
       <div class="body">你是「${escape(state.company)}」的创始人。<br>
-        公司正当红。<br>发布会开始了。</div>
+        公司正当红。<br>收购方在楼下等你。</div>
       <div class="carry">左右划卡，做决定。${invalid ? '<br>存档未能完整读取，将重新开始。' : ''}</div>
       <button id="go">${resumed ? '继续' : '开始'}</button>`;
     veil.classList.add('on');

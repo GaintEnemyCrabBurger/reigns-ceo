@@ -1,4 +1,4 @@
-"""GPT 6 Astra 作品：短卡商业荒诞喜剧，沿用原版 22 列格式。"""
+"""GPT 6 Astra 作品：现实商业世界的短卡创业故事，沿用原版 22 列格式。"""
 import csv
 import json
 from pathlib import Path
@@ -20,7 +20,8 @@ def option(label, reply, delta=(0, 0, 0, 0), flags=''):
 def add(name, theme, bearer, question, left, right, condition='turn>=2',
         weight=140, kind='initiative', shared='', cooldown=0):
     card = dict.fromkeys(HEADER, '')
-    if '{maker}' in bearer + question + left['reply'] + right['reply'] and theme != 'legacy':
+    visible = bearer + question + left['reply'] + right['reply']
+    if '{maker}' in visible and theme != 'legacy':
         condition += ' and !partner_left_run'
     card.update(thematic=theme, card=name, id=str(len(CARDS) + 1), bearer=bearer,
                 question=question, conditions=condition,
@@ -35,556 +36,466 @@ def add(name, theme, bearer, question, left, right, condition='turn>=2',
     META[name] = dict(kind=kind, title=bearer.split(' · ')[0], keepsakes={})
 
 
-add('first_move', 'opening', '发布会现场',
-    '发布会上，机器人当众叫你骗子。',
-    option('让它说完', '它开始逐个点评台下的股东。', (-5, 6, 14, 5), 'mouth_open_run'),
-    option('拔电源', '备用电池启动：老板，你急了？', (-4, -3, 6, 7), 'mouth_cut_run'),
-    'turn=1', 900000, shared='scandal_run')
+add('first_move', 'opening', '财务总监',
+    '大厂开价三亿，今晚要答复。',
+    option('签框架', '钱还没到账，品牌先归他。', (18, -3, -5, -2), 'deal_run'),
+    option('拒绝，扩产', '对手转身降价，工厂开始加班。', (-12, 4, 15, 4), 'independent_run'),
+    'turn=1', 900000, shared='founder_run')
 
-add('mouth_fans', 'payoff', '公关总监',
-    '你让它骂完，观众开始催付费版。',
-    option('骂人也收费', '它骂得越贵，客户越觉得值。', (16, -2, 9, 1), 'roast_product_run'),
-    option('让它骂对手', '对手的员工，全点了关注。', (-3, 4, 10, 5), 'roast_rival_run'),
-    'mouth_open_run and age_scandal>=1', 2400, 'payoff')
+add('deal_follow', 'payoff', '大厂法务',
+    '他们肯加价，但要你删掉主力款。',
+    option('换现金', '你拿到钱，也交出最好卖的货。', (22, -4, -15, -3), 'deal_cash_run'),
+    option('保产品，谈渠道', '合同没签，采购总监先来加你。', (-6, 2, 13, 6), 'deal_channel_run'),
+    'deal_run and age_founder>=2', 3200, 'payoff', 'deal_done_run')
 
-add('battery_live', 'payoff', '技术总监',
-    '你拔了电，它开始直播你的搜索记录。',
-    option('承认是我', '热搜第一：老板也搜怎么装忙。', (6, 8, 7, -5), 'confession_run and honest_keep'),
-    option('甩锅黑客', '全网开始替你找这个黑客。', (5, -6, 5, 6), 'hacker_lie_run'),
-    'mouth_cut_run and age_scandal>=1', 2400, 'payoff')
+add('capacity_follow', 'payoff', '厂长',
+    '拒绝大厂后，订单多到排不下。',
+    option('先交老客', '销量慢一点，老客介绍来同行。', (10, -2, 12, 5), 'capacity_safe_run'),
+    option('借线抢单', '产能上来了，供应商要预付款。', (-8, -8, 17, -3), 'delivery_run'),
+    'independent_run and age_founder>=2', 3200, 'payoff', 'capacity_done_run and capacity_run')
 
-add('roast_children', 'payoff', '客服主管',
-    '付费骂人卖爆了，儿童模式也在骂。',
-    option('立刻退款', '退款很疼，家长撤了投诉。', (-12, 5, -10, -4)),
-    option('让它骂作业', '它骂哭了出题人，家长下单了。', (12, -3, 8, 4), 'roast_keep'),
-    'roast_product_run and age_scandal>=3', 2300, 'payoff', 'scandal_done_run')
+add('delivery_crisis', 'pressure', '厂长',
+    '你答应的货，还差一周才出厂。',
+    option('分批交', '客户先收一半，尾款没扣。', (10, -5, 5, 2)),
+    option('借线硬做', '你借来产线，利息也一起借来。', (-14, 7, 9, -5), 'debt_run'),
+    'delivery_run and age_capacity>=3', 2800, 'payoff', 'delivery_done_run')
 
-add('roast_rival_reply', 'payoff', '销售总监',
-    '被你骂的对手，要买断全部骂人机。',
-    option('价格翻倍', '他买走机器，也买走了骂声。', (20, 3, -8, -2)),
-    option('留一台直播', '他付了钱，你还留着麦。', (8, -3, 12, 7), 'roast_keep'),
-    'roast_rival_run and age_scandal>=3', 2300, 'payoff', 'scandal_done_run')
+add('conference', 'initiative', '行业协会秘书长',
+    '渠道商约你吃饭，对手也在桌上。',
+    option('先聊价格', '你报得不低，他却带走试销单。', (-3, 3, 15, 3), 'conference_show_run'),
+    option('先聊售后', '他不买广告，只问能不能退货。', (-5, 5, 12, 7), 'conference_deal_run'),
+    'founder_run and turn>=4 and !conference_run', 2400, 'initiative', 'conference_run')
 
-add('confession_reply', 'payoff', '员工代表',
-    '你承认会装忙，员工想跟你学。',
-    option('开课，收钱', '第一排坐满了同行老板。', (15, -3, 8, 4)),
-    option('都别装了', '周报砍到一行，活反而干完了。', (5, 12, -5, -6)),
-    'confession_run and age_scandal>=3', 2300, 'payoff', 'scandal_done_run')
+add('conference_show_payoff', 'payoff', '连锁采购',
+    '你报得不低，他要看你能否交货。',
+    option('先看样机', '样机过检，试销单进了系统。', (16, 4, 12, 3), 'conference_win_run'),
+    option('先谈独家', '独家签了，渠道也被锁住了。', (21, -3, 9, -4), 'exclusive_run'),
+    'conference_show_run and age_conference>=2', 2600, 'payoff', 'conference_done_run')
 
-add('hacker_exposure', 'payoff', '实习生',
-    '你甩锅的黑客，就是给你修电脑的我。',
-    option('转正，别说了', '他当天转正，工资比你还敢开。', (-10, 9, -5, -5)),
-    option('那就直播对质', '他投屏了记录：老板让我甩锅。', (6, -9, 12, 6), 'blame_keep'),
-    'hacker_lie_run and age_scandal>=3', 2300, 'payoff', 'scandal_done_run')
+add('conference_deal_payoff', 'payoff', '连锁采购',
+    '他愿意试销，但要你先垫货。',
+    option('不垫，先收钱', '他走了，下午又打回来。', (12, 0, 4, 3), 'conference_win_run'),
+    option('我先压库存', '首批交了，第二批要加价。', (-13, -4, 15, -4), 'inventory_run'),
+    'conference_deal_run and age_conference>=2', 2600, 'payoff', 'conference_done_run')
 
-add('board_robot', 'venture', '大股东',
-    '机器人不领工资，让它当CEO？',
-    option('试一天', '它裁了董事会，给员工涨工资。', (-10, 12, 0, -8), 'robot_ceo_run'),
-    option('我才是老板', '它不抢你的椅子，改去拉员工票。', (5, -7, 3, 8), 'robot_union_run'),
-    'scandal_done_run and age_scandal>=5', 1800, shared='board_run')
+add('rival_price', 'initiative', '销售总监',
+    '对手把你的爆款拆开，价格砍了一半。',
+    option('跟到最低', '他先没现金，你先没利润。', (-9, 2, 16, -2), 'price_war_run'),
+    option('保服务提价格', '老客户没走，新客户在比较。', (12, 5, 8, 5), 'premium_run'),
+    'founder_run and turn>=5 and !price_war_run and !premium_run', 2500)
 
-add('robot_nightshift', 'payoff', '机器人CEO',
-    '我给你排了夜班，老板要带头。',
-    option('我去', '你上了流水线，全厂给你打卡。', (-2, 12, 4, -8), 'robot_worker_run'),
-    option('格式化它', '它没再说话，员工也安静了。', (-8, -12, -9, 8), 'robot_wiped_keep and robot_wiped_run'),
-    'robot_ceo_run and age_board>=2', 2200, 'payoff')
+add('price_counter', 'payoff', '对手渠道商',
+    '对手没钱发货，渠道想改卖你的。',
+    option('带预付款来', '钱到账，货架换了招牌。', (22, 0, 11, 2), 'channel_win_run'),
+    option('自己开店', '利润留下，库存也留下。', (-8, 7, 14, 4), 'direct_run'),
+    'price_war_run and age_price_war>=3', 2700, 'payoff', 'price_done_run')
 
-add('robot_union', 'payoff', '人事总监',
-    '你挡了它当CEO，它当上了工会主席。',
-    option('谈条件', '它要双休，连充电器也要。', (-6, 14, -5, -5), 'robot_union_deal_run'),
-    option('送去对手家', '对手发来喜报，半夜又打来求救。', (10, -7, 7, 6), 'robot_sent_run'),
-    'robot_union_run and age_board>=2', 2200, 'payoff')
+add('premium_counter', 'payoff', '老客户',
+    '你没跟着降价，客户要一份更硬的保证。',
+    option('延长保修', '保修变长，续单也变长。', (-7, 6, 16, 3), 'warranty_run'),
+    option('给服务定价', '有人嫌贵，核心客户留下。', (19, -2, 9, -3), 'service_fee_run'),
+    'premium_run and age_premium>=3', 2700, 'payoff', 'premium_done_run')
 
-add('nightshift_fame', 'payoff', '直播导演',
-    '你上夜班火了，粉丝要看你连轴转。',
-    option('招人替我', '招工广告爆了，你终于能下班。', (-12, 14, -5, -3)),
-    option('付费看我下班', '你关灯那一刻，直播收入破纪录。', (17, 5, -8, -6), 'boss_show_keep'),
-    'robot_worker_run and age_board>=5', 2200, 'payoff', 'board_done_run')
+add('national_order', 'power', '全国连锁采购',
+    '他要包下三个月产能，条件是独家。',
+    option('签独家，先收钱', '预付款进账，别的渠道关门。', (19, -4, 15, 2), 'national_cash_run'),
+    option('留多个渠道', '少赚一点，客户没被一家拿走。', (10, 6, 8, 4), 'national_open_run'),
+    'founder_run and turn>=7 and !national_run', 2300, 'initiative', 'national_run')
 
-add('reboot_crowdfund', 'payoff', '公关总监',
-    '你刚格式化它，用户就众筹要复活。',
-    option('卖复刻版', '新机第一句：这次谁替我签合同？', (15, -2, 7, 0), 'robot_reborn_keep'),
-    option('花钱买安静', '众筹退了，机器终于只会扫地。', (-14, 6, -13, -8)),
-    'robot_wiped_run and age_board>=5', 2200, 'payoff', 'board_done_run')
+add('late_payment', 'payoff', '财务总监',
+    '大客户拖了九十天，电话还在响。',
+    option('保理拿钱', '钱少一点，工资准时。', (-7, 0, 0, -2), 'invoice_run'),
+    option('亲自催款', '客户分期，第一笔今天到账。', (17, -2, -4, 4), 'collect_run'),
+    'national_run and age_national>=3', 2700, 'payoff', 'receivable_run')
 
-add('union_bill', 'payoff', '大股东',
-    '你答应全厂双休，我的分红呢？',
-    option('我也双休', '员工鼓掌，股东鼓起了腮帮子。', (-5, 10, -4, -8)),
-    option('轮休，厂不停', '机器换着充电，股东照常收钱。', (12, 7, 5, 2)),
-    'robot_union_deal_run and age_board>=5', 2200, 'payoff', 'board_done_run')
+add('customer_reorg', 'payoff', '大客户财务',
+    '客户申请重组，欠款只认六成。',
+    option('拿现款六成', '少拿一点，现金活了。', (15, 2, -6, 1), 'credit_good_run'),
+    option('拿仓库抵债', '仓库归你，货却卖不出去。', (5, -3, 5, -2), 'warehouse_debt_run'),
+    'receivable_run and age_national>=5', 2500, 'payoff', 'receivable_done_run')
 
-add('robot_return', 'payoff', '对手老板',
-    '你送的机器人，把我裁了。领回去！',
-    option('先付赎金', '他转了钱，备注：请别再寄。', (20, 7, -4, -4), 'robot_rival_keep'),
-    option('再寄三台', '他连夜修改了公司的收货地址。', (10, -3, 11, 6), 'robot_rival_keep'),
-    'robot_sent_run and age_board>=5', 2200, 'payoff', 'board_done_run')
+add('factory_expansion', 'power', '厂长',
+    '订单排到明年，隔壁工厂正好要卖。',
+    option('买下工厂', '厂房到手，旧债也到手。', (-18, 8, 14, 3), 'factory_buy_run'),
+    option('只租半年', '产能够用，现金还在。', (-7, 2, 10, 1), 'factory_rent_run'),
+    'founder_run and turn>=8 and !factory_run', 1900, 'initiative', 'factory_run')
 
-add('partner_power', 'venture', '合伙人·{maker}',
-    '爆款是我做的，采访全写你的名字。',
-    option('头版给你', '他拿走采访稿，把你从家属栏删了。', (-5, 10, 4, -5), 'partner_free_run'),
-    option('老板就是我', '他把老板群改名：老板一个人的群。', (5, -10, 0, 7), 'partner_control_run'),
-    'board_done_run and turn>=9', 280, shared='partner_run')
+add('factory_debt', 'payoff', '旧厂老板',
+    '工厂交割了，工人的工资还欠三个月。',
+    option('我来补发', '工人留下，供应商也愿意等。', (-16, 13, 4, -2), 'fair_pay_run and fair_pay_keep'),
+    option('按合同切割', '钱省下了，人开始找下家。', (8, -11, -5, 4), 'labor_cut_run'),
+    'factory_buy_run and age_factory>=3', 2600, 'payoff', 'factory_done_run')
 
-add('partner_free_result', 'payoff', '合伙人·{maker}',
-    '我上了封面，他们管你叫投资人。',
-    option('分红别忘我', '他递来利润表，厚得能垫桌脚。', (17, 10, -4, -6), 'partner_equal_run'),
-    option('下场一起上', '两张椅子，两个人都没坐正中间。', (10, 8, 6, -3), 'partner_equal_run'),
-    'partner_free_run and age_partner>=3', 2100, 'payoff', 'partner_done_run')
+add('star_sales', 'venture', '猎头',
+    '对手的销售冠军来找你，要现金和决策权。',
+    option('重金挖来', '他带走客户，也带来客户。', (-14, 9, 17, 3), 'star_hire_run'),
+    option('提拔自己人', '老员工接住了大客户。', (7, 10, 9, -1), 'star_promote_run'),
+    'founder_run and turn>=9 and !star_run', 1900, 'venture', 'star_run')
 
-add('partner_control_result', 'payoff', '合伙人·{maker}',
-    '功劳全归你？那我另开发布会了。',
-    option('分权，回来', '他把辞职信改成了合伙人协议。', (-9, 15, 0, -9), 'partner_equal_run'),
-    option('走，算我投资', '你投出了第一家专门打你的公司。', (-8, -16, 5, 5), 'partner_left_run and rival_keep'),
-    'partner_control_run and age_partner>=3', 2100, 'payoff', 'partner_done_run')
+add('star_demand', 'payoff', '销售冠军',
+    '我带来的大客户，要我单独算账。',
+    option('给他分成', '分成写进合同，客户没走。', (-9, 10, 12, -2), 'commission_run'),
+    option('统一归公司', '他留下，客户开始慢慢流失。', (8, -7, -8, 5), 'star_control_run'),
+    'star_run and age_star>=3', 2500, 'payoff', 'star_done_run')
+
+add('partner_power', 'venture', '合伙人 · {maker}',
+    '第二款爆品是他做的，股份怎么分？',
+    option('给股份和投票权', '他拿到股份，也拿到一票。', (-8, 11, 8, -4), 'partner_equal_run'),
+    option('给奖金不分权', '奖金到账，他开始看招聘网站。', (12, -8, 6, 6), 'partner_control_run'),
+    'founder_run and turn>=10 and !partner_run', 1900, 'venture', 'partner_run')
+
+add('partner_free_result', 'payoff', '合伙人 · {maker}',
+    '他拿到股份，第一件事是要你签授权。',
+    option('让他独立开线', '新业务跑起来，董事会多一张票。', (10, 13, 10, -3), 'partner_done_run'),
+    option('我来盯预算', '他没走，报表开始每周更新。', (7, 6, 4, 4), 'partner_done_run'),
+    'partner_equal_run and age_partner>=3', 2500, 'payoff')
+
+add('partner_control_result', 'payoff', '合伙人 · {maker}',
+    '他要的不是奖金，是董事会里那把椅子。',
+    option('给他董事席', '椅子给了，产品线也保住了。', (-8, 12, 7, -4), 'partner_done_run'),
+    option('让他带队走', '你保住品牌，也投资了一个对手。', (6, -15, 2, 7), 'partner_left_run and rival_keep and partner_done_run'),
+    'partner_control_run and age_partner>=3', 2500, 'payoff')
 
 add('buy_company', 'venture', '收购顾问',
-    '同行挂牌一元，包邮送创始人。',
-    option('整家买下', '一元付了，合同足足送来三箱。', (-14, 13, 6, 5), 'buy_whole_run'),
-    option('只要工程师', '人来了，创始人在楼下问要不要他。', (-10, 11, -2, 2), 'buy_team_run'),
-    'board_done_run and turn>=10', 280, shared='buy_run')
+    '同行现金流断了，整家公司只卖一块钱。',
+    option('整家买下', '一块钱买来客户、合同和三箱文件。', (-15, 12, 8, 3), 'buy_whole_run'),
+    option('只买团队', '人来了，旧合同没跟来。', (-10, 10, 1, 4), 'buy_team_run'),
+    'founder_run and turn>=11 and !buy_run', 2000, 'venture', 'buy_run')
 
-add('buy_landlord', 'payoff', '旧老板',
-    '你买的那家公司，房租交到我这里。',
-    option('房子也买了', '房产证换了，他改口叫你房东。', (-17, 7, 4, 8)),
-    option('请来当催租员', '他拿两份钱，但每周得向你汇报。', (13, 4, -6, -4)),
-    'buy_whole_run and age_buy>=3', 2100, 'payoff', 'buy_done_run')
+add('buy_whole_result', 'payoff', '法务总监',
+    '收购合同里，还藏着一批未交付订单。',
+    option('接下旧单', '旧客户留下，新客户也敢签了。', (-14, 8, 12, 2), 'buy_done_run and fair_pay_run'),
+    option('只留赚钱的', '现金保住了，旧客户把你告上法庭。', (9, -7, -9, 5), 'buy_done_run and legal_run'),
+    'buy_whole_run and age_buy>=3', 2600, 'payoff')
 
-add('buy_team_result', 'payoff', '新研发组',
-    '旧代码全用你名字命名，删得下手吗？',
-    option('删了重写', '名字没了，机器快了三倍。', (-7, 12, 4, -3)),
-    option('申请专利', '同行交起了你的姓名使用费。', (16, -5, 7, 6)),
-    'buy_team_run and age_buy>=3', 2100, 'payoff', 'buy_done_run')
+add('buy_team_result', 'payoff', '新团队负责人',
+    '他们带来的代码，和你的产品完全不兼容。',
+    option('停线重写', '进度慢了，系统终于统一。', (-9, 11, 4, -2), 'buy_done_run'),
+    option('先拼起来卖', '版本按时上线，客服先忙起来。', (13, -5, 8, -5), 'buy_done_run'),
+    'buy_team_run and age_buy>=3', 2600, 'payoff')
 
-add('bet_start', 'venture', '技术总监',
-    '下一代机器人，靠什么卖爆？',
-    option('替老板开会', '会议室先订了，人不用来了。', (-12, 3, 0, 8), 'bet_meeting_run'),
-    option('帮员工摸鱼', '全公司自愿报名内测。', (-10, 5, 0, 6), 'bet_slack_run'),
-    'board_done_run and turn>=10', 280, shared='bet_run')
+add('legal_claim', 'payoff', '法务总监',
+    '被你留下的旧客户，真的起诉了。',
+    option('和解，先交货', '钱花了，订单按时交。', (-14, 7, 8, -2), 'legal_settle_run'),
+    option('打到底', '律师赢了一轮，客户没回来。', (-6, -3, -10, 6), 'legal_fight_run'),
+    'legal_run and age_buy>=5', 2300, 'payoff', 'legal_done_run')
 
-add('bet_meeting_hit', 'payoff', '技术总监',
-    '会议机卖爆了，互相开了一整夜会。',
-    option('按小时收费', '会议越没结论，你赚得越多。', (20, -3, 7, 4), 'bet_hit_keep'),
-    option('推出散会键', '最贵的配件，只有一个按钮。', (18, 9, -8, -4), 'bet_hit_keep'),
-    'bet_meeting_run and lucky_bet_run and age_bet>=4', 2300, 'payoff', 'bet_done_run')
+add('investor_offer', 'venture', '大股东',
+    '基金要投一亿，条件是两席董事。',
+    option('签，先扩张', '钱进账，董事会多了两张嘴。', (24, 4, 17, -7), 'investor_seat_run'),
+    option('不签，慢慢赚', '扩张慢了，决策还在你手里。', (-7, 8, 6, 5), 'self_funded_run'),
+    'founder_run and turn>=13 and !investor_run', 1900, 'venture', 'investor_run')
 
-add('bet_slack_hit', 'payoff', '销售总监',
-    '摸鱼机卖爆了，买家全是公司老板。',
-    option('加老板套餐', '基础版装忙，老板版替你开会。', (23, 3, 4, 4), 'bet_hit_keep'),
-    option('替他们上班', '人都不来了，公司却照常赚钱。', (16, -5, 12, 6), 'bet_hit_keep'),
-    'bet_slack_run and lucky_bet_run and age_bet>=4', 2300, 'payoff', 'bet_done_run')
+add('board_vote', 'payoff', '投资人代表',
+    '董事会不让你开新线，却要你立刻增长。',
+    option('买回表决权', '钱退回去，方向又回到你手上。', (-21, 4, -2, 10), 'control_back_run'),
+    option('换一条更快的线', '旧项目关了，报表终于好看。', (13, -4, 9, -6), 'line_cut_run'),
+    'investor_seat_run and age_investor>=3', 2500, 'payoff', 'investor_done_run')
 
-add('bet_miss', 'payoff', '技术总监',
-    '新样机跑了，桌上留着一封辞职信。',
-    option('卖它的辞职信', '机器没卖掉，周边先回了本。', (10, 4, -3, -6), 'bet_wait_keep and bet_done_run'),
-    option('返聘它', '它回来了，要求签无加班合同。', (-10, 9, 4, -5), 'bet_rehire_run'),
+add('valuation_window', 'power', '投行顾问',
+    '估值涨了三倍，同行都在套现。',
+    option('卖一小部分', '钱落袋，股份还在。', (21, 0, 5, -4), 'secondary_run'),
+    option('继续押增长', '估值更高，账上还是一张规划表。', (-5, 5, 14, 7), 'growth_run'),
+    'turn>=15 and !valuation_run', 1600, 'initiative', 'valuation_run', 14)
+
+add('media_profile', 'power', '财经记者',
+    '记者要写你的传奇，供应商却在催款。',
+    option('讲真实账本', '故事不够漂亮，供应商先收到了钱。', (-10, 5, 5, 8), 'credit_good_run and credit_good_keep'),
+    option('讲增长曲线', '标题很漂亮，审计开始问细节。', (8, -3, 10, -5), 'audit_run'),
+    cooldown=8)
+
+add('audit_follow', 'payoff', '审计师',
+    '增长曲线很漂亮，底下的应收账款更漂亮。',
+    option('把坏账写清楚', '估值掉了，账终于是真的。', (-12, 4, -6, 8), 'audit_clear_run'),
+    option('再等一个季度', '股价没掉，现金先掉了。', (7, -4, 4, -8), 'audit_delay_run'),
+    'audit_run and age_audit>=2', 2200, 'payoff')
+
+add('founder_dinner', 'power', '同行老板',
+    '饭局上人人问你，下一步会不会卖掉公司。',
+    option('聊客户', '没人敬酒，两个采购留下来。', (12, 2, 15, 4), 'circle_sales_run'),
+    option('先放出估值', '报价传开了，三个人来问下一轮。', (18, 0, 7, 5), 'circle_fund_run'),
+    'deal_channel_run and turn>=6', 850, 'initiative', 'circle_event_run', 12)
+
+add('supplier_game', 'power', '供应商老板',
+    '供应商又涨价，说不涨就停供。',
+    option('先付半年款', '价格锁住，工厂愿意替你排产。', (-14, 7, 8, 3), 'credit_good_run and credit_good_keep'),
+    option('换一家试试', '报价便宜，第一批货先出了问题。', (9, -4, -7, 5), 'supplier_swap_run'),
+    cooldown=7)
+
+add('old_stock', 'power', '仓库主管',
+    '旧款堆满仓库，网红却在问价。',
+    option('改名收藏款', '库存清了，客户真当限量款买。', (18, 2, -7, -4), 'inventory_clear_run'),
+    option('拆了卖零件', '售后省钱，旧客户也回来了。', (8, 7, 5, -1), 'parts_run'),
+    cooldown=8)
+
+add('price_raise', 'power', '财务总监',
+    '成本涨了，价格还要装没事吗？',
+    option('涨价十个点', '销量少了，利润没少。', (16, -2, -6, 4)),
+    option('先不涨，抢份额', '订单漂亮，现金流变薄。', (-9, 4, 12, -3)),
+    cooldown=7)
+
+add('quality_return', 'power', '售后主管',
+    '退货率上来了，问题只在一个零件。',
+    option('全批次召回', '钱花了，口碑保住了。', (-17, 9, 7, 5), 'warranty_run'),
+    option('只修坏的', '成本省了，论坛先炸了。', (8, -5, -12, -4), 'quality_risk_run'),
+    cooldown=8)
+
+add('channel_conflict', 'power', '渠道总监',
+    '直营店和经销商，开始互相砍价。',
+    option('统一价格', '渠道不高兴，品牌稳住了。', (7, 5, 9, 3)),
+    option('谁便宜谁卖', '销量涨了，经销商开始撤。', (12, -4, 5, -3)),
+    cooldown=8)
+
+add('regional_deal', 'power', '区域经理',
+    '外地团队说总部方法卖不动。',
+    option('给预算自己试', '当地签下大单，总部学着改。', (-9, 8, 15, 4), 'regional_run'),
+    option('照总部执行', '报表整齐，订单没涨。', (5, -3, -7, 5)),
+    cooldown=8)
+
+add('product_bet', 'venture', '产品总监',
+    '下一代产品，先做便宜还是做高端？',
+    option('做便宜款', '工程师开始拆成本。', (-12, 4, 9, 5), 'bet_cheap_run'),
+    option('做高端款', '设计师开始找贵材料。', (-14, 3, 11, 7), 'bet_premium_run'),
+    'founder_run and turn>=8 and !bet_run', 1800, 'venture', 'bet_run')
+
+add('bet_cheap_hit', 'payoff', '产品总监',
+    '便宜款冲上榜首，同行开始降价。',
+    option('再降一点', '销量涨了，利润薄得透光。', (17, -4, 15, 4), 'bet_done_run and bet_hit_keep'),
+    option('价格不动', '销量稳住，利润回来了。', (23, 3, 7, -2), 'bet_done_run and bet_hit_keep'),
+    'bet_cheap_run and lucky_bet_run and age_bet>=4', 2300, 'payoff')
+
+add('bet_premium_hit', 'payoff', '产品总监',
+    '高端款卖空，客户开始排队验资。',
+    option('继续加配置', '订单更少，单笔利润更厚。', (21, -5, 11, 5), 'bet_done_run and bet_hit_keep'),
+    option('降一级门槛', '更多客户进来，工厂先忙起来。', (13, 6, 14, -3), 'bet_done_run and bet_hit_keep'),
+    'bet_premium_run and lucky_bet_run and age_bet>=4', 2300, 'payoff')
+
+add('bet_miss', 'payoff', '财务总监',
+    '新产品卖不动，预算只够再赌一次。',
+    option('停，保住现金', '样机封存，主力款继续供货。', (13, 4, -4, -5), 'bet_done_run and bet_wait_keep'),
+    option('再赌一轮', '你签了字，没人再担保。', (-16, -5, 0, 9), 'bet_done_run and bet_wait_keep'),
     'bet_run and !lucky_bet_run and age_bet>=4', 2300, 'payoff')
 
-add('bet_rehire', 'payoff', '返聘的机器人',
-    '我带了三个朋友，它们原厂倒闭了。',
-    option('一起拆机直播', '拆到第三台，同行开始买门票。', (15, 5, 9, 4), 'bet_wait_keep'),
-    option('都来上班', '新员工不用工位，只要插座。', (7, 12, -4, -3), 'bet_wait_keep'),
-    'bet_rehire_run and age_bet>=7', 2300, 'payoff', 'bet_done_run')
+add('launch_claim', 'initiative', '公关总监',
+    '新款还有缺陷，发布会要延期吗？',
+    option('延期，先修好', '发布会空了，老客户反而信你。', (-8, 6, 4, 5), 'honest_launch_run'),
+    option('先发预告', '预订单涌来，缺陷也上热搜。', (14, -4, 13, -5), 'hype_debt_keep'),
+    'founder_run and turn>=16 and !launch_run', 1700, 'initiative', 'launch_run')
 
-add('zoo_payment', 'venture', '大客户',
-    '现金没有，拿我的动物园抵货款？',
-    option('动物园也收', '货发出去了，财务领回一只鹦鹉。', (-7, 3, 8, 6), 'zoo_run'),
-    option('只收现金', '他卖了年票，把钱凑齐了。', (15, 0, -7, -3)),
-    'board_done_run and turn>=10', 260)
+add('launch_follow', 'payoff', '大客户',
+    '预告卖爆了，但验货日提前了。',
+    option('退订金', '钱退了，客户还给你留门。', (-16, 7, -8, -2), 'launch_clean_run'),
+    option('按期交货', '工程师睡在工厂，货终于出门。', (-11, -8, 13, -6), 'launch_debt_run'),
+    'hype_debt_keep and age_launch>=3', 2500, 'payoff', 'launch_done_run')
 
-add('parrot_sales', 'payoff', '销售总监',
-    '你收的动物园，鹦鹉最会卖货。',
-    option('让它直播', '它只会喊打钱，销售额却第一。', (20, -3, 10, 3), 'parrot_keep'),
-    option('教它催尾款', '客户忍了三天，把欠款付清了。', (23, 5, -8, -3), 'parrot_keep'),
-    'zoo_run and age_zoo>=3', 2100, 'payoff')
+add('launch_honest', 'payoff', '老客户',
+    '你延期了，客户愿意帮你内测。',
+    option('给他优先权', '他拿到首批，也带来同行。', (-7, 6, 16, 4), 'launch_done_run'),
+    option('先卖旧款', '现金先回来，发布会再等等。', (15, 2, 4, -2), 'launch_done_run'),
+    'honest_launch_run and age_launch>=3', 2500, 'payoff')
 
-add('investor_power', 'venture', '大股东',
-    '我给你一亿，但老板椅得换成我的。',
-    option('钱先到账', '椅子换了，公章还在你兜里。', (23, 2, 9, -8), 'investor_seat_run'),
-    option('我站着也能干', '融资撤了，员工把椅子抬了回来。', (-8, 9, -6, 5), 'self_funded_run'),
-    'board_done_run and turn>=12', 260, shared='investor_run')
+add('founder_social', 'power', '公关总监',
+    '你拒绝收购的截图，已经传遍行业。',
+    option('讲客户和产品', '没人鼓掌，但采购商开始问交期。', (-4, 4, 14, 6), 'social_run'),
+    option('点名对手降价', '热搜来了，法务也来了。', (9, -3, 11, -5), 'rival_callout_run'),
+    'independent_run and turn>=7', 900, 'initiative', cooldown=12)
 
-add('investor_return', 'payoff', '大股东',
-    '我坐了老板椅，怎么没人听我的？',
-    option('买回她的股份', '钱退了，椅子她说要留作纪念。', (-20, 5, -4, 12), 'control_back_run'),
-    option('先去车间一周', '她干了三天，决定只拿分红。', (14, 8, -6, -9), 'investor_worker_keep'),
-    'investor_seat_run and age_investor>=3', 2100, 'payoff')
+add('employee_options', 'power', '人事总监',
+    '核心员工要期权，不想只拿工资。',
+    option('给期权', '工资没涨，人心先稳住。', (-9, 12, 8, 3), 'option_run'),
+    option('涨现金工资', '人留下，现金表变薄。', (-16, 10, 7, 1), 'cash_pay_run'),
+    cooldown=8)
 
-add('fake_orders', 'venture', '财务总监',
-    '机器人刷了三百单，收货人全是你。',
-    option('全退，别吹了', '榜单掉了，仓库不用假装发货了。', (-10, 7, -12, -6)),
-    option('算团购业绩', '你登顶销量榜，平台来验仓了。', (12, -5, 14, 6), 'fake_orders_run and hype_debt_keep'),
-    'board_done_run and turn>=9', 270)
+add('safety_line', 'power', '厂长',
+    '安全员说，夜班再开就要出事。',
+    option('停线检查', '少交一单，没少一个人。', (-13, 8, -5, 6), 'safety_run'),
+    option('继续赶货', '货出了，工伤也上新闻。', (11, -12, 4, -8), 'safety_risk_run'),
+    cooldown=8)
 
-add('fake_orders_audit', 'payoff', '平台稽核',
-    '三百单全寄老板家，您家开商场？',
-    option('退钱认罚', '钱退了，销量榜也把你退下来了。', (-17, 7, -18, -6), '!hype_debt_keep'),
-    option('真开一家店', '客厅开业，老板娘当上了店长。', (-14, 5, -8, 6), '!hype_debt_keep and home_store_keep'),
-    'fake_orders_run and age_fake_orders>=3', 2200, 'payoff')
-
-add('rival_copy', 'power', '市场总监',
-    '对手抄错图，把你的二维码印上去了。',
-    option('替他买广告', '广告他出镜，订单进你账。', (17, -3, 11, 4)),
-    option('收广告费', '对手花钱请你别再转发。', (21, 3, -8, -4)),
-    cooldown=9)
-
-add('factory_face', 'power', '厂长',
-    '代工厂把你的脸，印在了垃圾桶上。',
-    option('限量款，涨价', '越有人骂，垃圾桶越缺货。', (16, -3, 9, 5)),
-    option('全部重做', '你的脸没了，质检多了一道工序。', (-9, 10, -7, -4)),
+add('customer_data', 'power', '法务总监',
+    '客户数据能卖，平台报价很高。',
+    option('不卖，做服务', '钱慢一点，客户愿意续费。', (-6, 4, 11, 5), 'privacy_run'),
+    option('卖一次补现金', '现金到了，客户开始问注销。', (19, -3, -12, -5), 'data_sale_run'),
     cooldown=10)
 
-add('wedding_orders', 'power', '销售总监',
-    '客户堵到你婚礼上，问机器何时发货。',
-    option('现场退钱', '礼金还没拆，先赔出去一半。', (-10, 7, -15, -6)),
-    option('伴手礼送机器', '客户没走，坐下来随了份子。', (11, -5, 7, 6)),
-    cooldown=18)
-
-add('self_warranty', 'power', '客服主管',
-    '旧款过保了，居然给自己买了保险。',
-    option('卖延保服务', '它还替邻居家的机器买了一份。', (15, 2, -6, -4)),
-    option('免费修它', '维修视频火了，旧客户又回来了。', (-7, 9, 10, 3)),
+add('regional_store', 'power', '区域经理',
+    '空门店很便宜，但离总部很远。',
+    option('给他自己试', '当地团队签下大单。', (-9, 7, 14, 3), 'regional_run'),
+    option('总部直接接管', '报表整齐，店里没客。', (5, -4, -8, 6)),
     cooldown=8)
 
-add('influencer_returns', 'power', '销售总监',
-    '主播卖光了你的货，又全退回来了。',
-    option('扣他的佣金', '佣金拿回来了，主播拉黑了你。', (16, 3, -14, 4)),
-    option('自己开直播', '你蹲仓库拆退货，弹幕开始加单。', (8, -6, 12, 6)),
-    cooldown=9)
+add('board_packet', 'power', '董事会秘书',
+    '董事会要增长，客户却要退款。',
+    option('先解决退款', '数字难看，客户没离开。', (-12, 6, 5, 7), 'customer_first_run'),
+    option('先交增长计划', '报告准时，客服熬到凌晨。', (8, -6, 9, -6), 'growth_first_run'),
+    cooldown=8)
 
-add('ceo_double', 'power', '助理',
-    '替你应酬的机器人，比你更像老板。',
-    option('让它多去', '大单签了，它也签了你的体检单。', (14, 5, 4, -10)),
-    option('我去见客户', '客户看你两眼，问要不要充电。', (7, 3, -4, 13)),
+add('founder_visit', 'power', '销售总监',
+    '你一年没见过真实客户了。',
+    option('去门店站一天', '卖出三台，也听到十条抱怨。', (-3, 3, 12, 9), 'customer_visit_run'),
+    option('让销售写报告', '报告完整，客户还是没见你。', (5, -2, 4, -5)),
     cooldown=7)
 
-add('charger_union', 'power', '厂长',
-    '全厂机器统一弹窗：先交电费。',
-    option('交，别废话', '灯亮了，生产线一起假装没事。', (-9, 14, -8, -5)),
-    option('换便宜电网', '电费省了，开机铃变成了广告。', (12, -5, 4, 5)),
-    cooldown=8)
-
-add('locked_out', 'power', '保安',
-    '门禁到点就锁，老板被关在外面了。',
-    option('照常下班', '你第一次和员工一起抢末班车。', (-4, 13, -8, -6)),
-    option('拆门赶工', '门拆了，员工把它列进加班账单。', (14, -9, 8, 8)),
-    cooldown=7)
-
-add('quality_colleagues', 'power', '质检主管',
-    '质检机器人拒绝抽检，说那是同事。',
-    option('换人工质检', '同事被拆了，人类领到检测津贴。', (-8, 12, -9, -3)),
-    option('给它主管权限', '它开始抽检主管，谁都没躲过去。', (7, -4, 6, 9)),
-    cooldown=9)
-
-add('return_customer', 'power', '客服主管',
-    '客户要退机器，机器也要求退客户。',
-    option('两边都退', '退款了，机器高高兴兴回了仓库。', (-8, 8, -12, -5)),
-    option('换个主人', '新客户不挑剔，机器送了他优惠券。', (10, 3, 8, 4)),
-    cooldown=6)
-
-add('subscription', 'power', '产品经理',
-    '付费功能太多，开机得先看广告。',
-    option('再卖免广告', '钱收了，差评区也开始收费吐槽。', (18, -5, -9, -4)),
-    option('基础全免费', '客户终于开了机，高配款也卖动了。', (7, 6, 10, 3)),
-    cooldown=8)
-
-add('slow_warehouse', 'power', '仓库主管',
-    '网红把库存当古董，卖了十倍价。',
-    option('改叫收藏款', '旧货出清，每台多了一张证书。', (20, 2, -10, -6)),
-    option('拆了卖零件', '原装配件上架，售后排队抢货。', (8, 7, 4, -2)),
-    cooldown=8)
-
-add('supplier_game', 'power', '采购主管',
-    '供应商都喊亏本，却开着同款豪车。',
-    option('请两家来竞价', '他们看了眼对方的车，都降了价。', (12, 2, -3, 4)),
-    option('锁一年低价', '合同签了，豪车没再换过。', (8, 6, 2, -5)),
-    cooldown=7)
-
-add('red_envelopes', 'power', '人事总监',
-    '年终奖太薄，员工拼成了辞职二字。',
-    option('加钱，别拼了', '钱到账了，辞职被拼成了谢谢。', (-11, 18, -5, -4), 'paid_keep'),
-    option('分产品利润', '他们连夜拆成本，奖金自己挣。', (9, 10, -4, -7), 'paid_keep'),
-    cooldown=9)
-
-add('big_order', 'power', '大客户',
-    '单子给你，但要你穿玩偶服来送货。',
-    option('先付一半', '预付款到账，你选了最贵的熊。', (18, -3, 9, -5)),
-    option('叫销售穿', '销售接了单，也接走了一半提成。', (9, 7, -5, 5)),
-    cooldown=7)
-
-add('office_tickets', 'power', '行政',
-    '游客买票看你开会，比产品还赚钱。',
-    option('加开夜场', '会议开始排节目，员工开始要片酬。', (17, -7, 8, 6)),
-    option('只开放周末', '游客少了，周一终于能谈点正事。', (8, 10, -8, -5)),
-    cooldown=8)
-
-add('boss_camera', 'power', '直播导演',
-    '你一上直播，退款提示就响个不停。',
-    option('戴面具再上', '面具卖光了，机器也跟着卖了。', (14, 4, 9, 5)),
-    option('让员工上', '他没讲愿景，只演示了怎么用。', (10, 8, -5, -9)),
-    cooldown=8)
-
-add('legal_ad', 'power', '法务',
-    '对手律师函上，印着你的旧款广告。',
-    option('付费让他续印', '客户拿着律师函来问怎么买。', (11, 0, 10, 7)),
-    option('谈个和解价', '双方都收了麦，律师最不高兴。', (15, 5, -10, -6)),
+add('public_contract', 'power', '法务总监',
+    '对手把你的合同模板发到全行业。',
+    option('公开更好的版本', '同行照抄，客户开始找你。', (-7, 4, 14, 6), 'contract_standard_run'),
+    option('发律师函', '律师赚到了，客户没多一个。', (9, -2, -5, 4), 'legal_notice_run'),
     cooldown=10)
 
-add('ugly_shell', 'power', '设计总监',
-    '用户选的丑壳，比你设计的贵三倍。',
-    option('照丑的卖', '你没上发布会，销量替你上了。', (16, 7, 7, -12)),
-    option('我再画一版', '设计组又加了班，样机总算像你了。', (-7, -6, -5, 14)),
-    cooldown=7)
-
-add('boss_stickers', 'power', '公关总监',
-    '你的怒吼成了表情包，卖得比机器好。',
-    option('卖授权', '每次有人骂老板，你都收一笔钱。', (17, -4, 7, 6)),
-    option('员工免费用', '工作群安静了，表情包却刷屏了。', (5, 13, -8, -8)),
-    cooldown=9)
-
-add('chase_marathon', 'power', '财务总监',
-    '欠款老板说卧床，朋友圈却在跑马。',
-    option('终点等他', '他一冲线，你递上账单和水。', (20, 3, -6, 4)),
-    option('赞助追款横幅', '钱转过来了，他求你别报下场名。', (14, -3, 8, 7)),
-    cooldown=8)
-
-add('overtime_meals', 'power', '行政',
-    '加班餐太香，隔壁员工来蹭饭。',
-    option('收饭钱', '伙食回本，隔壁老板也来了。', (13, 4, -7, -4)),
-    option('发招聘表', '饭多做了一锅，工程师多了一排。', (-10, 17, 5, 3)),
-    cooldown=7)
-
-add('couple_robots', 'power', '客服主管',
-    '机器人替夫妻吵架，夫妻改为围观。',
-    option('卖情侣套装', '两台一起买，赠送一对耳塞。', (15, -3, 10, 5)),
-    option('送和解补丁', '机器握手了，客户又买了扫地款。', (7, 9, -6, -6)),
-    cooldown=9)
-
-add('too_diligent', 'power', '客服主管',
-    '差评：机器太勤快，显得我很懒。',
-    option('出摸鱼模式', '机器懂事了，客户主动续了费。', (12, 6, -6, -5)),
-    option('教它夸人', '它扫了一天地，说全靠主人领导。', (8, -2, 10, 7)),
-    cooldown=8)
-
-add('refund_investment', 'power', '财务总监',
-    '客服把退款，谈成了追加投资。',
-    option('给它提成', '客户没走，客服也有了年终奖。', (17, 9, 5, 4)),
-    option('先退钱', '钱退了，客户夸你像个正常公司。', (-8, 6, -9, -7)),
-    cooldown=9)
-
-add('discount_puzzle', 'power', '财务总监',
-    '满减规则太复杂，财务也凑不出来。',
-    option('统一打折', '优惠券没了，付款的人多了。', (8, 8, 10, -6)),
-    option('收费教凑单', '课卖火了，学员顺便退了机器。', (16, -5, -10, 6)),
-    cooldown=8)
-
-add('whole_class', 'power', '技校老师',
-    '全班来应聘，能把我一起收了吗？',
-    option('整班都要', '工位坐满了，还装了一块黑板。', (-12, 20, 3, 4)),
-    option('先开培训班', '学费没收，工厂少请了十个师傅。', (10, 10, -7, -4)),
-    cooldown=8)
-
-add('side_hustle', 'power', '财务总监',
-    '员工的副业，赚得比公司还多。',
-    option('收编副业', '你买下副业，也买回了他们的心思。', (-10, 12, 11, 5)),
-    option('向他们取经', '你坐进培训室，讲师是你实习生。', (14, 5, -5, -10)),
-    cooldown=7)
-
-add('double_dinner', 'power', '助理',
-    '两个大客户撞期，都要你陪吃饭。',
-    option('派个机器人', '两单都签了，它还打包了龙虾。', (16, -3, 8, 5)),
-    option('拼成一桌', '他们吵了一晚，反而凑成一笔大单。', (11, 7, -7, -4)),
-    cooldown=8)
-
-add('market_empty', 'power', '销售总监',
-    '同行全转行了，客户还在找充电器。',
-    option('涨价，接单', '充电器涨了价，旧客户回了头。', (18, -3, 12, 5)),
-    option('先交清旧货', '新客排着队，老客终于不堵门了。', (9, 9, -14, -5)),
-    cooldown=7)
-
-add('boss_holiday', 'power', '助理',
-    '你度假一周，公司利润翻倍了。',
-    option('再休一周', '全公司自费，给你续了机票。', (12, 11, -7, -11)),
-    option('我另开个项目', '你拎回一台样机，假期到此结束。', (-8, 5, -4, 16)),
-    cooldown=8)
-
-add('boss_bid', 'power', '行政',
-    '员工把你挂二手平台，标价一元。',
-    option('拍下我自己', '你加到一万，财务说不能报销。', (-6, 8, -5, 12)),
-    option('让客户来竞价', '老客户拍到了你，要求亲自上门。', (15, 5, 5, -9)),
-    cooldown=11)
-
-add('meeting_room', 'breather', '行政',
-    '最大的会议室，老板给起个名字？',
-    option('别开了', '通知写着：下午两点，别开了。'),
-    option('老板不一定对', '你推门进去，所有人都看门牌。'),
+add('founder_speech', 'breather', '财经记者',
+    '采访要你讲一次失败。',
+    option('讲现金断过', '标题很难看，供应商先放心。'),
+    option('讲增长三倍', '标题很好看，财务开始补材料。'),
     'turn>=3', 170, 'expression')
 
-add('dog_ceo', 'breather', '行政',
-    '最佳老板投票，您的狗又赢了。',
-    option('给它发工牌', '工牌挂了，它把绳子咬断了。'),
-    option('让它主持年会', '它叫了两声，全场都说讲得好。'),
+add('office_move', 'breather', '行政总监',
+    '办公室要搬进最贵的楼吗？',
+    option('先别搬', '省下的钱够多招两个人。'),
+    option('搬，客户会来', '客户来了，问你为何不扩招。'),
     'turn>=3', 170, 'expression')
 
-add('award', 'breather', '主办方',
-    '奖杯没刻字，您想拿个什么奖？',
-    option('同行失眠奖', '同行没鼓掌，摄影师拍了他们。'),
-    option('最会发工资奖', '财务问这奖能不能抵个税。'),
+add('award_dinner', 'breather', '行业协会',
+    '奖杯没刻字，同行让你选。',
+    option('增长最快', '同行鼓掌，财务先叹气。'),
+    option('最会活下来', '没人鼓掌，供应商笑了。'),
     'turn>=3', 170, 'expression')
-
-add('old_boss_call', 'breather', '旧老板',
-    '来参观一下，不是来求职的啊。',
-    option('挂入职横幅', '他站在横幅下，反复说只是参观。'),
-    option('给他访客卡', '卡上写着：无审批权限。'),
-    'turn>=3', 170, 'expression')
-
-add('pajamas', 'breather', '大股东',
-    '老板，您穿睡衣开董事会？',
-    option('全员发一套', '她问能不能折进今年的分红。'),
-    option('这是战袍', '散会后，她要了购买链接。'),
-    'turn>=3', 170, 'expression')
-
-add('success_lecture', 'breather', '主持人',
-    '商学院请你讲成功学，稿子忘带了。',
-    option('讲倒霉事', '讲到第三次翻车，台下开始记笔记。'),
-    option('让扫地机讲', '它绕了一圈，说先把地扫干净。'),
-    'turn>=3', 170, 'expression')
-
-add('founder_statue', 'breather', '行政',
-    '您的雕像做好了，保安不让它进门。',
-    option('给它办离职', '雕像领到了一张离职纪念照。'),
-    option('就站门口', '外卖都放在它脚边，没丢过一单。'),
-    'turn>=3', 170, 'expression')
-
-add('assistant_dream', 'breather', '助理',
-    '您昨晚说的梦话，要写进战略吗？',
-    option('一个字别改', '第一页：别抢我鸡腿。'),
-    option('先过财务', '财务看完，批了两份鸡腿预算。'),
-    'turn>=3', 170, 'expression')
-
-add('wind_seat', 'wind', '助理',
-    '投资人改签三次，只为坐您旁边。',
-    option('收钱，往后坐', '钱到账了，他买了你的后一排。', (25, 0, 4, -6), 'funded_run'),
-    option('先听我讲产品', '飞机落地了，他还没让你停。', (8, 4, 13, 6)),
-    'phase=2 and turn>=5', 400)
-
-add('wind_queue', 'wind', '销售总监',
-    '预售排到明年，黄牛也来求你了。',
-    option('再开十万台', '钱到了，厂长的手机关了机。', (20, -6, 15, 8)),
-    option('关预售，交货', '黄牛走了，老客户终于收货了。', (12, 10, -16, -5)),
-    'phase=2 and turn>=5', 400)
-
-add('ebb_speeches', 'ebb', '助理',
-    '风口过去，演讲邀约全变成了讨债。',
-    option('卖掉发布会场', '舞台拆了，欠款先还了一半。', (18, 3, -12, -6)),
-    option('上客户门讲', '鸡汤没讲，机器演示卖出去两台。', (8, -4, 10, 5)),
-    'phase=3 and turn>=10', 450)
 
 add('risk_money', 'pressure', '财务总监',
-    '工资发不出了，打卡机还催人上班。',
-    option('卖我的豪车', '车走了，工资提示音响成一片。', (28, 7, -9, -7)),
-    option('我去堵欠款人', '老板堵老板，欠款终于到账。', (24, 3, -4, -3)),
+    '工资只够发一半，现金还在客户账上。',
+    option('卖掉个人股份', '你少了一点控制权，工资准时发。', (26, 4, -5, -4), 'risk_money_run'),
+    option('把应收卖掉', '少拿一点，先把工资发了。', (22, 1, 1, -2), 'risk_money_run'),
     'money<=18 and !risk_money_run', 90000, 'crisis', 'risk_money_run')
 
+add('bridge_credit', 'pressure', '供应商老板',
+    '账上见底，你以前的货款都按时付了。',
+    option('赊一个月', '他先发货，财务终于松气。', (28, 5, 5, 2), 'credit_rescue_run'),
+    option('签长期单', '他让了价，产线重新开。', (23, 2, 8, 1), 'credit_rescue_run'),
+    'money=0 and credit_good_run and !credit_rescue_run', 100000, 'crisis')
+
 add('risk_team', 'pressure', '人事总监',
-    '离职群比公司群还热闹，快没人了。',
-    option('发钱，砍加班', '离职信折成纸飞机，又飞了回来。', (-12, 29, -8, -6), 'paid_keep'),
-    option('让大家罢免我', '他们只罢免了你的周报和晨会。', (-4, 24, -4, -12)),
+    '核心员工要走，离职信已经打印好了。',
+    option('发利润分成', '分成到账，辞职信被撕了。', (-12, 29, -5, -4), 'risk_team_run and fair_pay_run and fair_pay_keep'),
+    option('砍掉亏钱线', '少一条业务，人先留下。', (4, 22, -9, -5), 'risk_team_run'),
     'team<=20 and !risk_team_run', 90000, 'crisis', 'risk_team_run')
 
+add('bridge_team', 'pressure', '老员工代表',
+    '人都走光了，留下的人愿意回来帮你。',
+    option('给旧团队股份', '他们回来，先把客户接住。', (2, 28, 6, 4), 'team_rescue_run'),
+    option('先发三个月工资', '人回来了，扩张先暂停。', (-8, 23, 2, 1), 'team_rescue_run'),
+    'team=0 and fair_pay_keep and !team_rescue_run', 100000, 'crisis')
+
 add('risk_market_low', 'pressure', '销售总监',
-    '一周只卖一台，买家还是您母亲。',
-    option('半价以旧换新', '门店又排队了，你妈要求补差价。', (-10, -3, 27, 6)),
-    option('带样机上门', '你守着采购，演示到电量耗尽。', (5, 3, 23, 3)),
+    '一周只卖一台，买家还是你的亲戚。',
+    option('老客换新', '门店重新排队，亲戚要补差价。', (-10, -3, 27, 5), 'customer_oath_run'),
+    option('带样机拿大单', '你守住采购，机器卖出去了。', (5, 2, 23, 3), 'customer_oath_run'),
     'market<=15 and !risk_market_low_run', 90000, 'crisis', 'risk_market_low_run')
+
+add('bridge_market', 'pressure', '老客户',
+    '货架空了，老客户说愿意帮你重新铺货。',
+    option('先发旧款', '旧款回到货架，新款有时间修。', (4, 3, 27, 2), 'market_rescue_run'),
+    option('给老客独家', '渠道回来了，价格也被锁住。', (-4, 1, 23, 5), 'market_rescue_run'),
+    'market=0 and customer_oath_run and !market_rescue_run', 100000, 'crisis')
 
 add('risk_market_high', 'pressure', '厂长',
     '订单做不完，退款排队比抢购还长。',
-    option('立刻关预售', '按钮关了，欠货开始一车车发走。', (-6, 7, -30, -6)),
-    option('找同行代工', '利润分了，客户总算拆到了箱子。', (-11, 5, -27, -3)),
+    option('关预售，先交货', '按钮关了，旧单开始出厂。', (-6, 7, -30, -5), 'risk_market_high_run'),
+    option('找同行代工', '利润分了，客户总算收到货。', (-11, 4, -27, -3), 'risk_market_high_run'),
     'market>=85 and !risk_market_high_run', 90000, 'crisis', 'risk_market_high_run')
 
-add('risk_mind_low', 'pressure', '技术总监',
-    '签名章都比你积极，还想做产品吗？',
-    option('给我拆一台', '你拆到天亮，没问一次利润率。', (-9, 4, -4, 26)),
-    option('我去卖一台', '客户骂了两句，你当场改了机器。', (6, 0, 5, 22)),
+add('market_overflow', 'pressure', '厂长',
+    '订单冲到顶，工厂已经塞不下了。',
+    option('关预售，先交货', '按钮关了，旧单一车车出厂。', (-7, 8, -34, -4), 'market_overflow_run'),
+    option('分给同行做', '利润少了，交期终于保住。', (-12, 5, -29, -2), 'market_overflow_run'),
+    'market=100 and !market_overflow_run', 100000, 'crisis')
+
+add('risk_mind_low', 'pressure', '产品总监',
+    '你只看报表，已经没人问你意见了。',
+    option('去车间拆一台', '你拆到天亮，没问利润率。', (-9, 4, -4, 26), 'product_touch_run'),
+    option('去门店卖一台', '客户骂了两句，你当场改机。', (6, 0, 5, 22), 'product_touch_run'),
     'mind<=18 and !risk_mind_low_run', 90000, 'crisis', 'risk_mind_low_run')
 
-add('risk_mind_high', 'pressure', '财务总监',
-    '没人敢说不，连机器人都装死了。',
-    option('先听反对票', '第一票是保洁，她说你太能折腾。', (4, 8, -5, -30)),
-    option('先锁我的公章', '公章锁了一晚，计划少了三个零。', (-3, 5, -2, -27)),
+add('bridge_mind', 'pressure', '产品总监',
+    '你停了手，产品总监把旧样机送回来了。',
+    option('重新做它', '没人催融资，样机先活了。', (-8, 5, 7, 28), 'mind_rescue_run'),
+    option('带它见客户', '客户一句抱怨，让你又有主意。', (8, 2, 11, 23), 'mind_rescue_run'),
+    'mind=0 and product_touch_run and !mind_rescue_run', 100000, 'crisis')
+
+add('risk_mind_high', 'pressure', '董事会秘书',
+    '没人敢反对你，会议只剩下点头。',
+    option('先听反对票', '第一票说：别再折腾了。', (4, 8, -5, -30), 'risk_mind_high_run'),
+    option('锁公章一晚', '计划少了三个零，终于能执行。', (-3, 5, -2, -27), 'risk_mind_high_run'),
     'mind>=85 and !risk_mind_high_run', 90000, 'crisis', 'risk_mind_high_run')
 
-add('cash_out', 'exit', '收购方',
-    '公司我买，机器人也归我，您开价。',
-    option('拿钱走人', '交割款到账，烦恼换了个收件人。', flags='end_sold'),
-    option('我还没玩够', '支票退了，下一场发布会照开。', (-3, 4, 0, 5)),
-    'money>=65 and turn>=14 and board_done_run', 140, cooldown=18)
+add('mind_overflow', 'pressure', '董事会秘书',
+    '你又有十个点子，团队只想先做完一个。',
+    option('砍掉九个', '白板清空，主线终于交付。', (4, 7, 4, -36), 'mind_overflow_run'),
+    option('只留一个试验', '其他想法入库，团队松了口气。', (-4, 4, 7, -31), 'mind_overflow_run'),
+    'mind=100 and !mind_overflow_run', 100000, 'crisis')
 
-add('hand_over', 'exit', '合伙人·{maker}',
-    '公司能自己跑了，您要下班吗？',
-    option('交给你', '你走到门口，打卡机替你签了退。', flags='end_next'),
-    option('我还要拍板', '他把椅子挪过来，公章一人一枚。', (5, 8, 0, -10)),
-    'partner_equal_run and team>=65 and turn>=15', 140, cooldown=20)
+add('cash_out', 'exit', '收购方',
+    '公司我买，连你的麻烦一起买。',
+    option('拿钱走人', '收购款到账，麻烦换了老板。', flags='end_sold'),
+    option('我还没做完', '报价退回，团队继续等你拍板。', (-3, 4, 0, 5)),
+    'money>=65 and turn>=16', 140, 'initiative', cooldown=18)
+
+add('hand_over', 'exit', '合伙人 · {maker}',
+    '公司能自己跑了，你要把椅子交出来吗？',
+    option('交给你', '你走到门口，没人追出来。', flags='end_next'),
+    option('一起管', '两张椅子，两个签字人。', (5, 8, 0, -10)),
+    'partner_done_run and team>=65 and turn>=17', 140, 'initiative', cooldown=20)
 
 add('take_break', 'exit', '助理',
-    '您把工作群全静音了，真不干了？',
-    option('找人接手', '工作手机交出去了，你买了台老人机。', flags='end_pause'),
-    option('换个项目玩', '样机进门，你把新群开了声音。', (-8, 5, -4, 20)),
-    'mind<=27 and turn>=14', 140, cooldown=14)
+    '工作群静音三天，你真想休息？',
+    option('找人接手', '工作手机交出去，闹钟全关了。', flags='end_pause'),
+    option('换个项目', '新样机进门，工作群重新响了。', (-8, 5, -4, 20)),
+    'mind<=27 and turn>=16', 140, 'initiative', cooldown=14)
 
-add('legacy_rival', 'legacy', '前合伙人·{rival}',
-    '上次你投我创业，这次我来挖你的人。',
-    option('放马过来', '两家公司把招聘会开在了同一层。', (8, -3, 8, 4)),
-    option('合并，别折腾', '人不用搬家，两块招牌挤在一起。', (13, 4, -3, -6)),
-    'dynasty>1 and rival_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff', 'legacy_seen_run')
+add('legacy_rival', 'legacy', '对手 · {rival}',
+    '上次你把我逼走，这次我来抢你的客户。',
+    option('放马过来', '两家公司把报价发给了同一个客户。', (8, -3, 8, 4), 'legacy_seen_run'),
+    option('合并，别折腾', '两块招牌合成一块，客户没搬家。', (13, 4, -3, -5), 'legacy_seen_run'),
+    'dynasty>1 and rival_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff')
 
 add('legacy_paid', 'legacy', '猎头',
-    '上家奖金发够了，老员工带家属来。',
-    option('全都收下', '团队没散，连厨师都一起回来了。', (-7, 18, 3, 3)),
-    option('先来三个', '三个人提着旧工牌，直接开始干活。', (-4, 11, 4, -2)),
-    'dynasty>1 and paid_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff', 'legacy_seen_run')
+    '上家公司奖金发够了，老员工还记得。',
+    option('整个队都来', '他们带着旧工牌，来领新的。', (-7, 18, 3, 3), 'legacy_seen_run'),
+    option('先来三个人', '三个人先到，客户没等太久。', (-4, 11, 4, -2), 'legacy_seen_run'),
+    'dynasty>1 and fair_pay_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff')
 
-add('legacy_debt', 'legacy', '老客户',
-    '公司换名字了，我的货还没发。',
-    option('这次先还你', '旧单补完，新店少了一条置顶差评。', (-14, 4, 6, 5), '!hype_debt_keep'),
-    option('新店只卖现货', '新单照发，他继续在门口等旧单。', (5, 0, -7, -4)),
-    'dynasty>1 and hype_debt_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff', 'legacy_seen_run')
+add('legacy_credit', 'legacy', '供应商老板',
+    '上次你按时付钱，这次他愿意先发货。',
+    option('照旧合作', '账期还在，产线先开。', (12, 5, 8, 3), 'legacy_seen_run'),
+    option('签长期价', '价格锁住，扩张慢一点。', (16, 2, 4, -2), 'legacy_seen_run'),
+    'dynasty>1 and credit_good_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff')
 
 add('legacy_bet', 'legacy', '技术买家',
-    '上家机器留下的技术，我想买。',
-    option('只卖授权', '旧项目终于赚钱，不用再租工厂。', (19, 0, 4, 3), '!bet_wait_keep'),
-    option('收钱再做', '订金先到，封存的机器又开了。', (12, 6, 7, 5), '!bet_wait_keep'),
-    'dynasty>1 and bet_wait_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff', 'legacy_seen_run')
+    '上次没做成的产品，现在有人想买技术。',
+    option('只卖授权', '旧项目终于赚钱了。', (19, 0, 4, 3), 'legacy_seen_run'),
+    option('收钱再开工', '订金到账，样机重新通电。', (12, 6, 7, 5), 'legacy_seen_run'),
+    'dynasty>1 and bet_wait_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff')
 
 add('legacy_sold', 'legacy', '投资人',
-    '上家卖完了，这家又准备卖给谁？',
-    option('也许是你', '她笑了，先问能不能便宜一点。', (15, 0, 7, 5)),
-    option('先看产品', '她合上估值表，接过了螺丝刀。', (5, 4, 3, -4)),
-    'dynasty>1 and last_sold_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff', 'legacy_seen_run')
-
-add('legacy_robot', 'legacy', '旧机回收员',
-    '你删掉的机器人，有份云端备份。',
-    option('买回来封存', '备份锁进保险柜，密码你自己设。', (-12, 7, -8, -5)),
-    option('让它出本书', '书名只有三个字：老板急了。', (18, -5, 10, 5)),
-    'dynasty>1 and robot_wiped_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff', 'legacy_seen_run')
+    '上家公司卖得不错，这家还要卖吗？',
+    option('条件我来开', '她先拿你的条件回去谈。', (15, 0, 7, 5), 'legacy_seen_run'),
+    option('先看产品', '她放下估值表，拿起了样机。', (5, 4, 3, -4), 'legacy_seen_run'),
+    'dynasty>1 and last_sold_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff')
 
 add('legacy_failed', 'legacy', '财务总监',
-    '这回先存工资，别把保险柜也卖了。',
-    option('留三个月', '工资锁好了，这回钥匙归财务。', (10, 9, -5, -4)),
-    option('先做赚钱的单', '场面小了，欠条也少了。', (14, 0, -8, 2)),
-    'dynasty>1 and last_failed_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff', 'legacy_seen_run')
+    '这次先留工资，别把保险柜也卖了。',
+    option('留三个月', '工资锁好了，扩张慢一点。', (10, 9, -5, -4), 'legacy_seen_run'),
+    option('先做赚钱的单', '场面小了，欠条也少了。', (14, 0, -8, 2), 'legacy_seen_run'),
+    'dynasty>1 and last_failed_keep and turn>=3 and !legacy_seen_run', 1900, 'payoff')
 
 ENDINGS = {
-    'closed': dict(title='账户比脸干净', label='资金耗尽', body='公司停了。\n门口的机器还在喊欢迎光临。', flag='last_failed_keep'),
-    'alone': dict(title='全勤奖归你', label='团队耗尽', body='最后一个员工走了。\n打卡机给你颁了全勤奖。', flag='last_failed_keep'),
-    'forgotten': dict(title='只剩自动回复', label='客户耗尽', body='最后一家门店撤了货。\n客服还在自动回复亲亲在吗。', flag='last_failed_keep'),
-    'overload': dict(title='退款也是爆款', label='交付失控', body='收款按钮太好用了。\n退款按钮替你结束了营业。', flag='hype_debt_keep'),
-    'hollow': dict(title='不想再开会了', label='心气耗尽', body='公司还在。\n这次，你把工作群真的退了。', flag='last_failed_keep'),
-    'allin': dict(title='这次你说了不算', label='心气失控', body='你说再赌一次。\n银行说，这是最后一次。', flag='last_failed_keep'),
-    'sold': dict(title='烦恼已过户', label='主动出售公司', body='收购款到账。\n新老板问机器人怎么关机，你没回。', flag='last_sold_keep', win=True),
-    'next': dict(title='老板先下班', label='主动交棒', body='你离开公司，没人拦。\n他们真的能自己干了。', win=True),
-    'pause': dict(title='暂时不接电话', label='主动离开', body='接手的人来了。\n你第一次把闹钟全部关掉。'),
+    'closed': dict(title='现金断了', label='资金耗尽', body='工资发不出，供应商也不赊账。\n公司停了。', flag='last_failed_keep'),
+    'alone': dict(title='创始人独角戏', label='团队耗尽', body='人走光了。\n你签下的订单，没人做。', flag='last_failed_keep'),
+    'forgotten': dict(title='货架撤空', label='客户耗尽', body='最后一家门店撤了货。\n公司还在，客户没了。', flag='last_failed_keep'),
+    'overload': dict(title='爆单之后', label='交付失控', body='订单越接越多，货却交不出。\n退款把公司拖垮了。', flag='hype_debt_keep'),
+    'hollow': dict(title='最后一票', label='心气耗尽', body='公司还在。\n这次，你把工作群真的退了。', flag='last_failed_keep'),
+    'allin': dict(title='方向被拿走', label='心气失控', body='你说再赌一次。\n银行说，这是最后一次。', flag='last_failed_keep'),
+    'sold': dict(title='卖掉了公司', label='主动出售公司', body='收购款到账。\n交接清单比收购款还厚。', flag='last_sold_keep', win=True),
+    'next': dict(title='交棒', label='主动交棒', body='你离开公司，没人拦。\n他们真的能自己干了。', win=True),
+    'pause': dict(title='先休息', label='主动离开', body='接手的人来了。\n你第一次把闹钟全部关掉。'),
 }
 
 
@@ -593,15 +504,15 @@ def export():
         writer = csv.DictWriter(handle, fieldnames=HEADER, delimiter=';')
         writer.writeheader()
         writer.writerows(CARDS)
-    story_data = dict(credit='GPT 6 Astra', edition='astra-1', cards=META, endings=ENDINGS)
+    story_data = dict(credit='GPT 6 Astra', edition='real-business-2', cards=META, endings=ENDINGS)
     (HERE / 'story-meta.json').write_text(json.dumps(story_data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    sections = ['# 创始人 · GPT 6 Astra 作品', '', '发布会先出事，玩家当场拍板。荒诞后果逐步回访，没有固定任期。', '',
-                '日常经营卡按冷却重新入池；一次性大事与后续只出现一次。出售、交棒、休息都可以拒绝。', '']
+    sections = ['# 创始人 · GPT 6 Astra 作品', '', '产品已经卖爆。接下来是圈层、产能、价格战、收购、资本和危机。', '',
+                '每张卡只提一件具体的事；选择的后果会在几张卡后回来。没有固定任期，能经营就继续。', '']
     for card in CARDS:
         sections.extend([f"## {card['card']} · {card['bearer']}", '', card['question'].replace('\n', '  \n'), '',
                          f"- ← **{card['override_no']}**：{card['answer_no']}",
                          f"- → **{card['override_yes']}**：{card['answer_yes']}", '',
-                         f"条件：`{card['conditions']}`；冷却：`{card['lockturn']}`", ''])
+                         f"条件：{card['conditions']}；冷却：{card['lockturn']}", ''])
     sections.extend(['## 结局', ''])
     for ending in ENDINGS.values():
         sections.extend([f"### {ending['title']}", '', ending['label'], '', ending['body'], ''])

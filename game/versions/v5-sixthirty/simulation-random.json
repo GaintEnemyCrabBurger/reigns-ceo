@@ -4,23 +4,25 @@
   "simulationHorizon": 300,
   "stillOperatingAtHorizon": 0,
   "horizonSurvivalRate": 0,
-  "beyond18Decisions": 565,
-  "medianDecisions": 43,
+  "beyond18Decisions": 581,
+  "medianDecisions": 35,
   "minimumDecisions": 10,
-  "maximumDecisions": 106,
-  "meanExpressionChoices": 4.7,
-  "meanCrisisChoices": 2.16,
-  "cardsSeen": 90,
-  "cardsTotal": 90,
+  "maximumDecisions": 116,
+  "meanExpressionChoices": 1.28,
+  "meanCrisisChoices": 3.77,
+  "cardsSeen": 73,
+  "cardsTotal": 75,
   "endings": {
-    "forgotten": 237,
-    "sold": 152,
-    "allin": 89,
-    "next": 77,
-    "overload": 29,
-    "closed": 4,
-    "pause": 11,
-    "hollow": 1
+    "closed": 316,
+    "next": 108,
+    "overload": 119,
+    "sold": 38,
+    "pause": 4,
+    "allin": 14,
+    "forgotten": 1
   },
-  "unseen": []
+  "unseen": [
+    "bridge_team",
+    "bridge_mind"
+  ]
 }

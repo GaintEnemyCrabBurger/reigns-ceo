@@ -1,7 +1,7 @@
 'use strict';
 
 const Founder = (() => {
-  const VERSION = 7;
+  const VERSION = 8;
   const HISTORY_LIMIT = 80;
   const RESOURCES = ['money', 'team', 'market', 'mind'];
   const MAKERS = ['韩涛', '顾言', '邱白', '林工', '郑然', '叶舟'];
@@ -10,8 +10,18 @@ const Founder = (() => {
   const DANGER = {
     money: {low:18, flag:'risk_money_run', ending:'closed'},
     team: {low:20, flag:'risk_team_run', ending:'alone'},
-    market: {low:15, high:85, flag:'risk_market_low_run', highFlag:'risk_market_high_run', ending:'forgotten', highEnding:'overload'},
-    mind: {low:18, high:85, flag:'risk_mind_low_run', highFlag:'risk_mind_high_run', ending:'hollow', highEnding:'allin'},
+    market: {low:15, high:92, flag:'risk_market_low_run', highFlag:'risk_market_high_run', ending:'forgotten', highEnding:'overload'},
+    mind: {low:18, high:92, flag:'risk_mind_low_run', highFlag:'risk_mind_high_run', ending:'hollow', highEnding:'allin'},
+  };
+  const REVIVAL = {
+    money: {prerequisite:'credit_good_run', used:'credit_rescue_run'},
+    team: {prerequisite:'fair_pay_keep', used:'team_rescue_run'},
+    market: {prerequisite:'customer_oath_run', used:'market_rescue_run'},
+    mind: {prerequisite:'product_touch_run', used:'mind_rescue_run'},
+  };
+  const OVERFLOW = {
+    market: {used:'market_overflow_run'},
+    mind: {used:'mind_overflow_run'},
   };
 
   function random(state){
@@ -116,7 +126,7 @@ const Founder = (() => {
       let multiplier = 1;
       if (!['pressure', 'exit', 'legacy'].includes(card.thematic)){
         if (currentPhase === 2 && resource === 'money') multiplier = raw > 0 ? 1.4 : 0.8;
-        if (currentPhase === 2 && resource === 'market' && raw > 0) multiplier = 1.15;
+        if (resource === 'market' && raw > 0) multiplier = currentPhase === 2 ? 0.75 : 0.65;
         if (currentPhase === 4 && resource === 'money') multiplier = raw > 0 ? 0.85 : 1.15;
       }
       changes[resource] = Math.sign(raw) * Math.round(Math.abs(raw) * multiplier) + (upkeep[resource] || 0);
@@ -129,16 +139,31 @@ const Founder = (() => {
     return Object.fromEntries(RESOURCES.map(resource => {
       const danger = DANGER[resource];
       let next = Math.max(0, Math.min(100, state[resource] + changes[resource]));
-      if (next === 0 && !state.flags[danger.flag]) next = 1;
+      if (next === 0 && !state.flags[danger.flag] && !hasRevivalPromise(state, resource)) next = 1;
       if (danger.high && next === 100 && !state.flags[danger.highFlag]) next = 99;
       return [resource, next];
     }));
   }
 
+  function canRevive(state, resource){
+    const revival = REVIVAL[resource];
+    return Boolean(revival && state[resource] === 0 && state.flags[revival.prerequisite] && !state.flags[revival.used]);
+  }
+
+  function hasRevivalPromise(state, resource){
+    const revival = REVIVAL[resource];
+    return Boolean(revival && state.flags[revival.prerequisite] && !state.flags[revival.used]);
+  }
+
+  function canHandleOverflow(state, resource){
+    const overflow = OVERFLOW[resource];
+    return Boolean(overflow && state[resource] >= 100 && !state.flags[overflow.used]);
+  }
+
   function resourceEnding(state){
     for (const resource of RESOURCES){
-      if (state[resource] <= 0) return DANGER[resource].ending;
-      if (DANGER[resource].high && state[resource] >= 100) return DANGER[resource].highEnding;
+      if (state[resource] <= 0 && !canRevive(state, resource)) return DANGER[resource].ending;
+      if (DANGER[resource].high && state[resource] >= 100 && !canHandleOverflow(state, resource)) return DANGER[resource].highEnding;
     }
     return null;
   }
@@ -247,7 +272,7 @@ const Founder = (() => {
     } catch { return null; }
   }
 
-  return {VERSION, HISTORY_LIMIT, RESOURCES, LABELS, DANGER, create, random, phase, value,
+    return {VERSION, HISTORY_LIMIT, RESOURCES, LABELS, DANGER, REVIVAL, OVERFLOW, create, random, phase, value,
     condition, render, pick, effect, projected, resourceEnding, choose, advance, nextCompany, restore};
 })();
 
