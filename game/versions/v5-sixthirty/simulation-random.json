@@ -1,0 +1,26 @@
+{
+  "policy": "random",
+  "runs": 600,
+  "simulationHorizon": 300,
+  "stillOperatingAtHorizon": 0,
+  "horizonSurvivalRate": 0,
+  "beyond18Decisions": 565,
+  "medianDecisions": 43,
+  "minimumDecisions": 10,
+  "maximumDecisions": 106,
+  "meanExpressionChoices": 4.7,
+  "meanCrisisChoices": 2.16,
+  "cardsSeen": 90,
+  "cardsTotal": 90,
+  "endings": {
+    "forgotten": 237,
+    "sold": 152,
+    "allin": 89,
+    "next": 77,
+    "overload": 29,
+    "closed": 4,
+    "pause": 11,
+    "hollow": 1
+  },
+  "unseen": []
+}

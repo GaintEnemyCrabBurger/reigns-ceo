@@ -1,0 +1,33 @@
+{
+  "policy": "smart",
+  "runs": 100,
+  "simulationHorizon": 1000,
+  "stillOperatingAtHorizon": 100,
+  "horizonSurvivalRate": 100,
+  "beyond18Decisions": 100,
+  "medianDecisions": 1000,
+  "minimumDecisions": 1000,
+  "maximumDecisions": 1000,
+  "meanExpressionChoices": 8,
+  "meanCrisisChoices": 0.02,
+  "cardsSeen": 75,
+  "cardsTotal": 90,
+  "endings": {},
+  "unseen": [
+    "battery_live",
+    "roast_rival_reply",
+    "confession_reply",
+    "hacker_exposure",
+    "risk_money",
+    "risk_team",
+    "risk_market_low",
+    "risk_market_high",
+    "legacy_rival",
+    "legacy_paid",
+    "legacy_debt",
+    "legacy_bet",
+    "legacy_sold",
+    "legacy_robot",
+    "legacy_failed"
+  ]
+}

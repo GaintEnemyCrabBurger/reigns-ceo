@@ -1,0 +1,41 @@
+{
+  "policy": "right",
+  "runs": 90,
+  "simulationHorizon": 300,
+  "stillOperatingAtHorizon": 0,
+  "horizonSurvivalRate": 0,
+  "beyond18Decisions": 66,
+  "medianDecisions": 26,
+  "minimumDecisions": 13,
+  "maximumDecisions": 78,
+  "meanExpressionChoices": 2.82,
+  "meanCrisisChoices": 2.03,
+  "cardsSeen": 71,
+  "cardsTotal": 90,
+  "endings": {
+    "forgotten": 11,
+    "allin": 77,
+    "overload": 2
+  },
+  "unseen": [
+    "mouth_fans",
+    "roast_children",
+    "roast_rival_reply",
+    "confession_reply",
+    "robot_nightshift",
+    "nightshift_fame",
+    "reboot_crowdfund",
+    "union_bill",
+    "partner_free_result",
+    "buy_landlord",
+    "bet_meeting_hit",
+    "parrot_sales",
+    "investor_return",
+    "risk_money",
+    "risk_mind_low",
+    "hand_over",
+    "take_break",
+    "legacy_sold",
+    "legacy_robot"
+  ]
+}

@@ -1,0 +1,512 @@
+{
+  "credit": "GPT 6 Astra",
+  "edition": "astra-1",
+  "cards": {
+    "first_move": {
+      "kind": "initiative",
+      "title": "发布会现场",
+      "keepsakes": {}
+    },
+    "mouth_fans": {
+      "kind": "payoff",
+      "title": "公关总监",
+      "keepsakes": {}
+    },
+    "battery_live": {
+      "kind": "payoff",
+      "title": "技术总监",
+      "keepsakes": {}
+    },
+    "roast_children": {
+      "kind": "payoff",
+      "title": "客服主管",
+      "keepsakes": {}
+    },
+    "roast_rival_reply": {
+      "kind": "payoff",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "confession_reply": {
+      "kind": "payoff",
+      "title": "员工代表",
+      "keepsakes": {}
+    },
+    "hacker_exposure": {
+      "kind": "payoff",
+      "title": "实习生",
+      "keepsakes": {}
+    },
+    "board_robot": {
+      "kind": "initiative",
+      "title": "大股东",
+      "keepsakes": {}
+    },
+    "robot_nightshift": {
+      "kind": "payoff",
+      "title": "机器人CEO",
+      "keepsakes": {}
+    },
+    "robot_union": {
+      "kind": "payoff",
+      "title": "人事总监",
+      "keepsakes": {}
+    },
+    "nightshift_fame": {
+      "kind": "payoff",
+      "title": "直播导演",
+      "keepsakes": {}
+    },
+    "reboot_crowdfund": {
+      "kind": "payoff",
+      "title": "公关总监",
+      "keepsakes": {}
+    },
+    "union_bill": {
+      "kind": "payoff",
+      "title": "大股东",
+      "keepsakes": {}
+    },
+    "robot_return": {
+      "kind": "payoff",
+      "title": "对手老板",
+      "keepsakes": {}
+    },
+    "partner_power": {
+      "kind": "initiative",
+      "title": "合伙人·{maker}",
+      "keepsakes": {}
+    },
+    "partner_free_result": {
+      "kind": "payoff",
+      "title": "合伙人·{maker}",
+      "keepsakes": {}
+    },
+    "partner_control_result": {
+      "kind": "payoff",
+      "title": "合伙人·{maker}",
+      "keepsakes": {}
+    },
+    "buy_company": {
+      "kind": "initiative",
+      "title": "收购顾问",
+      "keepsakes": {}
+    },
+    "buy_landlord": {
+      "kind": "payoff",
+      "title": "旧老板",
+      "keepsakes": {}
+    },
+    "buy_team_result": {
+      "kind": "payoff",
+      "title": "新研发组",
+      "keepsakes": {}
+    },
+    "bet_start": {
+      "kind": "initiative",
+      "title": "技术总监",
+      "keepsakes": {}
+    },
+    "bet_meeting_hit": {
+      "kind": "payoff",
+      "title": "技术总监",
+      "keepsakes": {}
+    },
+    "bet_slack_hit": {
+      "kind": "payoff",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "bet_miss": {
+      "kind": "payoff",
+      "title": "技术总监",
+      "keepsakes": {}
+    },
+    "bet_rehire": {
+      "kind": "payoff",
+      "title": "返聘的机器人",
+      "keepsakes": {}
+    },
+    "zoo_payment": {
+      "kind": "initiative",
+      "title": "大客户",
+      "keepsakes": {}
+    },
+    "parrot_sales": {
+      "kind": "payoff",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "investor_power": {
+      "kind": "initiative",
+      "title": "大股东",
+      "keepsakes": {}
+    },
+    "investor_return": {
+      "kind": "payoff",
+      "title": "大股东",
+      "keepsakes": {}
+    },
+    "fake_orders": {
+      "kind": "initiative",
+      "title": "财务总监",
+      "keepsakes": {}
+    },
+    "fake_orders_audit": {
+      "kind": "payoff",
+      "title": "平台稽核",
+      "keepsakes": {}
+    },
+    "rival_copy": {
+      "kind": "initiative",
+      "title": "市场总监",
+      "keepsakes": {}
+    },
+    "factory_face": {
+      "kind": "initiative",
+      "title": "厂长",
+      "keepsakes": {}
+    },
+    "wedding_orders": {
+      "kind": "initiative",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "self_warranty": {
+      "kind": "initiative",
+      "title": "客服主管",
+      "keepsakes": {}
+    },
+    "influencer_returns": {
+      "kind": "initiative",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "ceo_double": {
+      "kind": "initiative",
+      "title": "助理",
+      "keepsakes": {}
+    },
+    "charger_union": {
+      "kind": "initiative",
+      "title": "厂长",
+      "keepsakes": {}
+    },
+    "locked_out": {
+      "kind": "initiative",
+      "title": "保安",
+      "keepsakes": {}
+    },
+    "quality_colleagues": {
+      "kind": "initiative",
+      "title": "质检主管",
+      "keepsakes": {}
+    },
+    "return_customer": {
+      "kind": "initiative",
+      "title": "客服主管",
+      "keepsakes": {}
+    },
+    "subscription": {
+      "kind": "initiative",
+      "title": "产品经理",
+      "keepsakes": {}
+    },
+    "slow_warehouse": {
+      "kind": "initiative",
+      "title": "仓库主管",
+      "keepsakes": {}
+    },
+    "supplier_game": {
+      "kind": "initiative",
+      "title": "采购主管",
+      "keepsakes": {}
+    },
+    "red_envelopes": {
+      "kind": "initiative",
+      "title": "人事总监",
+      "keepsakes": {}
+    },
+    "big_order": {
+      "kind": "initiative",
+      "title": "大客户",
+      "keepsakes": {}
+    },
+    "office_tickets": {
+      "kind": "initiative",
+      "title": "行政",
+      "keepsakes": {}
+    },
+    "boss_camera": {
+      "kind": "initiative",
+      "title": "直播导演",
+      "keepsakes": {}
+    },
+    "legal_ad": {
+      "kind": "initiative",
+      "title": "法务",
+      "keepsakes": {}
+    },
+    "ugly_shell": {
+      "kind": "initiative",
+      "title": "设计总监",
+      "keepsakes": {}
+    },
+    "boss_stickers": {
+      "kind": "initiative",
+      "title": "公关总监",
+      "keepsakes": {}
+    },
+    "chase_marathon": {
+      "kind": "initiative",
+      "title": "财务总监",
+      "keepsakes": {}
+    },
+    "overtime_meals": {
+      "kind": "initiative",
+      "title": "行政",
+      "keepsakes": {}
+    },
+    "couple_robots": {
+      "kind": "initiative",
+      "title": "客服主管",
+      "keepsakes": {}
+    },
+    "too_diligent": {
+      "kind": "initiative",
+      "title": "客服主管",
+      "keepsakes": {}
+    },
+    "refund_investment": {
+      "kind": "initiative",
+      "title": "财务总监",
+      "keepsakes": {}
+    },
+    "discount_puzzle": {
+      "kind": "initiative",
+      "title": "财务总监",
+      "keepsakes": {}
+    },
+    "whole_class": {
+      "kind": "initiative",
+      "title": "技校老师",
+      "keepsakes": {}
+    },
+    "side_hustle": {
+      "kind": "initiative",
+      "title": "财务总监",
+      "keepsakes": {}
+    },
+    "double_dinner": {
+      "kind": "initiative",
+      "title": "助理",
+      "keepsakes": {}
+    },
+    "market_empty": {
+      "kind": "initiative",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "boss_holiday": {
+      "kind": "initiative",
+      "title": "助理",
+      "keepsakes": {}
+    },
+    "boss_bid": {
+      "kind": "initiative",
+      "title": "行政",
+      "keepsakes": {}
+    },
+    "meeting_room": {
+      "kind": "expression",
+      "title": "行政",
+      "keepsakes": {}
+    },
+    "dog_ceo": {
+      "kind": "expression",
+      "title": "行政",
+      "keepsakes": {}
+    },
+    "award": {
+      "kind": "expression",
+      "title": "主办方",
+      "keepsakes": {}
+    },
+    "old_boss_call": {
+      "kind": "expression",
+      "title": "旧老板",
+      "keepsakes": {}
+    },
+    "pajamas": {
+      "kind": "expression",
+      "title": "大股东",
+      "keepsakes": {}
+    },
+    "success_lecture": {
+      "kind": "expression",
+      "title": "主持人",
+      "keepsakes": {}
+    },
+    "founder_statue": {
+      "kind": "expression",
+      "title": "行政",
+      "keepsakes": {}
+    },
+    "assistant_dream": {
+      "kind": "expression",
+      "title": "助理",
+      "keepsakes": {}
+    },
+    "wind_seat": {
+      "kind": "initiative",
+      "title": "助理",
+      "keepsakes": {}
+    },
+    "wind_queue": {
+      "kind": "initiative",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "ebb_speeches": {
+      "kind": "initiative",
+      "title": "助理",
+      "keepsakes": {}
+    },
+    "risk_money": {
+      "kind": "crisis",
+      "title": "财务总监",
+      "keepsakes": {}
+    },
+    "risk_team": {
+      "kind": "crisis",
+      "title": "人事总监",
+      "keepsakes": {}
+    },
+    "risk_market_low": {
+      "kind": "crisis",
+      "title": "销售总监",
+      "keepsakes": {}
+    },
+    "risk_market_high": {
+      "kind": "crisis",
+      "title": "厂长",
+      "keepsakes": {}
+    },
+    "risk_mind_low": {
+      "kind": "crisis",
+      "title": "技术总监",
+      "keepsakes": {}
+    },
+    "risk_mind_high": {
+      "kind": "crisis",
+      "title": "财务总监",
+      "keepsakes": {}
+    },
+    "cash_out": {
+      "kind": "initiative",
+      "title": "收购方",
+      "keepsakes": {}
+    },
+    "hand_over": {
+      "kind": "initiative",
+      "title": "合伙人·{maker}",
+      "keepsakes": {}
+    },
+    "take_break": {
+      "kind": "initiative",
+      "title": "助理",
+      "keepsakes": {}
+    },
+    "legacy_rival": {
+      "kind": "payoff",
+      "title": "前合伙人·{rival}",
+      "keepsakes": {}
+    },
+    "legacy_paid": {
+      "kind": "payoff",
+      "title": "猎头",
+      "keepsakes": {}
+    },
+    "legacy_debt": {
+      "kind": "payoff",
+      "title": "老客户",
+      "keepsakes": {}
+    },
+    "legacy_bet": {
+      "kind": "payoff",
+      "title": "技术买家",
+      "keepsakes": {}
+    },
+    "legacy_sold": {
+      "kind": "payoff",
+      "title": "投资人",
+      "keepsakes": {}
+    },
+    "legacy_robot": {
+      "kind": "payoff",
+      "title": "旧机回收员",
+      "keepsakes": {}
+    },
+    "legacy_failed": {
+      "kind": "payoff",
+      "title": "财务总监",
+      "keepsakes": {}
+    }
+  },
+  "endings": {
+    "closed": {
+      "title": "账户比脸干净",
+      "label": "资金耗尽",
+      "body": "公司停了。\n门口的机器还在喊欢迎光临。",
+      "flag": "last_failed_keep"
+    },
+    "alone": {
+      "title": "全勤奖归你",
+      "label": "团队耗尽",
+      "body": "最后一个员工走了。\n打卡机给你颁了全勤奖。",
+      "flag": "last_failed_keep"
+    },
+    "forgotten": {
+      "title": "只剩自动回复",
+      "label": "客户耗尽",
+      "body": "最后一家门店撤了货。\n客服还在自动回复亲亲在吗。",
+      "flag": "last_failed_keep"
+    },
+    "overload": {
+      "title": "退款也是爆款",
+      "label": "交付失控",
+      "body": "收款按钮太好用了。\n退款按钮替你结束了营业。",
+      "flag": "hype_debt_keep"
+    },
+    "hollow": {
+      "title": "不想再开会了",
+      "label": "心气耗尽",
+      "body": "公司还在。\n这次，你把工作群真的退了。",
+      "flag": "last_failed_keep"
+    },
+    "allin": {
+      "title": "这次你说了不算",
+      "label": "心气失控",
+      "body": "你说再赌一次。\n银行说，这是最后一次。",
+      "flag": "last_failed_keep"
+    },
+    "sold": {
+      "title": "烦恼已过户",
+      "label": "主动出售公司",
+      "body": "收购款到账。\n新老板问机器人怎么关机，你没回。",
+      "flag": "last_sold_keep",
+      "win": true
+    },
+    "next": {
+      "title": "老板先下班",
+      "label": "主动交棒",
+      "body": "你离开公司，没人拦。\n他们真的能自己干了。",
+      "win": true
+    },
+    "pause": {
+      "title": "暂时不接电话",
+      "label": "主动离开",
+      "body": "接手的人来了。\n你第一次把闹钟全部关掉。"
+    }
+  }
+}

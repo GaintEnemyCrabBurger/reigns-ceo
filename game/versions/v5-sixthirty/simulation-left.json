@@ -1,0 +1,42 @@
+{
+  "policy": "left",
+  "runs": 90,
+  "simulationHorizon": 300,
+  "stillOperatingAtHorizon": 0,
+  "horizonSurvivalRate": 0,
+  "beyond18Decisions": 82,
+  "medianDecisions": 40,
+  "minimumDecisions": 14,
+  "maximumDecisions": 88,
+  "meanExpressionChoices": 4.3,
+  "meanCrisisChoices": 2.06,
+  "cardsSeen": 74,
+  "cardsTotal": 90,
+  "endings": {
+    "hollow": 1,
+    "sold": 35,
+    "overload": 7,
+    "next": 22,
+    "forgotten": 17,
+    "pause": 4,
+    "closed": 4
+  },
+  "unseen": [
+    "battery_live",
+    "roast_rival_reply",
+    "confession_reply",
+    "hacker_exposure",
+    "robot_union",
+    "reboot_crowdfund",
+    "union_bill",
+    "robot_return",
+    "partner_control_result",
+    "buy_team_result",
+    "bet_slack_hit",
+    "bet_rehire",
+    "fake_orders_audit",
+    "risk_team",
+    "legacy_rival",
+    "legacy_robot"
+  ]
+}
