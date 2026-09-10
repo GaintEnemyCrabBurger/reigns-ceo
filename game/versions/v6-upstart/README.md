@@ -2,6 +2,8 @@
 
 《上位》是基于原版 Reigns CEO 框架制作的独立剧本版本。玩家从曜石云的实习生开始，在约 22 次决定内冲到 CEO；真正的游戏从坐上椅子后开始。
 
+在线试玩：https://gaintenemycrabburger.github.io/reigns-ceo/shangwei/
+
 ## 运行
 
 直接打开 `玩.html` 即可试玩。若浏览器限制本地脚本，可在仓库根目录运行：
@@ -27,7 +29,7 @@ python -m http.server 4173
 
 ```powershell
 python -X utf8 story.py
-python -X utf8 build.py
+python -X utf8 build.py --publish
 python -X utf8 -m unittest -v test_story.py
 ```
 

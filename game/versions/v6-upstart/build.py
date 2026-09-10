@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Build and validate the independent 《上位》 deck."""
+import argparse
 import collections
 import csv
 import hashlib
@@ -207,7 +208,10 @@ def assert_artifacts_consistent(cards):
         raise SystemExit("index.html 与 玩.html 发布内容不一致")
 
 
-if __name__ == "__main__":
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--publish", action="store_true", help="同步生成 docs/shangwei 独立发布入口")
+    arguments = parser.parse_args()
     cards = load_cards()
     assert_source_fresh(cards)
     errors = validate(cards)
@@ -219,3 +223,15 @@ if __name__ == "__main__":
     build(cards)
     assert_artifacts_consistent(cards)
     print(f"校验通过：{len(cards)} 张卡；续写 {sum(not c['weight'] for c in cards)} 张；已生成 玩.html")
+    if arguments.publish:
+        destination = HERE.parents[2] / "docs" / "shangwei"
+        destination.mkdir(parents=True, exist_ok=True)
+        (destination / "index.html").write_text(
+            (HERE / "index.html").read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+        print("已发布：docs/shangwei/index.html")
+
+
+if __name__ == "__main__":
+    main()

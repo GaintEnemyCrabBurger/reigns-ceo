@@ -1,12 +1,20 @@
 # Reigns CEO
 
-三个独立试玩入口，共用最初的左右划卡玩法；新版不会覆盖其他作品。
+四个独立试玩入口，共用最初的左右划卡玩法；新版不会覆盖其他作品。
 
 | 版本 | 在线试玩 |
 | --- | --- |
 | 原版 | https://gaintenemycrabburger.github.io/reigns-ceo/ |
 | Claude 版 | https://gaintenemycrabburger.github.io/reigns-ceo/startup/ |
 | **GPT 6 Astra 作品** | **https://gaintenemycrabburger.github.io/reigns-ceo/gpt-6-astra/** |
+| **上位** | **https://gaintenemycrabburger.github.io/reigns-ceo/shangwei/** |
+
+## 上位
+
+从实习生一路决策升到 CEO。灰账、笼络、甩锅、审计、收购和交棒会形成跨阶段回访；四条资源触底或爆表立即结束，隐藏风险与证据决定八类剧情终局。
+
+- 源码：`game/versions/v6-upstart`；发布文件：`docs/shangwei/index.html`。
+- 构建发布：`cd game && python versions/v6-upstart/build.py --publish`。
 
 ## GPT 6 Astra 作品
 
