@@ -1,0 +1,581 @@
+{
+  "cards": {
+    "intern_open": {
+      "theme": "act1",
+      "title": "财务部主管 周启明",
+      "kind": "opening"
+    },
+    "intern_audit": {
+      "theme": "act1",
+      "title": "审计专员 林岚",
+      "kind": "main"
+    },
+    "intern_audit_result": {
+      "theme": "act1",
+      "title": "财务部主管 周启明",
+      "kind": "main"
+    },
+    "intern_fix": {
+      "theme": "act1",
+      "title": "财务部主管 周启明",
+      "kind": "main"
+    },
+    "intern_gift": {
+      "theme": "act1",
+      "title": "财务部主管 周启明",
+      "kind": "main"
+    },
+    "intern_promotion": {
+      "theme": "act1",
+      "title": "人事经理",
+      "kind": "main"
+    },
+    "manager_team": {
+      "theme": "act2",
+      "title": "工程师 许棠",
+      "kind": "promotion_branch"
+    },
+    "manager_power": {
+      "theme": "act2",
+      "title": "事业部副总 周启明",
+      "kind": "promotion_branch"
+    },
+    "manager_team_review": {
+      "theme": "act2",
+      "title": "项目经理 许棠",
+      "kind": "promotion_branch"
+    },
+    "manager_power_review": {
+      "theme": "act2",
+      "title": "事业部副总 周启明",
+      "kind": "promotion_branch"
+    },
+    "manager_day1": {
+      "theme": "act2",
+      "title": "事业部副总",
+      "kind": "main"
+    },
+    "manager_clean_bid": {
+      "theme": "act2",
+      "title": "采购负责人 吴老板",
+      "kind": "procurement_branch"
+    },
+    "manager_dirty_bid": {
+      "theme": "act2",
+      "title": "采购负责人 吴老板",
+      "kind": "procurement_branch"
+    },
+    "manager_leader": {
+      "theme": "act2",
+      "title": "事业部副总",
+      "kind": "main"
+    },
+    "manager_crisis": {
+      "theme": "act2",
+      "title": "项目总监",
+      "kind": "main"
+    },
+    "manager_report": {
+      "theme": "act2",
+      "title": "事业部副总",
+      "kind": "main"
+    },
+    "manager_promotion": {
+      "theme": "act2",
+      "title": "人事经理",
+      "kind": "main"
+    },
+    "director_budget": {
+      "theme": "act3",
+      "title": "董事会秘书",
+      "kind": "main"
+    },
+    "director_deputy": {
+      "theme": "act3",
+      "title": "猎头",
+      "kind": "main"
+    },
+    "director_leader": {
+      "theme": "act3",
+      "title": "前任副总",
+      "kind": "main"
+    },
+    "director_audit_clean": {
+      "theme": "act3",
+      "title": "审计负责人 林岚",
+      "kind": "clean_callback"
+    },
+    "director_audit_dirty": {
+      "theme": "act3",
+      "title": "审计负责人 林岚",
+      "kind": "main"
+    },
+    "director_clean_reckoning": {
+      "theme": "act3",
+      "title": "审计负责人 林岚",
+      "kind": "audit_branch"
+    },
+    "director_dirty_reckoning": {
+      "theme": "act3",
+      "title": "审计负责人 林岚",
+      "kind": "audit_branch"
+    },
+    "director_media": {
+      "theme": "act3",
+      "title": "财经记者",
+      "kind": "main"
+    },
+    "director_board": {
+      "theme": "act3",
+      "title": "董事长",
+      "kind": "main"
+    },
+    "acting_ceo": {
+      "theme": "act4",
+      "title": "董事长",
+      "kind": "main"
+    },
+    "acting_crisis": {
+      "theme": "act4",
+      "title": "警方经侦联络人",
+      "kind": "main"
+    },
+    "ceo_crowning": {
+      "theme": "act4",
+      "title": "董事会秘书",
+      "kind": "main"
+    },
+    "ceo_first_day": {
+      "theme": "act5",
+      "title": "董事会秘书",
+      "kind": "main"
+    },
+    "ceo_day_two": {
+      "theme": "act5",
+      "title": "你的助理",
+      "kind": "main"
+    },
+    "ceo_first_reckoning": {
+      "theme": "open",
+      "title": "董事会秘书 叶真",
+      "kind": "open_world"
+    },
+    "audit_invitation": {
+      "theme": "open",
+      "title": "审计负责人",
+      "kind": "open_world"
+    },
+    "audit_witness": {
+      "theme": "open",
+      "title": "老同事",
+      "kind": "open_world"
+    },
+    "audit_ledger": {
+      "theme": "open",
+      "title": "财务总监",
+      "kind": "open_world"
+    },
+    "audit_prosecutor": {
+      "theme": "open",
+      "title": "经侦警官",
+      "kind": "open_world"
+    },
+    "board_favor": {
+      "theme": "open",
+      "title": "董事长",
+      "kind": "open_world"
+    },
+    "board_revolt": {
+      "theme": "open",
+      "title": "聪明副手",
+      "kind": "open_world"
+    },
+    "board_vote": {
+      "theme": "open",
+      "title": "独立董事",
+      "kind": "open_world"
+    },
+    "team_bonus": {
+      "theme": "open",
+      "title": "员工代表",
+      "kind": "open_world"
+    },
+    "team_layoff": {
+      "theme": "open",
+      "title": "人事总监",
+      "kind": "open_world"
+    },
+    "team_succession": {
+      "theme": "open",
+      "title": "老同事",
+      "kind": "open_world"
+    },
+    "market_fake": {
+      "theme": "open",
+      "title": "销售总监",
+      "kind": "open_world"
+    },
+    "market_boom": {
+      "theme": "open",
+      "title": "客户总监",
+      "kind": "open_world"
+    },
+    "market_competitor": {
+      "theme": "open",
+      "title": "竞争对手 CEO",
+      "kind": "open_world"
+    },
+    "old_leader": {
+      "theme": "open",
+      "title": "前任副总",
+      "kind": "open_world"
+    },
+    "old_reporter": {
+      "theme": "open",
+      "title": "财经记者",
+      "kind": "open_world"
+    },
+    "old_vendor": {
+      "theme": "open",
+      "title": "供应商老板",
+      "kind": "open_world"
+    },
+    "exit_offer": {
+      "theme": "open",
+      "title": "大厂收购负责人",
+      "kind": "open_world"
+    },
+    "handover": {
+      "theme": "open",
+      "title": "接班人",
+      "kind": "open_world"
+    },
+    "callback_team_credit": {
+      "theme": "open",
+      "title": "工程师 许棠",
+      "kind": "open_world"
+    },
+    "callback_credit_hog": {
+      "theme": "open",
+      "title": "工程师 许棠",
+      "kind": "open_world"
+    },
+    "callback_shared_secret": {
+      "theme": "open",
+      "title": "员工代表 赵宁",
+      "kind": "open_world"
+    },
+    "callback_leader_favor": {
+      "theme": "open",
+      "title": "前任副总 周启明",
+      "kind": "open_world"
+    },
+    "callback_power_in_writing": {
+      "theme": "open",
+      "title": "董事长 韩柏",
+      "kind": "open_world"
+    },
+    "callback_clean_procurement": {
+      "theme": "open",
+      "title": "采购负责人 吴老板",
+      "kind": "open_world"
+    },
+    "callback_dirty_audit": {
+      "theme": "open",
+      "title": "审计负责人 林岚",
+      "kind": "open_world"
+    },
+    "callback_clean_audit": {
+      "theme": "open",
+      "title": "审计负责人 林岚",
+      "kind": "open_world"
+    },
+    "callback_fast_track": {
+      "theme": "open",
+      "title": "董事会秘书 叶真",
+      "kind": "open_world"
+    },
+    "callback_media_leak": {
+      "theme": "open",
+      "title": "财经记者 唐未",
+      "kind": "open_world"
+    },
+    "callback_media_bought": {
+      "theme": "open",
+      "title": "财经记者 唐未",
+      "kind": "open_world"
+    },
+    "callback_loyal_deputy": {
+      "theme": "open",
+      "title": "工程师 许棠",
+      "kind": "open_world"
+    },
+    "callback_smart_deputy": {
+      "theme": "open",
+      "title": "副手 顾惟",
+      "kind": "open_world"
+    },
+    "regulator_notice": {
+      "theme": "open",
+      "title": "监管联络人",
+      "kind": "open_world"
+    },
+    "investor_demand": {
+      "theme": "open",
+      "title": "投资人代表",
+      "kind": "open_world"
+    },
+    "board_budget": {
+      "theme": "open",
+      "title": "董事会主席 韩柏",
+      "kind": "open_world"
+    },
+    "employee_walkout": {
+      "theme": "open",
+      "title": "员工代表 赵宁",
+      "kind": "open_world"
+    },
+    "competitor_offer": {
+      "theme": "open",
+      "title": "竞争对手 CEO",
+      "kind": "open_world"
+    },
+    "final_investigation": {
+      "theme": "open",
+      "title": "林岚与监管人员",
+      "kind": "open_world"
+    },
+    "scapegoat_offer": {
+      "theme": "open",
+      "title": "董事长 韩柏",
+      "kind": "open_world"
+    },
+    "final_clean": {
+      "theme": "open",
+      "title": "董事会主席 韩柏",
+      "kind": "open_world"
+    },
+    "final_black": {
+      "theme": "open",
+      "title": "投资人代表",
+      "kind": "open_world"
+    },
+    "final_board": {
+      "theme": "open",
+      "title": "独立董事 叶真",
+      "kind": "open_world"
+    },
+    "ending_cash_zero": {
+      "theme": "endings",
+      "title": "现金断裂",
+      "kind": "ending",
+      "trigger": "cash=0",
+      "trigger_type": "resource_edge"
+    },
+    "ending_cash_max": {
+      "theme": "endings",
+      "title": "账目无法解释",
+      "kind": "ending",
+      "trigger": "cash=100",
+      "trigger_type": "resource_edge"
+    },
+    "ending_team_zero": {
+      "theme": "endings",
+      "title": "团队散伙",
+      "kind": "ending",
+      "trigger": "team=0",
+      "trigger_type": "resource_edge"
+    },
+    "ending_team_max": {
+      "theme": "endings",
+      "title": "派系逼宫",
+      "kind": "ending",
+      "trigger": "team=100",
+      "trigger_type": "resource_edge"
+    },
+    "ending_market_zero": {
+      "theme": "endings",
+      "title": "失去价值",
+      "kind": "ending",
+      "trigger": "market=0",
+      "trigger_type": "resource_edge"
+    },
+    "ending_market_max": {
+      "theme": "endings",
+      "title": "爆单崩盘",
+      "kind": "ending",
+      "trigger": "market=100",
+      "trigger_type": "resource_edge"
+    },
+    "ending_capital_zero": {
+      "theme": "endings",
+      "title": "被架空",
+      "kind": "ending",
+      "trigger": "capital=0",
+      "trigger_type": "resource_edge"
+    },
+    "ending_capital_max": {
+      "theme": "endings",
+      "title": "所有人联合防你",
+      "kind": "ending",
+      "trigger": "capital=100",
+      "trigger_type": "resource_edge"
+    },
+    "ending_arrest": {
+      "theme": "endings",
+      "title": "东窗事发",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "final_investigation",
+          "side": "yes",
+          "choice": "替所有人扛下",
+          "condition": "ceo_run and ceo_open>=7 and risk>=4 and evidence>=5 and !scapegoat_ready and !final_whistle and !final_arrest"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    },
+    "ending_scapegoat": {
+      "theme": "endings",
+      "title": "替罪羊",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "scapegoat_offer",
+          "side": "no",
+          "choice": "替公司签字",
+          "condition": "ceo_run and ceo_open>=7 and scapegoat_ready and risk>=5 and evidence<6 and !scapegoat_taken and !scapegoat_refused"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    },
+    "ending_clean_ceo": {
+      "theme": "endings",
+      "title": "清白上位",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "final_clean",
+          "side": "no",
+          "choice": "继续做 CEO",
+          "condition": "ceo_run and ceo_open>=7 and clean_ceo and audit_closed and !dirty_route and risk<3 and !final_clean_ceo and !final_clean_sale"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    },
+    "ending_black_empire": {
+      "theme": "endings",
+      "title": "黑账帝国",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "final_black",
+          "side": "no",
+          "choice": "继续扩张",
+          "condition": "ceo_run and ceo_open>=7 and dirty_route and risk>=4 and evidence<7 and !final_black_empire and !final_black_whistle"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    },
+    "ending_whistle": {
+      "theme": "endings",
+      "title": "举报者",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "audit_prosecutor",
+          "side": "no",
+          "choice": "交出上级录音",
+          "condition": "ceo_run and turn>=23 and evidence>=4 and !prosecutor_recording"
+        },
+        {
+          "card": "final_investigation",
+          "side": "no",
+          "choice": "交出录音和账本",
+          "condition": "ceo_run and ceo_open>=7 and risk>=4 and evidence>=5 and !scapegoat_ready and !final_whistle and !final_arrest"
+        },
+        {
+          "card": "scapegoat_offer",
+          "side": "yes",
+          "choice": "把原件交给监管",
+          "condition": "ceo_run and ceo_open>=7 and scapegoat_ready and risk>=5 and evidence<6 and !scapegoat_taken and !scapegoat_refused"
+        },
+        {
+          "card": "final_black",
+          "side": "yes",
+          "choice": "把账交出去",
+          "condition": "ceo_run and ceo_open>=7 and dirty_route and risk>=4 and evidence<7 and !final_black_empire and !final_black_whistle"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    },
+    "ending_sold": {
+      "theme": "endings",
+      "title": "卖掉一切",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "exit_offer",
+          "side": "no",
+          "choice": "卖掉公司",
+          "condition": "ceo_run and ceo_open>=7 and !company_sold"
+        },
+        {
+          "card": "board_budget",
+          "side": "no",
+          "choice": "支持收购",
+          "condition": "ceo_run and ceo_open>=7 and !sale_supported and !chair_removed"
+        },
+        {
+          "card": "final_clean",
+          "side": "yes",
+          "choice": "卖给大厂",
+          "condition": "ceo_run and ceo_open>=7 and clean_ceo and audit_closed and !dirty_route and risk<3 and !final_clean_ceo and !final_clean_sale"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    },
+    "ending_handover": {
+      "theme": "endings",
+      "title": "主动交棒",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "handover",
+          "side": "no",
+          "choice": "签交接",
+          "condition": "ceo_run and ceo_open>=7 and loyal_successor"
+        },
+        {
+          "card": "final_board",
+          "side": "no",
+          "choice": "签交接",
+          "condition": "ceo_run and ceo_open>=8 and !final_handover and !final_board_puppet"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    },
+    "ending_board_puppet": {
+      "theme": "endings",
+      "title": "董事会木偶",
+      "kind": "ending",
+      "entries": [
+        {
+          "card": "final_board",
+          "side": "yes",
+          "choice": "再赌一把",
+          "condition": "ceo_run and ceo_open>=8 and !final_handover and !final_board_puppet"
+        }
+      ],
+      "trigger_type": "explicit_choice",
+      "trigger": "显式选择"
+    }
+  }
+}
