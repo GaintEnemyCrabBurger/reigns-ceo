@@ -99,6 +99,19 @@ class StoryContractTests(unittest.TestCase):
                 self.assertEqual(metadata["trigger_type"], "resource_edge")
                 self.assertTrue(metadata.get("trigger"))
 
+    def test_card_copy_is_quick_to_read(self):
+        for card in story.CARDS:
+            self.assertLessEqual(len(card["question"]), 24, card["card"])
+            self.assertLessEqual(len(card["override_no"]), 8, card["card"])
+            self.assertLessEqual(len(card["override_yes"]), 8, card["card"])
+            self.assertLessEqual(len(card["answer_no"]), 24, card["card"])
+            self.assertLessEqual(len(card["answer_yes"]), 24, card["card"])
+            for field in ("question", "answer_no", "answer_yes"):
+                self.assertNotIn("\n", card[field], f"{card['card']}.{field}")
+            if card["thematic"] == "endings":
+                self.assertEqual(card["override_no"], "结束本局")
+                self.assertEqual(card["override_yes"], "结束本局")
+
     def test_explicit_ending_actions_are_not_ambiguous(self):
         cards = {card["card"]: card for card in story.CARDS}
         self.assertIn(">_ending_sold", cards["exit_offer"]["no_custom"])

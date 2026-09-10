@@ -43,37 +43,37 @@ const RES = [
 
 // 资源结局与剧情结局。结局后重新开始时，所有资源和本局状态都会归零重置。
 const ENDINGS = {
-  cash_zero: {title:'现金断裂', kicker:'现金归零', body:'工资、供应商和律师同时上门。你从实习生一路签上来的每一张单，终于一起找你兑现。',
+  cash_zero: {title:'现金断裂', kicker:'现金归零', body:'工资发不出来。公司停摆。',
     carry:'本局结束：现金断裂。'},
-  cash_max: {title:'账目无法解释', kicker:'现金爆表', body:'账上多出的钱足以买下半个行业，却解释不了第一张八万元报销单。审计在门口等你。',
+  cash_max: {title:'账目无法解释', kicker:'现金爆表', body:'账上钱太多，解释不清。审计进门。',
     carry:'本局结束：账目无法解释。'},
-  team_zero: {title:'团队散伙', kicker:'人心归零', body:'最后一个同事把工牌放在桌上：不是因为你最坏，而是因为没人知道下一次谁会被你牺牲。',
+  team_zero: {title:'团队散伙', kicker:'人心归零', body:'最后一个人也走了。办公室空了。',
     carry:'本局结束：团队散伙。'},
-  team_max: {title:'派系逼宫', kicker:'人心爆表', body:'所有人都忠于你，也都拿着一张你的秘密。董事会一致同意：公司不能再由你一个人领导。',
+  team_max: {title:'派系逼宫', kicker:'人心爆表', body:'所有人都听你的。所以所有人一起逼宫。',
     carry:'本局结束：派系逼宫。'},
-  market_zero: {title:'失去价值', kicker:'业绩归零', body:'业绩归零。董事会不再需要解释你的过去，只需要找一个更便宜的人。',
+  market_zero: {title:'失去价值', kicker:'业绩归零', body:'没人买你的东西。董事会换人。',
     carry:'本局结束：失去价值。'},
-  market_max: {title:'爆单崩盘', kicker:'业绩爆表', body:'订单和承诺一起爆表。客户开始排队起诉，销售总监还在问要不要再签一单。',
+  market_max: {title:'爆单崩盘', kicker:'业绩爆表', body:'订单超过交付能力。客户开始索赔。',
     carry:'本局结束：爆单崩盘。'},
-  capital_zero: {title:'被架空', kicker:'权力归零', body:'你仍然是 CEO，直到门禁失效。董事会说这是一次平稳交接。',
+  capital_zero: {title:'被架空', kicker:'权力归零', body:'董事会七票换人。你被架空。',
     carry:'本局结束：被架空。'},
-  capital_max: {title:'所有人联合防你', kicker:'权力爆表', body:'你终于拥有所有权力，于是所有人开始拥有同一个目标：不要让你继续拥有更多。',
+  capital_max: {title:'所有人联合防你', kicker:'权力爆表', body:'你拿了所有权力。所有人开始防你。',
     carry:'本局结束：所有人联合防你。'},
-  arrest: {title:'东窗事发', kicker:'风险与证据同时爆表', body:'经侦在凌晨六点敲门。你坐上 CEO 用了十八次决定，离开公司只用了一副手铐。',
+  arrest: {title:'东窗事发', kicker:'风险与证据同时爆表', body:'凌晨六点，门铃响。经侦带走了你。',
     carry:'本局结束：东窗事发。'},
-  scapegoat: {title:'替罪羊', kicker:'签字的人留下了', body:'所有人都做过。只有你在最关键的那张单子上签了字。',
+  scapegoat: {title:'替罪羊', kicker:'签字的人留下了', body:'责任书上只有你的名字。你替所有人签了。',
     carry:'本局结束：替罪羊。'},
-  clean_ceo: {title:'清白上位', kicker:'清白上位', body:'你没有变成好人，只是每次都让证据留下来。公司活下来了，董事会终于只能叫你 CEO。',
+  clean_ceo: {title:'清白上位', kicker:'清白上位', body:'账清了，任命书来了。你坐稳 CEO。',
     carry:'本局结束：你真的坐稳了。', win:true},
-  black_empire: {title:'黑账帝国', kicker:'黑账帝国', body:'你把每一笔灰色收入都变成了更大的权力。没人能证明你清白，也没人敢证明你有罪。',
+  black_empire: {title:'黑账帝国', kicker:'黑账帝国', body:'灰账养大了公司。没人敢查你。',
     carry:'本局结束：你赢了，但不能退休。', win:true},
-  whistle: {title:'举报者', kicker:'举报者', body:'你交出录音和账本。公司被拆开，旧领导被带走，而你终于不用再记谁欠你一个人情。',
+  whistle: {title:'举报者', kicker:'举报者', body:'你把录音和账本交了。旧领导先被带走。',
     carry:'本局结束：你保住了自由。', win:true},
-  sold: {title:'卖掉一切', kicker:'卖掉一切', body:'三十亿到账。你离开了公司，却发现买家把你的名字留在了所有旧账的第一页。',
+  sold: {title:'卖掉一切', kicker:'卖掉一切', body:'三十亿到账。买家接手公司，旧账仍挂你名下。',
     carry:'本局结束：钱和旧账一起交割。', win:true},
-  handover: {title:'主动交棒', kicker:'主动交棒', body:'你把椅子留给接班人。最难得的不是坐上 CEO，而是让公司在你离开后仍然做决定。',
+  handover: {title:'主动交棒', kicker:'主动交棒', body:'接班人接过钥匙。公司不再等你。',
     carry:'本局结束：公司不再依赖你。', win:true},
-  board_puppet: {title:'董事会木偶', kicker:'保住头衔，失去声音', body:'你保住了 CEO 的头衔，却失去了预算、人事和最后一句自己的话。每次投票都通过，唯独没人再问你。',
+  board_puppet: {title:'董事会木偶', kicker:'保住头衔，失去声音', body:'你还是 CEO，预算和人事归董事会。',
     carry:'本局结束：董事会替你做完了所有决定。'},
 };
 
@@ -727,16 +727,14 @@ function succeed(){
   CARDS.forEach((c,i)=>{ if (c.card) byName[c.card] = i; });
   initState({cash:46,team:48,market:44,capital:42}, 1, {});
   veil.innerHTML =
-    `<div class="kicker">职场黑色喜剧 · 卡牌</div>
+    `<div class="kicker">职场卡牌</div>
      <h1>上 位</h1>
-     <div class="body">你是一个实习生。<br><br>
-       第一张报销单有八万元的缺口。<br>
-       今晚之前，你要决定它归谁。<br><br>
-       四条槽 —— 现金、人心、业绩、权力。<br>
-       任意一条见底或爆表，故事立刻换一种结局。</div>
-     <div class="carry">左右明显拖动卡片做决定，轻轻碰一下会回到中间。<br>
-       你会升职，但每一次上位都会留下一个人、一笔钱或一份证据。<br>
-       坐上 CEO 的椅子以后，旧账才真正开始。</div>
+     <div class="body">你是实习生。<br><br>
+       第一张报销单，差八万元。<br>
+       今晚之前，决定谁来签。</div>
+     <div class="carry">左右滑动做决定。<br>
+       现金、人心、业绩、权力，任一归零或爆表，本局结束。<br>
+       升上 CEO，旧账才找上门。</div>
      <button id="go">开始</button>`;
   veil.classList.add('on');
   $('#go').onclick = ()=>{ veil.classList.remove('on'); step(null); };
